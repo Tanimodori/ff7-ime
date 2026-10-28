@@ -21577,6 +21577,1806 @@
 "expect_top1": "我们会立刻彻底铲除你们！"
 },
 {
+"category": "mid_keyword",
+"input": "yiyangjuan",
+"expect_in_top": 5,
+"expect_text": "像海螺一样卷卷的"
+},
+{
+"category": "mid_keyword",
+"input": "dedaohei",
+"expect_in_top": 5,
+"expect_text": "克劳德，我想得到黑魔晶石"
+},
+{
+"category": "mid_keyword",
+"input": "lihaizhen",
+"expect_in_top": 5,
+"expect_text": "用两只脚站立还真难啊"
+},
+{
+"category": "mid_keyword",
+"input": "wenghuo",
+"expect_in_top": 5,
+"expect_text": "黑迷利翁或红溪里"
+},
+{
+"category": "mid_keyword",
+"input": "quhuizhe",
+"expect_in_top": 5,
+"expect_text": "妈妈，一起取回这个星球吧"
+},
+{
+"category": "mid_keyword",
+"input": "nengshi",
+"expect_in_top": 5,
+"expect_text": "得活着才能是塔克斯"
+},
+{
+"category": "mid_keyword",
+"input": "yougui",
+"expect_in_top": 5,
+"expect_text": "南瓜幽鬼刺猬"
+},
+{
+"category": "mid_keyword",
+"input": "demo",
+"expect_in_top": 5,
+"expect_text": "有时是高超的魔晶石猎人！"
+},
+{
+"category": "mid_keyword",
+"input": "rennai",
+"expect_in_top": 5,
+"expect_text": "小心翼翼、忍耐安静……"
+},
+{
+"category": "mid_keyword",
+"input": "xiaokan",
+"expect_in_top": 5,
+"expect_text": "你可别小看塔克斯"
+},
+{
+"category": "mid_keyword",
+"input": "fusonggei",
+"expect_in_top": 5,
+"expect_text": "让我把祝福送给你吧"
+},
+{
+"category": "mid_keyword",
+"input": "chule",
+"expect_in_top": 5,
+"expect_text": "阳露出了笑容"
+},
+{
+"category": "mid_keyword",
+"input": "nengshita",
+"expect_in_top": 5,
+"expect_text": "得活着才能是塔克斯"
+},
+{
+"category": "mid_keyword",
+"input": "zuobu",
+"expect_in_top": 5,
+"expect_text": "那是我的工作，不需要谢礼"
+},
+{
+"category": "mid_keyword",
+"input": "gewei",
+"expect_in_top": 5,
+"expect_text": "愿星球与各位同在"
+},
+{
+"category": "mid_keyword",
+"input": "kudemai",
+"expect_in_top": 5,
+"expect_text": "贫民窟的卖花女"
+},
+{
+"category": "mid_keyword",
+"input": "zhuwo",
+"expect_in_top": 5,
+"expect_text": "我克制不住我自己"
+},
+{
+"category": "mid_keyword",
+"input": "shizhengfu",
+"expect_in_top": 5,
+"expect_text": "五台临时政府"
+},
+{
+"category": "mid_keyword",
+"input": "dequxiang",
+"expect_in_top": 5,
+"expect_text": "黑斗篷的去向"
+},
+{
+"category": "mid_keyword",
+"input": "shiqiangde",
+"expect_in_top": 5,
+"expect_text": "单手是枪的男人"
+},
+{
+"category": "mid_keyword",
+"input": "zhongjiede",
+"expect_in_top": 5,
+"expect_text": "迈向终结的世界"
+},
+{
+"category": "mid_keyword",
+"input": "lexiao",
+"expect_in_top": 5,
+"expect_text": "阳露出了笑容"
+},
+{
+"category": "mid_keyword",
+"input": "qiangde",
+"expect_in_top": 5,
+"expect_text": "单手是枪的男人"
+},
+{
+"category": "mid_keyword",
+"input": "lihai",
+"expect_in_top": 5,
+"expect_text": "用两只脚站立还真难啊"
+},
+{
+"category": "mid_keyword",
+"input": "litezhen",
+"expect_in_top": 5,
+"expect_text": "伊弗利特阵形"
+},
+{
+"category": "mid_keyword",
+"input": "huide",
+"expect_in_top": 5,
+"expect_text": "充满懊悔的归乡"
+},
+{
+"category": "mid_keyword",
+"input": "mannikong",
+"expect_in_top": 5,
+"expect_text": "用愤怒填满你空虚的心"
+},
+{
+"category": "mid_keyword",
+"input": "qufuyu",
+"expect_in_top": 5,
+"expect_text": "不会屈服于胁迫"
+},
+{
+"category": "mid_keyword",
+"input": "tianpili",
+"expect_in_top": 5,
+"expect_text": "忍法，晴天霹雳！"
+},
+{
+"category": "mid_keyword",
+"input": "qidaojiu",
+"expect_in_top": 5,
+"expect_text": "要对剑祈祷就趁现在"
+},
+{
+"category": "mid_keyword",
+"input": "shibudui",
+"expect_in_top": 5,
+"expect_text": "暴力是不对的！"
+},
+{
+"category": "mid_keyword",
+"input": "daoci",
+"expect_in_top": 5,
+"expect_text": "捉迷藏就到此为止了"
+},
+{
+"category": "mid_keyword",
+"input": "daijia",
+"expect_in_top": 5,
+"expect_text": "自由的代价果然很高"
+},
+{
+"category": "mid_keyword",
+"input": "guici",
+"expect_in_top": 5,
+"expect_text": "南瓜幽鬼刺猬"
+},
+{
+"category": "mid_keyword",
+"input": "zhuanjiayao",
+"expect_in_top": 5,
+"expect_text": "破坏专家钥匙圈"
+},
+{
+"category": "mid_keyword",
+"input": "renqing",
+"expect_in_top": 5,
+"expect_text": "新总裁就任庆祝游行"
+},
+{
+"category": "mid_keyword",
+"input": "zhunfangyu",
+"expect_in_top": 5,
+"expect_text": "强化精准防御"
+},
+{
+"category": "mid_keyword",
+"input": "shikanshou",
+"expect_in_top": 5,
+"expect_text": "魔晶石看守者"
+},
+{
+"category": "mid_keyword",
+"input": "chishiba",
+"expect_in_top": 5,
+"expect_text": "神罗去吃屎吧！"
+},
+{
+"category": "mid_keyword",
+"input": "zhuizhusai",
+"expect_in_top": 5,
+"expect_text": "莫古力追逐赛"
+},
+{
+"category": "mid_keyword",
+"input": "woderen",
+"expect_in_top": 5,
+"expect_text": "我想重拾我的人生"
+},
+{
+"category": "mid_keyword",
+"input": "tianxuan",
+"expect_in_top": 5,
+"expect_text": "我是天选之人"
+},
+{
+"category": "mid_keyword",
+"input": "kanshou",
+"expect_in_top": 5,
+"expect_text": "魔晶石看守者"
+},
+{
+"category": "mid_keyword",
+"input": "huishini",
+"expect_in_top": 5,
+"expect_text": "失去会使你变强"
+},
+{
+"category": "mid_keyword",
+"input": "zhanmanxian",
+"expect_in_top": 5,
+"expect_text": "我的手已经沾满鲜血了啊！"
+},
+{
+"category": "mid_keyword",
+"input": "shengdixing",
+"expect_in_top": 5,
+"expect_text": "星命学的圣地星殒峡谷"
+},
+{
+"category": "mid_keyword",
+"input": "zhifude",
+"expect_in_top": 5,
+"expect_text": "下次就推心置腹地聊聊吧"
+},
+{
+"category": "mid_keyword",
+"input": "xiapingchang",
+"expect_in_top": 5,
+"expect_text": "搭档，说一下平常那句"
+},
+{
+"category": "mid_keyword",
+"input": "xiangzhu",
+"expect_in_top": 5,
+"expect_text": "有时是出手相助的美少女忍者！"
+},
+{
+"category": "mid_keyword",
+"input": "ganrende",
+"expect_in_top": 5,
+"expect_text": "这是感人的重逢"
+},
+{
+"category": "mid_keyword",
+"input": "lideci",
+"expect_in_top": 5,
+"expect_text": "有时是华丽的刺客！"
+},
+{
+"category": "mid_keyword",
+"input": "debiaoyan",
+"expect_in_top": 5,
+"expect_text": "来吧，期待已久的表演时间到了！"
+},
+{
+"category": "mid_keyword",
+"input": "xiaping",
+"expect_in_top": 5,
+"expect_text": "搭档，说一下平常那句"
+},
+{
+"category": "mid_keyword",
+"input": "zeleite",
+"expect_in_top": 5,
+"expect_text": "赛姆泽雷特巨枭"
+},
+{
+"category": "mid_keyword",
+"input": "jiubai",
+"expect_in_top": 5,
+"expect_text": "爱丽丝就拜托你们了"
+},
+{
+"category": "mid_keyword",
+"input": "zhufusong",
+"expect_in_top": 5,
+"expect_text": "让我把祝福送给你吧"
+},
+{
+"category": "mid_keyword",
+"input": "zhaonimen",
+"expect_in_top": 5,
+"expect_text": "我要替搭档找你们算账"
+},
+{
+"category": "mid_keyword",
+"input": "weixingqiu",
+"expect_in_top": 5,
+"expect_text": "日后将成为星球的支配者"
+},
+{
+"category": "mid_keyword",
+"input": "yingyongzhan",
+"expect_in_top": 5,
+"expect_text": "高度英勇斩击"
+},
+{
+"category": "mid_keyword",
+"input": "kongke",
+"expect_in_top": 5,
+"expect_text": "我可爱的空壳人偶"
+},
+{
+"category": "mid_keyword",
+"input": "chongsheng",
+"expect_in_top": 5,
+"expect_text": "自动重生耳环"
+},
+{
+"category": "mid_keyword",
+"input": "zaifangai",
+"expect_in_top": 5,
+"expect_text": "是谁在妨碍我？"
+},
+{
+"category": "mid_keyword",
+"input": "shituancong",
+"expect_in_top": 5,
+"expect_text": "宇宙骑士团从军勋章"
+},
+{
+"category": "mid_keyword",
+"input": "lumao",
+"expect_in_top": 5,
+"expect_text": "处以撸猫之刑！"
+},
+{
+"category": "mid_keyword",
+"input": "jingzhun",
+"expect_in_top": 5,
+"expect_text": "强化精准防御"
+},
+{
+"category": "mid_keyword",
+"input": "meishiguang",
+"expect_in_top": 5,
+"expect_text": "吉尔伽美什光束"
+},
+{
+"category": "mid_keyword",
+"input": "yijiao",
+"expect_in_top": 5,
+"expect_text": "克劳德，我可以叫你大哥吗？"
+},
+{
+"category": "mid_keyword",
+"input": "akelao",
+"expect_in_top": 5,
+"expect_text": "时代变了啊，克劳德"
+},
+{
+"category": "mid_keyword",
+"input": "daijijiang",
+"expect_in_top": 5,
+"expect_text": "来吧，新时代即将揭开序幕"
+},
+{
+"category": "mid_keyword",
+"input": "woyou",
+"expect_in_top": 5,
+"expect_text": "不错，我有点心动"
+},
+{
+"category": "mid_keyword",
+"input": "chunzhi",
+"expect_in_top": 5,
+"expect_text": "强硬和愚蠢只有一线之隔"
+},
+{
+"category": "mid_keyword",
+"input": "liangbawo",
+"expect_in_top": 5,
+"expect_text": "闪耀吧，磨亮吧，我的太阳"
+},
+{
+"category": "mid_keyword",
+"input": "yaojie",
+"expect_in_top": 5,
+"expect_text": "实验秀要揭开序幕了！"
+},
+{
+"category": "mid_keyword",
+"input": "maoshuimu",
+"expect_in_top": 5,
+"expect_text": "冠帽长矛水母"
+},
+{
+"category": "mid_keyword",
+"input": "deshendian",
+"expect_in_top": 5,
+"expect_text": "古代种的神殿"
+},
+{
+"category": "mid_keyword",
+"input": "huoju",
+"expect_in_top": 5,
+"expect_text": "宝条那家伙，居然真这么做"
+},
+{
+"category": "mid_keyword",
+"input": "yurenhe",
+"expect_in_top": 5,
+"expect_text": "天空不属于任何人"
+},
+{
+"category": "mid_keyword",
+"input": "kanta",
+"expect_in_top": 5,
+"expect_text": "你可别小看塔克斯"
+},
+{
+"category": "mid_keyword",
+"input": "tuocheqi",
+"expect_in_top": 5,
+"expect_text": "神罗摩托车骑手"
+},
+{
+"category": "mid_keyword",
+"input": "woshouzhong",
+"expect_in_top": 5,
+"expect_text": "神罗会在我手中脱胎换骨"
+},
+{
+"category": "mid_keyword",
+"input": "zhangshouli",
+"expect_in_top": 5,
+"expect_text": "仙人掌手里剑"
+},
+{
+"category": "mid_keyword",
+"input": "cihuan",
+"expect_in_top": 5,
+"expect_text": "超电磁幻光球"
+},
+{
+"category": "mid_keyword",
+"input": "youyijing",
+"expect_in_top": 5,
+"expect_text": "我居然忘记猪油已经用完了"
+},
+{
+"category": "mid_keyword",
+"input": "zhunfang",
+"expect_in_top": 5,
+"expect_text": "强化精准防御"
+},
+{
+"category": "mid_keyword",
+"input": "huidegui",
+"expect_in_top": 5,
+"expect_text": "充满懊悔的归乡"
+},
+{
+"category": "mid_keyword",
+"input": "guixing",
+"expect_in_top": 5,
+"expect_text": "只是回归星球而已"
+},
+{
+"category": "mid_keyword",
+"input": "wohuibao",
+"expect_in_top": 5,
+"expect_text": "这次我会保护你"
+},
+{
+"category": "mid_keyword",
+"input": "huojuran",
+"expect_in_top": 5,
+"expect_text": "宝条那家伙，居然真这么做"
+},
+{
+"category": "mid_keyword",
+"input": "shicha",
+"expect_in_top": 5,
+"expect_text": "演技真是差劲"
+},
+{
+"category": "mid_keyword",
+"input": "haianhai",
+"expect_in_top": 5,
+"expect_text": "太阳海岸·海滩"
+},
+{
+"category": "mid_keyword",
+"input": "shizheng",
+"expect_in_top": 5,
+"expect_text": "五台临时政府"
+},
+{
+"category": "mid_keyword",
+"input": "jiede",
+"expect_in_top": 5,
+"expect_text": "迈向终结的世界"
+},
+{
+"category": "mid_keyword",
+"input": "yundongjie",
+"expect_in_top": 5,
+"expect_text": "热身运动结束了"
+},
+{
+"category": "mid_keyword",
+"input": "lijin",
+"expect_in_top": 5,
+"expect_text": "莫古力紧急出动"
+},
+{
+"category": "mid_keyword",
+"input": "lahushen",
+"expect_in_top": 5,
+"expect_text": "赛特拉护身符"
+},
+{
+"category": "mid_keyword",
+"input": "jiushizhan",
+"expect_in_top": 5,
+"expect_text": "人生就是战斗！"
+},
+{
+"category": "mid_keyword",
+"input": "shengerhuan",
+"expect_in_top": 5,
+"expect_text": "自动重生耳环"
+},
+{
+"category": "mid_keyword",
+"input": "huizhe",
+"expect_in_top": 5,
+"expect_text": "妈妈，一起取回这个星球吧"
+},
+{
+"category": "mid_keyword",
+"input": "changmaoshui",
+"expect_in_top": 5,
+"expect_text": "冠帽长矛水母"
+},
+{
+"category": "mid_keyword",
+"input": "jijiangjie",
+"expect_in_top": 5,
+"expect_text": "来吧，新时代即将揭开序幕"
+},
+{
+"category": "mid_keyword",
+"input": "dinu",
+"expect_in_top": 5,
+"expect_text": "丘比尔狄努斯"
+},
+{
+"category": "mid_keyword",
+"input": "fusong",
+"expect_in_top": 5,
+"expect_text": "让我把祝福送给你吧"
+},
+{
+"category": "mid_keyword",
+"input": "qufu",
+"expect_in_top": 5,
+"expect_text": "不会屈服于胁迫"
+},
+{
+"category": "mid_keyword",
+"input": "zainide",
+"expect_in_top": 5,
+"expect_text": "未来正掌握在你的手中"
+},
+{
+"category": "mid_keyword",
+"input": "lizhui",
+"expect_in_top": 5,
+"expect_text": "莫古力追逐赛"
+},
+{
+"category": "mid_keyword",
+"input": "bangshoude",
+"expect_in_top": 5,
+"expect_text": "万能帮手的工作"
+},
+{
+"category": "mid_keyword",
+"input": "gongzuobu",
+"expect_in_top": 5,
+"expect_text": "那是我的工作，不需要谢礼"
+},
+{
+"category": "mid_keyword",
+"input": "mutezhen",
+"expect_in_top": 5,
+"expect_text": "巴哈姆特阵形"
+},
+{
+"category": "mid_keyword",
+"input": "tiaoqi",
+"expect_in_top": 5,
+"expect_text": "是你们挑起战争的"
+},
+{
+"category": "mid_keyword",
+"input": "shidere",
+"expect_in_top": 5,
+"expect_text": "神罗战士的热身"
+},
+{
+"category": "mid_keyword",
+"input": "dangchengyi",
+"expect_in_top": 5,
+"expect_text": "别擅自把我当成一伙的"
+},
+{
+"category": "mid_keyword",
+"input": "jiagao",
+"expect_in_top": 5,
+"expect_text": "米德加高速公路"
+},
+{
+"category": "mid_keyword",
+"input": "daijiaguo",
+"expect_in_top": 5,
+"expect_text": "自由的代价果然很高"
+},
+{
+"category": "mid_keyword",
+"input": "huichu",
+"expect_in_top": 5,
+"expect_text": "选择之后就会出现新世界"
+},
+{
+"category": "mid_keyword",
+"input": "aohui",
+"expect_in_top": 5,
+"expect_text": "充满懊悔的归乡"
+},
+{
+"category": "mid_keyword",
+"input": "laikelao",
+"expect_in_top": 5,
+"expect_text": "快过来，克劳德"
+},
+{
+"category": "mid_keyword",
+"input": "quande",
+"expect_in_top": 5,
+"expect_text": "星球涌泉的战略大师"
+},
+{
+"category": "mid_keyword",
+"input": "jiuqu",
+"expect_in_top": 5,
+"expect_text": "我现在就去接你"
+},
+{
+"category": "mid_keyword",
+"input": "chongshenger",
+"expect_in_top": 5,
+"expect_text": "自动重生耳环"
+},
+{
+"category": "mid_keyword",
+"input": "yujianai",
+"expect_in_top": 5,
+"expect_text": "在海岸遇见爱"
+},
+{
+"category": "mid_keyword",
+"input": "shoudeci",
+"expect_in_top": 5,
+"expect_text": "召唤兽的祠堂"
+},
+{
+"category": "mid_keyword",
+"input": "duohuaba",
+"expect_in_top": 5,
+"expect_text": "收下这朵花吧"
+},
+{
+"category": "mid_keyword",
+"input": "shixuechi",
+"expect_in_top": 5,
+"expect_text": "下次就是雪耻之战了"
+},
+{
+"category": "mid_keyword",
+"input": "beihuan",
+"expect_in_top": 5,
+"expect_text": "肮脏的鼠辈，欢迎你们！"
+},
+{
+"category": "mid_keyword",
+"input": "qingtian",
+"expect_in_top": 5,
+"expect_text": "忍法，晴天霹雳！"
+},
+{
+"category": "mid_keyword",
+"input": "haishang",
+"expect_in_top": 5,
+"expect_text": "狂乱的海上旅行"
+},
+{
+"category": "mid_keyword",
+"input": "gelipei",
+"expect_in_top": 5,
+"expect_text": "雅恩格利佩尔"
+},
+{
+"category": "mid_keyword",
+"input": "shiqiang",
+"expect_in_top": 5,
+"expect_text": "单手是枪的男人"
+},
+{
+"category": "mid_keyword",
+"input": "jiudao",
+"expect_in_top": 5,
+"expect_text": "捉迷藏就到此为止了"
+},
+{
+"category": "mid_keyword",
+"input": "xiaokanta",
+"expect_in_top": 5,
+"expect_text": "你可别小看塔克斯"
+},
+{
+"category": "mid_keyword",
+"input": "quchishi",
+"expect_in_top": 5,
+"expect_text": "神罗去吃屎吧！"
+},
+{
+"category": "mid_keyword",
+"input": "dezhanlve",
+"expect_in_top": 5,
+"expect_text": "星球涌泉的战略大师"
+},
+{
+"category": "mid_keyword",
+"input": "shangjide",
+"expect_in_top": 5,
+"expect_text": "这是上级的命令"
+},
+{
+"category": "mid_keyword",
+"input": "zhenshicha",
+"expect_in_top": 5,
+"expect_text": "演技真是差劲"
+},
+{
+"category": "mid_keyword",
+"input": "jiazhan",
+"expect_in_top": 5,
+"expect_text": "重装甲战斗员"
+},
+{
+"category": "mid_keyword",
+"input": "beihuanying",
+"expect_in_top": 5,
+"expect_text": "肮脏的鼠辈，欢迎你们！"
+},
+{
+"category": "mid_keyword",
+"input": "manni",
+"expect_in_top": 5,
+"expect_text": "用愤怒填满你空虚的心"
+},
+{
+"category": "mid_keyword",
+"input": "hute",
+"expect_in_top": 5,
+"expect_text": "我们似乎特别走运呢"
+},
+{
+"category": "mid_keyword",
+"input": "shoubake",
+"expect_in_top": 5,
+"expect_text": "好好享受吧，克劳德"
+},
+{
+"category": "mid_keyword",
+"input": "nizaiyi",
+"expect_in_top": 5,
+"expect_text": "我想多跟你在一起嘛"
+},
+{
+"category": "mid_keyword",
+"input": "yangyangde",
+"expect_in_top": 5,
+"expect_text": "火辣辣、痒痒的对吧！"
+},
+{
+"category": "mid_keyword",
+"input": "yideyue",
+"expect_in_top": 5,
+"expect_text": "充满回忆的约会"
+},
+{
+"category": "mid_keyword",
+"input": "pengde",
+"expect_in_top": 5,
+"expect_text": "黑斗篷的去向"
+},
+{
+"category": "mid_keyword",
+"input": "erbugen",
+"expect_in_top": 5,
+"expect_text": "盖泽尔·布根哈根"
+},
+{
+"category": "mid_keyword",
+"input": "defen",
+"expect_in_top": 5,
+"expect_text": "命运的分歧点"
+},
+{
+"category": "mid_keyword",
+"input": "chongguanbao",
+"expect_in_top": 5,
+"expect_text": "怒发冲冠爆击"
+},
+{
+"category": "mid_keyword",
+"input": "jiazhandou",
+"expect_in_top": 5,
+"expect_text": "重装甲战斗员"
+},
+{
+"category": "mid_keyword",
+"input": "linshi",
+"expect_in_top": 5,
+"expect_text": "五台临时政府"
+},
+{
+"category": "mid_keyword",
+"input": "zhixingshou",
+"expect_in_top": 5,
+"expect_text": "道路之星手镯"
+},
+{
+"category": "mid_keyword",
+"input": "yiqiu",
+"expect_in_top": 5,
+"expect_text": "让人梦寐以求的休假"
+},
+{
+"category": "mid_keyword",
+"input": "wozaini",
+"expect_in_top": 5,
+"expect_text": "未来正掌握在你的手中"
+},
+{
+"category": "mid_keyword",
+"input": "wozai",
+"expect_in_top": 5,
+"expect_text": "未来正掌握在你的手中"
+},
+{
+"category": "mid_keyword",
+"input": "yundong",
+"expect_in_top": 5,
+"expect_text": "热身运动结束了"
+},
+{
+"category": "mid_keyword",
+"input": "baituo",
+"expect_in_top": 5,
+"expect_text": "爱丽丝就拜托你们了"
+},
+{
+"category": "mid_keyword",
+"input": "caineng",
+"expect_in_top": 5,
+"expect_text": "得活着才能是塔克斯"
+},
+{
+"category": "mid_keyword",
+"input": "laike",
+"expect_in_top": 5,
+"expect_text": "快过来，克劳德"
+},
+{
+"category": "mid_keyword",
+"input": "gaihui",
+"expect_in_top": 5,
+"expect_text": "竟然搞错该回去的地方"
+},
+{
+"category": "mid_keyword",
+"input": "chishi",
+"expect_in_top": 5,
+"expect_text": "神罗去吃屎吧！"
+},
+{
+"category": "mid_keyword",
+"input": "shuhushen",
+"expect_in_top": 5,
+"expect_text": "世界之树护身符"
+},
+{
+"category": "mid_keyword",
+"input": "dete",
+"expect_in_top": 5,
+"expect_text": "万事通琪里耶的特大新闻哦！"
+},
+{
+"category": "mid_keyword",
+"input": "buzhuwo",
+"expect_in_top": 5,
+"expect_text": "我克制不住我自己"
+},
+{
+"category": "mid_keyword",
+"input": "shuyu",
+"expect_in_top": 5,
+"expect_text": "天空不属于任何人"
+},
+{
+"category": "mid_keyword",
+"input": "huiqude",
+"expect_in_top": 5,
+"expect_text": "竟然搞错该回去的地方"
+},
+{
+"category": "mid_keyword",
+"input": "xuejia",
+"expect_in_top": 5,
+"expect_text": "继承了伟大科学家工作的凡人"
+},
+{
+"category": "mid_keyword",
+"input": "deluopan",
+"expect_in_top": 5,
+"expect_text": "海盗王的罗盘"
+},
+{
+"category": "mid_keyword",
+"input": "zhongde",
+"expect_in_top": 5,
+"expect_text": "古代种的神殿"
+},
+{
+"category": "mid_keyword",
+"input": "linshizheng",
+"expect_in_top": 5,
+"expect_text": "五台临时政府"
+},
+{
+"category": "mid_keyword",
+"input": "tezhi",
+"expect_in_top": 5,
+"expect_text": "米德加特制总汇"
+},
+{
+"category": "mid_keyword",
+"input": "shuyuren",
+"expect_in_top": 5,
+"expect_text": "天空不属于任何人"
+},
+{
+"category": "mid_keyword",
+"input": "yuzhe",
+"expect_in_top": 5,
+"expect_text": "生命循环于这颗星球"
+},
+{
+"category": "mid_keyword",
+"input": "yuzhihui",
+"expect_in_top": 5,
+"expect_text": "棘刺蓝鱼指挥官"
+},
+{
+"category": "mid_keyword",
+"input": "bufen",
+"expect_in_top": 5,
+"expect_text": "美丽是不分男女的"
+},
+{
+"category": "mid_keyword",
+"input": "lizhaohuan",
+"expect_in_top": 5,
+"expect_text": "莫古力召唤术"
+},
+{
+"category": "mid_keyword",
+"input": "zuobuxu",
+"expect_in_top": 5,
+"expect_text": "那是我的工作，不需要谢礼"
+},
+{
+"category": "mid_keyword",
+"input": "fenqidian",
+"expect_in_top": 5,
+"expect_text": "命运的分歧点"
+},
+{
+"category": "mid_keyword",
+"input": "zhitu",
+"expect_in_top": 5,
+"expect_text": "法外之徒手镯"
+},
+{
+"category": "mid_keyword",
+"input": "zhuangzhan",
+"expect_in_top": 5,
+"expect_text": "重魔装战斗员"
+},
+{
+"category": "mid_keyword",
+"input": "tianpi",
+"expect_in_top": 5,
+"expect_text": "忍法，晴天霹雳！"
+},
+{
+"category": "mid_keyword",
+"input": "zaijiuyou",
+"expect_in_top": 5,
+"expect_text": "雷诺前辈不在，就由我来补上！"
+},
+{
+"category": "mid_keyword",
+"input": "jisuanyi",
+"expect_in_top": 5,
+"expect_text": "查德利计算溢出"
+},
+{
+"category": "mid_keyword",
+"input": "yijiaoni",
+"expect_in_top": 5,
+"expect_text": "克劳德，我可以叫你大哥吗？"
+},
+{
+"category": "mid_keyword",
+"input": "ankuni",
+"expect_in_top": 5,
+"expect_text": "阿尼安·库尼昂"
+},
+{
+"category": "mid_keyword",
+"input": "shubei",
+"expect_in_top": 5,
+"expect_text": "肮脏的鼠辈，欢迎你们！"
+},
+{
+"category": "mid_keyword",
+"input": "shinibian",
+"expect_in_top": 5,
+"expect_text": "失去会使你变强"
+},
+{
+"category": "mid_keyword",
+"input": "anku",
+"expect_in_top": 5,
+"expect_text": "阿尼安·库尼昂"
+},
+{
+"category": "mid_keyword",
+"input": "zibeili",
+"expect_in_top": 5,
+"expect_text": "杰西·莱兹贝利"
+},
+{
+"category": "mid_keyword",
+"input": "lipei",
+"expect_in_top": 5,
+"expect_text": "雅恩格利佩尔"
+},
+{
+"category": "mid_keyword",
+"input": "shengbei",
+"expect_in_top": 5,
+"expect_text": "野外求生背心"
+},
+{
+"category": "mid_keyword",
+"input": "yiqishi",
+"expect_in_top": 5,
+"expect_text": "能和家人在一起是最好的"
+},
+{
+"category": "mid_keyword",
+"input": "kudetai",
+"expect_in_top": 5,
+"expect_text": "贫民窟的太阳"
+},
+{
+"category": "mid_keyword",
+"input": "nizai",
+"expect_in_top": 5,
+"expect_text": "我想多跟你在一起嘛"
+},
+{
+"category": "mid_keyword",
+"input": "zhongdeshen",
+"expect_in_top": 5,
+"expect_text": "古代种的神殿"
+},
+{
+"category": "mid_keyword",
+"input": "jianmu",
+"expect_in_top": 5,
+"expect_text": "我要去见母亲"
+},
+{
+"category": "mid_keyword",
+"input": "yinghui",
+"expect_in_top": 5,
+"expect_text": "爸爸，欢迎回来！"
+},
+{
+"category": "mid_keyword",
+"input": "juranzhen",
+"expect_in_top": 5,
+"expect_text": "宝条那家伙，居然真这么做"
+},
+{
+"category": "mid_keyword",
+"input": "shengbeixin",
+"expect_in_top": 5,
+"expect_text": "野外求生背心"
+},
+{
+"category": "mid_keyword",
+"input": "tehuale",
+"expect_in_top": 5,
+"expect_text": "巴雷特·华勒斯"
+},
+{
+"category": "mid_keyword",
+"input": "dehai",
+"expect_in_top": 5,
+"expect_text": "狂乱的海上旅行"
+},
+{
+"category": "mid_keyword",
+"input": "shichajin",
+"expect_in_top": 5,
+"expect_text": "演技真是差劲"
+},
+{
+"category": "mid_keyword",
+"input": "yantade",
+"expect_in_top": 5,
+"expect_text": "毕竟我没有讨厌他的理由嘛"
+},
+{
+"category": "mid_keyword",
+"input": "qiyiqie",
+"expect_in_top": 5,
+"expect_text": "我会扛起一切！"
+},
+{
+"category": "mid_keyword",
+"input": "guanbao",
+"expect_in_top": 5,
+"expect_text": "怒发冲冠爆击"
+},
+{
+"category": "mid_keyword",
+"input": "tuancong",
+"expect_in_top": 5,
+"expect_text": "宇宙骑士团从军勋章"
+},
+{
+"category": "mid_keyword",
+"input": "zhilv",
+"expect_in_top": 5,
+"expect_text": "复仇之旅启程"
+},
+{
+"category": "mid_keyword",
+"input": "jingshiji",
+"expect_in_top": 5,
+"expect_text": "巨型魔晶石计划"
+},
+{
+"category": "mid_keyword",
+"input": "taideshi",
+"expect_in_top": 5,
+"expect_text": "来自五台的使者"
+},
+{
+"category": "mid_keyword",
+"input": "juezhenbu",
+"expect_in_top": 5,
+"expect_text": "天空感觉真不舒服"
+},
+{
+"category": "mid_keyword",
+"input": "xingyou",
+"expect_in_top": 5,
+"expect_text": "看来我的罪行又增加了一条"
+},
+{
+"category": "mid_keyword",
+"input": "mitou",
+"expect_in_top": 5,
+"expect_text": "来吧小猫咪，投入我的怀抱！"
+},
+{
+"category": "mid_keyword",
+"input": "genan",
+"expect_in_top": 5,
+"expect_text": "我会给你一个难忘的夜晚"
+},
+{
+"category": "mid_keyword",
+"input": "haishanglv",
+"expect_in_top": 5,
+"expect_text": "狂乱的海上旅行"
+},
+{
+"category": "mid_keyword",
+"input": "kechedi",
+"expect_in_top": 5,
+"expect_text": "我们会立刻彻底铲除你们！"
+},
+{
+"category": "mid_keyword",
+"input": "zhuwozi",
+"expect_in_top": 5,
+"expect_text": "我克制不住我自己"
+},
+{
+"category": "mid_keyword",
+"input": "yigenan",
+"expect_in_top": 5,
+"expect_text": "我会给你一个难忘的夜晚"
+},
+{
+"category": "mid_keyword",
+"input": "ezuoju",
+"expect_in_top": 5,
+"expect_text": "亡灵的恶作剧"
+},
+{
+"category": "mid_keyword",
+"input": "huishi",
+"expect_in_top": 5,
+"expect_text": "失去会使你变强"
+},
+{
+"category": "mid_keyword",
+"input": "keyijiao",
+"expect_in_top": 5,
+"expect_text": "克劳德，我可以叫你大哥吗？"
+},
+{
+"category": "mid_keyword",
+"input": "qiushengbei",
+"expect_in_top": 5,
+"expect_text": "野外求生背心"
+},
+{
+"category": "mid_keyword",
+"input": "shenmeshi",
+"expect_in_top": 5,
+"expect_text": "塔克斯的制服为什么是黑色的啊！"
+},
+{
+"category": "mid_keyword",
+"input": "mofahu",
+"expect_in_top": 5,
+"expect_text": "仙人掌魔法护盾"
+},
+{
+"category": "mid_keyword",
+"input": "huanyuzhe",
+"expect_in_top": 5,
+"expect_text": "生命循环于这颗星球"
+},
+{
+"category": "mid_keyword",
+"input": "kantake",
+"expect_in_top": 5,
+"expect_text": "你可别小看塔克斯"
+},
+{
+"category": "mid_keyword",
+"input": "leweixiao",
+"expect_in_top": 5,
+"expect_text": "可别忘了微笑啊"
+},
+{
+"category": "mid_keyword",
+"input": "medouyao",
+"expect_in_top": 5,
+"expect_text": "不管发生什么都要在一起哦"
+},
+{
+"category": "mid_keyword",
+"input": "fangai",
+"expect_in_top": 5,
+"expect_text": "是谁在妨碍我？"
+},
+{
+"category": "mid_keyword",
+"input": "deduikou",
+"expect_in_top": 5,
+"expect_text": "宇宙不是我的对口专业"
+},
+{
+"category": "mid_keyword",
+"input": "tuancongjun",
+"expect_in_top": 5,
+"expect_text": "宇宙骑士团从军勋章"
+},
+{
+"category": "mid_keyword",
+"input": "jingzhan",
+"expect_in_top": 5,
+"expect_text": "我的手已经沾满鲜血了啊！"
+},
+{
+"category": "mid_keyword",
+"input": "demaihua",
+"expect_in_top": 5,
+"expect_text": "贫民窟的卖花女"
+},
+{
+"category": "mid_keyword",
+"input": "yixiaping",
+"expect_in_top": 5,
+"expect_text": "搭档，说一下平常那句"
+},
+{
+"category": "mid_keyword",
+"input": "lizhuizhu",
+"expect_in_top": 5,
+"expect_text": "莫古力追逐赛"
+},
+{
+"category": "mid_keyword",
+"input": "shusi",
+"expect_in_top": 5,
+"expect_text": "雪崩的殊死战斗"
+},
+{
+"category": "mid_keyword",
+"input": "xuechi",
+"expect_in_top": 5,
+"expect_text": "下次就是雪耻之战了"
+},
+{
+"category": "mid_keyword",
+"input": "wangdeluo",
+"expect_in_top": 5,
+"expect_text": "海盗王的罗盘"
+},
+{
+"category": "mid_keyword",
+"input": "haiandu",
+"expect_in_top": 5,
+"expect_text": "太阳海岸度假村"
+},
+{
+"category": "mid_keyword",
+"input": "chaojisi",
+"expect_in_top": 5,
+"expect_text": "乔尼的超级死党"
+},
+{
+"category": "mid_keyword",
+"input": "dechao",
+"expect_in_top": 5,
+"expect_text": "乔尼的超级死党"
+},
+{
+"category": "mid_keyword",
+"input": "tehua",
+"expect_in_top": 5,
+"expect_text": "巴雷特·华勒斯"
+},
+{
+"category": "mid_keyword",
+"input": "danmawo",
+"expect_in_top": 5,
+"expect_text": "你很大胆嘛，我的朋友！"
+},
+{
+"category": "mid_keyword",
+"input": "xingqiuji",
+"expect_in_top": 5,
+"expect_text": "我们的星球即将消失"
+},
+{
+"category": "mid_keyword",
+"input": "shidedao",
+"expect_in_top": 5,
+"expect_text": "陷入困境时，得到英雄拯救"
+},
+{
+"category": "mid_keyword",
+"input": "ganshen",
+"expect_in_top": 5,
+"expect_text": "喂！你干什么啊！"
+},
+{
+"category": "mid_keyword",
+"input": "xiangdedao",
+"expect_in_top": 5,
+"expect_text": "克劳德，我想得到黑魔晶石"
+},
+{
+"category": "mid_keyword",
+"input": "chaodemo",
+"expect_in_top": 5,
+"expect_text": "有时是高超的魔晶石猎人！"
+},
+{
+"category": "mid_keyword",
+"input": "kushenghuo",
+"expect_in_top": 5,
+"expect_text": "贫民窟生活守则"
+},
+{
+"category": "mid_keyword",
+"input": "zhanlihai",
+"expect_in_top": 5,
+"expect_text": "用两只脚站立还真难啊"
+},
+{
+"category": "mid_keyword",
+"input": "erkeya",
+"expect_in_top": 5,
+"expect_text": "凯泽尔科亚特尔"
+},
+{
+"category": "mid_keyword",
+"input": "lvqicheng",
+"expect_in_top": 5,
+"expect_text": "复仇之旅启程"
+},
+{
+"category": "mid_keyword",
+"input": "gaihuiqu",
+"expect_in_top": 5,
+"expect_text": "竟然搞错该回去的地方"
+},
+{
+"category": "mid_keyword",
+"input": "rennaian",
+"expect_in_top": 5,
+"expect_text": "小心翼翼、忍耐安静……"
+},
+{
+"category": "mid_keyword",
+"input": "zhangmo",
+"expect_in_top": 5,
+"expect_text": "仙人掌魔法护盾"
+},
+{
+"category": "mid_keyword",
+"input": "jianmuqin",
+"expect_in_top": 5,
+"expect_text": "我要去见母亲"
+},
+{
+"category": "mid_keyword",
+"input": "dikangbing",
+"expect_in_top": 5,
+"expect_text": "立刻停止抵抗并投降"
+},
+{
+"category": "mid_keyword",
+"input": "tebiezou",
+"expect_in_top": 5,
+"expect_text": "我们似乎特别走运呢"
+},
+{
+"category": "mid_keyword",
+"input": "dinusi",
+"expect_in_top": 5,
+"expect_text": "丘比尔狄努斯"
+},
+{
+"category": "mid_keyword",
+"input": "yingyong",
+"expect_in_top": 5,
+"expect_text": "高度英勇斩击"
+},
+{
+"category": "mid_keyword",
+"input": "anhaitan",
+"expect_in_top": 5,
+"expect_text": "太阳海岸·海滩"
+},
+{
+"category": "mid_keyword",
+"input": "demojing",
+"expect_in_top": 5,
+"expect_text": "有时是高超的魔晶石猎人！"
+},
+{
+"category": "mid_keyword",
+"input": "liangba",
+"expect_in_top": 5,
+"expect_text": "闪耀吧，磨亮吧，我的太阳"
+},
+{
+"category": "mid_keyword",
+"input": "zhenbu",
+"expect_in_top": 5,
+"expect_text": "天空感觉真不舒服"
+},
+{
+"category": "mid_keyword",
+"input": "yidedi",
+"expect_in_top": 5,
+"expect_text": "充满回忆的地方"
+},
+{
+"category": "mid_keyword",
+"input": "rende",
+"expect_in_top": 5,
+"expect_text": "这是感人的重逢"
+},
+{
+"category": "mid_keyword",
+"input": "duanhao",
+"expect_in_top": 5,
+"expect_text": "干脆扭断好了"
+},
+{
+"category": "mid_keyword",
+"input": "yangyang",
+"expect_in_top": 5,
+"expect_text": "火辣辣、痒痒的对吧！"
+},
+{
+"category": "mid_keyword",
+"input": "liji",
+"expect_in_top": 5,
+"expect_text": "查德利计算溢出"
+},
+{
+"category": "mid_keyword",
+"input": "rendechong",
+"expect_in_top": 5,
+"expect_text": "这是感人的重逢"
+},
+{
+"category": "mid_keyword",
+"input": "qiangdenan",
+"expect_in_top": 5,
+"expect_text": "单手是枪的男人"
+},
+{
+"category": "mid_keyword",
+"input": "jingzhunfang",
+"expect_in_top": 5,
+"expect_text": "强化精准防御"
+},
+{
+"category": "mid_keyword",
+"input": "duiquan",
+"expect_in_top": 5,
+"expect_text": "第七步兵连队全体集合"
+},
+{
+"category": "mid_keyword",
+"input": "touru",
+"expect_in_top": 5,
+"expect_text": "来吧小猫咪，投入我的怀抱！"
+},
+{
+"category": "mid_keyword",
+"input": "wodangcheng",
+"expect_in_top": 5,
+"expect_text": "别擅自把我当成一伙的"
+},
+{
+"category": "mid_keyword",
+"input": "yangjuan",
+"expect_in_top": 5,
+"expect_text": "像海螺一样卷卷的"
+},
+{
+"category": "mid_keyword",
+"input": "yinghuilai",
+"expect_in_top": 5,
+"expect_text": "爸爸，欢迎回来！"
+},
+{
+"category": "mid_keyword",
+"input": "xiubiaoyan",
+"expect_in_top": 5,
+"expect_text": "获得最优秀表演奖"
+},
+{
+"category": "mid_keyword",
+"input": "kangqi",
+"expect_in_top": 5,
+"expect_text": "我会扛起一切！"
+},
+{
+"category": "mid_keyword",
+"input": "yuge",
+"expect_in_top": 5,
+"expect_text": "愿星球与各位同在"
+},
+{
+"category": "mid_keyword",
+"input": "sibulu",
+"expect_in_top": 5,
+"expect_text": "格伦·洛斯布鲁克上校"
+},
+{
+"category": "mid_keyword",
+"input": "qiyi",
+"expect_in_top": 5,
+"expect_text": "我会扛起一切！"
+},
+{
+"category": "mid_keyword",
+"input": "lipeier",
+"expect_in_top": 5,
+"expect_text": "雅恩格利佩尔"
+},
+{
+"category": "mid_keyword",
+"input": "hutebie",
+"expect_in_top": 5,
+"expect_text": "我们似乎特别走运呢"
+},
+{
+"category": "mid_keyword",
+"input": "wushimo",
+"expect_in_top": 5,
+"expect_text": "幸运食物是蘑菇"
+},
+{
+"category": "mid_keyword",
+"input": "zaini",
+"expect_in_top": 5,
+"expect_text": "未来正掌握在你的手中"
+},
+{
+"category": "mid_keyword",
+"input": "douyaozai",
+"expect_in_top": 5,
+"expect_text": "不管发生什么都要在一起哦"
+},
+{
+"category": "mid_keyword",
+"input": "yandebu",
+"expect_in_top": 5,
+"expect_text": "全都讨厌得不得了！"
+},
+{
+"category": "mid_keyword",
+"input": "jiuhuichu",
+"expect_in_top": 5,
+"expect_text": "选择之后就会出现新世界"
+},
+{
+"category": "mid_keyword",
+"input": "shubeihuan",
+"expect_in_top": 5,
+"expect_text": "肮脏的鼠辈，欢迎你们！"
+},
+{
+"category": "mid_keyword",
+"input": "shenmea",
+"expect_in_top": 5,
+"expect_text": "喂！你干什么啊！"
+},
+{
+"category": "mid_keyword",
+"input": "bakelao",
+"expect_in_top": 5,
+"expect_text": "好好享受吧，克劳德"
+},
+{
+"category": "mid_keyword",
+"input": "zhangmofa",
+"expect_in_top": 5,
+"expect_text": "仙人掌魔法护盾"
+},
+{
+"category": "mid_keyword",
+"input": "shenghuo",
+"expect_in_top": 5,
+"expect_text": "贫民窟生活守则"
+},
+{
+"category": "mid_keyword",
+"input": "duohua",
+"expect_in_top": 5,
+"expect_text": "收下这朵花吧"
+},
+{
+"category": "mid_keyword",
+"input": "youxiubiao",
+"expect_in_top": 5,
+"expect_text": "获得最优秀表演奖"
+},
+{
+"category": "mid_keyword",
+"input": "zhishu",
+"expect_in_top": 5,
+"expect_text": "世界之树护身符"
+},
+{
+"category": "mid_keyword",
+"input": "niuduan",
+"expect_in_top": 5,
+"expect_text": "干脆扭断好了"
+},
+{
+"category": "mid_keyword",
+"input": "weiziji",
+"expect_in_top": 5,
+"expect_text": "我一直认为自己是特别的"
+},
+{
+"category": "mid_keyword",
+"input": "kangqiyi",
+"expect_in_top": 5,
+"expect_text": "我会扛起一切！"
+},
+{
+"category": "mid_keyword",
+"input": "gennizai",
+"expect_in_top": 5,
+"expect_text": "我想多跟你在一起嘛"
+},
+{
+"category": "mid_keyword",
+"input": "weishen",
+"expect_in_top": 5,
+"expect_text": "塔克斯的制服为什么是黑色的啊！"
+},
+{
+"category": "mid_keyword",
+"input": "pengdequ",
+"expect_in_top": 5,
+"expect_text": "黑斗篷的去向"
+},
+{
+"category": "mid_keyword",
+"input": "qingtianpi",
+"expect_in_top": 5,
+"expect_text": "忍法，晴天霹雳！"
+},
+{
 "category": "fallback",
 "input": "zzzzzz",
 "expect_nonempty": 9

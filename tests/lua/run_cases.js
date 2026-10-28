@@ -8,7 +8,7 @@ const { LuaFactory } = require("wasmoon");
 
 const root = path.resolve(__dirname, "../..");
 const casesPath = process.argv[2] || path.join(root, "tests/lua/core_cases.json");
-const dataPath = process.argv[3] || path.join(root, "tests/lua/sample_data.lua");
+const dataPath = process.argv[3] || path.join(root, "src/lua/mgjy_data.lua");
 
 const matcherSrc = fs.readFileSync(path.join(root, "src/lua/mgjy_matcher.lua"), "utf8");
 const dataSrc = fs.readFileSync(dataPath, "utf8");
@@ -43,7 +43,7 @@ end
   let pass = 0;
   let fail = 0;
   for (const c of cases) {
-    const topn = c.expect_nonempty || 9;
+    const topn = Math.max(9, c.expect_nonempty || 0, c.expect_in_top || 0);
     const res = await run(c.input, topn);
     const top = res[0] ? res[0].text : null;
     let ok = true;
@@ -51,6 +51,15 @@ end
     if (c.expect_top1 !== undefined && top !== c.expect_top1) {
       ok = false;
       why = `top1=${top} expected=${c.expect_top1}`;
+    }
+    if (c.expect_in_top !== undefined) {
+      const inTop = res
+        .slice(0, c.expect_in_top)
+        .some((r) => r.text === c.expect_text);
+      if (!inTop) {
+        ok = false;
+        why = `"${c.expect_text}" not in top ${c.expect_in_top}`;
+      }
     }
     if (c.expect_nonempty !== undefined && res.length < c.expect_nonempty) {
       ok = false;

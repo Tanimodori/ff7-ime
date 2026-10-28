@@ -46,6 +46,32 @@ def main():
     for r in rows:
         full_to_text.setdefault("".join(r["syls"]), []).append(r["text"])
 
+    # All full-pinyin prefixes: a mid-phrase query that is also a prefix of
+    # another phrase has a legitimate exact/prefix competitor, so it is not a
+    # clean mid-keyword regression case.
+    all_prefixes = set()
+    for r in rows:
+        full = "".join(r["syls"])
+        for i in range(1, len(full)):
+            all_prefixes.add(full[:i])
+
+    # Count how many distinct phrases contain each 2-3 syllable run. Shared
+    # runs (e.g. 是我的, 护身符) are inherently ambiguous keywords and are not
+    # used as mid-keyword regression cases.
+    run_counts = {}
+    for r in rows:
+        syls = r["syls"]
+        runs = set()
+        for span in (2, 3):
+            for i in range(0, max(0, len(syls) - span + 1)):
+                raw = "".join(syls[i:i + span])
+                can = "".join(canon_syl(s) for s in syls[i:i + span])
+                if len(raw) >= 4:
+                    runs.add(("r", raw))
+                    runs.add(("c", can))
+        for key in runs:
+            run_counts[key] = run_counts.get(key, 0) + 1
+
     cases = []
 
     # exact
@@ -125,6 +151,42 @@ def main():
     for q, text in [("lkcc", "我们会立刻彻底铲除你们！"),
                     ("wmhlkcdccnm", "我们会立刻彻底铲除你们！")]:
         cases.append({"category": "keyword", "input": q, "expect_top1": text})
+
+    # mid_keyword: contiguous 2-3 syllable runs from the middle of long phrases
+    mids = []
+    for r in rows:
+        syls = r["syls"]
+        if len(syls) < 6:
+            continue
+        mid = len(syls) // 2
+        for span in (2, 3):
+            for start in (mid - 1, mid):
+                if start < 1:
+                    continue
+                end = start + span
+                if end > len(syls):
+                    continue
+                q = "".join(syls[start:end])
+                if len(q) < 4:
+                    continue
+                if q in full_to_text or q in all_prefixes:
+                    continue
+                can_q = "".join(canon_syl(s) for s in syls[start:end])
+                if run_counts.get(("r", q), 0) > 1 or run_counts.get(("c", can_q), 0) > 1:
+                    continue
+                mids.append((q, r["text"]))
+
+    seen_mid = set()
+    uniq_mids = []
+    for q, text in mids:
+        key = (q, text)
+        if key not in seen_mid:
+            seen_mid.add(key)
+            uniq_mids.append(key)
+    rng.shuffle(uniq_mids)
+    for q, text in uniq_mids[:300]:
+        cases.append({"category": "mid_keyword", "input": q, "expect_in_top": 5,
+                      "expect_text": text})
 
     # fallback
     for q in ["zzzzzz", "qqqq", "xyzxyz", "a", "abc", "vvvvvv", "lkccx"]:
