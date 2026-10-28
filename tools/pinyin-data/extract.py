@@ -442,7 +442,7 @@ def write_report(
     A(f"| 两套数据都缺失的字 | {stats['n_missing_both']} |")
     A(f"| 标点种类 / 出现次数 | {stats['n_punct_types']} / {stats['n_punct_tokens']} |")
     A("")
-    A("验收结论：")
+    A("校验结论：")
     A("")
     A(f"- 覆盖 **{stats['n_entries']}/{stats['n_entries']}** 条，每条至少一个主读音。")
     A(f"- 生僻字缺失 **{stats['n_missing_both']}**；所有唯一汉字均由 pypinyin 与 luna 双源覆盖。")

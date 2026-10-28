@@ -14,7 +14,7 @@ patch:
   # ------------------------------------------------------------------
   ff7-ime/top_n: 9
   menu/page_size: 9
-  # DP 候选上限：越大越稳，越小越快（默认 56）
+  # 完整对齐候选上限：越大越稳，越小越快（默认 56）
   ff7-ime/dp_max_candidates: 56
   ff7-ime/show_comment: true
   ff7-ime/show_score: false
@@ -22,8 +22,8 @@ patch:
 
   # ------------------------------------------------------------------
   # 模糊音开关
-  # A 类（题目要求）：zh/ch/sh -> z/c/s，ng -> n
-  # B 类（可选，默认关）：n/l、r/l、f/h、en/eng、in/ing、an/ang、uan/uang
+  # 默认开启：zh/ch/sh -> z/c/s，ng -> n
+  # 可选（默认关闭）：n/l、r/l、f/h、en/eng、in/ing、an/ang、uan/uang
   # v_u：把 ü 的 v 拼写与 u 拼写视为互通（默认开）
   # ------------------------------------------------------------------
   ff7-ime/fuzzy/zh_z: true
@@ -56,13 +56,13 @@ patch:
   # ------------------------------------------------------------------
   # 回退与置信度
   # ------------------------------------------------------------------
-  # 最后一级回退用 bigram/trigram 召回 + Damerau/Dice-LCS 排序
+  # 最后一级回退按字面相似度召回与排序
   ff7-ime/fallback/use_lcs: true
-  # DP 近似对齐低于该 raw 时视为噪声，不再作为强候选
+  # 近似对齐分数低于该值时不作为强候选
   ff7-ime/fallback/dp_min_raw: 0.65
   # 回退池按重叠度预排序后，实际计算相似度的候选数上限
   ff7-ime/fallback/max_candidates: 96
-  # 已有强命中（raw 达标）时改用小池，避免拖慢正常按键
+  # 已有强命中时改用小池，避免拖慢正常按键
   ff7-ime/fallback/strong_raw: 0.70
   ff7-ime/fallback/fast_max_candidates: 16
 

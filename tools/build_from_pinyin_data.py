@@ -3,8 +3,8 @@
 """Build the final Lua phrase table from the curated pinyin TSV.
 
 Input:
-  experiments/pinyin-data/phrases.tsv   (id, phrase, primary_pinyin, ...)
-  experiments/pinyin-data/override.yaml (misread_candidates, ...)
+  tools/pinyin-data/phrases.tsv   (id, phrase, primary_pinyin, ...)
+  tools/pinyin-data/override.yaml (misread_candidates, ...)
 
 Model:
   - primary reading comes from the curated TSV;
@@ -263,8 +263,8 @@ def to_json(phrases):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--input", default="experiments/pinyin-data/phrases.tsv")
-    ap.add_argument("--override", default="experiments/pinyin-data/override.yaml")
+    ap.add_argument("--input", default="tools/pinyin-data/phrases.tsv")
+    ap.add_argument("--override", default="tools/pinyin-data/override.yaml")
     ap.add_argument("--lua", default="lua/ff7-ime_data.lua")
     ap.add_argument("--json", default="data/phrases.json")
     ap.add_argument("--cap", type=int, default=8)

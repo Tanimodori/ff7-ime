@@ -5,6 +5,9 @@ build/
 # Test output
 tests/cases/*.log
 
+# Generated pinyin-data report
+tools/pinyin-data/REPORT.md
+
 # Node dependencies (wasmoon Lua sandbox)
 node_modules/
 

@@ -1,6 +1,6 @@
 # 魔光键影 (ff7-ime) 拼音覆盖表
 #
-# 本文件是人工确认的读音覆盖，供 experiments/pinyin-data/extract.py 合并。
+# 本文件是人工确认的读音覆盖，供 tools/pinyin-data/extract.py 合并。
 # 数字声调：1-4 为四声，5 为轻声；ü 写作 v。
 #
 # 合并优先级（高 -> 低）：
@@ -10,7 +10,7 @@
 #   * confirmed_phrases.readings 只对应词条中的汉字，标点/间隔号不占位。
 #   * char_rules.when_contains 为子串条件；命中后把该词条中所有该字改为 reading。
 #   * misread_candidates 是给 Lua 容错输入用的“允许误读集合”，不是规范读音。
-#   * rare_watchlist 收录任务点名的生僻字；不在 dict.txt 中的也保留读音备查。
+#   * rare_watchlist 收录词表中出现的生僻字；不在 dict.txt 中的也保留读音备查。
 
 version: 1
 updated: "2026-10-28"
