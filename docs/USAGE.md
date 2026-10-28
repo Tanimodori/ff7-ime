@@ -145,7 +145,8 @@
 - 每次按键都会重新计算并给出 **N 个候选**（默认 9）。
 - N 可在 `mgjy/top_n` 修改；`menu/page_size` 建议与 N 相同（或更小，用翻页）。
 - 即使输入乱码、单字母或空串，也不会空输出：
-  - 乱码/无匹配：最近邻回退 + 静态优先序；
+  - 乱码/无匹配：按共享 bigram/trigram 召回，再用 Damerau + Dice-LCS 排序；
+  - 已有强命中时只补 16 个小池候选；无强命中时补 96 个；
   - 空输入：按词条权重/长度/词典序取前 N。
 - 精确全拼永远 top1；同分时按通道优先级、短词、词条权重、词典序排序。
 
@@ -221,11 +222,20 @@ patch:
 ```yaml
 patch:
   mgjy/dp_max_candidates: 56   # 8–500；越小越快，越大召回越稳
+  # 回退与置信度
+  mgjy/fallback/use_lcs: true
+  mgjy/fallback/dp_min_raw: 0.65
+  mgjy/fallback/strong_raw: 0.70
+  mgjy/fallback/fast_max_candidates: 16
+  mgjy/fallback/max_candidates: 96
 ```
 
 - 精确/前缀输入不跑 DP，通常 1–15 ms/键；
 - 长模糊/容错输入最坏约 50 ms/键；
-- 卡顿时优先降到 40/32，或关闭 `n_l`、`r_l`、`f_h`。
+- 卡顿时优先降到 40/32，或关闭 `n_l`、`r_l`、`f_h`；
+- `fallback/dp_min_raw` 控制 DP 最低置信度，低于它的近似对齐会被丢弃；
+- `fallback/strong_raw` 以上视为强命中，只用 `fast_max_candidates` 个小池补位；
+- `fallback/max_candidates` 是无强命中时的回退池上限。
 
 ### 4.6 通道权重（高级）
 
@@ -295,7 +305,10 @@ patch:
 
 ### 6.1 为什么 `zzzzzz` 也有候选？
 
-需求要求“永远给出 N 个”，因此无匹配时用最近邻回退 + 静态优先序填满 N。它们不代表真实匹配，只是保证不空输出。
+需求要求“永远给出 N 个”，因此无匹配时按共享 bigram/trigram 召回，再用
+Damerau + Dice-LCS 排序；只有回退池为空才用静态优先序兜底。它们不代表
+真实匹配，只是保证不空输出。`zzzzzz` 现在会优先给出含 `z` 的词条，而不是
+固定的静态前 9 条。
 
 ### 6.2 为什么 `lkcc` 有时不是第一？
 

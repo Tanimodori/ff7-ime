@@ -306,17 +306,45 @@ raw = 0.50
 前缀优先仍然成立：`zhiwen` 的 `少女之吻` 加权 0.780，但
 `直纹叶翼蜥` 的全拼前缀得分 0.907，仍排第一。
 
-### 5.9 最近邻回退
+### 5.9 置信度门槛与最近邻回退
 
-若以上强通道都没有命中，`fallback_score`：
+DP 是近似对齐，必须防止它在垃圾串上“硬凑”出低分候选。`dp_score` 的
+归一化分数低于 `mgjy/fallback/dp_min_raw`（默认 0.65）时，该 DP 结果
+不进入强通道；例如 `asdfghjkl` 对若干四音节词的 raw 约 0.55，会被丢弃，
+而不是返回 9 个看似匹配的随机词。
 
-```
-对每个 full 变体：sim = 1 - Damerau(q, full)/max(#q,#full)
-对声母串：       sim = 0.88 * (1 - Damerau(q, initials)/max(...))
-取最大
-```
+回退不再按 `static_top` 的固定顺序取前 N 个，而是：
 
-回退权重 0.55，保证乱码输入仍有 N 个候选。
+1. **候选池**：用 `by_canon_bigram` / `by_canon_trigram` 召回与输入共享
+   双/三字母的词条，再并上 `by_first[首字母]`（含规范化首字母）。
+2. **重叠度预排序**：
+
+   ```
+   overlap = 2 * bigram_hits + 4 * trigram_hits
+           + 2 * (首字母匹配) + 2 * (末字母匹配)
+           - 0.10 * |#q - #full|
+   ```
+
+   已有强命中（非回退结果 raw ≥ `strong_raw`，默认 0.70）时只取前
+   `fast_max_candidates`（默认 16）个，避免拖慢正常按键；没有强命中时
+   取前 `max_candidates`（默认 96）个。
+3. **相似度**：对短名单计算
+
+   ```
+   Damerau:  sim = 1 - Damerau(q, full)/max(#q,#full)
+             声母串再乘 0.88
+   Dice-LCS: sim = 2*LCS(q, full)/(#q+#full)
+             - 0.05 * |#q-#full|/max(#q,#full)
+   取两者最大
+   ```
+
+   LCS 必须用 Dice 归一化；原始 LCS 长度会系统性偏向长句。
+4. **权重**：回退通道权重 0.55，低于所有强通道。
+5. **静态兜底**：只有候选池为空或仍不足 N 时，才从 `static_top` 补足。
+
+例：`zzzzzz` 回退到共享 `z` 的词条（`刺针蜘蛛` 等），`qwxz` 回退到
+`青蛙戒指` 等；`fangge` 的 exact 结果之后，补位候选也来自同首字母/
+共享片段的短名单，而不是固定的静态前 9 条。
 
 ### 5.10 预编辑音节切分（仅显示）
 
@@ -335,7 +363,8 @@ raw = 0.50
 
 ## 6. 候选召回与 DP 截断
 
-全量 1212 条逐键扫描 + 对每条跑 DP 会超时。实际采用三阶段：
+全量 1212 条逐键扫描 + 对每条跑 DP 会超时。实际采用三个阶段，之后是
+n-gram + Damerau/Dice-LCS 回退：
 
 ### 6.1 索引
 
@@ -383,7 +412,9 @@ overlap = 2 * bigram_hits + 4 * trigram_hits
 
 - 精确/前缀/模糊/声母/换位已够强时完全跳过 DP，长句逐键保持 1–15 ms；
 - 纯声母/关键词输入跳过 DP，避免 DP 误抢关键词；
-- DP 短名单既控制延迟，又通过 canonical 重叠度确保正确候选不被截掉。
+- DP 短名单既控制延迟，又通过 canonical 重叠度确保正确候选不被截掉；
+- DP 的归一化 raw 低于 `mgjy/fallback/dp_min_raw`（默认 0.65）时丢弃，
+  避免垃圾串被强行对齐成随机词。
 
 ### 6.4 阶段 3：中段关键词召回
 
@@ -429,7 +460,7 @@ final = raw_channel * weight[channel] + 0.0001 * phrase_weight
 | swap | 0.93 | 相邻音节换位 |
 | initial | 0.86 | canon 声母相等 |
 | keyword | 0.80 | 声母子序列 / 音节前缀子序列；`initial_mode` 下 0.90 |
-| fallback | 0.55 | 最近邻 |
+| fallback | 0.55 | 最近邻（Damerau / Dice-LCS） |
 
 ### 7.1 `initial_mode`
 
@@ -460,10 +491,12 @@ initial_mode = #q >= 2 and (
 ## 8. 永远 N 个候选
 
 1. 强通道结果先进入 `results`；
-2. 若不足 N，`fill_static` 从 `static_top` 中取未出现的词条，计算 `fallback_score`，以 `fallback` 通道补足；
-3. 空输入直接取 `static_top` 前 N；
-4. 若 `matcher.rank` 抛错，`mgjy.lua` 用预构建的 fallback 顺序产出 N 个候选；
-5. `top_n` 默认 9，可配置 1–64；1212 条词条保证任何 N≤1212 都能填满。
+2. 若不足 N，`fill_fallback` 先按双/三字母重叠度召回候选，再用
+   Damerau/Dice-LCS 排序补足；已有强命中时只做 16 个候选的小池；
+3. 候选池为空或仍不足 N 时，`fill_static` 才从 `static_top` 兜底；
+4. 空输入直接取 `static_top` 前 N；
+5. 若 `matcher.rank` 抛错，`mgjy.lua` 用预构建的 fallback 顺序产出 N 个候选；
+6. `top_n` 默认 9，可配置 1–64；1212 条词条保证任何 N≤1212 都能填满。
 
 ---
 
@@ -474,6 +507,9 @@ initial_mode = #q >= 2 and (
 - 阶段 1：索引并集大小 \(C\)（通常 50–500），每词条 O(#fulls + #inits + L)，约 \(O(C \cdot L)\)；
 - 阶段 2：重叠度排序 \(O(C \log C)\)，DP \(O(K \cdot L \cdot n \cdot A \cdot k)\)；
 - 阶段 3：前缀索引召回通常 10–100 条，每条 O(\(n \cdot L \cdot A \cdot 3\))；
+- 阶段 4：回退池排序 \(O(C_{fb} \log C_{fb})\)；相似度计算只对
+  `max_candidates=96`（无强命中）或 `fast_max_candidates=16`（有强命中）
+  条候选，每条 O(\(L \cdot F\))，其中 \(F\) 为全拼/声母串长度；
 - 预编辑：O(\(L \cdot k\)) 的音节集合查询，对逐键耗时影响可忽略；
 - 实测本机（librime 1.13.1 原生 Lua 5.4）：
   - 精确/前缀：1–15 ms/键；
@@ -496,7 +532,7 @@ initial_mode = #q >= 2 and (
 | fuzzy | 878 | top1 | 100% |
 | initial | 1212 | top1 或 top3 | 100%（top1 98.3%） |
 | typo | 600 | top3 | 100%（top1 99.7%） |
-| keyword | 238 | top5 | 97.9%（233/238；top1 75.6%） |
+| keyword | 238 | top5 | 97.9%（233/238；top1 76.1%） |
 | mid_keyword | 300 | top5 | 100%（top1 91.0%） |
 | fallback | 7 | 返回 N | 100% |
 
@@ -518,7 +554,7 @@ initial_mode = #q >= 2 and (
 | 中段关键词 `meishao` | 无此通道 | 音节前缀子序列 |
 | 漏/多/换位 | 无通用编辑距离 | Damerau + 音节 DP |
 | 多音/误读权重 | 词典多读音有限 | 上下文读音 + 误读表 |
-| 永远 N | 可能空 | 静态回退保证 |
+| 永远 N | 可能空 | 回退候选池 + 静态兜底 |
 
 ---
 

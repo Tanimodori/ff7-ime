@@ -265,6 +265,7 @@ patch:
 ### 7.5 输入卡顿
 
 - 调小 `mgjy/dp_max_candidates`（默认 56，可试 32/40）；
+- 调小 `mgjy/fallback/max_candidates`（默认 96）或 `fast_max_candidates`（默认 16）；
 - 调小 `mgjy/typo/max_edit`（默认 2，可试 1）；
 - 关闭不需要的模糊音（尤其 `n_l`、`r_l`、`f_h`）；
 - 精确/前缀输入本身不跑 DP，通常 1–15 ms/键；长模糊/容错输入最坏约 50 ms/键。

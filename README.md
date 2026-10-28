@@ -99,6 +99,7 @@ patch:
   mgjy/fuzzy/ng_n: false      # 关闭 ng/n 模糊
   mgjy/typo/max_edit: 1       # 容错编辑距离上限
   mgjy/dp_max_candidates: 56  # 需要 DP 时的候选上限（性能/召回权衡）
+  mgjy/fallback/dp_min_raw: 0.65  # DP 最低置信度；低于它不再作为强候选
 ```
 
 完整配置项与 F4 开关说明见 [docs/USAGE.md](docs/USAGE.md)。
@@ -135,7 +136,7 @@ PLAN.md                          总体方案与验收门
 | 模糊音 | 878 | top1 | **878/878（100%）** |
 | 全声母/前缀 | 1212 | top1 或 top3 | **1212/1212（100%；top1 98.3%）** |
 | 漏/多/换位 | 600 | top3 | **600/600（100%；top1 99.7%）** |
-| 关键词稀疏子序列 | 238 | top5 | **233/238（97.9%；top1 75.6%）** |
+| 关键词稀疏子序列 | 238 | top5 | **233/238（97.9%；top1 76.1%）** |
 | 中段关键词 | 300 | top5 | **300/300（100%；top1 91.0%）** |
 | 乱码/单字母/空 | 7 | 返回 N | **7/7（100%）** |
 
@@ -150,11 +151,13 @@ lkcc                → 我们会立刻彻底铲除你们！（关键词）
 meishao             → 有时是出手相助的美少女忍者！（中段关键词，预编辑 mei'shao）
 wmhlkcdccnm         → 我们会立刻彻底铲除你们！（全声母）
 zanguokuaigon       → 掌掴快攻（跨音节 ng→n 模糊）
+fagnge              → 芳格（音节内换位/模糊对齐）
 renshengjiushizhandou → 人生就是战斗！（含标点）
-zzzzzz              → 仍有 9 个候选
+zzzzzz              → 9 个共享 z 的回退候选（不再是固定静态前 9）
+asdfghjkl           → 9 个回退候选，低分 DP 噪声被置信度门槛丢弃
 ```
 
-核心 Lua 回归 34/34 通过，其中 5 条同时断言预编辑分词（`di'ou`、`shen'luo`、`mei'shao`、`shen'l`、`a'an`）。
+核心 Lua 回归 40/40 通过，其中 19 条同时断言预编辑分词（`di'ou`、`shen'luo`、`mei'shao`、`shen'l`、`a'an` 等），并新增了 `fagnge`、fallback 候选池和 DP 置信度门槛的回归。
 
 真实 Rime 逐键性能（K=56，测量于本机 `rime.dll`）：精确/前缀输入通常 1–15 ms/键，长模糊/容错输入最坏约 50 ms/键，中段关键词约 17–23 ms/键（`meishao` 7 键总耗时 123 ms）；20 键长句 `renshengjiushizhandou` 总耗时约 57 ms。GUI 已在记事本中实测 `lkcc`、`lienuo`、`senluo`、`zanguokuaigon`、`renshengjiushizhandou` 均正确提交；内嵌预编辑 `di'ou`/`mei'shao`、回车/小键盘回车提交也已实测通过。
 
@@ -180,11 +183,11 @@ zzzzzz              → 仍有 9 个候选
 
 1. **关键词模式存在天然歧义**：极稀疏声母子序列（如 `mlh`）和多个词条共享的中段音节串（如“是我的”“护身符”）可能同时匹配多个词条；方案保证返回 Top-N，但 top1 不保证是用户心中那一条。需求示例 `lkcc`、`meishao` 已稳定 top1。
 2. **中段关键词低于全拼前缀**：`zhiwen` 会先给前缀词 `直纹叶翼蜥`，包含 `zhi wen` 的 `少女之吻` 排在其后；这是有意保留“前缀优先”。
-3. **只输出 1212 条**：词库外输入只做最近邻回退，不会造句或输出其他内容。
+3. **只输出 1212 条**：词库外输入只做 bigram/trigram 召回 + Damerau/Dice-LCS 回退，不会造句或输出其他内容；回退候选只保证表面字母相关，不保证语义相关。
 4. **portable 是分发包，不是便携运行时**：本项目的 portable 定义为可分发档案，安装目标是 Rime 用户目录（小狼毫默认 `%APPDATA%\Rime`）。若要让小狼毫整体随 U 盘走，需要 `WeaselSetup.exe /userdir:<dir>` 并重启服务，这会改变该机器所有方案的用户目录。
 5. **WeaselDeployer 的 `/deploy` 在部分环境会打开“方案选单设定”GUI 并改写 `default.custom.yaml`**。本包改用 `deploy-rime.ps1`（直接调用 `rime.dll` 的维护接口）无头部署，避免该问题。
 6. **数据读音为工程化整理**：以 pypinyin + luna_pinyin + 人工覆盖为准；若发现译名读音争议，改 `experiments/pinyin-data/override.yaml` 后重新构建。
-7. **性能取决于词条长度与输入类型**：纯精确/前缀很快；长模糊/容错输入会跑音节 DP，最坏约 50 ms/键；中段关键词约 17–23 ms/键。可通过 `mgjy/dp_max_candidates` 调整。
+7. **性能取决于词条长度与输入类型**：纯精确/前缀很快；长模糊/容错输入会跑音节 DP，最坏约 50 ms/键；中段关键词约 17–23 ms/键。可通过 `mgjy/dp_max_candidates`、`mgjy/fallback/max_candidates` 调整。
 
 ---
 

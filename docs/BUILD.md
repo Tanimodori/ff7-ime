@@ -123,14 +123,14 @@ NODE_PATH="$PWD/tools/lua-sandbox/node_modules" \
 
 期望：
 
-- 核心 34/34（含 `meishao` 中段关键词与 `di'ou` 预编辑分词回归）；
+- 核心 40/40（含 `meishao` 中段关键词、`di'ou` 预编辑分词、`fagnge` 换位/模糊对齐、fallback 与 DP 置信度回归）；
 - exact 1212/1212；
 - fuzzy 878/878；
 - initial 1212/1212（top1 或 top3）；
 - typo 600/600（top3）；
 - keyword 233/238 top5（极稀疏声母子序列的天然歧义）；
 - mid_keyword 300/300 top5（长句中段唯一音节串）；
-- fallback 7/7。
+- fallback 7/7（n-gram + Damerau/Dice-LCS 回退）。
 
 ### 2.5 真实 Rime 集成测试
 

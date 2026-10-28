@@ -27,7 +27,7 @@
 - 不做整句输入、云输入、用户自造词、简繁转换、英文/数字输入法。
 - 不修改或替换用户现有的 `luna_pinyin_simp` 方案；只新增方案并加入方案列表。
 - 不依赖外部服务、网络、Python 运行时（Python 仅用于构建期）。
-- 不保证对 `dict.txt` 之外词条的输入效果；词库外输入只做“最近邻回退”。
+- 不保证对 `dict.txt` 之外词条的输入效果；词库外输入只做 n-gram + Damerau/Dice-LCS 回退。
 
 ---
 
@@ -133,7 +133,7 @@ score = w_exact   * exact_full
 - 所有通道得分归一到 `[0,1]`；精确全拼固定为最高档。
 - `syllable_coverage`、`compactness`、`prefix_quality` 用于区分短词/长句，防止长句靠“字多”压过短词。
 - 同分 tie-break：精确通道 > 规范读音 > 短词 > 更紧凑 > 词典顺序。
-- 无任何通道命中时，用字母 n-gram / 归一化编辑距离做最近邻回退，保证 N 个候选。
+- 无任何通道命中时，用双/三字母 n-gram 召回 + Damerau/Dice-LCS 做最近邻回退，保证 N 个候选；DP 低于置信度门槛时不作为强候选。
 
 ### 3.5 性能预算
 
@@ -330,13 +330,14 @@ patch:
 
 - 方案已部署到本机 `%APPDATA%\Rime`，`luna_pinyin_simp` 与 `moguang_jianying` 共存；
 - 真实 Rime + GUI 实测通过（`lkcc`、`lienuo`、`senluo`、`zanguokuaigon`、`ren sheng...`）；
-- 全量自动评估：exact 1212/1212、fuzzy 878/878、initial 1212/1212（top1 98.3%）、typo 600/600（top3）、keyword 231/238（top5）、fallback 7/7；
+- 全量自动评估：exact 1212/1212、fuzzy 878/878、initial 1212/1212（top1 98.3%）、typo 600/600（top3）、keyword 233/238（top5）、mid_keyword 300/300、fallback 7/7；
 - 内嵌预编辑：`diou` → `di'ou`、`meishao` → `mei'shao`；回车/小键盘回车提交高亮候选（GUI 实测）；
 - 关键架构调整：
   1. 使用 `lua_translator@*mgjy` + 纯 Lua 匹配引擎，而不是 Rime 原生 `script_translator`；
   2. 连续串 canon 只做安全规则（zh/ch/sh、v/u），`ng→n` 放音节级 DP，避免跨音节误伤；
   3. 两阶段召回（廉价通道 + canonical 双/三字母重叠 Top-K DP），兼顾准确率与逐键延迟；
-  4. 部署使用 `deploy-rime.ps1` 直接调 `rime.dll`，避免 `WeaselDeployer /deploy` 打开 GUI 并改写 `default.custom.yaml`。
+  4. 回退改为 bigram/trigram 召回 + Damerau/Dice-LCS 排序，并给 DP 加 0.65 置信度门槛；有强命中时只用 16 个小池，避免拖慢正常按键；
+  5. 部署使用 `deploy-rime.ps1` 直接调 `rime.dll`，避免 `WeaselDeployer /deploy` 打开 GUI 并改写 `default.custom.yaml`。
 - 已知限制：极稀疏关键词子序列存在天然歧义；portable 是分发包而非便携运行时（Weasel 用户目录由前端决定）；词库外输入只回退不造句。
 
 ---

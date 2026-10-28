@@ -170,7 +170,7 @@ build_index（首次/模糊开关变化时）
   ▼
 排序（score → channel_rank → 长度 → 权重 → 词典序）
   │
-  ├─ 不足 N：static_top + fallback_score 补足
+  ├─ 不足 N：bigram/trigram 回退池 + Damerau/Dice-LCS；static 兜底
   │
   ├─ preview：预测音节边界（diou -> di'ou），写入 cand.preedit
   ▼
@@ -206,7 +206,7 @@ yield N 个 Candidate（quality 递减）
 
 ### 5.3 缓存
 
-- `prepare_phrase` 缓存每条词条的 `readings/fulls/canons/init_variants/swaps/_firsts/_lasts/canon_full`；
+- `prepare_phrase` 缓存每条词条的 `readings/fulls/canons/init_variants/init_flats/swaps/_firsts/_lasts/canon_full`；
 - 每次 `rank` 共享 `cache[chunk.."\0"..reading]`，避免跨词条重复 Damerau 计算；
 - 不对输入结果做全局 LRU；逐键输入本身就是新串，缓存收益有限。
 
@@ -241,6 +241,11 @@ yield N 个 Candidate（quality 递减）
 | `mgjy/initial/enabled` | bool | true | 声母/关键词通道 |
 | `mgjy/keyword/gap_penalty` | double | 0.02 | 关键词跳跃惩罚 |
 | `mgjy/keyword/syllable_subsequence` | bool | true | 中段音节前缀子序列（meishao） |
+| `mgjy/fallback/use_lcs` | bool | true | 回退排序是否融合 Dice-LCS |
+| `mgjy/fallback/dp_min_raw` | double | 0.65 | DP 低置信度门槛 |
+| `mgjy/fallback/strong_raw` | double | 0.70 | 有强命中时改用小池 |
+| `mgjy/fallback/fast_max_candidates` | int | 16 | 强命中时回退池上限 |
+| `mgjy/fallback/max_candidates` | int | 96 | 无强命中时回退池上限 |
 | `mgjy/preedit/enabled` | bool | true | 预测预编辑音节分隔符 |
 | `mgjy/preedit/separator` | string | `'` | 预编辑分隔符（可改为空格） |
 | `style/inline_preedit` | bool | true | Weasel 从 schema 读取，内嵌显示预编辑 |
@@ -264,6 +269,7 @@ mgjy_initial, mgjy_typo
 
 - `mgjy.lua` 的 `init` 用 `pcall` 包住 `prepare_all`；失败时用默认配置再试。
 - `func` 用 `pcall` 包住 `matcher.rank`；失败或空结果时 `fallback_results(top_n)` 用预构建顺序产出 N 个候选。
+- `matcher.rank` 结果不足 N 时先 `fill_fallback`（n-gram 召回 + Damerau/Dice-LCS），仍不足才 `fill_static`。
 - `format_comment` 对 `show_comment=false` 返回空串；`show_score=true` 才显示分数。
 - `Candidate` 的 `quality` 设置包在 `pcall` 中，旧版本不支持的字段不会中断输入。
 - 配置读取全部 `pcall` 包裹；缺失路径返回 nil，不抛错。
