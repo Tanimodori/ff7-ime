@@ -25,12 +25,18 @@
   {"input": "zhiwen", "expect_in_top": 3, "expect_text": "少女之吻"},
   {"input": "aan", "expect_in_top": 5, "expect_text": "阿尼安·库尼昂", "expect_preedit": "a'an"},
   {"input": "keye", "expect_in_top": 5, "expect_text": "凯泽尔科亚特尔"},
-  {"input": "zzzzzz", "expect_nonempty": 9, "expect_preedit": "zzzzzz"},
+  {"input": "zzzzzz", "expect_nonempty": 9, "expect_not_channel": "dp", "expect_preedit": "zzzzzz"},
   {"input": "", "expect_nonempty": 9, "expect_preedit": ""},
   {"input": "a", "expect_nonempty": 9, "expect_preedit": "a"},
   {"input": "diou", "expect_top1": "迪欧", "expect_preedit": "di'ou"},
   {"input": "shenlu", "expect_top1": "神罗", "expect_preedit": "shen'lu"},
   {"input": "meisha", "expect_top1": "有时是出手相助的美少女忍者！", "expect_preedit": "mei'sha"},
   {"input": "zanguokuaigon", "expect_top1": "掌掴快攻", "expect_preedit": "zan'guo'kuai'gon"},
-  {"input": "xian", "expect_top1": "响板蟹", "expect_preedit": "xian"}
+  {"input": "xian", "expect_top1": "响板蟹", "expect_preedit": "xian"},
+  {"input": "fagnge", "expect_top1": "芳格", "expect_top1_channel": "dp"},
+  {"input": "fangge", "expect_top1": "芳格"},
+  {"input": "asdfghjkl", "expect_nonempty": 9, "expect_not_channel": "dp"},
+  {"input": "qwxz", "expect_nonempty": 9, "expect_not_channel": "dp"},
+  {"input": "mina", "expect_top1": "蜜娜"},
+  {"input": "mian", "expect_top1": "双面相"}
 ]

@@ -54,6 +54,19 @@ patch:
   mgjy/keyword/syllable_subsequence: true
 
   # ------------------------------------------------------------------
+  # 回退与置信度
+  # ------------------------------------------------------------------
+  # 最后一级回退用 bigram/trigram 召回 + Damerau/Dice-LCS 排序
+  mgjy/fallback/use_lcs: true
+  # DP 近似对齐低于该 raw 时视为噪声，不再作为强候选
+  mgjy/fallback/dp_min_raw: 0.65
+  # 回退池按重叠度预排序后，实际计算相似度的候选数上限
+  mgjy/fallback/max_candidates: 96
+  # 已有强命中（raw 达标）时改用小池，避免拖慢正常按键
+  mgjy/fallback/strong_raw: 0.70
+  mgjy/fallback/fast_max_candidates: 16
+
+  # ------------------------------------------------------------------
   # 预编辑显示（只影响输入框里的拼音，不影响匹配与上屏文本）
   # ------------------------------------------------------------------
   # 开启预测音节分隔符：diou -> di'ou，shenluo -> shen'luo

@@ -179,6 +179,35 @@ local function build_options(env)
     preedit_separator = defaults.preedit.separator
   end
 
+  local fallback_use_lcs = cfg_bool(config, "mgjy/fallback/use_lcs")
+  if fallback_use_lcs == nil then
+    fallback_use_lcs = defaults.fallback.use_lcs
+  end
+  local dp_min_raw = cfg_double(config, "mgjy/fallback/dp_min_raw")
+  if dp_min_raw == nil then
+    dp_min_raw = defaults.fallback.dp_min_raw
+  end
+  if dp_min_raw < 0 then dp_min_raw = 0 end
+  if dp_min_raw > 1 then dp_min_raw = 1 end
+  local fallback_max = cfg_int(config, "mgjy/fallback/max_candidates")
+  if fallback_max == nil then
+    fallback_max = defaults.fallback.max_candidates
+  end
+  if fallback_max < 8 then fallback_max = 8 end
+  if fallback_max > 500 then fallback_max = 500 end
+  local fallback_strong_raw = cfg_double(config, "mgjy/fallback/strong_raw")
+  if fallback_strong_raw == nil then
+    fallback_strong_raw = defaults.fallback.strong_raw
+  end
+  if fallback_strong_raw < 0 then fallback_strong_raw = 0 end
+  if fallback_strong_raw > 1 then fallback_strong_raw = 1 end
+  local fallback_fast_max = cfg_int(config, "mgjy/fallback/fast_max_candidates")
+  if fallback_fast_max == nil then
+    fallback_fast_max = defaults.fallback.fast_max_candidates
+  end
+  if fallback_fast_max < 8 then fallback_fast_max = 8 end
+  if fallback_fast_max > 500 then fallback_fast_max = 500 end
+
   local show_comment = cfg_bool(config, "mgjy/show_comment")
   if show_comment == nil then show_comment = true end
 
@@ -204,6 +233,13 @@ local function build_options(env)
     keyword = {
       gap_penalty = gap_penalty,
       syllable_subsequence = syllable_subsequence,
+    },
+    fallback = {
+      use_lcs = fallback_use_lcs,
+      dp_min_raw = dp_min_raw,
+      strong_raw = fallback_strong_raw,
+      fast_max_candidates = fallback_fast_max,
+      max_candidates = fallback_max,
     },
     preedit = {
       enabled = preedit_enabled,

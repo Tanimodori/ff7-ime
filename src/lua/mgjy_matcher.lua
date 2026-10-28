@@ -59,6 +59,17 @@ M.defaults = {
     -- 词条中段的音节前缀子序列（meishao -> 美少女）。
     syllable_subsequence = true,
   },
+  -- 最后一级回退：按 bigram/trigram 召回候选，再用 Damerau/LCS 排序。
+  fallback = {
+    use_lcs = true,
+    -- DP 是近似对齐；低于该 raw 的结果不作为强候选，交给回退。
+    dp_min_raw = 0.65,
+    -- 已有该 raw 以上的强命中时，只做小池回退，避免拖慢正常输入。
+    strong_raw = 0.70,
+    fast_max_candidates = 16,
+    -- 无强命中时，回退池按重叠度预排序后实际计算相似度的候选数上限。
+    max_candidates = 96,
+  },
   -- 仅影响 preedit 显示，不影响匹配与候选排序。
   preedit = {
     enabled = true,
@@ -173,16 +184,19 @@ local function edit_distance(a, b, transposition)
   end
 
   local prev2, prev, cur = {}, {}, {}
+  local ba, bb = {}, {}
+  for i = 1, la do ba[i] = string.byte(a, i) end
+  for j = 1, lb do bb[j] = string.byte(b, j) end
   for j = 0, lb do
     prev[j] = j
   end
 
   for i = 1, la do
     cur[0] = i
-    local ca = a:sub(i, i)
-    local ca_prev = a:sub(i - 1, i - 1)
+    local ca = ba[i]
+    local ca_prev = ba[i - 1]
     for j = 1, lb do
-      local cb = b:sub(j, j)
+      local cb = bb[j]
       local cost = (ca == cb) and 0 or 1
       local v = math.min(
         prev[j] + 1,
@@ -190,7 +204,7 @@ local function edit_distance(a, b, transposition)
         prev[j - 1] + cost
       )
       if transposition and i > 1 and j > 1
-          and ca == b:sub(j - 1, j - 1)
+          and ca == bb[j - 1]
           and ca_prev == cb then
         v = math.min(v, prev2[j - 2] + 1)
       end
@@ -361,6 +375,17 @@ local function prepare_phrase(p, fuzzy, typo)
       end
     end
     p.init_variants = normalized
+  end
+
+  -- 回退相似度会反复用到声母串，预计算一次。
+  p.init_flats = {}
+  for _, v in ipairs(p.init_variants) do
+    local flat = {}
+    for i, tok in ipairs(v.tokens) do
+      local text = type(tok) == "table" and (tok.s or tok[1]) or tok
+      flat[i] = initial_of(text)
+    end
+    p.init_flats[#p.init_flats + 1] = table.concat(flat)
   end
 
   -- 相邻音节换位变体（nuolei -> 雷诺）。
@@ -792,18 +817,79 @@ local function fallback_score(input, p, fuzzy)
     local s = 1 - d / math.max(#input, #f.s)
     if s > best then best = s end
   end
-  for _, v in ipairs(p.init_variants) do
-    local flat = {}
-    for i, tok in ipairs(v.tokens) do
-      local text = type(tok) == "table" and (tok.s or tok[1]) or tok
-      flat[i] = initial_of(text)
-    end
-    local s0 = table.concat(flat)
+  for _, s0 in ipairs(p.init_flats or {}) do
     local d = edit_distance(input, s0, true)
     local s = 0.88 * (1 - d / math.max(#input, #s0))
     if s > best then best = s end
   end
   if best < 0 then best = 0 end
+  return best
+end
+
+-- 最长公共子序列长度。回退排序用，不参与强通道打分。
+local function lcs_length(a, b)
+  local la, lb = #a, #b
+  if la == 0 or lb == 0 then
+    return 0
+  end
+  if la < lb then
+    a, b = b, a
+    la, lb = lb, la
+  end
+  local ba, bb = {}, {}
+  for i = 1, la do ba[i] = string.byte(a, i) end
+  for j = 1, lb do bb[j] = string.byte(b, j) end
+  local prev, cur = {}, {}
+  for j = 0, lb do prev[j] = 0 end
+  for i = 1, la do
+    cur[0] = 0
+    local ca = ba[i]
+    for j = 1, lb do
+      if ca == bb[j] then
+        cur[j] = prev[j - 1] + 1
+      elseif prev[j] >= cur[j - 1] then
+        cur[j] = prev[j]
+      else
+        cur[j] = cur[j - 1]
+      end
+    end
+    prev, cur = cur, prev
+  end
+  return prev[lb]
+end
+
+-- Dice 归一化的 LCS：2*LCS/(len(q)+len(full))，再对长度差收一点惩罚。
+-- 原始 LCS 长度会系统性偏向长句，不能直接拿来排序。
+local function lcs_similarity(input, p)
+  local best = 0
+  for _, f in ipairs(p.fulls) do
+    local denom = #input + #f.s
+    if denom > 0 then
+      local l = lcs_length(input, f.s)
+      local s = (2 * l) / denom
+      local maxlen = math.max(#input, #f.s)
+      s = s - 0.05 * math.abs(#input - #f.s) / maxlen
+      if s > best then
+        best = s
+      end
+    end
+  end
+  if best < 0 then best = 0 end
+  return best
+end
+
+local function fallback_similarity(input, p, fuzzy, cfg, fast)
+  local use_lcs = not cfg.fallback or cfg.fallback.use_lcs ~= false
+  local best = 0
+  if not fast or not use_lcs then
+    best = fallback_score(input, p, fuzzy)
+  end
+  if use_lcs then
+    local l = lcs_similarity(input, p)
+    if l > best then
+      best = l
+    end
+  end
   return best
 end
 
@@ -913,7 +999,11 @@ local function score_phrase(q, qcanon, p, cfg, initial_mode, relaxed, allow_dp, 
   -- 纯声母输入（无元音）不跑 DP：用户意图是缩写，不是全拼笔误。
   if allow_dp and not initial_mode and best_raw < 0.90
       and dp_allowed(q, p, fuzzy, cfg, relaxed) then
-    consider(dp_score(q, p, fuzzy, cfg, cache, cfg.typo.strict == true or cfg.typo.enabled == false), "dp", "align")
+    local dp_raw = dp_score(q, p, fuzzy, cfg, cache, cfg.typo.strict == true or cfg.typo.enabled == false)
+    local dp_min_raw = cfg.fallback and cfg.fallback.dp_min_raw or 0
+    if dp_raw > 0 and dp_raw >= dp_min_raw then
+      consider(dp_raw, "dp", "align")
+    end
   end
 
   if not best_channel then
@@ -1173,51 +1263,6 @@ local function collect_syllable_keyword(q, idx)
   return cand
 end
 
-local function collect_second(q, idx, scored)
-  local cand = {}
-  if #q < 2 then
-    return cand
-  end
-
-  -- 统计每个候选与输入的共享双字母/三字母数。
-  -- 双字母至少 2 个；输入 >=4 时还要求至少 1 个三字母，进一步压低噪声。
-  local hits = {}
-  for k = 1, #q - 1 do
-    local bg = q:sub(k, k + 1)
-    local list = idx.by_bigram[bg]
-    if list then
-      for _, id in ipairs(list) do
-        if not scored[id] then
-          hits[id] = (hits[id] or 0) + 1
-        end
-      end
-    end
-  end
-
-  local tri = {}
-  if #q >= 4 then
-    for k = 1, #q - 2 do
-      local tg = q:sub(k, k + 2)
-      local list = idx.by_trigram[tg]
-      if list then
-        for _, id in ipairs(list) do
-          if not scored[id] then
-            tri[id] = (tri[id] or 0) + 1
-          end
-        end
-      end
-    end
-  end
-
-  local min_hits = (#q >= 4) and 2 or 1
-  for id, n in pairs(hits) do
-    if n >= min_hits and (#q < 4 or (tri[id] or 0) >= 1) then
-      cand[id] = true
-    end
-  end
-  return cand
-end
-
 local function add_result(results, pos, id, p, r)
   local at = pos[id]
   if at then
@@ -1271,7 +1316,7 @@ local function fill_static(results, pos, phrases, idx, q, cfg, top_n)
   for _, id in ipairs(idx.static_top) do
     if not pos[id] then
       local p = phrases[id]
-      local fs = fallback_score(q, p, fuzzy)
+      local fs = fallback_similarity(q, p, fuzzy, cfg)
       results[#results + 1] = {
         index = id,
         phrase = p,
@@ -1286,6 +1331,124 @@ local function fill_static(results, pos, phrases, idx, q, cfg, top_n)
         break
       end
     end
+  end
+end
+
+-- 最后一级回退：先用 canonical bigram/trigram 和首字母召回候选，
+-- 按重叠度取短名单，再用 Damerau + Dice-LCS 排序。
+-- 不再按 static_top 的固定顺序取前 N 个；静态顺序只作为兜底。
+local function fill_fallback(results, pos, phrases, idx, q, cfg, top_n, bg, tg)
+  local need = top_n - #results
+  if need <= 0 then
+    return
+  end
+  if #q == 0 then
+    fill_static(results, pos, phrases, idx, q, cfg, top_n)
+    return
+  end
+
+  local fuzzy = cfg.fuzzy
+
+  -- 已有强命中时只做小池，避免为补足 9 个候选拖慢每一次正常按键。
+  local strong_raw = (cfg.fallback and cfg.fallback.strong_raw) or 0.70
+  local strong = false
+  for i = 1, #results do
+    local r = results[i]
+    if r.channel ~= "fallback" and (r.raw or 0) >= strong_raw then
+      strong = true
+      break
+    end
+  end
+
+  local have_ngram = (not strong) and bg and tg
+  if not have_ngram and not strong and #q >= 2 then
+    bg, tg = build_hit_maps(q, idx)
+    have_ngram = true
+  end
+  if not have_ngram then
+    bg, tg = EMPTY, EMPTY
+  end
+
+  local qfirst, qlast, qlen = q:sub(1, 1), q:sub(-1), #q
+  local ids = {}
+  for id in pairs(bg) do
+    if not pos[id] then ids[id] = true end
+  end
+  for id in pairs(tg) do
+    if not pos[id] then ids[id] = true end
+  end
+
+  local first = qfirst
+  local list = idx.by_first[first]
+  if list then
+    for _, id in ipairs(list) do
+      if not pos[id] then ids[id] = true end
+    end
+  end
+  local cfirst = canon_input(first, fuzzy):sub(1, 1)
+  if cfirst ~= first then
+    list = idx.by_first[cfirst]
+    if list then
+      for _, id in ipairs(list) do
+        if not pos[id] then ids[id] = true end
+      end
+    end
+  end
+
+  if next(ids) == nil then
+    fill_static(results, pos, phrases, idx, q, cfg, top_n)
+    return
+  end
+
+  -- 先用双/三字母重叠度把池子压到 max_candidates，再算较贵的相似度。
+  local ranked = {}
+  for id in pairs(ids) do
+    ranked[#ranked + 1] = {
+      id = id,
+      hint = overlap_score(id, phrases[id], bg, tg, qfirst, qlast, qlen),
+    }
+  end
+  table.sort(ranked, function(a, b)
+    if math.abs(a.hint - b.hint) > 1e-9 then
+      return a.hint > b.hint
+    end
+    return a.id < b.id
+  end)
+
+  local limit
+  if strong then
+    limit = (cfg.fallback and cfg.fallback.fast_max_candidates) or 16
+  else
+    limit = (cfg.fallback and cfg.fallback.max_candidates) or 96
+  end
+  if limit < 8 then limit = 8 end
+  if limit > 500 then limit = 500 end
+
+  local scored = {}
+  for i = 1, math.min(limit, #ranked) do
+    local id = ranked[i].id
+    local p = phrases[id]
+    local fs = fallback_similarity(q, p, fuzzy, cfg, strong)
+    scored[#scored + 1] = {
+      index = id,
+      phrase = p,
+      score = fs * (cfg.weights.fallback or 0.55) + 0.0001 * (p.w or 1.0),
+      raw = fs,
+      channel = "fallback",
+      detail = "neighbor",
+    }
+  end
+  table.sort(scored, function(a, b)
+    return compare_results(a, b, cfg.score_epsilon)
+  end)
+
+  for i = 1, math.min(need, #scored) do
+    local r = scored[i]
+    add_result(results, pos, r.index, r.phrase, r)
+  end
+
+  if #results < top_n then
+    fill_static(results, pos, phrases, idx, q, cfg, top_n)
   end
 end
 
@@ -1323,6 +1486,7 @@ function M.rank(input, phrases, opts)
   local cache = {}
   local results = {}
   local pos = {}
+  local bg, tg
 
   -- 阶段 1：廉价通道（精确/前缀/模糊/声母/换位），不跑 DP。
   local primary = collect_primary(q, idx, cfg, initial_mode)
@@ -1344,7 +1508,7 @@ function M.rank(input, phrases, opts)
   -- 候选先用双/三字母重叠度排序，只对 Top-K 做音节对齐。
   local need_dp = (not initial_mode) and best_cheap_raw < 0.93 and #q >= 2
   if need_dp then
-    local bg, tg = build_hit_maps(q, idx)
+    bg, tg = build_hit_maps(q, idx)
     local cand = {}
     for id in pairs(primary) do cand[id] = true end
     for id in pairs(bg) do cand[id] = true end
@@ -1402,7 +1566,7 @@ function M.rank(input, phrases, opts)
   end
 
   if #results < top_n then
-    fill_static(results, pos, phrases, idx, q, cfg, top_n)
+    fill_fallback(results, pos, phrases, idx, q, cfg, top_n, bg, tg)
   end
 
   table.sort(results, function(a, b)

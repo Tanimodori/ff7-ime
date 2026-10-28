@@ -56,6 +56,18 @@ end
       ok = false;
       why = `top1=${top} expected=${c.expect_top1}`;
     }
+    if (c.expect_top1_channel !== undefined
+        && (!res[0] || res[0].channel !== c.expect_top1_channel)) {
+      ok = false;
+      why = `top1 channel=${res[0] && res[0].channel} expected=${c.expect_top1_channel}`;
+    }
+    if (c.expect_not_channel !== undefined) {
+      const bad = res.find((r) => r.channel === c.expect_not_channel);
+      if (bad) {
+        ok = false;
+        why = `unexpected ${c.expect_not_channel} candidate: ${bad.text}`;
+      }
+    }
     if (c.expect_in_top !== undefined) {
       const inTop = res
         .slice(0, c.expect_in_top)
