@@ -278,9 +278,10 @@ git checkout <上一个版本>
 | 症状 | 原因 | 处理 |
 |---|---|---|
 | 方案不显示 | `build/default.yaml` 没有条目 | 在“方案选单设定”中勾选“魔光键影”，重新部署 |
+| 安装后完全无法打字/无候选 | 安装器只复制文件，未生成 `build/ff7-ime.schema.yaml` | 重新部署；确认 `build/ff7-ime.schema.yaml` 存在，必要时重启 WeaselServer |
 | 有方案无候选 | Lua 模块未加载/文件名错 | 检查 `lua/ff7-ime*.lua`、`lua_translator@*ff7-ime`、日志 |
 | 输入被拆段 | `speller/algebra`/`finals`/`delimiter` 配置 | 保持 `alphabet` 全字母、`finals` 空、无 algebra |
-| `lkcc` 被当 ASCII | `ascii_mode` 打开 | F4 关闭“西文”或 `Shift` 切回 |
+| `lkcc` 被当 ASCII | `ascii_mode` 被外部打开 | 本方案已禁用 Shift 切换；切换到其他方案再切回，或重新部署（`ascii_mode` reset: 0） |
 | 改了配置不生效 | 秒级 mtime/未重建 | 等 2 秒后重新部署；重启 WeaselServer |
 | luna 丢失 | 其他工具改写了 `default.custom.yaml` | 在方案选单中同时勾选 luna 与“魔光键影”，重新部署 |
 | 输入卡顿 | 长模糊/容错 DP | 降 `dp_max_candidates`、`max_edit`，关可选模糊 |

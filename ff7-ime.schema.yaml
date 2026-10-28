@@ -186,3 +186,16 @@ key_binder:
     # 回车/小键盘回车确认高亮候选，避免裸拼音上屏。
     - { when: composing, accept: Return, send: space }
     - { when: composing, accept: KP_Enter, send: space }
+
+# 禁用 Shift 中英切换：Weasel 默认 Shift_L=inline_ascii、Shift_R=commit_text，
+# 游戏中按 Shift（冲刺/奔跑）会误进英文模式。noop 让 Shift 透传给宿主程序，
+# 本方案始终保持中文；需要英文时请切换到 luna_pinyin_simp。
+ascii_composer:
+  good_old_caps_lock: true
+  switch_key:
+    Shift_L: noop
+    Shift_R: noop
+    Control_L: noop
+    Control_R: noop
+    Caps_Lock: clear
+    Eisu_toggle: clear

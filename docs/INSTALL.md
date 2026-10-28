@@ -51,6 +51,10 @@
 8. 在任意输入框输入 `shenluo`，应出现“神罗”；输入 `lkcc`，应出现
    “我们会立刻彻底铲除你们！”。
 
+> 如果安装器输出 4 个 `Installing:` 但完全无法打字，先检查
+> `%APPDATA%\Rime\build\ff7-ime.schema.yaml` 是否存在。缺失说明只复制了文件、
+> 还没有完成部署；执行第 7 步并在必要时重启 WeaselServer 即可恢复。
+
 ### 1.3 安装器做了什么
 
 仓库根目录的 `recipe.yaml` 告诉 Plum 只安装 4 个运行时文件：

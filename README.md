@@ -86,6 +86,8 @@
 
 候选窗口默认显示 9 个；注释显示命中通道与主拼音，例如 `全拼 · shen luo`、`关键词 · wo men hui ...`、`容错 · lei nuo`。若命中非主读音，会标注 `异读`。
 
+本方案禁用了 Shift 中英切换（`ascii_composer/switch_key` 中 `Shift_L`/`Shift_R` 为 `noop`）：按 Shift 不会进入英文模式，Shift 会透传给游戏，不会吞掉冲刺/奔跑键。需要输入英文时切换到 `luna_pinyin_simp`。
+
 ### 3.2 常用配置
 
 编辑 `%APPDATA%\Rime\ff7-ime.custom.yaml`，修改后重新部署（Weasel 托盘 → 重新部署，或在方案选单中确认）。

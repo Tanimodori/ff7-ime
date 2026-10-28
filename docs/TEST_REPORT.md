@@ -237,9 +237,35 @@ keyword 5.3→5.9 ms，其余类别基本持平或略降。
 | `meishao` | 输入框内显示 `mei'shao`；回车提交 有时是出手相助的美少女忍者！ | ✅ |
 | `shenluo` | 小键盘回车提交 神罗 | ✅ |
 
-> 内嵌预编辑通过全屏截图确认（`di'ou`/`mei'shao` 直接显示在记事本文本区，候选窗口同时出现）；提交文本通过记事本文本框 Accessibility `value` 确认。`style/inline_preedit: true` 由 schema 提供，Weasel 从 schema 读取，未修改 `weasel.custom.yaml`。测试后已关闭测试窗口并把系统默认输入法恢复为微软拼音。
+> 内嵌预编辑通过全屏截图确认（`di'ou`/`mei'shao` 直接显示在记事本文本区，候选窗口同时出现）；提交文本通过记事本文本框 Accessibility `value` 确认。`style/inline_preedit: true` 由 schema 提供，Weasel 从 schema 读取，未修改 `weasel.custom.yaml`。
 >
 > 本轮 fallback/DP 置信度改动不影响输入框绘制；新增行为用真实 librime 键序列验证（见 §4.1），未重复 GUI 截图。
+
+### 5.1 官方 Plum 安装、首次输入与 Shift 锁定（2026-10-29）
+
+环境：Windows 10 x64、Weasel 0.17.4、Notepad++；通过官方
+**方案选单设定 → 获取更多输入方案** 输入 `Tanimodori/ff7-ime` 安装。
+
+| 项目 | 结果 |
+|---|---|
+| 安装器输出 | `Installing recipe: Tanimodori/ff7-ime` + 4 个 `Installing:`，`Updated ~ 4 files` ✅ |
+| 安装后首次输入 | 无候选、无法打字；`build/ff7-ime.schema.yaml` 缺失，日志报 `nonexistent config file` ❌ |
+| 补做完整部署 + 重启 WeaselServer | `build/ff7-ime.schema.yaml` 生成，方案正常加载 ✅ |
+| `shenluo` | 神罗 ✅ |
+| `lkcc` | 我们会立刻彻底铲除你们！ ✅ |
+| `meishao` | 有时是出手相助的美少女忍者！ ✅ |
+| 空闲时按 `Shift_L` 后输入 `shenluo` | 仍提交神罗，未进入英文模式 ✅ |
+| 组词中按 `Shift_R` 后空格 | 仍提交神罗，组词未中断 ✅ |
+| Weasel 日志 | 本次会话 `converting current composition to ascii mode` 出现 0 次 ✅ |
+
+结论：官方安装器只负责复制 `recipe.yaml` 清单中的文件，**不会自动完成部署**；
+安装后必须在方案选单中确认勾选并重新部署。Shift 锁定由
+`ascii_composer/switch_key` 的 `Shift_L`/`Shift_R: noop` 实现；真实 librime
+探针同时验证：左右 Shift 按下/释放后 `ascii_mode` 始终为 false，预编辑保持
+`shen'luo`，空格提交“神罗”。
+
+> 早前 §5 表格的 GUI 测试使用系统记事本；本轮验证使用 Notepad++。测试结束时
+> 系统当前输入法为小狼毫，未强制切回微软拼音。
 
 ---
 
@@ -271,6 +297,7 @@ keyword 5.3→5.9 ms，其余类别基本持平或略降。
 - 官方安装器：
   - `recipe.yaml` 只安装 `ff7-ime.schema.yaml` 与 `lua/ff7-ime*.lua` 共 4 个文件；
   - 安装器不改写 `default.custom.yaml`，方案启用由“方案选单设定”的勾选完成；
+  - 安装器也不触发部署；若当前方案已是 `ff7-ime` 而 `build/ff7-ime.schema.yaml` 尚未生成，会表现为完全无法打字（本次实测，见 §5.1）；
   - 用 `rime_harness.py` 直接查真实 user dir 时必须加 `--no-write-custom`；否则 harness 默认会把 `default.custom.yaml` 重写成只含当前 schema。
 - 包校验与 Plum 安装：
   - `python tools/check_package.py` 通过，安装清单恰好 4 个运行时文件；
