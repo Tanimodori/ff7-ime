@@ -198,8 +198,27 @@ keyword 5.3→5.9 ms，其余类别基本持平或略降。
 | `meishaonv` | 有时是出手相助的美少女忍者！ | 关键词 · you shi shi chu shou xiang… |
 | `chushou` | 有时是出手相助的美少女忍者！ | 关键词 · you shi shi chu shou xiang… |
 | `shouxiang` | 有时是出手相助的美少女忍者！ | 关键词 · you shi shi chu shou xiang… |
+| `fangge` | 芳格 | 全拼 · fang ge；后续为回退候选 |
+| `fagnge` | 芳格 | 容错 · fang ge（preedit `fagnge`） |
+| `zzzzzz` | 刺针蜘蛛 | 回退 · ci zhen zhi zhu |
+| `qwxz` | 青蛙戒指 | 回退 · qing wa jie zhi |
+| `asdfghjkl` | 格拉斯兰 | 回退 · ge la si lan；无容错候选 |
+| `mina` | 蜜娜 | 全拼 · mi na（preedit `mi'na`） |
+| `mian` | 双面相 | 关键词 · shuang mian xiang |
 
-候选顺序、注释、Top-N（9）均正确。
+候选顺序、注释、Top-N（9）均正确。`fagnge`、`fangge`、`zzzzzz`、`qwxz`、
+`asdfghjkl`、`meishao` 的 preedit 分别为 `fagnge`、`fang'ge`、`zzzzzz`、
+`qwxz`、`asdfghjkl`、`mei'shao`；`asdfghjkl`/`qwxz`/`zzzzzz` 的候选注释中
+不再出现“容错”，说明 DP 置信度门槛生效。
+
+### 4.1 提交与键绑定回归（真实 librime）
+
+| 操作 | 提交 | 结果 |
+|---|---|---|
+| `fagnge` + 选择候选 0 | 芳格 | ✅ |
+| `fagnge{Return}` | 芳格 | ✅ |
+| `fagnge{KP_Enter}` | 芳格 | ✅ |
+| `meishao{Return}` | 有时是出手相助的美少女忍者！ | ✅ |
 
 ---
 
@@ -219,6 +238,8 @@ keyword 5.3→5.9 ms，其余类别基本持平或略降。
 | `shenluo` | 小键盘回车提交 神罗 | ✅ |
 
 > 内嵌预编辑通过全屏截图确认（`di'ou`/`mei'shao` 直接显示在记事本文本区，候选窗口同时出现）；提交文本通过记事本文本框 Accessibility `value` 确认。`style/inline_preedit: true` 由 schema 提供，Weasel 从 schema 读取，未修改 `weasel.custom.yaml`。测试后已关闭测试窗口并把系统默认输入法恢复为微软拼音。
+>
+> 本轮 fallback/DP 置信度改动不影响输入框绘制；新增行为用真实 librime 键序列验证（见 §4.1），未重复 GUI 截图。
 
 ---
 
@@ -254,7 +275,7 @@ keyword 5.3→5.9 ms，其余类别基本持平或略降。
 - portable 分发包：
   - zip 共 32 个成员、单一顶层目录、全部为 POSIX 路径，`testzip()` 通过；
   - `MANIFEST.txt`、`SHA256SUMS`（31 个文件）、`.zip.sha256` 齐备且逐项匹配；
-  - 从 zip 解压后重放 `install.ps1 -NoDeploy` + `deploy-rime.ps1`，生成 `build/moguang_jianying.schema.yaml`，查询 `meishao` 仍为 top1；
+  - 从 zip 解压后重放 `install.ps1 -NoDeploy` + `deploy-rime.ps1`，生成 `build/moguang_jianying.schema.yaml`，查询 `meishao`→长句、`fagnge`→芳格、`asdfghjkl`/`zzzzzz`→回退候选均正确；
   - `uninstall.ps1` 只移除本方案，luna 保留。
 
 ---
@@ -265,20 +286,26 @@ keyword 5.3→5.9 ms，其余类别基本持平或略降。
 
 | 输入 | 总耗时 | 单键最大 | 单键平均 |
 |---|---:|---:|---:|
-| `shenluo`（精确） | 44.3 ms | 13.4 ms | 6.3 ms |
-| `lkcc`（关键词） | 18.8 ms | 6.3 ms | 4.7 ms |
-| `wmhlkcdccnm`（全声母） | 64.4 ms | 7.0 ms | 5.9 ms |
-| `lienuo`（换位） | 41.8 ms | 12.8 ms | 7.0 ms |
-| `leiknuo`（多字） | 55.4 ms | 18.6 ms | 7.9 ms |
-| `dhenluo`（首字母错） | 56.7 ms | 22.3 ms | 8.1 ms |
-| `senguilon`（ng 模糊） | 110.2 ms | 36.0 ms | 12.2 ms |
-| `zanguokuaigon`（长模糊） | 250.1 ms | 49.4 ms | 19.2 ms |
-| `shuanganozhe`（音节内换位） | 141.1 ms | 35.6 ms | 11.8 ms |
-| `meishao`（中段关键词，7 键） | 123 ms | — | 17.6 ms |
-| `shouxiang`（中段关键词，9 键） | 205 ms | — | 22.8 ms |
-| `renshengjiushizhandou`（20 键精确） | 57.1 ms | 10.7 ms | 2.7 ms |
+| `shenluo`（精确） | 40.7 ms | 10.6 ms | 5.8 ms |
+| `lkcc`（关键词） | 16.9 ms | 5.6 ms | 4.2 ms |
+| `wmhlkcdccnm`（全声母） | 69.5 ms | 8.1 ms | 6.3 ms |
+| `lienuo`（换位） | 60.2 ms | 19.2 ms | 10.0 ms |
+| `leiknuo`（多字） | 68.0 ms | 20.7 ms | 9.7 ms |
+| `dhenluo`（首字母错） | 82.5 ms | 27.1 ms | 11.8 ms |
+| `senguilon`（ng 模糊） | 124.3 ms | 35.7 ms | 13.8 ms |
+| `zanguokuaigon`（长模糊） | 294.7 ms | 64.9 ms | 22.7 ms |
+| `shuanganozhe`（音节内换位） | 244.2 ms | 45.3 ms | 20.3 ms |
+| `meishao`（中段关键词，7 键） | 61.4 ms | 23.3 ms | 8.8 ms |
+| `shouxiang`（中段关键词，9 键） | 141.2 ms | 40.7 ms | 15.7 ms |
+| `renshengjiushizhandou`（20 键精确） | 86.9 ms | 11.8 ms | 4.1 ms |
+| `fagnge`（换位/模糊） | 38.8 ms | 13.8 ms | 6.5 ms |
+| `zzzzzz`（回退） | 31.7 ms | 8.2 ms | 5.3 ms |
+| `asdfghjkl`（回退） | 69.8 ms | 11.2 ms | 7.8 ms |
 
-结论：精确/前缀输入流畅；长模糊/容错输入最坏约 50 ms/键，中段关键词约 17–23 ms/键，符合目标（单键 <50–100 ms）。可调 `dp_max_candidates` 进一步降延迟。
+结论：精确/前缀输入流畅（约 5–6 ms/键）；长模糊/容错输入最坏约
+65 ms/键，中段关键词约 9–16 ms/键，仍在目标（单键 <50–100 ms）内。
+回退改动没有改变 DP 短名单大小；如仍卡顿，可调 `dp_max_candidates`
+或 `fallback/max_candidates`。
 
 ---
 

@@ -182,7 +182,7 @@ PY
 - `mgjy/fallback/dp_min_raw`：默认 0.65；调高会丢弃更多低置信 DP，调低会保留更多“硬凑”候选；
 - `mgjy/fallback/strong_raw`：默认 0.70；有强命中时只用小池补位；
 - `mgjy/fallback/fast_max_candidates`：默认 16；`max_candidates`：默认 96；
-- 长模糊输入最坏约 50 ms/键；精确/前缀 1–15 ms/键。
+- 长模糊输入最坏约 65 ms/键；精确/前缀 5–10 ms/键。
 
 ### 4.6 调参后的验证
 

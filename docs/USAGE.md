@@ -230,8 +230,8 @@ patch:
   mgjy/fallback/max_candidates: 96
 ```
 
-- 精确/前缀输入不跑 DP，通常 1–15 ms/键；
-- 长模糊/容错输入最坏约 50 ms/键；
+- 精确/前缀输入不跑 DP，通常 5–10 ms/键；
+- 长模糊/容错输入最坏约 65 ms/键；
 - 卡顿时优先降到 40/32，或关闭 `n_l`、`r_l`、`f_h`；
 - `fallback/dp_min_raw` 控制 DP 最低置信度，低于它的近似对齐会被丢弃；
 - `fallback/strong_raw` 以上视为强命中，只用 `fast_max_candidates` 个小池补位；

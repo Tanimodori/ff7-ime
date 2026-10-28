@@ -410,7 +410,7 @@ overlap = 2 * bigram_hits + 4 * trigram_hits
 
 只对前 `dp_max_candidates`（默认 56）跑完整 `score_phrase`（含 DP）。
 
-- 精确/前缀/模糊/声母/换位已够强时完全跳过 DP，长句逐键保持 1–15 ms；
+- 精确/前缀/模糊/声母/换位已够强时完全跳过 DP，长句逐键约 5–10 ms；
 - 纯声母/关键词输入跳过 DP，避免 DP 误抢关键词；
 - DP 短名单既控制延迟，又通过 canonical 重叠度确保正确候选不被截掉；
 - DP 的归一化 raw 低于 `mgjy/fallback/dp_min_raw`（默认 0.65）时丢弃，
@@ -435,7 +435,7 @@ Top-K；对每条候选调用 `syllable_keyword_score`，按 `keyword` 权重
 - 不会因为关键词 raw 很高而把 `best_raw` 推到 0.90 以上、阻断 DP；
 - 也不会因为 `best_cheap_raw >= 0.93` 跳过阶段 2 而漏掉中段关键词；
 - 代价是每条输入多一次前缀索引查询和少量候选的 DP，实测真实
-  librime 下 7–9 键输入总耗时约 120–205 ms（约 17–23 ms/键）。
+  librime 下 7–9 键输入总耗时约 61–141 ms（约 9–16 ms/键）。
 
 ---
 
@@ -512,13 +512,15 @@ initial_mode = #q >= 2 and (
   条候选，每条 O(\(L \cdot F\))，其中 \(F\) 为全拼/声母串长度；
 - 预编辑：O(\(L \cdot k\)) 的音节集合查询，对逐键耗时影响可忽略；
 - 实测本机（librime 1.13.1 原生 Lua 5.4）：
-  - 精确/前缀：1–15 ms/键；
-  - 模糊/容错：20–50 ms/键（最坏约 50 ms）；
-  - 中段关键词：约 17–23 ms/键（`meishao` 7 键总耗时 123 ms，
-    `shouxiang` 9 键总耗时 205 ms）；
-  - 20 键长句 `renshengjiushizhandou` 总耗时约 57 ms。
+  - 精确/前缀：约 5–10 ms/键；
+  - 模糊/容错：约 10–65 ms/键（`zanguokuaigon` 单键最大 64.9 ms）；
+  - 中段关键词：约 9–16 ms/键（`meishao` 7 键总耗时 61 ms，
+    `shouxiang` 9 键总耗时 141 ms）；
+  - 20 键长句 `renshengjiushizhandou` 总耗时约 87 ms；
+  - 回退：`zzzzzz` 总耗时 32 ms，`asdfghjkl` 70 ms。
 
-`dp_max_candidates`、`max_edit`、`top_n` 均可调，用于性能/召回权衡。
+`dp_max_candidates`、`max_edit`、`top_n`、`fallback/max_candidates`
+均可调，用于性能/召回权衡。
 
 ---
 

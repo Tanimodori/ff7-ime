@@ -159,7 +159,7 @@ asdfghjkl           → 9 个回退候选，低分 DP 噪声被置信度门槛�
 
 核心 Lua 回归 40/40 通过，其中 19 条同时断言预编辑分词（`di'ou`、`shen'luo`、`mei'shao`、`shen'l`、`a'an` 等），并新增了 `fagnge`、fallback 候选池和 DP 置信度门槛的回归。
 
-真实 Rime 逐键性能（K=56，测量于本机 `rime.dll`）：精确/前缀输入通常 1–15 ms/键，长模糊/容错输入最坏约 50 ms/键，中段关键词约 17–23 ms/键（`meishao` 7 键总耗时 123 ms）；20 键长句 `renshengjiushizhandou` 总耗时约 57 ms。GUI 已在记事本中实测 `lkcc`、`lienuo`、`senluo`、`zanguokuaigon`、`renshengjiushizhandou` 均正确提交；内嵌预编辑 `di'ou`/`mei'shao`、回车/小键盘回车提交也已实测通过。
+真实 Rime 逐键性能（K=56，测量于本机 `rime.dll`）：精确/前缀约 5–10 ms/键，长模糊/容错最坏约 65 ms/键，中段关键词约 9–16 ms/键（`meishao` 7 键总耗时 61 ms，`shouxiang` 9 键 141 ms）；20 键长句 `renshengjiushizhandou` 总耗时约 87 ms。GUI 已在记事本中实测 `lkcc`、`lienuo`、`senluo`、`zanguokuaigon`、`renshengjiushizhandou` 均正确提交；内嵌预编辑 `di'ou`/`mei'shao`、回车/小键盘回车提交也已实测通过。
 
 详见 [docs/TEST_REPORT.md](docs/TEST_REPORT.md) 与 [docs/acceptance/](docs/acceptance/)。
 
@@ -187,7 +187,7 @@ asdfghjkl           → 9 个回退候选，低分 DP 噪声被置信度门槛�
 4. **portable 是分发包，不是便携运行时**：本项目的 portable 定义为可分发档案，安装目标是 Rime 用户目录（小狼毫默认 `%APPDATA%\Rime`）。若要让小狼毫整体随 U 盘走，需要 `WeaselSetup.exe /userdir:<dir>` 并重启服务，这会改变该机器所有方案的用户目录。
 5. **WeaselDeployer 的 `/deploy` 在部分环境会打开“方案选单设定”GUI 并改写 `default.custom.yaml`**。本包改用 `deploy-rime.ps1`（直接调用 `rime.dll` 的维护接口）无头部署，避免该问题。
 6. **数据读音为工程化整理**：以 pypinyin + luna_pinyin + 人工覆盖为准；若发现译名读音争议，改 `experiments/pinyin-data/override.yaml` 后重新构建。
-7. **性能取决于词条长度与输入类型**：纯精确/前缀很快；长模糊/容错输入会跑音节 DP，最坏约 50 ms/键；中段关键词约 17–23 ms/键。可通过 `mgjy/dp_max_candidates`、`mgjy/fallback/max_candidates` 调整。
+7. **性能取决于词条长度与输入类型**：纯精确/前缀很快；长模糊/容错输入会跑音节 DP，最坏约 65 ms/键；中段关键词约 9–16 ms/键。可通过 `mgjy/dp_max_candidates`、`mgjy/fallback/max_candidates` 调整。
 
 ---
 
