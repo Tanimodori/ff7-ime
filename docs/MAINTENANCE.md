@@ -258,7 +258,7 @@ git checkout <上一个版本>
 # 重新在“获取更多输入方案”中安装，或在开发机复制 4 个运行时文件后重新部署
 ```
 
-不再保留 portable zip；版本以 git 提交和 `schema/version` 为准。
+不再保留额外分发包；版本以 git 提交和 `schema/version` 为准。
 
 ---
 
