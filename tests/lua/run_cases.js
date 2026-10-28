@@ -24,7 +24,8 @@ local PHRASES = (function()
 ${dataSrc}
 end)()
 return function(q, topn)
-  local r = M.rank(q, PHRASES, { top_n = topn or 9 })
+  local opts = { top_n = topn or 9, preedit = { enabled = true, separator = "'" } }
+  local r = M.rank(q, PHRASES, opts)
   local o = {}
   for i, v in ipairs(r) do
     o[i] = {
@@ -35,7 +36,8 @@ return function(q, topn)
       detail = v.detail,
     }
   end
-  return o
+  local pv = M.preview(q, PHRASES, opts, r[1] and r[1].phrase)
+  return { candidates = o, preedit = pv }
 end
 `;
   const run = await lua.doString(chunk);
@@ -44,7 +46,9 @@ end
   let fail = 0;
   for (const c of cases) {
     const topn = Math.max(9, c.expect_nonempty || 0, c.expect_in_top || 0);
-    const res = await run(c.input, topn);
+    const out = await run(c.input, topn);
+    const res = out.candidates;
+    const preedit = out.preedit;
     const top = res[0] ? res[0].text : null;
     let ok = true;
     let why = "";
@@ -65,9 +69,14 @@ end
       ok = false;
       why = `only ${res.length} candidates, expected >= ${c.expect_nonempty}`;
     }
+    if (c.expect_preedit !== undefined && preedit !== c.expect_preedit) {
+      ok = false;
+      why = `preedit=${JSON.stringify(preedit)} expected=${JSON.stringify(c.expect_preedit)}`;
+    }
     if (ok) {
       pass++;
-      console.log(`OK   ${JSON.stringify(c.input)} -> ${top} (${res.length})`);
+      const pv = c.expect_preedit !== undefined ? ` preedit=${JSON.stringify(preedit)}` : "";
+      console.log(`OK   ${JSON.stringify(c.input)} -> ${top} (${res.length})${pv}`);
     } else {
       fail++;
       console.log(`FAIL ${JSON.stringify(c.input)}: ${why}`);

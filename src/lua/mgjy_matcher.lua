@@ -59,6 +59,11 @@ M.defaults = {
     -- 词条中段的音节前缀子序列（meishao -> 美少女）。
     syllable_subsequence = true,
   },
+  -- 仅影响 preedit 显示，不影响匹配与候选排序。
+  preedit = {
+    enabled = true,
+    separator = "'",
+  },
   score_epsilon = 1e-9,
 }
 
@@ -977,10 +982,30 @@ local function build_index(phrases, cfg)
     by_full = {},
     by_canon = {},
     static_top = {},
+    syllables = {},
+    syllable_prefixes = {},
+    max_syllable = 0,
   }
 
   for id, p in ipairs(phrases) do
     prepare_phrase(p, cfg.fuzzy, cfg.typo)
+
+    for _, readings in ipairs(p.readings) do
+      for _, r in ipairs(readings) do
+        local forms = { r.s }
+        local cr = canon_syllable(r.s, cfg.fuzzy)
+        if cr ~= r.s then forms[2] = cr end
+        for _, syl in ipairs(forms) do
+          if syl ~= "" then
+            idx.syllables[syl] = true
+            if #syl > idx.max_syllable then idx.max_syllable = #syl end
+            for k = 1, #syl do
+              idx.syllable_prefixes[syl:sub(1, k)] = true
+            end
+          end
+        end
+      end
+    end
 
     local seen_first, seen_init, seen_bg, seen_tg = {}, {}, {}, {}
 
@@ -1389,6 +1414,90 @@ function M.rank(input, phrases, opts)
     out[i] = results[i]
   end
   return out
+end
+
+-- 预测输入的音节边界，只用于 preedit 显示。
+-- 例：diou -> di'ou，shenluo -> shen'luo，lkcc -> lkcc。
+-- 若首个候选的完整读音恰好等于输入，优先采用它的音节切分。
+function M.preview(input, phrases, opts, hint)
+  local cfg = M.options(opts)
+  local s = M.normalize(input)
+  local L = #s
+  if L == 0 then
+    return ""
+  end
+  if not cfg.preedit or cfg.preedit.enabled == false then
+    return s
+  end
+  local sep = cfg.preedit.separator or "'"
+
+  if hint and hint.syls and #hint.syls > 0 then
+    local full = table.concat(hint.syls)
+    if full == s then
+      return table.concat(hint.syls, sep)
+    end
+  end
+
+  local idx = build_index(phrases, cfg)
+  local syllables, maxlen = idx.syllables, idx.max_syllable
+  if not syllables or maxlen < 1 then
+    return s
+  end
+
+  -- best[i]：覆盖前 i 个字符的最优切分；先最大化覆盖，再最小化音节数。
+  local best = { [0] = { pieces = 0, prev = -1, take = 0 } }
+  for i = 0, L - 1 do
+    local cur = best[i]
+    if cur then
+      for k = 1, math.min(maxlen, L - i) do
+        local sub = s:sub(i + 1, i + k)
+        if syllables[sub] or syllables[canon_syllable(sub, cfg.fuzzy)] then
+          local j = i + k
+          local cand = { pieces = cur.pieces + 1, prev = i, take = k }
+          local prev = best[j]
+          if not prev
+              or cand.pieces < prev.pieces
+              or (cand.pieces == prev.pieces and k > prev.take) then
+            best[j] = cand
+          end
+        end
+      end
+    end
+  end
+
+  -- 输入可能还没打完（shenl / shenlu）。允许最后一个未完成音节作为尾巴，
+  -- 只要它是某个合法音节的前缀；否则保持原样。
+  local end_pos = L
+  local tail = nil
+  if not best[L] then
+    for i = L - 1, 1, -1 do
+      local suffix = s:sub(i + 1)
+      if best[i] and idx.syllable_prefixes[suffix] then
+        end_pos = i
+        tail = suffix
+        break
+      end
+    end
+    if not tail then
+      return s
+    end
+  end
+
+  local parts = {}
+  local pos = end_pos
+  while pos and pos > 0 do
+    local node = best[pos]
+    parts[#parts + 1] = s:sub(node.prev + 1, pos)
+    pos = node.prev
+  end
+  local out = {}
+  for i = #parts, 1, -1 do
+    out[#out + 1] = parts[i]
+  end
+  if tail then
+    out[#out + 1] = tail
+  end
+  return table.concat(out, sep)
 end
 
 -- 为整张表做一次预计算并建立索引。返回 phrases 便于链式调用。

@@ -74,6 +74,12 @@ switches:
 menu:
   page_size: 9
 
+# Weasel 会从 schema 读取该设置：把预编辑串内嵌显示到输入框。
+# 音节分隔符由 lua/mgjy_matcher.lua 的 preview() 预测（diou -> di'ou）。
+style:
+  inline_preedit: true
+  preedit_type: composition
+
 # ---------------------------------------------------------------------------
 # 方案配置（Lua 读取；用户可在 moguang_jianying.custom.yaml 中覆盖）
 # ---------------------------------------------------------------------------
@@ -164,3 +170,7 @@ punctuator:
 
 key_binder:
   import_preset: default
+  bindings:
+    # 回车/小键盘回车确认高亮候选，避免裸拼音上屏。
+    - { when: composing, accept: Return, send: space }
+    - { when: composing, accept: KP_Enter, send: space }

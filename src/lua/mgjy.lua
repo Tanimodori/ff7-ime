@@ -80,6 +80,13 @@ local function cfg_double(config, path)
   return nil
 end
 
+local function cfg_string(config, path)
+  if not config then return nil end
+  local ok, v = pcall(function() return config:get_string(path) end)
+  if ok then return v end
+  return nil
+end
+
 local function switch_value(env, name, enabled)
   if not enabled then return nil end
   local ctx = context_of(env)
@@ -165,6 +172,13 @@ local function build_options(env)
     syllable_subsequence = defaults.keyword.syllable_subsequence
   end
 
+  local preedit_enabled = cfg_bool(config, "mgjy/preedit/enabled")
+  if preedit_enabled == nil then preedit_enabled = true end
+  local preedit_separator = cfg_string(config, "mgjy/preedit/separator")
+  if preedit_separator == nil then
+    preedit_separator = defaults.preedit.separator
+  end
+
   local show_comment = cfg_bool(config, "mgjy/show_comment")
   if show_comment == nil then show_comment = true end
 
@@ -190,6 +204,10 @@ local function build_options(env)
     keyword = {
       gap_penalty = gap_penalty,
       syllable_subsequence = syllable_subsequence,
+    },
+    preedit = {
+      enabled = preedit_enabled,
+      separator = preedit_separator,
     },
     show_comment = show_comment,
     show_score = show_score,
@@ -290,10 +308,22 @@ function M.func(input, seg, env)
     end_pos = start_pos + #input
   end
 
+  -- 预编辑显示：把输入切成预测音节（diou -> di'ou），commit 文本不变。
+  local preedit = nil
+  if opts.preedit.enabled and #input > 0 then
+    local ok, pv = pcall(matcher.preview, input, data, opts, results[1] and results[1].phrase)
+    if ok and pv and #pv > 0 then
+      preedit = pv
+    end
+  end
+
   local total = #results
   for i = 1, total do
     local r = results[i]
     local cand = Candidate("mgjy", start_pos, end_pos, r.phrase.text, format_comment(r, opts))
+    if preedit then
+      pcall(function() cand.preedit = preedit end)
+    end
     -- 同一 segment 内按 yield 顺序稳定排序：quality 越高越靠前。
     pcall(function()
       cand.quality = (total - i + 1) * 0.001
