@@ -96,7 +96,8 @@ data/phrases.json = 646 KB
 | `mina` | 蜜娜 | ✅ |
 | `mian` | 双面相 | ✅ |
 
-结果：**40/40 通过**。新增用例同时锁定：
+结果：**41/41 通过**。新增用例同时锁定：
+- 声母缩写按声母分段（`nd` → `n'd`、`lkcc` → `l'k'c'c`），fallback 噪声保持原样（`zzzzzz` → `zzzzzz`）；
 - DP 置信度门槛（`asdfghjkl`/`qwxz`/`zzzzzz` 不得出现 `dp` 候选）；
 - fallback 不再按静态顺序补位；
 - `fagnge` 这类相邻字母换位仍由 DP 命中；
@@ -112,7 +113,8 @@ data/phrases.json = 646 KB
 | `meishao` | `mei'shao` | ✅ |
 | `shenl`（未打完） | `shen'l` | ✅ |
 | `aan` | `a'an` | ✅ |
-| `lkcc`（首字母） | `lkcc` | ✅ |
+| `nd`（声母缩写） | `n'd` | ✅ |
+| `lkcc`（声母缩写） | `l'k'c'c` | ✅ |
 
 ---
 
@@ -209,7 +211,9 @@ keyword 5.3→5.9 ms，其余类别基本持平或略降。
 候选顺序、注释、Top-N（9）均正确。`fagnge`、`fangge`、`zzzzzz`、`qwxz`、
 `asdfghjkl`、`meishao` 的 preedit 分别为 `fagnge`、`fang'ge`、`zzzzzz`、
 `qwxz`、`asdfghjkl`、`mei'shao`；`asdfghjkl`/`qwxz`/`zzzzzz` 的候选注释中
-不再出现“容错”，说明 DP 置信度门槛生效。
+不再出现“容错”，说明 DP 置信度门槛生效。声母缩写命中强候选时按声母分段：
+`nd` → `n'd`、`lkcc` → `l'k'c'c`、`wmhlkcdccnm` → `w'm'h'l'k'c'd'c'c'n'm`；
+只命中 fallback 的噪声串（`zzzzzz`/`qwxz`/`asdfghjkl`）保持原样。
 
 ### 4.1 提交与键绑定回归（真实 librime）
 
@@ -219,6 +223,23 @@ keyword 5.3→5.9 ms，其余类别基本持平或略降。
 | `fagnge{Return}` | 芳格 | ✅ |
 | `fagnge{KP_Enter}` | 芳格 | ✅ |
 | `meishao{Return}` | 有时是出手相助的美少女忍者！ | ✅ |
+
+### 4.2 声母缩写预编辑（真实 librime，2026-10-29）
+
+在真实 user dir 重新部署后用 `rime_harness.py` 查询（`--no-write-custom`）：
+
+| 输入 | preedit | top1 |
+|---|---|---|
+| `nd` | `n'd` | 逗你的 |
+| `nide` | `ni'de` | 尼德霍格 |
+| `lkcc` | `l'k'c'c` | 我们会立刻彻底铲除你们！ |
+| `wmhlkcdccnm` | `w'm'h'l'k'c'd'c'c'n'm` | 我们会立刻彻底铲除你们！ |
+| `zzzzzz` | `zzzzzz`（fallback，保持原样） | 刺针蜘蛛 |
+| `asdfghjkl` | `asdfghjkl`（fallback，保持原样） | 格拉斯兰 |
+
+更新后的 `lua/ff7-ime.lua`、`lua/ff7-ime_matcher.lua` 已复制到本地
+`%APPDATA%\Rime\lua\`，重新部署并重启 WeaselServer 后生效；原文件已备份为
+`*.before-abbrev-preedit-<时间戳>`。
 
 ---
 

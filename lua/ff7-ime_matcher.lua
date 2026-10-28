@@ -1580,8 +1580,40 @@ function M.rank(input, phrases, opts)
   return out
 end
 
+-- 预编辑缩写回退用：合法拼音声母（含双字母声母）。
+local PREEDIT_INITIALS = {
+  b = true, p = true, m = true, f = true, d = true, t = true,
+  n = true, l = true, g = true, k = true, h = true, j = true,
+  q = true, x = true, zh = true, ch = true, sh = true,
+  r = true, z = true, c = true, s = true, y = true, w = true,
+}
+
+-- 把纯声母串切成声母序列（zh/ch/sh 优先）；含非声母字符时返回 nil。
+local function split_initials(s)
+  local out = {}
+  local i = 1
+  while i <= #s do
+    local two = s:sub(i, i + 1)
+    if PREEDIT_INITIALS[two] then
+      out[#out + 1] = two
+      i = i + 2
+    else
+      local one = s:sub(i, i)
+      if not PREEDIT_INITIALS[one] then
+        return nil
+      end
+      out[#out + 1] = one
+      i = i + 1
+    end
+  end
+  if #out < 2 then
+    return nil
+  end
+  return out
+end
+
 -- 预测输入的音节边界，只用于 preedit 显示。
--- 例：diou -> di'ou，shenluo -> shen'luo，lkcc -> lkcc。
+-- 例：diou -> di'ou，shenluo -> shen'luo，nd -> n'd，lkcc -> l'k'c'c。
 -- 若首个候选的完整读音恰好等于输入，优先采用它的音节切分。
 function M.preview(input, phrases, opts, hint)
   local cfg = M.options(opts)
@@ -1595,10 +1627,17 @@ function M.preview(input, phrases, opts, hint)
   end
   local sep = cfg.preedit.separator or "'"
 
-  if hint and hint.syls and #hint.syls > 0 then
-    local full = table.concat(hint.syls)
+  local hint_phrase = hint
+  local hint_channel = nil
+  if type(hint) == "table" and hint.phrase then
+    hint_phrase = hint.phrase
+    hint_channel = hint.channel
+  end
+
+  if hint_phrase and hint_phrase.syls and #hint_phrase.syls > 0 then
+    local full = table.concat(hint_phrase.syls)
     if full == s then
-      return table.concat(hint.syls, sep)
+      return table.concat(hint_phrase.syls, sep)
     end
   end
 
@@ -1630,16 +1669,28 @@ function M.preview(input, phrases, opts, hint)
   end
 
   -- 输入可能还没打完（shenl / shenlu）。允许最后一个未完成音节作为尾巴，
-  -- 只要它是某个合法音节的前缀；否则保持原样。
+  -- 只要它是某个合法音节的前缀；否则如果剩余部分全是声母（nd / lkcc），
+  -- 按声母逐个分段。两者都不成立时保持原样。
   local end_pos = L
   local tail = nil
+  -- 只有输入命中了非 fallback 候选时才启用声母缩写分段，避免把
+  -- asdfghjkl / zzzzzz 这类噪声也切成一个个字母。
+  local allow_initials = hint_channel ~= "fallback"
   if not best[L] then
-    for i = L - 1, 1, -1 do
+    for i = L - 1, 0, -1 do
       local suffix = s:sub(i + 1)
-      if best[i] and idx.syllable_prefixes[suffix] then
-        end_pos = i
-        tail = suffix
-        break
+      if best[i] then
+        if idx.syllable_prefixes[suffix] then
+          end_pos = i
+          tail = suffix
+          break
+        end
+        local initials = allow_initials and split_initials(suffix) or nil
+        if initials then
+          end_pos = i
+          tail = table.concat(initials, sep)
+          break
+        end
       end
     end
     if not tail then

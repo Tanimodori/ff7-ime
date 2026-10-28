@@ -123,7 +123,7 @@ NODE_PATH="$PWD/tools/lua-sandbox/node_modules" \
 
 期望：
 
-- 核心 40/40（含 `meishao` 中段关键词、`di'ou` 预编辑分词、`fagnge` 换位/模糊对齐、fallback 与 DP 置信度回归）；
+- 核心 41/41（含 `meishao` 中段关键词、`di'ou` 预编辑分词、声母缩写 `nd`/`lkcc` 分段、`fagnge` 换位/模糊对齐、fallback 与 DP 置信度回归）；
 - exact 1212/1212；
 - fuzzy 878/878；
 - initial 1212/1212（top1 或 top3）；

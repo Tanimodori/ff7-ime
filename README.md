@@ -18,7 +18,7 @@
 | 全声母 | 每个音节首字母 | `wmhlkcdccnm` → 我们会立刻彻底铲除你们！ |
 | 关键词子序列 | 声母的稀疏子序列，长句可缩写 | `lkcc` → 我们会立刻彻底铲除你们！ |
 | 中段关键词 | 词条中段的音节前缀子序列，可跳过前导音节 | `meishao` → 有时是出手相助的美少女忍者！ |
-| 内嵌预编辑 | 输入框内实时显示预测音节分隔符，不影响上屏文本 | `diou` → `di'ou`；`meishao` → `mei'shao` |
+| 内嵌预编辑 | 输入框内实时显示预测音节分隔符，不影响上屏文本 | `diou` → `di'ou`；`meishao` → `mei'shao`；`nd` → `n'd` |
 | 部分输入 | 全拼前缀/不完整音节 | `shenl` → 神罗 |
 | 漏/多/错/换位 | 漏字母、多字母、相邻换位、音节换位 | `lienuo` / `leino` / `leiknuo` / `nuolei` → 雷诺 |
 | 永远 N 个 | 乱码、单字母、空输入也不空输出 | `zzzzzz` → 9 个候选 |
@@ -148,9 +148,9 @@ shenluo             → 神罗（全拼）
 senluo              → 神罗（模糊）
 diou                → 迪欧（预编辑 di'ou）
 leinuo / lienuo / leino / leiknuo / nuolei → 雷诺（全拼/漏/换位/多字/音节换位）
-lkcc                → 我们会立刻彻底铲除你们！（关键词）
+lkcc                → 我们会立刻彻底铲除你们！（关键词，预编辑 l'k'c'c）
 meishao             → 有时是出手相助的美少女忍者！（中段关键词，预编辑 mei'shao）
-wmhlkcdccnm         → 我们会立刻彻底铲除你们！（全声母）
+wmhlkcdccnm         → 我们会立刻彻底铲除你们！（全声母，预编辑 w'm'h'l'k'c'd'c'c'n'm）
 zanguokuaigon       → 掌掴快攻（跨音节 ng→n 模糊）
 fagnge              → 芳格（音节内换位/模糊对齐）
 renshengjiushizhandou → 人生就是战斗！（含标点）
@@ -158,7 +158,7 @@ zzzzzz              → 9 个共享 z 的回退候选（不再是固定静态前
 asdfghjkl           → 9 个回退候选，低分 DP 噪声被置信度门槛丢弃
 ```
 
-核心 Lua 回归 40/40 通过，其中 19 条同时断言预编辑分词（`di'ou`、`shen'luo`、`mei'shao`、`shen'l`、`a'an` 等），并新增了 `fagnge`、fallback 候选池和 DP 置信度门槛的回归。
+核心 Lua 回归 41/41 通过，其中 20 条同时断言预编辑分词（`di'ou`、`shen'luo`、`mei'shao`、`shen'l`、`a'an`、`n'd`、`l'k'c'c` 等），并新增了 `fagnge`、fallback 候选池和 DP 置信度门槛的回归。
 
 真实 Rime 逐键性能（K=56，测量于本机 `rime.dll`）：精确/前缀约 5–10 ms/键，长模糊/容错最坏约 65 ms/键，中段关键词约 9–16 ms/键（`meishao` 7 键总耗时 61 ms，`shouxiang` 9 键 141 ms）；20 键长句 `renshengjiushizhandou` 总耗时约 87 ms。GUI 已在记事本中实测 `lkcc`、`lienuo`、`senluo`、`zanguokuaigon`、`renshengjiushizhandou` 均正确提交；内嵌预编辑 `di'ou`/`mei'shao`、回车/小键盘回车提交也已实测通过。
 

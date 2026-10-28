@@ -36,7 +36,7 @@ return function(q, topn)
       detail = v.detail,
     }
   end
-  local pv = M.preview(q, PHRASES, opts, r[1] and r[1].phrase)
+  local pv = M.preview(q, PHRASES, opts, r[1])
   return { candidates = o, preedit = pv }
 end
 `;

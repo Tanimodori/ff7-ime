@@ -354,7 +354,9 @@ DP 是近似对齐，必须防止它在垃圾串上“硬凑”出低分候选�
 2. 否则用数据中所有读音的原始/规范化形式建立音节集合与前缀集合，对输入做 DP：
    - 覆盖全部字符；音节数越少越好；同分时优先更长的音节；
    - 允许一个未完成的尾音节，只要它是合法音节的前缀（`shenl` → `shen'l`）；
-   - 无法切分时原样返回（`lkcc` → `lkcc`）；
+   - 若整段（或匹配完整音节后的剩余部分）全由声母组成，且首个候选不是 fallback，
+     按声母分段（`nd` → `n'd`、`lkcc` → `l'k'c'c`、`wmhlkcdccnm` → `w'm'h'l'k'c'd'c'c'n'm`）；
+   - 仍无法切分时原样返回（`leiknuo` → `leiknuo`）；
 3. 用 `ff7-ime/preedit/separator`（默认 `'`）连接。
 
 显示层写入 `cand.preedit`；Rime 的 composition preedit 使用该字段，Weasel 在 `style/inline_preedit: true` 时把它画进输入框。commit 文本仍是候选的 `text`，不受影响。

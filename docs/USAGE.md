@@ -276,7 +276,8 @@ schema 内已设置 `style/inline_preedit: true`，Weasel 会把预编辑串直�
 | `shenluo` | `shen'luo` |
 | `meishao` | `mei'shao` |
 | `shenl`（未打完） | `shen'l` |
-| `lkcc`（首字母） | `lkcc` |
+| `nd`（声母缩写） | `n'd` |
+| `lkcc`（声母缩写） | `l'k'c'c` |
 
 配置：
 

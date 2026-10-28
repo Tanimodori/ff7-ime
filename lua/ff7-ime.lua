@@ -347,7 +347,7 @@ function M.func(input, seg, env)
   -- 预编辑显示：把输入切成预测音节（diou -> di'ou），commit 文本不变。
   local preedit = nil
   if opts.preedit.enabled and #input > 0 then
-    local ok, pv = pcall(matcher.preview, input, data, opts, results[1] and results[1].phrase)
+    local ok, pv = pcall(matcher.preview, input, data, opts, results[1])
     if ok and pv and #pv > 0 then
       preedit = pv
     end
