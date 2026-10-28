@@ -1,0 +1,8 @@
+[MGJY] Rime user dir: C:\Users\Tanimodori\AppData\Roaming\Rime
+[MGJY] Weasel dir:    C:\Program Files\Rime\weasel-0.17.4
+[MGJY] Backup: C:\Users\Tanimodori\AppData\Roaming\Rime\default.custom.yaml.mgjy-backup-20261028-213242
+[MGJY] Copied schema, custom config and Lua runtime.
+[MGJY] Inserted moguang_jianying into existing schema_list.
+[MGJY] Running WeaselDeployer.exe /deploy ...
+少御: Deployment artifact not found: C:\Users\Tanimodori\AppData\Roaming\Rime\build\moguang_jianying.schema.yaml
+少御: Check %TEMP%\rime.weasel logs and run WeaselDeployer.exe /deploy again.
