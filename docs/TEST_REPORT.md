@@ -274,8 +274,11 @@ keyword 5.3→5.9 ms，其余类别基本持平或略降。
   - 用 `rime_harness.py` 直接查真实 user dir 时必须加 `--no-write-custom`；否则 harness 默认会把 `default.custom.yaml` 重写成只含当前 schema。
 - 包校验与 Plum 安装：
   - `python tools/check_package.py` 通过，安装清单恰好 4 个运行时文件；
-  - 用本地克隆模拟 Plum 安装，用户目录只出现 schema + 3 个 Lua，没有 custom、`data/dict.txt`、tests；
-  - 官方 `rime-install.bat` 输出 `Installing recipe:` 与 4 个 `Installing:` 文件。
+  - 发布前用本地克隆模拟 Plum 安装，用户目录只出现 schema + 3 个 Lua，没有 custom、`data/dict.txt`、tests；
+  - 发布后用官方 `rime-install.bat` 从 `https://github.com/Tanimodori/ff7-ime.git` 克隆：
+    输出 `Downloading package` → `Installing recipe: Tanimodori/ff7-ime`，安装 1 个包；
+  - 安装器执行前后 `default.custom.yaml` 的 SHA-256 一致，确认安装器未改写方案列表；
+  - Plum 缓存 origin 为 `https://github.com/Tanimodori/ff7-ime.git`。
 - 本机旧安装迁移：
   - 旧 `moguang_jianying.schema.yaml`、旧 custom、旧 `lua/mgjy*.lua` 和旧 build 产物已备份后删除；
   - `default.custom.yaml` 现在为 `luna_pinyin_simp` + `ff7-ime`；
@@ -321,7 +324,7 @@ keyword 5.3→5.9 ms，其余类别基本持平或略降。
 1. keyword 极稀疏子序列存在天然歧义（5/238 未进 top5）；`lkcc` 等需求示例稳定。
 2. 中段共享音节串（如“是我的”“护身符”）存在天然歧义；`mid_keyword` 评测只使用唯一出现的 2–3 音节串。
 3. 只输出 1212 条，词库外输入仅做 n-gram + Damerau/Dice-LCS 回退；回退候选只保证表面字母相关，不保证语义相关。
-4. 安装源是整仓 Plum 包：用户浅克隆整个仓库（约 6 MB，含 tests/experiments/docs），需要公开仓库 + Git Bash；Weasel 0.17.4 的本地 ZIP 路径不复制 `lua/`。
+4. 安装源是整仓 Plum 包：用户浅克隆整个仓库（约 7 MB，含 tests/experiments/docs），需要公开仓库 + Git Bash；Weasel 0.17.4 的本地 ZIP 路径不复制 `lua/`。
 5. 安装器不改 `default.custom.yaml`；启用方案靠官方“方案选单设定”的勾选，避免与 luna 等方案冲突。
 6. 数据读音为工程化整理，争议读音需改 `override.yaml` 后重建。
 7. 20 组声母完全相同的词条，top1 无法仅靠声母唯一确定；Top-3 内均包含。

@@ -184,7 +184,7 @@ asdfghjkl           → 9 个回退候选，低分 DP 噪声被置信度门槛�
 1. **关键词模式存在天然歧义**：极稀疏声母子序列（如 `mlh`）和多个词条共享的中段音节串（如“是我的”“护身符”）可能同时匹配多个词条；方案保证返回 Top-N，但 top1 不保证是用户心中那一条。需求示例 `lkcc`、`meishao` 已稳定 top1。
 2. **中段关键词低于全拼前缀**：`zhiwen` 会先给前缀词 `直纹叶翼蜥`，包含 `zhi wen` 的 `少女之吻` 排在其后；这是有意保留“前缀优先”。
 3. **只输出 1212 条**：词库外输入只做 bigram/trigram 召回 + Damerau/Dice-LCS 回退，不会造句或输出其他内容；回退候选只保证表面字母相关，不保证语义相关。
-4. **安装源是整仓 Plum 包**：用户会浅克隆整个仓库（约 6 MB，含 tests/experiments/docs），仓库必须公开，并且目标机器要有 Git for Windows（Git Bash）。Weasel 0.17.4 的本地 ZIP 安装路径不复制 `lua/`，不能作为完整安装方式。
+4. **安装源是整仓 Plum 包**：用户会浅克隆整个仓库（约 7 MB，含 tests/experiments/docs），仓库必须公开，并且目标机器要有 Git for Windows（Git Bash）。Weasel 0.17.4 的本地 ZIP 安装路径不复制 `lua/`，不能作为完整安装方式。
 5. **安装器不改 `default.custom.yaml`**：是否启用“魔光键影”由官方“方案选单设定”的勾选决定；不要用第三方脚本直接改写方案列表，以免与 luna 等方案冲突。
 6. **数据读音为工程化整理**：以 pypinyin + luna_pinyin + 人工覆盖为准；若发现译名读音争议，改 `experiments/pinyin-data/override.yaml` 后重新构建。
 7. **性能取决于词条长度与输入类型**：纯精确/前缀很快；长模糊/容错输入会跑音节 DP，最坏约 65 ms/键；中段关键词约 9–16 ms/键。可通过 `ff7-ime/dp_max_candidates`、`ff7-ime/fallback/max_candidates` 调整。
