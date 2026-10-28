@@ -202,8 +202,10 @@ mgj   → 猫咪攻击 vs 迷你古兰迦兰
   - 自动备份 `default.custom.yaml`；
   - 无头部署（`deploy-rime.ps1`）保留两方案；
   - 不再依赖 `WeaselDeployer.exe /deploy`（该命令在本机会打开“方案选单设定”GUI，并可能重写 `default.custom.yaml`，导致 luna 丢失）。
-- portable 包：
-  - 在临时 user dir 重放 `install.ps1 -NoDeploy` + `deploy-rime.ps1`，两方案均构建、查询正常；
+- portable 分发包：
+  - zip 共 32 个成员、单一顶层目录、全部为 POSIX 路径，`testzip()` 通过；
+  - `MANIFEST.txt`、`SHA256SUMS`（31 个文件）、`.zip.sha256` 齐备且逐项匹配；
+  - 从 zip 解压后重放 `install.ps1 -NoDeploy` + `deploy-rime.ps1`，生成 `build/moguang_jianying.schema.yaml`，查询 `meishao` 仍为 top1；
   - `uninstall.ps1` 只移除本方案，luna 保留。
 
 ---
@@ -236,7 +238,7 @@ mgj   → 猫咪攻击 vs 迷你古兰迦兰
 1. keyword 极稀疏子序列存在天然歧义（5/238 未进 top5）；`lkcc` 等需求示例稳定。
 2. 中段共享音节串（如“是我的”“护身符”）存在天然歧义；`mid_keyword` 评测只使用唯一出现的 2–3 音节串。
 3. 只输出 1212 条，词库外输入仅最近邻回退。
-4. 小狼毫无官方 portable 模式，本包为“便携方案包”。
+4. portable 是“可分发档案”，不是小狼毫便携运行时；安装目标仍是 Rime 用户目录，Weasel 的用户目录由前端/注册表决定。
 5. WeaselDeployer `/deploy` 在部分环境会打开 GUI 并改写方案列表；包内改用 `deploy-rime.ps1` 无头部署。
 6. 数据读音为工程化整理，争议读音需改 `override.yaml` 后重建。
 7. 20 组声母完全相同的词条，top1 无法仅靠声母唯一确定；Top-3 内均包含。
@@ -256,6 +258,10 @@ NODE_PATH="$PWD/tools/lua-sandbox/node_modules" \
 # 全量评估
 python tools/gen_eval_cases.py
 NODE_PATH="$PWD/tools/lua-sandbox/node_modules" node tests/lua/bulk_eval.js
+
+# 分发包与完整性
+python tools/build_package.py
+(cd dist && sha256sum -c moguang_jianying-portable.zip.sha256)
 
 # 真实 Rime
 cd experiments/rime-harness

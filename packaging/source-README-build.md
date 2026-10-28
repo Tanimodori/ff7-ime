@@ -1,4 +1,4 @@
-# 在 portable 包内重建 Lua 数据
+# 在 portable 分发包内重建 Lua 数据
 
 包内 `source/` 已包含：
 

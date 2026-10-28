@@ -16,7 +16,7 @@
 | `src/moguang_jianying.schema.yaml` | 方案接线/默认配置 |
 | `src/moguang_jianying.custom.yaml` | 用户配置示例 |
 | `packaging/*.ps1` | 安装/卸载/无头部署 |
-| `tools/build_package.py` | 生成 portable 包 |
+| `tools/build_package.py` | 生成 portable 分发包（含 MANIFEST/SHA256SUMS） |
 | `tests/*` | 回归测试 |
 
 ---
@@ -252,7 +252,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File packaging\deploy-rime.ps1
 
 ### 6.3 版本回滚
 
-保留上一版 `dist/moguang_jianying-portable.zip` 与 `src/` 快照；回滚时用旧包重装即可。
+保留上一版 `dist/moguang_jianying-portable.zip`、对应的 `.zip.sha256` 与 `src/` 快照；回滚时用旧包重装即可。
 
 ---
 

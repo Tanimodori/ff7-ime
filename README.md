@@ -37,14 +37,26 @@ C:\Users\Tanimodori\AppData\Roaming\Rime\
 
 并已确认与 `luna_pinyin_simp` 共存。按 **F4** 或 **Ctrl+`** 打开方案选单，选择 **魔光键影**。
 
-### 2.2 从 portable 包安装
+### 2.2 从分发包（portable）安装
+
+本项目的 **portable 指“可分发档案”**：一个自包含的 Rime 方案 zip，不是小狼毫便携运行时。包内 `rime/` 就是 Rime 用户目录覆盖层（schema、custom、`lua/`），因此它既能用脚本安装，也能按 Rime 的常规做法手动复制。
+
+**方式 A：安装脚本**
 
 1. 解压 `dist/moguang_jianying-portable.zip`。
 2. 双击 `install.cmd`（或运行 `install.ps1`）。
 3. 脚本会：备份 `default.custom.yaml` → 复制方案/Lua/数据 → 加入 `schema_list` → 用 `rime.dll` 无头部署 → 校验 `build/moguang_jianying.schema.yaml`。
 4. 按 **F4** / **Ctrl+`** 选择 **魔光键影**。
 
+**方式 B：手动复制（Rime 标准做法）**
+
+1. 解压后把 `rime/` 下的全部文件复制到 Rime 用户目录（小狼毫默认 `%APPDATA%\Rime`）。
+2. 在 `default.custom.yaml` 的 `patch/schema_list` 中加入 `moguang_jianying`。
+3. 重新部署（托盘菜单 → “重新部署”，或包内 `deploy-rime.ps1`）。
+
 卸载：双击 `uninstall.cmd`；如需恢复安装前的方案列表，运行 `uninstall.ps1 -RestoreBackup`。
+
+分发包完整性：包内 `SHA256SUMS` 列出每个文件的 SHA-256；`dist/moguang_jianying-portable.zip.sha256` 给出压缩包本身的哈希。详见 [docs/INSTALL.md](docs/INSTALL.md)。
 
 > 若你使用非默认的小狼毫安装目录，给 `install.ps1` 加 `-WeaselDir "D:\...\weasel-0.17.4"`。
 > 若想把用户数据放到其他目录，加 `-RimeUserDir "D:\RimeUser"`；但小狼毫本身仍通过注册表 `RimeUserDir` 决定用户目录，详见 [docs/INSTALL.md](docs/INSTALL.md)。
@@ -104,7 +116,7 @@ src/
     mgjy_matcher.lua             纯 Lua 匹配/排序引擎
     mgjy_data.lua                构建期生成的数据表（1212 条）
 packaging/                       安装/卸载/校验/无头部署脚本
-dist/                            portable 包（构建产物，不入库）
+dist/                            portable 分发包（构建产物，不入库）
 tools/                           数据构建、测试、打包脚本
 tests/                           核心用例、全量评估、Lua 沙箱测试
 experiments/                     研究/探针/中间产物（不参与运行时）
@@ -165,7 +177,7 @@ zzzzzz              → 仍有 9 个候选
 1. **关键词模式存在天然歧义**：极稀疏声母子序列（如 `mlh`）和多个词条共享的中段音节串（如“是我的”“护身符”）可能同时匹配多个词条；方案保证返回 Top-N，但 top1 不保证是用户心中那一条。需求示例 `lkcc`、`meishao` 已稳定 top1。
 2. **中段关键词低于全拼前缀**：`zhiwen` 会先给前缀词 `直纹叶翼蜥`，包含 `zhi wen` 的 `少女之吻` 排在其后；这是有意保留“前缀优先”。
 3. **只输出 1212 条**：词库外输入只做最近邻回退，不会造句或输出其他内容。
-4. **小狼毫没有官方 portable 模式**：本包是“便携方案包”，安装到 `%APPDATA%\Rime`；真正的便携用户目录需要 `WeaselSetup.exe /userdir:<dir>` 并重启服务。
+4. **portable 是分发包，不是便携运行时**：本项目的 portable 定义为可分发档案，安装目标是 Rime 用户目录（小狼毫默认 `%APPDATA%\Rime`）。若要让小狼毫整体随 U 盘走，需要 `WeaselSetup.exe /userdir:<dir>` 并重启服务，这会改变该机器所有方案的用户目录。
 5. **WeaselDeployer 的 `/deploy` 在部分环境会打开“方案选单设定”GUI 并改写 `default.custom.yaml`**。本包改用 `deploy-rime.ps1`（直接调用 `rime.dll` 的维护接口）无头部署，避免该问题。
 6. **数据读音为工程化整理**：以 pypinyin + luna_pinyin + 人工覆盖为准；若发现译名读音争议，改 `experiments/pinyin-data/override.yaml` 后重新构建。
 7. **性能取决于词条长度与输入类型**：纯精确/前缀很快；长模糊/容错输入会跑音节 DP，最坏约 50 ms/键；中段关键词约 17–23 ms/键。可通过 `mgjy/dp_max_candidates` 调整。

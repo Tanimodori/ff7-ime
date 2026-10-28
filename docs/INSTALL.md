@@ -9,15 +9,29 @@
 
 | 路径 | 说明 |
 |---|---|
-| `dist/moguang_jianying-portable.zip` | 可移植方案包（推荐分发） |
+| `dist/moguang_jianying-portable.zip` | portable 分发包（可分发档案，推荐分发） |
+| `dist/moguang_jianying-portable.zip.sha256` | 压缩包本身的 SHA-256 |
 | `dist/moguang_jianying-portable/` | 解压后的目录 |
-| `dist/moguang_jianying-portable/rime/` | schema/custom/lua/data |
+| `dist/moguang_jianying-portable/rime/` | Rime 用户目录覆盖层：schema/custom/lua/data |
+| `dist/moguang_jianying-portable/MANIFEST.txt` | 包元数据：版本、目标、安装入口 |
+| `dist/moguang_jianying-portable/SHA256SUMS` | 包内每个文件的 SHA-256 |
 | `dist/moguang_jianying-portable/install.ps1` / `.cmd` | 安装 |
 | `dist/moguang_jianying-portable/uninstall.ps1` / `.cmd` | 卸载 |
 | `dist/moguang_jianying-portable/verify.ps1` / `.cmd` | 只读校验 |
 | `dist/moguang_jianying-portable/deploy-rime.ps1` | 无头部署（直接调 rime.dll） |
 | `dist/moguang_jianying-portable/source/` | `dict.txt`、拼音 TSV、override、构建脚本 |
 | `dist/moguang_jianying-portable/docs/` | 完整文档 |
+
+### 1.1 “portable”的定义
+
+本项目中的 **portable 指“可以分发的档案”**，即一个自包含的 Rime 方案 zip：
+
+- 包含完整方案源文件（`*.schema.yaml`、`*.custom.yaml`、`lua/`），`rime/` 目录就是 Rime 用户目录覆盖层；
+- 包含安装/卸载/校验脚本、文档、重建数据与测试 harness，不依赖 Python/Node/网络；
+- 解压后既可以运行 `install.ps1` 自动安装，也可以按 Rime 的常规做法把 `rime/` 下的文件复制到用户目录再部署；
+- 用 `MANIFEST.txt` + `SHA256SUMS` 标识版本与完整性，适合作为发布附件或离线拷贝。
+
+它**不是**“小狼毫便携运行时”：Weasel 的用户目录由前端/注册表决定，见第 8 节。
 
 ---
 
@@ -40,6 +54,28 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
 
 4. 按 **F4** 或 **Ctrl+`** 打开方案选单，选择 **魔光键影**。
 5. 在记事本输入 `shenluo`，候选应出现“神罗”；输入 `lkcc`，候选应出现“我们会立刻彻底铲除你们！”。
+
+### 手工安装（不运行脚本）
+
+解压后把 `rime/` 下的全部文件复制到 Rime 用户目录，将 `moguang_jianying` 加入 `default.custom.yaml` 的 `patch/schema_list`，然后重新部署。完整步骤见第 4 节。
+
+### 校验分发包
+
+```powershell
+# 压缩包本身（在 dist/ 或下载目录执行）
+$expected = (Get-Content .\moguang_jianying-portable.zip.sha256).Split()[0]
+$actual = (Get-FileHash .\moguang_jianying-portable.zip -Algorithm SHA256).Hash.ToLower()
+if ($actual -ne $expected) { Write-Error "zip hash mismatch" }
+
+# 解压后逐文件核对（在包根目录执行）
+Get-Content .\SHA256SUMS | ForEach-Object {
+    $hash, $file = $_ -split '  ', 2
+    $actual = (Get-FileHash -LiteralPath $file -Algorithm SHA256).Hash.ToLower()
+    if ($actual -ne $hash) { Write-Error "mismatch: $file" }
+}
+```
+
+标准 `sha256sum` 环境（Git Bash/WSL）也可以直接 `sha256sum -c SHA256SUMS`。
 
 ### 参数
 
@@ -93,7 +129,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
 
 ## 4. 手动安装（不使用脚本）
 
-1. 复制文件到 `%APPDATA%\Rime`：
+1. 解压分发包，把 `rime/` 下的文件复制到 `%APPDATA%\Rime`（保持 `lua/` 子目录）：
 
 ```
 moguang_jianying.schema.yaml
@@ -248,18 +284,18 @@ patch:
 
 ---
 
-## 8. 便携性说明
+## 8. 分发包（portable）的定义与边界
 
-小狼毫 0.17.4 **没有官方 portable 模式**，用户目录由注册表决定。本包的“portable”指：
+本项目把 **portable 定义为“可以分发的档案”**，而不是“整个小狼毫随 U 盘走”的便携运行时。具体含义：
 
-- 包内自带 schema/lua/data/安装脚本，可在任意 Windows x64 机器上复制安装；
-- 不依赖 Python/Node/网络；
-- 安装脚本可指定 `-RimeUserDir` 与 `-WeaselDir`；
-- 卸载可回滚。
+- 单个 zip 自带 schema、custom、`lua/`、安装/卸载/校验脚本、文档、源数据与测试 harness；
+- `rime/` 是 Rime 用户目录覆盖层，可按 Rime 的通用安装方式直接复制到用户目录；
+- 不依赖 Python/Node/网络；安装脚本可指定 `-RimeUserDir` 与 `-WeaselDir`；
+- 卸载可回滚，包内 `MANIFEST.txt`/`SHA256SUMS` 用于版本识别与完整性校验。
 
-若需要真正的“整个小狼毫随 U 盘走”，需要：
+边界：Weasel 的用户目录由前端/注册表决定（默认 `%APPDATA%\Rime`），分发包不会改变这一点。若确实需要“整个小狼毫随 U 盘走”，需要：
 
-1. 安装 Weasel 到目标机器；
+1. 在目标机器安装 Weasel；
 2. `WeaselSetup.exe /userdir:<U盘目录>` 切换全局用户目录；
 3. 重启 WeaselServer；
 4. 注意这会改变该机器上所有 Rime 方案的用户目录，需迁移/备份。

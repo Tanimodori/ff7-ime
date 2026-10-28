@@ -1,6 +1,6 @@
 # 构建说明
 
-> 本文说明如何从 `dict.txt` 重新生成拼音数据、Lua 数据、portable 包，以及如何运行测试。
+> 本文说明如何从 `dict.txt` 重新生成拼音数据、Lua 数据、portable 分发包，以及如何运行测试。
 > 运行时不需要 Python/Node；它们只用于构建与测试。
 
 ---
@@ -155,16 +155,19 @@ for q in shenluo senluo leinuo lienuo leino leiknuo nuolei zanguokuaigon; do
 done
 ```
 
-### 2.6 构建 portable 包
+### 2.6 构建分发包（portable）
 
 ```bash
 python tools/build_package.py
 ```
 
+这里的 **portable 指可分发档案**：一个自包含的 Rime 方案 zip，`rime/` 目录即 Rime 用户目录覆盖层，可直接复制安装，也可用包内脚本安装。
+
 输出：
 
 - `dist/moguang_jianying-portable/`
 - `dist/moguang_jianying-portable.zip`
+- `dist/moguang_jianying-portable.zip.sha256`
 
 > `dist/` 是构建产物，已在 `.gitignore` 中忽略，不进入版本库；需要分发时再构建。
 > 包内 `docs/` 不包含 `install-real*.log` 等开发机日志。
@@ -172,7 +175,7 @@ python tools/build_package.py
 包内容：
 
 ```
-README.md, VERSION
+README.md, VERSION, MANIFEST.txt, SHA256SUMS
 install.ps1/.cmd, uninstall.ps1/.cmd, verify.ps1/.cmd
 deploy-rime.ps1
 rime/moguang_jianying.schema.yaml
@@ -184,9 +187,17 @@ source/dict.txt, phrases.tsv, override.yaml, extract.py, 构建脚本
 tools/rime_harness.py
 ```
 
-### 2.7 包安装冒烟测试
+构建脚本会校验 zip：无绝对路径/`..`/反斜杠成员名，且只有一个顶层目录。`MANIFEST.txt` 记录 schema、版本、目标平台与安装入口；`SHA256SUMS` 覆盖包内每个文件；`.zip.sha256` 覆盖压缩包本身。
 
-在临时 user dir：
+### 2.7 分发包冒烟测试
+
+先核对压缩包哈希：
+
+```bash
+(cd dist && sha256sum -c moguang_jianying-portable.zip.sha256)
+```
+
+再在临时 user dir 重放安装：
 
 ```powershell
 $Test = "$env:TEMP\mgjy-pkg-test"
@@ -259,5 +270,5 @@ python tools/build_package.py
 ## 6. 不修改的目录
 
 - `experiments/` 下的探针/研究产物可保留，不参与运行时；
-- `tools/lua-sandbox/node_modules` 仅为测试依赖，不进入 portable 包；
+- `tools/lua-sandbox/node_modules` 仅为测试依赖，不进入 portable 分发包；
 - `dist/` 由 `build_package.py` 重新生成，不要手改。

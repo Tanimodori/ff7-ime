@@ -20,7 +20,7 @@
 4. **永远输出 N 个候选**（默认 N=9，可配置），任何输入（包括乱码）都不空输出。
 5. 精确全拼必须稳定排第一；短词与长句之间有良好区分度。
 6. 候选数量、权重、阈值、各模糊音开关均可通过 YAML 配置修改。
-7. 交付可移植方案包，并部署到本机小狼毫；提供完整 README / DOCS。
+7. 交付可分发档案（portable 分发包），并部署到本机小狼毫；提供完整 README / DOCS。
 
 ### 1.2 非目标
 
@@ -68,10 +68,10 @@ Rime 原生方案可以处理全拼、简拼和部分模糊音，但：
 | Lua 引擎 | `lua/mgjy.lua` | translator 入口、输入规范化、匹配调度、候选生成 |
 | Lua 算法 | `lua/mgjy_matcher.lua` | 音节对齐 DP、编辑距离、子序列、打分 |
 | Lua 数据 | `lua/mgjy_data.lua` | 构建期生成的 1212 条词条、读音、权重 |
-| 构建脚本 | `tools/build_data.py`、`tools/build_package.py` | dict.txt + 拼音数据 → Lua 数据 / portable 包 |
+| 构建脚本 | `tools/build_data.py`、`tools/build_package.py` | dict.txt + 拼音数据 → Lua 数据 / portable 分发包 |
 | 测试 | `tools/rime_harness.py`、`tests/` | Rime C API 自动化回归；算法单元测试 |
 | 文档 | `README.md`、`docs/*.md` | 安装、使用、算法、架构、构建、维护 |
-| 发布 | `dist/moguang_jianying-portable/` | 可直接复制安装的 portable 方案包 |
+| 发布 | `dist/moguang_jianying-portable.zip` | 可分发档案：自包含、可校验、可离线安装的 Rime 方案包 |
 
 ---
 
@@ -231,7 +231,7 @@ patch:
 - 复制 schema、custom、`lua/`；把 `moguang_jianying` 加入 `default.custom.yaml` 的 `schema_list`（幂等、先备份）。
 - 运行 `WeaselDeployer.exe /deploy`，检查 `%APPDATA%\Rime\build\` 日志。
 - 不覆盖 `luna_pinyin_simp` 文件；卸载时只移除本方案相关文件并恢复备份。
-- portable 包：`dist/moguang_jianying-portable/`，包含 `rime/`、`install.ps1`、`uninstall.ps1`、文档与离线数据。
+- portable 分发包：`dist/moguang_jianying-portable.zip`，内含 `rime/`（Rime 用户目录覆盖层）、`install.ps1`、`uninstall.ps1`、文档、离线数据、`MANIFEST.txt` 与 `SHA256SUMS`；同时生成 `.zip.sha256`。这里的 portable 指“可分发档案”，不是 Weasel 便携运行时。
 
 ---
 
@@ -278,7 +278,7 @@ patch:
 | G2 算法 | 核心用例 top1、Top-N、无空输出 | 独立代理用隐藏用例跑原型 |
 | G3 引擎 | Lua 实现与原型一致、性能达标、Rime 中可运行 | 独立代理代码审查 + 集成测试 |
 | G4 部署 | 真实小狼毫安装/切换/输入/卸载；不影响现有方案 | 独立代理按文档从零安装验证 |
-| G5 交付 | portable 包可复制安装、文档完整可复现 | 独立代理在临时目录模拟全新安装 |
+| G5 交付 | portable 分发包可离线安装、可校验完整性、文档完整可复现 | 独立代理在临时目录模拟全新安装 |
 
 每个门禁不通过则回到对应阶段修复，重新验收；验收报告写入 `docs/acceptance/`。
 
@@ -291,7 +291,7 @@ patch:
 3. **G2 算法**：Python 原型 + 测试集 + 参数调优，子代理验收。
 4. **G3 引擎**：Lua 移植、Rime schema、配置、集成测试，子代理验收。
 5. **G4 部署**：本机安装、GUI 实测、与现有方案共存验证，子代理验收。
-6. **G5 交付**：portable 包、README/DOCS、构建脚本、最终验收。
+6. **G5 交付**：portable 分发包（可分发档案 + 校验和）、README/DOCS、构建脚本、最终验收。
 
 ---
 
@@ -311,7 +311,7 @@ patch:
 
 ## 9. 交付清单
 
-- [x] `dist/moguang_jianying-portable/`（schema、custom、lua、data、install/uninstall、README）
+- [x] `dist/moguang_jianying-portable.zip`（分发包：schema、custom、lua、data、install/uninstall、README、MANIFEST、SHA256SUMS）
 - [x] 本机 `%APPDATA%\Rime` 已安装并部署，方案列表可见
 - [x] `README.md`
 - [x] `docs/ALGORITHM.md`
@@ -335,7 +335,7 @@ patch:
   2. 连续串 canon 只做安全规则（zh/ch/sh、v/u），`ng→n` 放音节级 DP，避免跨音节误伤；
   3. 两阶段召回（廉价通道 + canonical 双/三字母重叠 Top-K DP），兼顾准确率与逐键延迟；
   4. 部署使用 `deploy-rime.ps1` 直接调 `rime.dll`，避免 `WeaselDeployer /deploy` 打开 GUI 并改写 `default.custom.yaml`。
-- 已知限制：极稀疏关键词子序列存在天然歧义；小狼毫无官方 portable 模式；词库外输入只回退不造句。
+- 已知限制：极稀疏关键词子序列存在天然歧义；portable 是分发包而非便携运行时（Weasel 用户目录由前端决定）；词库外输入只回退不造句。
 
 ---
 
