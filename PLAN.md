@@ -323,6 +323,7 @@ patch:
 - [x] `docs/TEST_REPORT.md`
 - [~] 独立子代理验收 G0..G5：按用户指示跳过（G1–G3 子代理因 ClinePass 周限额失败；改由实现者自动化测试 + 真机 GUI 实测覆盖，见 `docs/TEST_REPORT.md`）
 - [x] 测试脚本与测试集（可复现）
+- [x] 内嵌预编辑（预测音节分隔符，`diou` → `di'ou`）与回车/小键盘回车上屏
 - [x] 构建脚本（dict.txt + 拼音数据 → Lua 数据 / 包）
 
 ### 实施结果摘要
@@ -330,6 +331,7 @@ patch:
 - 方案已部署到本机 `%APPDATA%\Rime`，`luna_pinyin_simp` 与 `moguang_jianying` 共存；
 - 真实 Rime + GUI 实测通过（`lkcc`、`lienuo`、`senluo`、`zanguokuaigon`、`ren sheng...`）；
 - 全量自动评估：exact 1212/1212、fuzzy 878/878、initial 1212/1212（top1 98.3%）、typo 600/600（top3）、keyword 231/238（top5）、fallback 7/7；
+- 内嵌预编辑：`diou` → `di'ou`、`meishao` → `mei'shao`；回车/小键盘回车提交高亮候选（GUI 实测）；
 - 关键架构调整：
   1. 使用 `lua_translator@*mgjy` + 纯 Lua 匹配引擎，而不是 Rime 原生 `script_translator`；
   2. 连续串 canon 只做安全规则（zh/ch/sh、v/u），`ng→n` 放音节级 DP，避免跨音节误伤；

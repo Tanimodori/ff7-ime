@@ -123,7 +123,7 @@ NODE_PATH="$PWD/tools/lua-sandbox/node_modules" \
 
 期望：
 
-- 核心 29/29（含 `meishao` 中段关键词回归）；
+- 核心 34/34（含 `meishao` 中段关键词与 `di'ou` 预编辑分词回归）；
 - exact 1212/1212；
 - fuzzy 878/878；
 - initial 1212/1212（top1 或 top3）；
@@ -146,6 +146,18 @@ python rime_harness.py \
 ```
 
 首次运行会自动部署（约 3–5 秒）。期望候选第一项为“我们会立刻彻底铲除你们！”。
+
+预编辑与提交绑定：
+
+```bash
+# preedit 应为 di'ou；meishao 应为 mei'shao
+python rime_harness.py ... --input diou --json
+python rime_harness.py ... --input meishao --json
+
+# 回车 / 小键盘回车都应提交高亮候选
+python rime_harness.py ... --sequence "meishao{Return}" --json
+python rime_harness.py ... --sequence "meishao{KP_Enter}" --json
+```
 
 也可以逐个测试：
 

@@ -81,6 +81,8 @@ engine:
 - **只有一个 translator**：候选顺序完全由 Lua 的 yield 顺序决定。
 - `uniquifier`：去重；1212 条文本本身唯一，不影响顺序。
 - `punctuator`：保留标点键行为；词条内部的标点由 Lua 原样输出，不经过 punctuator。
+- `key_binder`：在 preset 基础上追加 `Return`/`KP_Enter → space`，让回车和小键盘回车确认高亮候选。
+- `style/inline_preedit: true`：写在 schema 顶层；Weasel 会从 schema 读取该值，把预编辑串内嵌到输入框。
 
 ### 3.2 Speller 与 segment
 
@@ -103,7 +105,7 @@ speller:
 |---|---|
 | 注册 | `lua_translator@*mgjy` → `require("mgjy")` |
 | 入口 | 模块返回表，字段 `init(env)` / `func(input, seg, env)` / `fini` |
-| 候选 | `Candidate(type, start, end, text, comment)`，第一参是 type |
+| 候选 | `Candidate(type, start, end, text, comment)`，第一参是 type；`cand.preedit` 控制输入框内的预编辑串 |
 | 偏移 | `seg.start` / `seg._end`，0-based 字节偏移 |
 | 配置 | `env.engine.schema.config:get_int/get_bool/get_double/get_string`，缺失返回 nil |
 | 开关 | `env.engine.context:get_option(name)`，实时反映 switches |
@@ -169,6 +171,8 @@ build_index（首次/模糊开关变化时）
 排序（score → channel_rank → 长度 → 权重 → 词典序）
   │
   ├─ 不足 N：static_top + fallback_score 补足
+  │
+  ├─ preview：预测音节边界（diou -> di'ou），写入 cand.preedit
   ▼
 yield N 个 Candidate（quality 递减）
 ```
@@ -188,6 +192,7 @@ yield N 个 Candidate（quality 递减）
 - `by_bigram` / `by_trigram`：原始全拼的双/三字母；
 - `by_canon_bigram` / `by_canon_trigram`：逐音节模糊规范化全拼的双/三字母（DP 召回关键）；
 - `by_syl_prefix`：每个音节读音的 1–3 字母前缀（原始 + 规范化），用于中段关键词召回；
+- `syllables` / `syllable_prefixes` / `max_syllable`：预编辑分词用的合法音节及前缀集合；
 - `static_top`：按权重/长度/order 的静态优先序。
 
 ### 5.2 重建条件
@@ -236,6 +241,9 @@ yield N 个 Candidate（quality 递减）
 | `mgjy/initial/enabled` | bool | true | 声母/关键词通道 |
 | `mgjy/keyword/gap_penalty` | double | 0.02 | 关键词跳跃惩罚 |
 | `mgjy/keyword/syllable_subsequence` | bool | true | 中段音节前缀子序列（meishao） |
+| `mgjy/preedit/enabled` | bool | true | 预测预编辑音节分隔符 |
+| `mgjy/preedit/separator` | string | `'` | 预编辑分隔符（可改为空格） |
+| `style/inline_preedit` | bool | true | Weasel 从 schema 读取，内嵌显示预编辑 |
 | `mgjy/weights/*` | double | 见 schema | 通道权重 |
 
 ### 6.3 Switches

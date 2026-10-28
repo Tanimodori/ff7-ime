@@ -61,6 +61,7 @@ data/phrases.json = 646 KB
 |---|---|---|
 | `shenluo` | 神罗 | ✅ |
 | `senluo` | 神罗 | ✅ |
+| `diou` | 迪欧 | ✅ |
 | `leinuo` | 雷诺 | ✅ |
 | `lienuo` | 雷诺 | ✅ |
 | `leino` | 雷诺 | ✅ |
@@ -89,7 +90,19 @@ data/phrases.json = 646 KB
 | 空输入 | 非空 9 候选 | ✅ |
 | `a` | 非空 9 候选 | ✅ |
 
-结果：**29/29 通过**。
+结果：**34/34 通过**。
+
+同一批用例中的预编辑断言（节选）：
+
+| 输入 | 期望 preedit | 实际 |
+|---|---|---|
+| `diou` | `di'ou` | ✅ |
+| `shenluo` | `shen'luo` | ✅ |
+| `senluo` | `sen'luo` | ✅ |
+| `meishao` | `mei'shao` | ✅ |
+| `shenl`（未打完） | `shen'l` | ✅ |
+| `aan` | `a'an` | ✅ |
+| `lkcc`（首字母） | `lkcc` | ✅ |
 
 ---
 
@@ -161,17 +174,20 @@ mgj   → 猫咪攻击 vs 迷你古兰迦兰
 
 ## 5. GUI 实测
 
-环境：Windows 10 记事本；小狼毫设为默认输入法；逐键输入后空格提交。
+环境：Windows 10 记事本；小狼毫设为默认输入法；逐键输入。
 
-| 输入 | 提交文本 | 结果 |
+| 输入 | 提交/显示 | 结果 |
 |---|---|---|
 | `lkcc` | 我们会立刻彻底铲除你们！ | ✅ |
 | `lienuo` | 雷诺 | ✅ |
 | `senluo` | 神罗 | ✅ |
 | `zanguokuaigon` | 掌掴快攻 | ✅ |
 | `renshengjiushizhandou` | 人生就是战斗！ | ✅（标点保留） |
+| `diou` | 输入框内显示 `di'ou`；回车提交 迪欧 | ✅ |
+| `meishao` | 输入框内显示 `mei'shao`；回车提交 有时是出手相助的美少女忍者！ | ✅ |
+| `shenluo` | 小键盘回车提交 神罗 | ✅ |
 
-> 候选窗口是 WeaselServer 的独立顶层窗口，未被记事本窗口截图捕获；以上通过记事本文本框的 Accessibility `value` 与截图确认提交文本。测试后已清理记事本文本、关闭测试窗口，并把系统默认输入法恢复为微软拼音。
+> 内嵌预编辑通过全屏截图确认（`di'ou`/`mei'shao` 直接显示在记事本文本区，候选窗口同时出现）；提交文本通过记事本文本框 Accessibility `value` 确认。`style/inline_preedit: true` 由 schema 提供，Weasel 从 schema 读取，未修改 `weasel.custom.yaml`。测试后已关闭测试窗口并把系统默认输入法恢复为微软拼音。
 
 ---
 
@@ -186,6 +202,8 @@ mgj   → 猫咪攻击 vs 迷你古兰迦兰
 | `mgjy/fuzzy/ng_n: false` + `typo: false` | `senguilon` | 不再命中圣柜龙（回退 神罗）✅ |
 | `use_switches: true` + `mgjy_fuzzy_ng_n=false` + `mgjy_typo=false` | `senguilon` | 神秘龙（回退）✅ |
 | 同上，开关打开 | `senguilon` | 圣柜龙 ✅ |
+| `mgjy/preedit/enabled: false` | `diou` | preedit=`diou` ✅ |
+| `mgjy/preedit/separator: " "` | `diou` | preedit=`di ou` ✅ |
 
 说明：`typo.enabled=false` 为严格模式，只允许精确/模糊整音节；`senguilon` 仍可命中圣柜龙，因为 `ng→n` 属模糊而非 typo。
 

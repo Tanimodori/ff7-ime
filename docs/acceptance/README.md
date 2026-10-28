@@ -4,7 +4,7 @@
 
 交付质量由以下可复现测试覆盖：
 
-- `docs/TEST_REPORT.md`：数据规模/读音抽查、核心 29 例、全量 4447 例评估（含 300 例中段关键词）、真实 Rime 候选、GUI 提交、配置开关、共存、原生逐键性能；
+- `docs/TEST_REPORT.md`：数据规模/读音抽查、核心 34 例、全量 4447 例评估（含 300 例中段关键词）、预编辑分词、真实 Rime 候选、GUI 提交、配置开关、共存、原生逐键性能；
 - `tests/lua/run_cases.js`：核心用例；
 - `tests/lua/bulk_eval.js` + `tests/cases/eval_cases.json`：全量评估；
 - `experiments/rime-harness/rime_harness.py`：librime C API 集成测试；

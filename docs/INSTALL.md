@@ -28,6 +28,7 @@
 
 - 包含完整方案源文件（`*.schema.yaml`、`*.custom.yaml`、`lua/`），`rime/` 目录就是 Rime 用户目录覆盖层；
 - 包含安装/卸载/校验脚本、文档、重建数据与测试 harness，不依赖 Python/Node/网络；
+- schema 自带 `style/inline_preedit: true`（内嵌预编辑）与 `Return`/`KP_Enter` 确认候选绑定，无需改 `weasel.custom.yaml`；
 - 解压后既可以运行 `install.ps1` 自动安装，也可以按 Rime 的常规做法把 `rime/` 下的文件复制到用户目录再部署；
 - 用 `MANIFEST.txt` + `SHA256SUMS` 标识版本与完整性，适合作为发布附件或离线拷贝。
 
