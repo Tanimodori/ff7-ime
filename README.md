@@ -175,6 +175,7 @@ asdfghjkl           → 9 个回退候选，低分 DP 噪声被置信度门槛�
 - [docs/MAINTENANCE.md](docs/MAINTENANCE.md) — 更新词库、调权重、看日志、版本维护
 - [docs/TEST_REPORT.md](docs/TEST_REPORT.md) — 测试矩阵、结果、性能、GUI 记录
 - [docs/acceptance/](docs/acceptance/) — 独立子代理验收报告
+- [LICENSE](LICENSE) — MIT
 
 ---
 

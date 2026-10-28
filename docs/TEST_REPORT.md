@@ -276,6 +276,14 @@ keyword 5.3→5.9 ms，其余类别基本持平或略降。
   - `python tools/check_package.py` 通过，安装清单恰好 4 个运行时文件；
   - 用本地克隆模拟 Plum 安装，用户目录只出现 schema + 3 个 Lua，没有 custom、`data/dict.txt`、tests；
   - 官方 `rime-install.bat` 输出 `Installing recipe:` 与 4 个 `Installing:` 文件。
+- 本机旧安装迁移：
+  - 旧 `moguang_jianying.schema.yaml`、旧 custom、旧 `lua/mgjy*.lua` 和旧 build 产物已备份后删除；
+  - `default.custom.yaml` 现在为 `luna_pinyin_simp` + `ff7-ime`；
+  - 新 schema 由 Plum 安装，`build/ff7-ime.schema.yaml` 存在；
+  - 真实 librime 查询：`shenluo`→神罗、`senluo`→神罗、`fagnge`→芳格、
+    `meishao`→长句、`lkcc`→长句、`asdfghjkl`→格拉斯兰、`nuolei`→雷诺；
+    `diou` 预编辑为 `di'ou`；
+  - `luna_pinyin_simp` 输入 `nihao` 仍得到“你好”。
 
 ---
 
