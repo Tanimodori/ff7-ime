@@ -1,0 +1,111 @@
+{
+  "ok": true,
+  "input": "nihao",
+  "schema": "luna_pinyin_simp",
+  "schema_name": "朙月拼音·简化字",
+  "preedit": "ni hao",
+  "composition": {
+    "length": 6,
+    "cursor_pos": 6,
+    "sel_start": 0,
+    "sel_end": 6
+  },
+  "commit_text_preview": "你好",
+  "page": 0,
+  "page_size": 5,
+  "is_last_page": false,
+  "highlighted_candidate_index": 0,
+  "candidates": [
+    {
+      "index": 0,
+      "text": "你好",
+      "comment": ""
+    },
+    {
+      "index": 1,
+      "text": "妳好",
+      "comment": ""
+    },
+    {
+      "index": 2,
+      "text": "逆号",
+      "comment": ""
+    },
+    {
+      "index": 3,
+      "text": "拟好",
+      "comment": ""
+    },
+    {
+      "index": 4,
+      "text": "你",
+      "comment": ""
+    }
+  ],
+  "select_keys": "",
+  "select_labels": [],
+  "commit": "你好",
+  "status": {
+    "schema_id": "luna_pinyin_simp",
+    "schema_name": "朙月拼音·简化字",
+    "is_disabled": false,
+    "is_composing": true,
+    "is_ascii_mode": false,
+    "is_full_shape": false,
+    "is_simplified": false,
+    "is_traditional": false,
+    "is_ascii_punct": false
+  },
+  "options": {
+    "ascii_mode": false,
+    "full_shape": false,
+    "ascii_punct": false,
+    "simplification": false,
+    "zh_simp": true,
+    "traditional": false,
+    "extended_charset": false,
+    "emoji": false
+  },
+  "keys": {
+    "consumed": 5,
+    "simulate_ok": null
+  },
+  "select": {
+    "requested": 0,
+    "ok": true
+  },
+  "meta": {
+    "dll": "C:\\Program Files\\Rime\\weasel-0.17.4\\rime.dll",
+    "shared_data_dir": "C:\\Program Files\\Rime\\weasel-0.17.4\\data",
+    "user_data_dir": "C:\\Users\\TANIMO~1\\AppData\\Local\\Temp\\mgjy-test",
+    "build_dir": "C:\\Users\\TANIMO~1\\AppData\\Local\\Temp\\mgjy-test\\build",
+    "deployed": true,
+    "deploy_seconds": 3.98,
+    "deploy_events": [
+      {
+        "session_id": 0,
+        "type": "deploy",
+        "value": "start"
+      },
+      {
+        "session_id": 0,
+        "type": "deploy",
+        "value": "success"
+      }
+    ],
+    "elapsed_ms": 37,
+    "librime_struct_sizes": {
+      "RimeTraits": 96,
+      "RimeComposition": 24,
+      "RimeCandidate": 24,
+      "RimeMenu": 40,
+      "RimeContext": 88,
+      "RimeStatus": 56,
+      "RimeCommit": 16
+    }
+  },
+  "post_select": {
+    "preedit": "",
+    "is_composing": false
+  }
+}

@@ -1,0 +1,414 @@
+{
+  "defaults": {
+    "top_n": 5,
+    "max_segmentations": 6,
+    "max_variants": 24,
+    "alt_reading_weight": 0.82,
+    "misread_weight": 0.55,
+    "reading_penalty": 0.12,
+    "length_penalty": 0.02,
+    "prefix_exponent": 0.6,
+    "compact_exponent": 0.9,
+    "fallback_threshold": 0.5,
+    "fuzzy": {
+      "zh_z": true,
+      "ch_c": true,
+      "sh_s": true,
+      "ng_n": true,
+      "n_l": false,
+      "r_l": false,
+      "f_h": false,
+      "en_eng": true,
+      "in_ing": true,
+      "an_ang": true,
+      "uan_uang": true
+    },
+    "channel_weights": {
+      "exact": 1.0,
+      "fuzzy_exact": 1.0,
+      "initial_exact": 1.0,
+      "prefix": 1.0,
+      "fuzzy_prefix": 0.9,
+      "edit": 0.9,
+      "edit_fuzzy": 0.7,
+      "syllable": 1.1,
+      "initial_prefix": 0.9,
+      "initial_subseq": 1.7,
+      "keyword_subseq": 0.5,
+      "bigram": 0.25
+    }
+  },
+  "rows": [
+    {
+      "kind": "channel_weight",
+      "parameter": "initial_subseq",
+      "value": 0.8,
+      "pass_rate": 1.0,
+      "top1_rate": 1.0,
+      "contains_rate": 1.0,
+      "failures": []
+    },
+    {
+      "kind": "channel_weight",
+      "parameter": "initial_subseq",
+      "value": 1.2,
+      "pass_rate": 1.0,
+      "top1_rate": 1.0,
+      "contains_rate": 1.0,
+      "failures": []
+    },
+    {
+      "kind": "channel_weight",
+      "parameter": "initial_subseq",
+      "value": 1.7,
+      "pass_rate": 1.0,
+      "top1_rate": 1.0,
+      "contains_rate": 1.0,
+      "failures": []
+    },
+    {
+      "kind": "channel_weight",
+      "parameter": "initial_subseq",
+      "value": 2.2,
+      "pass_rate": 1.0,
+      "top1_rate": 1.0,
+      "contains_rate": 1.0,
+      "failures": []
+    },
+    {
+      "kind": "channel_weight",
+      "parameter": "initial_subseq",
+      "value": 2.6,
+      "pass_rate": 1.0,
+      "top1_rate": 1.0,
+      "contains_rate": 1.0,
+      "failures": []
+    },
+    {
+      "kind": "channel_weight",
+      "parameter": "syllable",
+      "value": 0.4,
+      "pass_rate": 0.9818,
+      "top1_rate": 0.9787,
+      "contains_rate": 1.0,
+      "failures": [
+        {
+          "id": "typo_nuolei_syllable_swap",
+          "note": " top1='诺艾米'",
+          "top": [
+            "诺艾米",
+            "玛蕾",
+            "华勒斯",
+            "索奇",
+            "罗榭"
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "channel_weight",
+      "parameter": "syllable",
+      "value": 0.8,
+      "pass_rate": 0.9818,
+      "top1_rate": 0.9787,
+      "contains_rate": 1.0,
+      "failures": [
+        {
+          "id": "typo_nuolei_syllable_swap",
+          "note": " top1='诺艾米'",
+          "top": [
+            "诺艾米",
+            "雷诺",
+            "华勒斯",
+            "玛蕾",
+            "索奇"
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "channel_weight",
+      "parameter": "syllable",
+      "value": 1.1,
+      "pass_rate": 1.0,
+      "top1_rate": 1.0,
+      "contains_rate": 1.0,
+      "failures": []
+    },
+    {
+      "kind": "channel_weight",
+      "parameter": "syllable",
+      "value": 1.5,
+      "pass_rate": 1.0,
+      "top1_rate": 1.0,
+      "contains_rate": 1.0,
+      "failures": []
+    },
+    {
+      "kind": "channel_weight",
+      "parameter": "syllable",
+      "value": 2.0,
+      "pass_rate": 0.9818,
+      "top1_rate": 0.9787,
+      "contains_rate": 1.0,
+      "failures": [
+        {
+          "id": "poly_dan",
+          "note": " top1='尖喙兽'",
+          "top": [
+            "尖喙兽",
+            "单手是枪的男人",
+            "大角手环",
+            "忍术",
+            "道具高手"
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "channel_weight",
+      "parameter": "edit",
+      "value": 0.3,
+      "pass_rate": 1.0,
+      "top1_rate": 1.0,
+      "contains_rate": 1.0,
+      "failures": []
+    },
+    {
+      "kind": "channel_weight",
+      "parameter": "edit",
+      "value": 0.6,
+      "pass_rate": 1.0,
+      "top1_rate": 1.0,
+      "contains_rate": 1.0,
+      "failures": []
+    },
+    {
+      "kind": "channel_weight",
+      "parameter": "edit",
+      "value": 0.9,
+      "pass_rate": 1.0,
+      "top1_rate": 1.0,
+      "contains_rate": 1.0,
+      "failures": []
+    },
+    {
+      "kind": "channel_weight",
+      "parameter": "edit",
+      "value": 1.3,
+      "pass_rate": 0.9818,
+      "top1_rate": 0.9787,
+      "contains_rate": 1.0,
+      "failures": [
+        {
+          "id": "typo_nuolei_syllable_swap",
+          "note": " top1='诺艾米'",
+          "top": [
+            "诺艾米",
+            "雷诺",
+            "华勒斯",
+            "玛蕾",
+            "索奇"
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "channel_weight",
+      "parameter": "edit",
+      "value": 1.8,
+      "pass_rate": 0.9636,
+      "top1_rate": 0.9574,
+      "contains_rate": 1.0,
+      "failures": [
+        {
+          "id": "poly_dan",
+          "note": " top1='尖喙兽'",
+          "top": [
+            "尖喙兽",
+            "忍术",
+            "单手是枪的男人",
+            "驯兽师",
+            "道具高手"
+          ]
+        },
+        {
+          "id": "typo_nuolei_syllable_swap",
+          "note": " top1='诺艾米'",
+          "top": [
+            "诺艾米",
+            "华勒斯",
+            "玛蕾",
+            "雷诺",
+            "索奇"
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "channel_weight",
+      "parameter": "fuzzy_exact",
+      "value": 0.3,
+      "pass_rate": 1.0,
+      "top1_rate": 1.0,
+      "contains_rate": 1.0,
+      "failures": []
+    },
+    {
+      "kind": "channel_weight",
+      "parameter": "fuzzy_exact",
+      "value": 0.6,
+      "pass_rate": 1.0,
+      "top1_rate": 1.0,
+      "contains_rate": 1.0,
+      "failures": []
+    },
+    {
+      "kind": "channel_weight",
+      "parameter": "fuzzy_exact",
+      "value": 1.0,
+      "pass_rate": 1.0,
+      "top1_rate": 1.0,
+      "contains_rate": 1.0,
+      "failures": []
+    },
+    {
+      "kind": "channel_weight",
+      "parameter": "fuzzy_exact",
+      "value": 1.5,
+      "pass_rate": 1.0,
+      "top1_rate": 1.0,
+      "contains_rate": 1.0,
+      "failures": []
+    },
+    {
+      "kind": "channel_weight",
+      "parameter": "bigram",
+      "value": 0.0,
+      "pass_rate": 0.9818,
+      "top1_rate": 0.9787,
+      "contains_rate": 1.0,
+      "failures": [
+        {
+          "id": "typo_nuolei_syllable_swap",
+          "note": " top1='诺艾米'",
+          "top": [
+            "诺艾米",
+            "雷诺",
+            "华勒斯",
+            "玛蕾",
+            "罗榭"
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "channel_weight",
+      "parameter": "bigram",
+      "value": 0.15,
+      "pass_rate": 1.0,
+      "top1_rate": 1.0,
+      "contains_rate": 1.0,
+      "failures": []
+    },
+    {
+      "kind": "channel_weight",
+      "parameter": "bigram",
+      "value": 0.25,
+      "pass_rate": 1.0,
+      "top1_rate": 1.0,
+      "contains_rate": 1.0,
+      "failures": []
+    },
+    {
+      "kind": "channel_weight",
+      "parameter": "bigram",
+      "value": 0.5,
+      "pass_rate": 1.0,
+      "top1_rate": 1.0,
+      "contains_rate": 1.0,
+      "failures": []
+    },
+    {
+      "kind": "structural",
+      "parameter": "length_penalty",
+      "value": 0.0,
+      "pass_rate": 1.0,
+      "top1_rate": 1.0,
+      "contains_rate": 1.0,
+      "failures": []
+    },
+    {
+      "kind": "structural",
+      "parameter": "length_penalty",
+      "value": 0.02,
+      "pass_rate": 1.0,
+      "top1_rate": 1.0,
+      "contains_rate": 1.0,
+      "failures": []
+    },
+    {
+      "kind": "structural",
+      "parameter": "length_penalty",
+      "value": 0.05,
+      "pass_rate": 1.0,
+      "top1_rate": 1.0,
+      "contains_rate": 1.0,
+      "failures": []
+    },
+    {
+      "kind": "structural",
+      "parameter": "length_penalty",
+      "value": 0.08,
+      "pass_rate": 1.0,
+      "top1_rate": 1.0,
+      "contains_rate": 1.0,
+      "failures": []
+    },
+    {
+      "kind": "structural",
+      "parameter": "length_penalty",
+      "value": 0.12,
+      "pass_rate": 1.0,
+      "top1_rate": 1.0,
+      "contains_rate": 1.0,
+      "failures": []
+    },
+    {
+      "kind": "structural",
+      "parameter": "max_segmentations",
+      "value": 3,
+      "pass_rate": 1.0,
+      "top1_rate": 1.0,
+      "contains_rate": 1.0,
+      "failures": []
+    },
+    {
+      "kind": "structural",
+      "parameter": "max_segmentations",
+      "value": 6,
+      "pass_rate": 1.0,
+      "top1_rate": 1.0,
+      "contains_rate": 1.0,
+      "failures": []
+    },
+    {
+      "kind": "structural",
+      "parameter": "max_segmentations",
+      "value": 12,
+      "pass_rate": 1.0,
+      "top1_rate": 1.0,
+      "contains_rate": 1.0,
+      "failures": []
+    },
+    {
+      "kind": "structural",
+      "parameter": "fuzzy_enabled",
+      "value": 0,
+      "pass_rate": 1.0,
+      "top1_rate": 1.0,
+      "contains_rate": 1.0,
+      "failures": []
+    }
+  ]
+}

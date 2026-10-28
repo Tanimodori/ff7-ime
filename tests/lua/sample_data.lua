@@ -1,0 +1,27 @@
+-- Sample phrase table for matcher unit tests.
+-- Runtime data will be generated from dict.txt + pinyin annotations.
+return {
+  { text = "神罗", syls = { "shen", "luo" }, fulls = { "shenluo" }, w = 1.0, order = 1 },
+  { text = "蒂法", syls = { "di", "fa" }, fulls = { "difa" }, w = 1.0, order = 2 },
+  { text = "克劳德", syls = { "ke", "lao", "de" }, fulls = { "kelaode" }, w = 1.0, order = 3 },
+  { text = "巴雷特", syls = { "ba", "lei", "te" }, fulls = { "baleite" }, w = 1.0, order = 4 },
+  { text = "爱丽丝", syls = { "ai", "li", "si" }, fulls = { "ailisi" }, w = 1.0, order = 5 },
+  { text = "萨菲罗斯", syls = { "sa", "fei", "luo", "si" }, fulls = { "safeiluosi" }, w = 1.0, order = 6 },
+  { text = "雷诺", syls = { "lei", "nuo" }, fulls = { "leinuo" }, w = 1.0, order = 7 },
+  { text = "神罗战士", syls = { "shen", "luo", "zhan", "shi" }, fulls = { "shenluozhanshi" }, w = 1.0, order = 8 },
+  { text = "我们会立刻彻底铲除你们！", syls = { "wo", "men", "hui", "li", "ke", "che", "di", "chan", "chu", "ni", "men" },
+    fulls = { "womenhuilikechedichanchunimen" }, w = 1.0, order = 9 },
+  { text = "长杖", syls = { "chang", "zhang" }, alts = { { "zhang" }, {} },
+    fulls = { { s = "changzhang", w = 1.0 }, { s = "zhangzhang", w = 0.97 } }, w = 1.0, order = 10 },
+  { text = "重力", syls = { "zhong", "li" }, alts = { { "chong" }, {} },
+    fulls = { { s = "zhongli", w = 1.0 }, { s = "chongli", w = 0.97 } }, w = 1.0, order = 11 },
+  { text = "曾", syls = { "zeng" }, alts = { { "ceng" } },
+    fulls = { { s = "zeng", w = 1.0 }, { s = "ceng", w = 0.97 } }, w = 1.0, order = 12 },
+  { text = "米德加", syls = { "mi", "de", "jia" }, fulls = { "midejia" }, w = 1.0, order = 13 },
+  { text = "陆行鸟", syls = { "lu", "xing", "niao" }, fulls = { "luxingniao" }, w = 1.0, order = 14 },
+  { text = "莫古力", syls = { "mo", "gu", "li" }, fulls = { "moguli" }, w = 1.0, order = 15 },
+  { text = "雪崩", syls = { "xue", "beng" }, fulls = { "xuebeng" }, w = 1.0, order = 16 },
+  { text = "人生就是战斗！", syls = { "ren", "sheng", "jiu", "shi", "zhan", "dou" },
+    fulls = { "renshengjiushizhandou" }, w = 1.0, order = 17 },
+  { text = "尤菲", syls = { "you", "fei" }, fulls = { "youfei" }, w = 1.0, order = 18 },
+}

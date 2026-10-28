@@ -1,0 +1,7 @@
+I20261028 20:40:48.763994 40544 types.cc:1558] [shared_test] user rime.lua
+I20261028 20:40:48.778670 40544 types.cc:1558] [mgjy_shared_probe] init name_space=*mgjy_shared_probe
+I20261028 20:40:48.778738 40544 types.cc:1558] [mgjy_shared_probe] init name_space=*mgjy_shared_probe
+I20261028 20:40:48.779338 40544 types.cc:1558] [mgjy_shared_probe] require mgjy_shared_data ok=true magic=MGJY-SHARED-OK
+I20261028 20:40:48.779479 40544 types.cc:1558] [mgjy_shared_probe] require mgjy_shared_data ok=true magic=MGJY-SHARED-OK
+I20261028 20:40:48.779539 40544 types.cc:1558] [mgjy_shared_probe] require mgjy_shared_data ok=true magic=MGJY-SHARED-OK
+I20261028 20:40:48.779592 40544 types.cc:1558] [mgjy_shared_probe] require mgjy_shared_data ok=true magic=MGJY-SHARED-OK

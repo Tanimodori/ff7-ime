@@ -1,0 +1,237 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""Convert a phrases TSV into the Lua data table consumed by mgjy_matcher.lua.
+
+Expected columns (header names, order-independent):
+    text      original phrase, punctuation preserved
+    pinyin    primary reading, space separated (one syllable per Han char)
+    readings  per-Han-char alternatives, groups separated by ';',
+              alternatives separated by '|', primary first
+    weight    optional float, default 1.0
+
+Usage:
+    python tools/tsv_to_lua_data.py \
+        --input experiments/algorithm-design/phrases.tsv \
+        --lua tests/lua/full_data.lua \
+        --json tests/lua/full_data.json
+"""
+from __future__ import annotations
+
+import argparse
+import itertools
+import json
+import os
+import sys
+
+HAN = range(0x4E00, 0xA000)
+
+
+def is_han(ch: str) -> bool:
+    return ord(ch) in HAN
+
+
+def split_groups(s: str):
+    return [g for g in (s or "").split(";")]
+
+
+def parse_tsv(path: str):
+    with open(path, encoding="utf-8-sig") as f:
+        lines = [ln.rstrip("\n") for ln in f if ln.strip()]
+    header = lines[0].split("\t")
+    idx = {name: i for i, name in enumerate(header)}
+    for required in ("text", "pinyin", "readings"):
+        if required not in idx:
+            raise SystemExit(f"missing column {required!r} in {path}: {header}")
+    rows = []
+    for ln in lines[1:]:
+        cols = ln.split("\t")
+        if len(cols) <= max(idx["text"], idx["pinyin"], idx["readings"]):
+            continue
+        text = cols[idx["text"]]
+        pinyin = cols[idx["pinyin"]].split()
+        groups = split_groups(cols[idx["readings"]])
+        weight = 1.0
+        if "weight" in idx and len(cols) > idx["weight"]:
+            try:
+                weight = float(cols[idx["weight"]])
+            except ValueError:
+                pass
+
+        han_chars = [c for c in text if is_han(c)]
+        if len(groups) != len(han_chars) or len(pinyin) != len(han_chars):
+            # Fall back: align to Han chars; drop mismatched groups.
+            groups = groups[: len(han_chars)]
+            while len(groups) < len(han_chars):
+                groups.append("")
+            pinyin = (pinyin + [None] * len(han_chars))[: len(han_chars)]
+
+        readings = []
+        for ch, prim, group in zip(han_chars, pinyin, groups):
+            alts = [a.strip() for a in (group or "").split("|") if a.strip()]
+            if not alts:
+                alts = [prim] if prim else []
+            if prim and prim not in alts:
+                alts = [prim] + alts
+            # Deduplicate, keep order.
+            seen = set()
+            ordered = []
+            for a in alts:
+                if a not in seen:
+                    seen.add(a)
+                    ordered.append(a)
+            readings.append(ordered)
+        if any(not r for r in readings):
+            raise SystemExit(f"no reading for a Han char in {text!r}")
+        rows.append({"text": text, "readings": readings, "weight": weight})
+    return rows
+
+
+def make_variants(readings, cap=8):
+    """Primary + single-char alternatives + a few two-char combinations."""
+    primary = [r[0] for r in readings]
+    variants = [primary]
+    seen = {tuple(primary)}
+
+    for j, alts in enumerate(readings):
+        for alt in alts[1:]:
+            v = primary.copy()
+            v[j] = alt
+            t = tuple(v)
+            if t not in seen:
+                seen.add(t)
+                variants.append(v)
+                if len(variants) >= cap:
+                    return variants
+
+    # Fill remaining slots with short combinations, deterministic order.
+    alt_positions = [(j, a) for j, alts in enumerate(readings) for a in alts[1:]]
+    for (j1, a1), (j2, a2) in itertools.combinations(alt_positions, 2):
+        if j1 == j2:
+            continue
+        v = primary.copy()
+        v[j1] = a1
+        v[j2] = a2
+        t = tuple(v)
+        if t not in seen:
+            seen.add(t)
+            variants.append(v)
+            if len(variants) >= cap:
+                break
+    return variants
+
+
+def initial_token(syllable: str) -> str:
+    for p in ("zh", "ch", "sh"):
+        if syllable.startswith(p):
+            return p
+    return syllable[:1]
+
+
+def lua_str(s: str) -> str:
+    return '"' + s.replace("\\", "\\\\").replace('"', '\\"').replace("\n", "\\n").replace("\r", "\\r") + '"'
+
+
+def lua_list(items) -> str:
+    return "{" + ", ".join(items) + "}"
+
+
+def build(rows, cap=8):
+    out = []
+    for order, row in enumerate(rows, 1):
+        readings = row["readings"]
+        variants = make_variants(readings, cap)
+        full_entries = []
+        seen_full = set()
+        for v in variants:
+            full = "".join(v)
+            if full in seen_full:
+                continue
+            seen_full.add(full)
+            n_alt = sum(1 for j, s in enumerate(v) if s != readings[j][0])
+            w = round(0.97 ** n_alt, 4)
+            full_entries.append((full, w))
+
+        alts = []
+        for r in readings:
+            alts.append(r[1:])
+
+        init_entries = []
+        seen_init = set()
+        for v in variants:
+            tokens = [initial_token(s) for s in v]
+            key = tuple(tokens)
+            if key in seen_init:
+                continue
+            seen_init.add(key)
+            n_alt = sum(1 for j, s in enumerate(v) if s != readings[j][0])
+            init_entries.append((tokens, round(0.97 ** n_alt, 4)))
+
+        primary = [r[0] for r in readings]
+        swaps = []
+        if len(primary) >= 2:
+            for j in range(len(primary) - 1):
+                v = primary.copy()
+                v[j], v[j + 1] = v[j + 1], v[j]
+                swaps.append("".join(v))
+
+        out.append({
+            "order": order,
+            "text": row["text"],
+            "syls": primary,
+            "alts": alts,
+            "fulls": full_entries,
+            "init_variants": init_entries,
+            "swaps": swaps,
+            "w": row["weight"],
+        })
+    return out
+
+
+def to_lua(phrases) -> str:
+    lines = ["-- Generated by tools/tsv_to_lua_data.py; do not edit by hand.", "return {"]
+    for p in phrases:
+        parts = [
+            f"text = {lua_str(p['text'])}",
+            f"syls = {lua_list(lua_str(s) for s in p['syls'])}",
+        ]
+        if any(p["alts"]):
+            alt_parts = []
+            for alts in p["alts"]:
+                alt_parts.append(lua_list(lua_str(a) for a in alts))
+            parts.append("alts = " + lua_list(alt_parts))
+        parts.append("fulls = " + lua_list(
+            "{ s = %s, w = %s }" % (lua_str(s), w) for s, w in p["fulls"]
+        ))
+        parts.append("init_variants = " + lua_list(
+            "{ tokens = %s, w = %s }" % (lua_list(lua_str(t) for t in toks), w)
+            for toks, w in p["init_variants"]
+        ))
+        if p["swaps"]:
+            parts.append("swaps = " + lua_list(lua_str(s) for s in p["swaps"]))
+        parts.append(f"w = {p['w']}")
+        parts.append(f"order = {p['order']}")
+        lines.append("  { " + ", ".join(parts) + " },")
+    lines.append("}")
+    return "\n".join(lines) + "\n"
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--input", required=True)
+    ap.add_argument("--lua", required=True)
+    ap.add_argument("--json", default=None)
+    ap.add_argument("--cap", type=int, default=8)
+    args = ap.parse_args()
+
+    rows = parse_tsv(args.input)
+    phrases = build(rows, args.cap)
+    with open(args.lua, "w", encoding="utf-8", newline="\n") as f:
+        f.write(to_lua(phrases))
+    if args.json:
+        with open(args.json, "w", encoding="utf-8", newline="\n") as f:
+            json.dump(phrases, f, ensure_ascii=False, indent=1)
+    print(f"wrote {len(phrases)} phrases to {args.lua}")
+
+
+if __name__ == "__main__":
+    main()

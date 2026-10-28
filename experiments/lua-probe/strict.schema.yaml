@@ -1,0 +1,45 @@
+# 对照 schema：speller/alphabet 只允许小写字母，用来证明
+# “不在 alphabet 里的键不会进入 composition，Lua translator 也就不会被调用”。
+schema:
+  schema_id: mgjy_probe_strict
+  name: "MGJY Lua Probe (strict alphabet)"
+  version: "0.1.0"
+  author: "mgjy lua-probe"
+  description: |
+    对照实验：alphabet 仅小写字母，无 fallback_segmentor。
+
+switches:
+  - name: mgjy_probe_enabled
+    reset: 1
+  - name: mgjy_probe_extra
+    reset: 0
+
+menu:
+  page_size: 5
+
+mgjy_probe:
+  flag: true
+  number: 7
+  name: "探针配置"
+  list:
+    - alpha
+    - beta
+
+speller:
+  alphabet: "zyxwvutsrqponmlkjihgfedcba"
+  initials: "zyxwvutsrqponmlkjihgfedcba"
+  delimiter: ""
+
+engine:
+  processors:
+    - ascii_composer
+    - speller
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - abc_segmentor
+  translators:
+    - lua_translator@*mgjy_probe
+  filters:
+    - uniquifier

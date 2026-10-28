@@ -1,0 +1,1471 @@
+I20261028 20:43:41.961820 33460 types.cc:1558] [mgjy_probe] rime.lua loaded from user data dir
+I20261028 20:43:41.987521 33460 types.cc:1558] [mgjy_probe] ================ init ================
+I20261028 20:43:41.987527 33460 types.cc:1558] [mgjy_probe] env.name_space=*mgjy_probe
+I20261028 20:43:41.987541 33460 types.cc:1558] [mgjy_probe] env.engine=userdata env.engine.schema=userdata
+I20261028 20:43:41.987544 33460 types.cc:1558] [mgjy_probe] package.path=C:\Users\TANIMO~1\AppData\Local\Temp\mgjy-lua-probe\user\lua\?.lua;C:\Users\TANIMO~1\AppData\Local\Temp\mgjy-lua-probe\user\lua\?\init.lua;C:\Program Files\Rime\weasel-0.17.4\data\lua\?.lua;C:\Program Files\Rime\weasel-0.17.4\data\lua\?\init.lua;C:\Python314\lua\?.lua;C:\Python314\lua\?\init.lua;C:\Python314\?.lua;C:\Python314\?\init.lua;C:\Python314\..\share\lua\5.4\?.lua;C:\Python314\..\share\lua\5.4\?\init.lua;.\?.lua;.\?\init.lua
+I20261028 20:43:41.987547 33460 types.cc:1558] [mgjy_probe] package.cpath=C:\Python314\?.dll;C:\Python314\..\lib\lua\5.4\?.dll;C:\Python314\loadall.dll;.\?.dll
+I20261028 20:43:41.987551 33460 types.cc:1558] [mgjy_probe] rime_api.get_rime_version()=1.13.1
+I20261028 20:43:41.987555 33460 types.cc:1558] [mgjy_probe] rime_api.get_user_data_dir()=C:\Users\TANIMO~1\AppData\Local\Temp\mgjy-lua-probe\user
+I20261028 20:43:41.987558 33460 types.cc:1558] [mgjy_probe] rime_api.get_shared_data_dir()=C:\Program Files\Rime\weasel-0.17.4\data
+I20261028 20:43:41.987727 33460 types.cc:1558] [mgjy_probe] require("mgjy_probe_data") => ok | table magic=MGJY-DATA-OK values=3 | nil
+I20261028 20:43:41.987806 33460 types.cc:1558] [mgjy_probe] package.searchpath("mgjy_probe_data") => ok | C:\Users\TANIMO~1\AppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe_data.lua | nil
+I20261028 20:43:41.987811 33460 types.cc:1558] [mgjy_probe] type(io), type(os), type(debug), type(require) => ok | table,table,table,function | nil
+I20261028 20:43:41.987888 33460 types.cc:1558] [mgjy_probe] io.open(user_data_dir/probe_data.txt) => ok | MGJY-IO-OK	读到了外部 TSV 文件 | nil
+I20261028 20:43:41.987895 33460 types.cc:1558] [mgjy_probe] os.getenv(TEMP) => ok | C:\Users\TANIMO~1\AppData\Local\Temp | nil
+I20261028 20:43:41.987902 33460 types.cc:1558] [mgjy_probe] os.date() => ok | 2026-10-28 20:43:41 | nil
+I20261028 20:43:41.987966 33460 types.cc:1558] [mgjy_probe] init config schema/name="MGJY Lua Probe" menu/page_size=5
+I20261028 20:43:41.987969 33460 types.cc:1558] [mgjy_probe] ================ init done ================
+I20261028 20:43:41.988148 33460 types.cc:1558] [mgjy_probe_b] init name_space=*mgjy_probe_b
+I20261028 20:43:41.988329 33460 types.cc:1558] [mgjy_filter] init name_space=*mgjy_probe_filter
+I20261028 20:43:41.988419 33460 types.cc:1558] [mgjy_probe] ================ init ================
+I20261028 20:43:41.988422 33460 types.cc:1558] [mgjy_probe] env.name_space=*mgjy_probe
+I20261028 20:43:41.988425 33460 types.cc:1558] [mgjy_probe] env.engine=userdata env.engine.schema=userdata
+I20261028 20:43:41.988428 33460 types.cc:1558] [mgjy_probe] package.path=C:\Users\TANIMO~1\AppData\Local\Temp\mgjy-lua-probe\user\lua\?.lua;C:\Users\TANIMO~1\AppData\Local\Temp\mgjy-lua-probe\user\lua\?\init.lua;C:\Program Files\Rime\weasel-0.17.4\data\lua\?.lua;C:\Program Files\Rime\weasel-0.17.4\data\lua\?\init.lua;C:\Python314\lua\?.lua;C:\Python314\lua\?\init.lua;C:\Python314\?.lua;C:\Python314\?\init.lua;C:\Python314\..\share\lua\5.4\?.lua;C:\Python314\..\share\lua\5.4\?\init.lua;.\?.lua;.\?\init.lua
+I20261028 20:43:41.988431 33460 types.cc:1558] [mgjy_probe] package.cpath=C:\Python314\?.dll;C:\Python314\..\lib\lua\5.4\?.dll;C:\Python314\loadall.dll;.\?.dll
+I20261028 20:43:41.988433 33460 types.cc:1558] [mgjy_probe] rime_api.get_rime_version()=1.13.1
+I20261028 20:43:41.988437 33460 types.cc:1558] [mgjy_probe] rime_api.get_user_data_dir()=C:\Users\TANIMO~1\AppData\Local\Temp\mgjy-lua-probe\user
+I20261028 20:43:41.988439 33460 types.cc:1558] [mgjy_probe] rime_api.get_shared_data_dir()=C:\Program Files\Rime\weasel-0.17.4\data
+I20261028 20:43:41.988443 33460 types.cc:1558] [mgjy_probe] require("mgjy_probe_data") => ok | table magic=MGJY-DATA-OK values=3 | nil
+I20261028 20:43:41.988530 33460 types.cc:1558] [mgjy_probe] package.searchpath("mgjy_probe_data") => ok | C:\Users\TANIMO~1\AppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe_data.lua | nil
+I20261028 20:43:41.988535 33460 types.cc:1558] [mgjy_probe] type(io), type(os), type(debug), type(require) => ok | table,table,table,function | nil
+I20261028 20:43:41.988617 33460 types.cc:1558] [mgjy_probe] io.open(user_data_dir/probe_data.txt) => ok | MGJY-IO-OK	读到了外部 TSV 文件 | nil
+I20261028 20:43:41.988624 33460 types.cc:1558] [mgjy_probe] os.getenv(TEMP) => ok | C:\Users\TANIMO~1\AppData\Local\Temp | nil
+I20261028 20:43:41.988631 33460 types.cc:1558] [mgjy_probe] os.date() => ok | 2026-10-28 20:43:41 | nil
+I20261028 20:43:41.988648 33460 types.cc:1558] [mgjy_probe] init config schema/name="MGJY Lua Probe" menu/page_size=5
+I20261028 20:43:41.988651 33460 types.cc:1558] [mgjy_probe] ================ init done ================
+I20261028 20:43:41.988656 33460 types.cc:1558] [mgjy_probe_b] init name_space=*mgjy_probe_b
+I20261028 20:43:41.988696 33460 types.cc:1558] [mgjy_filter] init name_space=*mgjy_probe_filter
+I20261028 20:43:41.989136 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.989146 33460 types.cc:1558] [mgjy_probe] input="l" #bytes=1 seg.start=0 seg._start=0 seg._end=1 seg.length=1
+I20261028 20:43:41.989153 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.989159 33460 types.cc:1558] [mgjy_probe] ctx.input="l" ctx.caret_pos=1 ctx:is_composing()=true
+I20261028 20:43:41.989187 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.989200 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.989210 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.989213 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.989218 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.989221 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="l"
+I20261028 20:43:41.989226 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:41.989228 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.989232 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.989238 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.989241 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.989245 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.989249 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.989253 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.989256 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.989260 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.989263 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.989267 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.989273 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD2198 type=userdata
+I20261028 20:43:41.989278 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.989284 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.989287 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.989291 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.989295 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD1EC8 type=userdata
+I20261028 20:43:41.989313 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.989318 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.989330 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=1 text="TEXT-l" comment="COMMENT-l" dyn=Simple
+I20261028 20:43:41.989334 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-l text="mgjy_probe" comment="COMMENT-l"
+I20261028 20:43:41.989343 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.989352 33460 types.cc:1558] [mgjy_probe_b] translate input="l" start=0 end=1
+I20261028 20:43:41.989368 33460 types.cc:1558] [mgjy_filter] apply input="l"
+I20261028 20:43:41.989378 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="探针:l" comment="probe: l"
+I20261028 20:43:41.989518 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.989523 33460 types.cc:1558] [mgjy_probe] input="lk" #bytes=2 seg.start=0 seg._start=0 seg._end=2 seg.length=2
+I20261028 20:43:41.989527 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.989530 33460 types.cc:1558] [mgjy_probe] ctx.input="lk" ctx.caret_pos=2 ctx:is_composing()=true
+I20261028 20:43:41.989543 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.989554 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.989564 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.989567 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.989572 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.989575 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="lk"
+I20261028 20:43:41.989578 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:41.989580 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.989584 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.989589 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.989592 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.989596 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.989599 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.989603 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.989606 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.989609 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.989613 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.989616 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.989620 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD3B38 type=userdata
+I20261028 20:43:41.989623 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.989627 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.989630 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.989650 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.989688 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD3BD8 type=userdata
+I20261028 20:43:41.989698 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.989706 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.989717 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=2 text="TEXT-lk" comment="COMMENT-lk" dyn=Simple
+I20261028 20:43:41.989724 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-lk text="mgjy_probe" comment="COMMENT-lk"
+I20261028 20:43:41.989732 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.989748 33460 types.cc:1558] [mgjy_probe_b] translate input="lk" start=0 end=2
+I20261028 20:43:41.989762 33460 types.cc:1558] [mgjy_filter] apply input="lk"
+I20261028 20:43:41.989775 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="探针:lk" comment="probe: lk"
+I20261028 20:43:41.989918 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.989926 33460 types.cc:1558] [mgjy_probe] input="lkc" #bytes=3 seg.start=0 seg._start=0 seg._end=3 seg.length=3
+I20261028 20:43:41.989931 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.989935 33460 types.cc:1558] [mgjy_probe] ctx.input="lkc" ctx.caret_pos=3 ctx:is_composing()=true
+I20261028 20:43:41.989951 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.989963 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.989974 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.989976 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.989981 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.989984 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="lkc"
+I20261028 20:43:41.989987 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:41.989990 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.989993 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.989999 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.990002 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.990006 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.990010 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.990013 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.990016 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.990020 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.990023 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.990027 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.990031 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD2F08 type=userdata
+I20261028 20:43:41.990034 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.990038 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.990052 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.990056 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.990059 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD2AA8 type=userdata
+I20261028 20:43:41.990064 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.990068 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.990074 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=3 text="TEXT-lkc" comment="COMMENT-lkc" dyn=Simple
+I20261028 20:43:41.990078 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-lkc text="mgjy_probe" comment="COMMENT-lkc"
+I20261028 20:43:41.990083 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.990091 33460 types.cc:1558] [mgjy_probe_b] translate input="lkc" start=0 end=3
+I20261028 20:43:41.990098 33460 types.cc:1558] [mgjy_filter] apply input="lkc"
+I20261028 20:43:41.990105 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="探针:lkc" comment="probe: lkc"
+I20261028 20:43:41.990189 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.990194 33460 types.cc:1558] [mgjy_probe] input="lkcc" #bytes=4 seg.start=0 seg._start=0 seg._end=4 seg.length=4
+I20261028 20:43:41.990197 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.990200 33460 types.cc:1558] [mgjy_probe] ctx.input="lkcc" ctx.caret_pos=4 ctx:is_composing()=true
+I20261028 20:43:41.990213 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.990224 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.990234 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.990236 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.990241 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.990243 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="lkcc"
+I20261028 20:43:41.990247 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:41.990249 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.990252 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.990257 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.990260 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.990264 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.990268 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.990271 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.990274 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.990277 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.990281 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.990284 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.990288 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD4358 type=userdata
+I20261028 20:43:41.990299 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.990303 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.990306 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.990310 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.990313 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD4628 type=userdata
+I20261028 20:43:41.990317 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.990321 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.990326 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=4 text="TEXT-lkcc" comment="COMMENT-lkcc" dyn=Simple
+I20261028 20:43:41.990330 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-lkcc text="mgjy_probe" comment="COMMENT-lkcc"
+I20261028 20:43:41.990335 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.990341 33460 types.cc:1558] [mgjy_probe_b] translate input="lkcc" start=0 end=4
+I20261028 20:43:41.990348 33460 types.cc:1558] [mgjy_filter] apply input="lkcc"
+I20261028 20:43:41.990355 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="力克兮兮" comment="custom: illegal pinyin lkcc"
+I20261028 20:43:41.990375 33460 types.cc:1558] [mgjy_filter] cand#2 type=mgjy_probe text="lkcc#01" comment="seq 1 for \"lkcc\""
+I20261028 20:43:41.990384 33460 types.cc:1558] [mgjy_filter] cand#3 type=mgjy_probe text="lkcc#02" comment="seq 2 for \"lkcc\""
+I20261028 20:43:41.990391 33460 types.cc:1558] [mgjy_filter] cand#4 type=mgjy_probe text="lkcc#03" comment="seq 3 for \"lkcc\""
+I20261028 20:43:41.990399 33460 types.cc:1558] [mgjy_filter] cand#5 type=mgjy_probe text="lkcc#04" comment="seq 4 for \"lkcc\""
+I20261028 20:43:41.990406 33460 types.cc:1558] [mgjy_filter] cand#6 type=mgjy_probe text="lkcc#05" comment="seq 5 for \"lkcc\""
+I20261028 20:43:41.990455 33460 types.cc:1558] [mgjy_filter] cand#7 type=mgjy_probe text="lkcc#06" comment="seq 6 for \"lkcc\""
+I20261028 20:43:41.990460 33460 types.cc:1558] [mgjy_probe] ---- translate yielded 1 primary + extras for input="lkcc" ----
+I20261028 20:43:41.990530 33460 types.cc:1558] [mgjy_filter] cand#8 type=mgjy_probe text="lkcc#07" comment="seq 7 for \"lkcc\""
+I20261028 20:43:41.990538 33460 types.cc:1558] [mgjy_filter] cand#9 type=mgjy_probe_b text="力克兮兮" comment="B duplicate comment"
+I20261028 20:43:41.990594 33460 types.cc:1558] [mgjy_filter] cand#10 type=mgjy_probe_b text="B:lkcc" comment="B distinct comment"
+I20261028 20:43:41.990598 33460 types.cc:1558] [mgjy_filter] passed 10 candidates
+I20261028 20:43:41.990738 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.990745 33460 types.cc:1558] [mgjy_probe] input="l" #bytes=1 seg.start=0 seg._start=0 seg._end=1 seg.length=1
+I20261028 20:43:41.990748 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.990752 33460 types.cc:1558] [mgjy_probe] ctx.input="l" ctx.caret_pos=1 ctx:is_composing()=true
+I20261028 20:43:41.990768 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.990779 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.990789 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.990792 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.990797 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.990810 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="l"
+I20261028 20:43:41.990813 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:41.990816 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.990819 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.990825 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.990828 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.990832 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.990836 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.990839 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.990842 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.990845 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.990849 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.990853 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.990857 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD2328 type=userdata
+I20261028 20:43:41.990860 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.990864 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.990867 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.990871 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.990874 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD1FB8 type=userdata
+I20261028 20:43:41.990878 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.990882 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.990888 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=1 text="TEXT-l" comment="COMMENT-l" dyn=Simple
+I20261028 20:43:41.990892 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-l text="mgjy_probe" comment="COMMENT-l"
+I20261028 20:43:41.990897 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.990904 33460 types.cc:1558] [mgjy_probe_b] translate input="l" start=0 end=1
+I20261028 20:43:41.990912 33460 types.cc:1558] [mgjy_filter] apply input="l"
+I20261028 20:43:41.990919 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="探针:l" comment="probe: l"
+I20261028 20:43:41.990993 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.990998 33460 types.cc:1558] [mgjy_probe] input="lk" #bytes=2 seg.start=0 seg._start=0 seg._end=2 seg.length=2
+I20261028 20:43:41.991002 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.991005 33460 types.cc:1558] [mgjy_probe] ctx.input="lk" ctx.caret_pos=2 ctx:is_composing()=true
+I20261028 20:43:41.991017 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.991027 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.991037 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.991040 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.991053 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.991056 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="lk"
+I20261028 20:43:41.991059 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:41.991061 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.991064 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.991069 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.991072 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.991076 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.991080 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.991083 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.991086 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.991089 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.991093 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.991096 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.991100 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD3368 type=userdata
+I20261028 20:43:41.991103 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.991106 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.991109 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.991113 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.991116 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD39A8 type=userdata
+I20261028 20:43:41.991120 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.991124 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.991129 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=2 text="TEXT-lk" comment="COMMENT-lk" dyn=Simple
+I20261028 20:43:41.991133 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-lk text="mgjy_probe" comment="COMMENT-lk"
+I20261028 20:43:41.991137 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.991144 33460 types.cc:1558] [mgjy_probe_b] translate input="lk" start=0 end=2
+I20261028 20:43:41.991151 33460 types.cc:1558] [mgjy_filter] apply input="lk"
+I20261028 20:43:41.991158 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="探针:lk" comment="probe: lk"
+I20261028 20:43:41.991226 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.991230 33460 types.cc:1558] [mgjy_probe] input="lkc" #bytes=3 seg.start=0 seg._start=0 seg._end=3 seg.length=3
+I20261028 20:43:41.991234 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.991237 33460 types.cc:1558] [mgjy_probe] ctx.input="lkc" ctx.caret_pos=3 ctx:is_composing()=true
+I20261028 20:43:41.991248 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.991258 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.991268 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.991278 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.991283 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.991286 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="lkc"
+I20261028 20:43:41.991289 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:41.991291 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.991294 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.991299 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.991302 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.991306 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.991309 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.991313 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.991315 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.991319 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.991322 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.991326 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.991329 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD1D38 type=userdata
+I20261028 20:43:41.991332 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.991336 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.991339 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.991342 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.991345 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD2DC8 type=userdata
+I20261028 20:43:41.991349 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.991354 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.991363 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=3 text="TEXT-lkc" comment="COMMENT-lkc" dyn=Simple
+I20261028 20:43:41.991370 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-lkc text="mgjy_probe" comment="COMMENT-lkc"
+I20261028 20:43:41.991377 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.991388 33460 types.cc:1558] [mgjy_probe_b] translate input="lkc" start=0 end=3
+I20261028 20:43:41.991399 33460 types.cc:1558] [mgjy_filter] apply input="lkc"
+I20261028 20:43:41.991410 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="探针:lkc" comment="probe: lkc"
+I20261028 20:43:41.991507 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.991513 33460 types.cc:1558] [mgjy_probe] input="lkcc" #bytes=4 seg.start=0 seg._start=0 seg._end=4 seg.length=4
+I20261028 20:43:41.991516 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.991520 33460 types.cc:1558] [mgjy_probe] ctx.input="lkcc" ctx.caret_pos=4 ctx:is_composing()=true
+I20261028 20:43:41.991535 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.991546 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.991600 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.991603 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.991607 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.991610 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="lkcc"
+I20261028 20:43:41.991614 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:41.991616 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.991620 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.991625 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.991628 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.991645 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.991660 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.991667 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.991673 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.991679 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.991686 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.991692 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.991699 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD3728 type=userdata
+I20261028 20:43:41.991705 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.991712 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.991717 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.991723 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.991729 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD4718 type=userdata
+I20261028 20:43:41.991737 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.991744 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.991755 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=4 text="TEXT-lkcc" comment="COMMENT-lkcc" dyn=Simple
+I20261028 20:43:41.991762 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-lkcc text="mgjy_probe" comment="COMMENT-lkcc"
+I20261028 20:43:41.991769 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.991784 33460 types.cc:1558] [mgjy_probe_b] translate input="lkcc" start=0 end=4
+I20261028 20:43:41.991797 33460 types.cc:1558] [mgjy_filter] apply input="lkcc"
+I20261028 20:43:41.991810 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="力克兮兮" comment="custom: illegal pinyin lkcc"
+I20261028 20:43:41.991840 33460 types.cc:1558] [mgjy_filter] cand#2 type=mgjy_probe text="lkcc#01" comment="seq 1 for \"lkcc\""
+I20261028 20:43:41.991853 33460 types.cc:1558] [mgjy_filter] cand#3 type=mgjy_probe text="lkcc#02" comment="seq 2 for \"lkcc\""
+I20261028 20:43:41.991864 33460 types.cc:1558] [mgjy_filter] cand#4 type=mgjy_probe text="lkcc#03" comment="seq 3 for \"lkcc\""
+I20261028 20:43:41.991876 33460 types.cc:1558] [mgjy_filter] cand#5 type=mgjy_probe text="lkcc#04" comment="seq 4 for \"lkcc\""
+I20261028 20:43:41.991883 33460 types.cc:1558] [mgjy_filter] cand#6 type=mgjy_probe text="lkcc#05" comment="seq 5 for \"lkcc\""
+I20261028 20:43:41.992032 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.992038 33460 types.cc:1558] [mgjy_probe] input="n" #bytes=1 seg.start=0 seg._start=0 seg._end=1 seg.length=1
+I20261028 20:43:41.992042 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.992046 33460 types.cc:1558] [mgjy_probe] ctx.input="n" ctx.caret_pos=1 ctx:is_composing()=true
+I20261028 20:43:41.992062 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.992074 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.992085 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.992087 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.992190 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.992193 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="n"
+I20261028 20:43:41.992196 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:41.992199 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.992203 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.992208 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.992212 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.992216 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.992220 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.992223 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.992226 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.992230 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.992233 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.992237 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.992241 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD2AF8 type=userdata
+I20261028 20:43:41.992244 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.992248 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.992251 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.992257 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.992263 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD2508 type=userdata
+I20261028 20:43:41.992267 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.992271 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.992278 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=1 text="TEXT-n" comment="COMMENT-n" dyn=Simple
+I20261028 20:43:41.992282 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-n text="mgjy_probe" comment="COMMENT-n"
+I20261028 20:43:41.992287 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.992295 33460 types.cc:1558] [mgjy_probe_b] translate input="n" start=0 end=1
+I20261028 20:43:41.992314 33460 types.cc:1558] [mgjy_filter] apply input="n"
+I20261028 20:43:41.992321 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="探针:n" comment="probe: n"
+I20261028 20:43:41.992400 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.992405 33460 types.cc:1558] [mgjy_probe] input="ni" #bytes=2 seg.start=0 seg._start=0 seg._end=2 seg.length=2
+I20261028 20:43:41.992408 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.992412 33460 types.cc:1558] [mgjy_probe] ctx.input="ni" ctx.caret_pos=2 ctx:is_composing()=true
+I20261028 20:43:41.992426 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.992436 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.992447 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.992449 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.992454 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.992456 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="ni"
+I20261028 20:43:41.992460 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:41.992462 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.992465 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.992470 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.992473 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.992477 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.992481 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.992484 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.992487 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.992490 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.992493 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.992497 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.992500 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD3A98 type=userdata
+I20261028 20:43:41.992503 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.992507 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.992510 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.992514 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.992517 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD3728 type=userdata
+I20261028 20:43:41.992521 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.992525 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.992530 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=2 text="TEXT-ni" comment="COMMENT-ni" dyn=Simple
+I20261028 20:43:41.992534 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-ni text="mgjy_probe" comment="COMMENT-ni"
+I20261028 20:43:41.992539 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.992554 33460 types.cc:1558] [mgjy_probe_b] translate input="ni" start=0 end=2
+I20261028 20:43:41.992561 33460 types.cc:1558] [mgjy_filter] apply input="ni"
+I20261028 20:43:41.992567 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="探针:ni" comment="probe: ni"
+I20261028 20:43:41.992643 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.992648 33460 types.cc:1558] [mgjy_probe] input="nih" #bytes=3 seg.start=0 seg._start=0 seg._end=3 seg.length=3
+I20261028 20:43:41.992651 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.992655 33460 types.cc:1558] [mgjy_probe] ctx.input="nih" ctx.caret_pos=3 ctx:is_composing()=true
+I20261028 20:43:41.992667 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.992677 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.992687 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.992690 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.992694 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.992697 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="nih"
+I20261028 20:43:41.992700 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:41.992702 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.992705 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.992710 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.992713 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.992717 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.992720 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.992724 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.992726 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.992730 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.992733 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.992737 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.992740 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD2648 type=userdata
+I20261028 20:43:41.992743 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.992747 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.992750 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.992753 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.992757 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD2C38 type=userdata
+I20261028 20:43:41.992760 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.992764 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.992769 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=3 text="TEXT-nih" comment="COMMENT-nih" dyn=Simple
+I20261028 20:43:41.992773 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-nih text="mgjy_probe" comment="COMMENT-nih"
+I20261028 20:43:41.992786 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.992793 33460 types.cc:1558] [mgjy_probe_b] translate input="nih" start=0 end=3
+I20261028 20:43:41.992799 33460 types.cc:1558] [mgjy_filter] apply input="nih"
+I20261028 20:43:41.992889 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="探针:nih" comment="probe: nih"
+I20261028 20:43:41.992971 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.992976 33460 types.cc:1558] [mgjy_probe] input="niha" #bytes=4 seg.start=0 seg._start=0 seg._end=4 seg.length=4
+I20261028 20:43:41.992980 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.992983 33460 types.cc:1558] [mgjy_probe] ctx.input="niha" ctx.caret_pos=4 ctx:is_composing()=true
+I20261028 20:43:41.992997 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.993007 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.993017 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.993020 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.993025 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.993028 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="niha"
+I20261028 20:43:41.993031 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:41.993033 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.993037 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.993042 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.993045 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.993049 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.993053 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.993056 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.993059 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.993062 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.993066 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.993069 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.993073 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD4128 type=userdata
+I20261028 20:43:41.993076 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.993080 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.993083 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.993087 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.993090 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD3DB8 type=userdata
+I20261028 20:43:41.993094 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.993098 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.993103 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=4 text="TEXT-niha" comment="COMMENT-niha" dyn=Simple
+I20261028 20:43:41.993118 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-niha text="mgjy_probe" comment="COMMENT-niha"
+I20261028 20:43:41.993122 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.993129 33460 types.cc:1558] [mgjy_probe_b] translate input="niha" start=0 end=4
+I20261028 20:43:41.993136 33460 types.cc:1558] [mgjy_filter] apply input="niha"
+I20261028 20:43:41.993143 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="探针:niha" comment="probe: niha"
+I20261028 20:43:41.993253 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.993258 33460 types.cc:1558] [mgjy_probe] input="nihao" #bytes=5 seg.start=0 seg._start=0 seg._end=5 seg.length=5
+I20261028 20:43:41.993262 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.993265 33460 types.cc:1558] [mgjy_probe] ctx.input="nihao" ctx.caret_pos=5 ctx:is_composing()=true
+I20261028 20:43:41.993279 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.993290 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.993300 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.993302 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.993307 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.993310 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="nihao"
+I20261028 20:43:41.993313 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:41.993315 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.993319 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.993324 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.993327 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.993330 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.993334 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.993337 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.993340 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.993344 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.993347 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.993351 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.993354 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD2A58 type=userdata
+I20261028 20:43:41.993357 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.993361 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.993364 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.993367 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.993371 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD2508 type=userdata
+I20261028 20:43:41.993375 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.993416 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.993422 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=5 text="TEXT-nihao" comment="COMMENT-nihao" dyn=Simple
+I20261028 20:43:41.993426 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-nihao text="mgjy_probe" comment="COMMENT-nihao"
+I20261028 20:43:41.993430 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.993438 33460 types.cc:1558] [mgjy_probe_b] translate input="nihao" start=0 end=5
+I20261028 20:43:41.993445 33460 types.cc:1558] [mgjy_filter] apply input="nihao"
+I20261028 20:43:41.993452 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="你好" comment="custom: nihao"
+I20261028 20:43:41.993470 33460 types.cc:1558] [mgjy_filter] cand#2 type=mgjy_probe text="nihao#01" comment="seq 1 for \"nihao\""
+I20261028 20:43:41.993478 33460 types.cc:1558] [mgjy_filter] cand#3 type=mgjy_probe text="nihao#02" comment="seq 2 for \"nihao\""
+I20261028 20:43:41.993485 33460 types.cc:1558] [mgjy_filter] cand#4 type=mgjy_probe text="nihao#03" comment="seq 3 for \"nihao\""
+I20261028 20:43:41.993492 33460 types.cc:1558] [mgjy_filter] cand#5 type=mgjy_probe text="nihao#04" comment="seq 4 for \"nihao\""
+I20261028 20:43:41.993500 33460 types.cc:1558] [mgjy_filter] cand#6 type=mgjy_probe text="nihao#05" comment="seq 5 for \"nihao\""
+I20261028 20:43:41.993622 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.993627 33460 types.cc:1558] [mgjy_probe] input="l" #bytes=1 seg.start=0 seg._start=0 seg._end=1 seg.length=1
+I20261028 20:43:41.993634 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.993637 33460 types.cc:1558] [mgjy_probe] ctx.input="l" ctx.caret_pos=1 ctx:is_composing()=true
+I20261028 20:43:41.993650 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.993661 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.993670 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.993673 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.993677 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.993680 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="l"
+I20261028 20:43:41.993683 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=true
+I20261028 20:43:41.993686 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.993689 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.993693 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.993696 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.993700 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.993704 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.993707 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.993710 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.993714 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.993717 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.993730 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.993734 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD2F58 type=userdata
+I20261028 20:43:41.993737 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.993741 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.993744 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.993748 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.993751 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD3408 type=userdata
+I20261028 20:43:41.993755 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.993759 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.993765 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=1 text="TEXT-l" comment="COMMENT-l" dyn=Simple
+I20261028 20:43:41.993769 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-l text="mgjy_probe" comment="COMMENT-l"
+I20261028 20:43:41.993773 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.993780 33460 types.cc:1558] [mgjy_probe_b] translate input="l" start=0 end=1
+I20261028 20:43:41.993786 33460 types.cc:1558] [mgjy_filter] apply input="l"
+I20261028 20:43:41.993793 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="探针:l" comment="probe: l"
+I20261028 20:43:41.993862 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.993867 33460 types.cc:1558] [mgjy_probe] input="lk" #bytes=2 seg.start=0 seg._start=0 seg._end=2 seg.length=2
+I20261028 20:43:41.993870 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.993873 33460 types.cc:1558] [mgjy_probe] ctx.input="lk" ctx.caret_pos=2 ctx:is_composing()=true
+I20261028 20:43:41.993885 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.993895 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.993905 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.993907 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.993911 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.993914 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="lk"
+I20261028 20:43:41.993917 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=true
+I20261028 20:43:41.993919 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.993922 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.993927 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.993930 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.993934 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.993937 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.993940 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.993943 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.993947 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.993958 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.993962 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.993965 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD36D8 type=userdata
+I20261028 20:43:41.993968 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.993972 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.993975 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.993978 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.993981 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD4628 type=userdata
+I20261028 20:43:41.993985 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.993989 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.993994 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=2 text="TEXT-lk" comment="COMMENT-lk" dyn=Simple
+I20261028 20:43:41.993998 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-lk text="mgjy_probe" comment="COMMENT-lk"
+I20261028 20:43:41.994002 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.994008 33460 types.cc:1558] [mgjy_probe_b] translate input="lk" start=0 end=2
+I20261028 20:43:41.994015 33460 types.cc:1558] [mgjy_filter] apply input="lk"
+I20261028 20:43:41.994021 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="探针:lk" comment="probe: lk"
+I20261028 20:43:41.994087 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.994091 33460 types.cc:1558] [mgjy_probe] input="lkc" #bytes=3 seg.start=0 seg._start=0 seg._end=3 seg.length=3
+I20261028 20:43:41.994095 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.994098 33460 types.cc:1558] [mgjy_probe] ctx.input="lkc" ctx.caret_pos=3 ctx:is_composing()=true
+I20261028 20:43:41.994109 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.994119 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.994128 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.994131 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.994135 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.994138 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="lkc"
+I20261028 20:43:41.994141 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=true
+I20261028 20:43:41.994143 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.994146 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.994150 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.994153 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.994157 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.994161 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.994164 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.994174 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.994178 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.994181 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.994185 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.994188 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD25F8 type=userdata
+I20261028 20:43:41.994191 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.994195 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.994198 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.994201 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.994205 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD2B98 type=userdata
+I20261028 20:43:41.994208 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.994212 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.994217 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=3 text="TEXT-lkc" comment="COMMENT-lkc" dyn=Simple
+I20261028 20:43:41.994221 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-lkc text="mgjy_probe" comment="COMMENT-lkc"
+I20261028 20:43:41.994225 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.994232 33460 types.cc:1558] [mgjy_probe_b] translate input="lkc" start=0 end=3
+I20261028 20:43:41.994238 33460 types.cc:1558] [mgjy_filter] apply input="lkc"
+I20261028 20:43:41.994244 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="探针:lkc" comment="probe: lkc"
+I20261028 20:43:41.994315 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.994320 33460 types.cc:1558] [mgjy_probe] input="lkcc" #bytes=4 seg.start=0 seg._start=0 seg._end=4 seg.length=4
+I20261028 20:43:41.994323 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.994326 33460 types.cc:1558] [mgjy_probe] ctx.input="lkcc" ctx.caret_pos=4 ctx:is_composing()=true
+I20261028 20:43:41.994337 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.994347 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.994357 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.994359 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.994363 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.994366 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="lkcc"
+I20261028 20:43:41.994369 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=true
+I20261028 20:43:41.994371 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.994374 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.994378 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.994381 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.994385 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.994396 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.994399 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.994402 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.994405 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.994409 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.994412 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.994416 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD31D8 type=userdata
+I20261028 20:43:41.994419 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.994422 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.994425 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.994429 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.994432 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD3278 type=userdata
+I20261028 20:43:41.994436 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.994439 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.994445 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=4 text="TEXT-lkcc" comment="COMMENT-lkcc" dyn=Simple
+I20261028 20:43:41.994448 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-lkcc text="mgjy_probe" comment="COMMENT-lkcc"
+I20261028 20:43:41.994452 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.994459 33460 types.cc:1558] [mgjy_probe_b] translate input="lkcc" start=0 end=4
+I20261028 20:43:41.994465 33460 types.cc:1558] [mgjy_filter] apply input="lkcc"
+I20261028 20:43:41.994471 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="力克兮兮" comment="custom: illegal pinyin lkcc"
+I20261028 20:43:41.994485 33460 types.cc:1558] [mgjy_filter] cand#2 type=mgjy_probe text="EXTRA-ON:lkcc" comment="switch mgjy_probe_extra is ON"
+I20261028 20:43:41.994493 33460 types.cc:1558] [mgjy_filter] cand#3 type=mgjy_probe text="lkcc#01" comment="seq 1 for \"lkcc\""
+I20261028 20:43:41.994500 33460 types.cc:1558] [mgjy_filter] cand#4 type=mgjy_probe text="lkcc#02" comment="seq 2 for \"lkcc\""
+I20261028 20:43:41.994508 33460 types.cc:1558] [mgjy_filter] cand#5 type=mgjy_probe text="lkcc#03" comment="seq 3 for \"lkcc\""
+I20261028 20:43:41.994515 33460 types.cc:1558] [mgjy_filter] cand#6 type=mgjy_probe text="lkcc#04" comment="seq 4 for \"lkcc\""
+I20261028 20:43:41.994607 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.994612 33460 types.cc:1558] [mgjy_probe] input="lkcc" #bytes=4 seg.start=0 seg._start=0 seg._end=4 seg.length=4
+I20261028 20:43:41.994615 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.994618 33460 types.cc:1558] [mgjy_probe] ctx.input="lkcc" ctx.caret_pos=4 ctx:is_composing()=true
+I20261028 20:43:41.994633 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.994643 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.994652 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.994655 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.994659 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.994671 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="lkcc"
+I20261028 20:43:41.994674 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:41.994676 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.994680 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.994684 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.994687 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.994691 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.994695 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.994698 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.994700 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.994704 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.994707 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.994711 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.994714 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD2918 type=userdata
+I20261028 20:43:41.994717 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.994721 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.994724 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.994727 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.994730 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD3F48 type=userdata
+I20261028 20:43:41.994735 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.994738 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.994744 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=4 text="TEXT-lkcc" comment="COMMENT-lkcc" dyn=Simple
+I20261028 20:43:41.994748 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-lkcc text="mgjy_probe" comment="COMMENT-lkcc"
+I20261028 20:43:41.994752 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.994758 33460 types.cc:1558] [mgjy_probe_b] translate input="lkcc" start=0 end=4
+I20261028 20:43:41.994765 33460 types.cc:1558] [mgjy_filter] apply input="lkcc"
+I20261028 20:43:41.994771 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="力克兮兮" comment="custom: illegal pinyin lkcc"
+I20261028 20:43:41.994843 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.994848 33460 types.cc:1558] [mgjy_probe] input="l" #bytes=1 seg.start=0 seg._start=0 seg._end=1 seg.length=1
+I20261028 20:43:41.994851 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.994854 33460 types.cc:1558] [mgjy_probe] ctx.input="l" ctx.caret_pos=1 ctx:is_composing()=true
+I20261028 20:43:41.994865 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.994875 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.994885 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.994895 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.994900 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.994902 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="l"
+I20261028 20:43:41.994905 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:41.994908 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.994911 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.994915 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.994918 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.994922 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.994926 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.994929 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.994931 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.994935 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.994938 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.994942 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.994945 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD27D8 type=userdata
+I20261028 20:43:41.994948 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.994952 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.994955 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.994958 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.994961 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD24B8 type=userdata
+I20261028 20:43:41.994965 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.994969 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.994974 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=1 text="TEXT-l" comment="COMMENT-l" dyn=Simple
+I20261028 20:43:41.994978 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-l text="mgjy_probe" comment="COMMENT-l"
+I20261028 20:43:41.994982 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.994988 33460 types.cc:1558] [mgjy_probe_b] translate input="l" start=0 end=1
+I20261028 20:43:41.994994 33460 types.cc:1558] [mgjy_filter] apply input="l"
+I20261028 20:43:41.995001 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="探针:l" comment="probe: l"
+I20261028 20:43:41.995065 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.995069 33460 types.cc:1558] [mgjy_probe] input="lk" #bytes=2 seg.start=0 seg._start=0 seg._end=2 seg.length=2
+I20261028 20:43:41.995073 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.995076 33460 types.cc:1558] [mgjy_probe] ctx.input="lk" ctx.caret_pos=2 ctx:is_composing()=true
+I20261028 20:43:41.995087 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.995097 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.995114 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.995117 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.995121 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.995124 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="lk"
+I20261028 20:43:41.995127 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:41.995129 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.995133 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.995137 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.995140 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.995144 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.995147 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.995150 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.995153 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.995157 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.995160 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.995164 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.995167 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD3098 type=userdata
+I20261028 20:43:41.995170 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.995174 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.995177 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.995180 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.995183 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD3908 type=userdata
+I20261028 20:43:41.995187 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.995190 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.995196 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=2 text="TEXT-lk" comment="COMMENT-lk" dyn=Simple
+I20261028 20:43:41.995200 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-lk text="mgjy_probe" comment="COMMENT-lk"
+I20261028 20:43:41.995204 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.995210 33460 types.cc:1558] [mgjy_probe_b] translate input="lk" start=0 end=2
+I20261028 20:43:41.995216 33460 types.cc:1558] [mgjy_filter] apply input="lk"
+I20261028 20:43:41.995223 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="探针:lk" comment="probe: lk"
+I20261028 20:43:41.995286 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.995290 33460 types.cc:1558] [mgjy_probe] input="lkc" #bytes=3 seg.start=0 seg._start=0 seg._end=3 seg.length=3
+I20261028 20:43:41.995338 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.995341 33460 types.cc:1558] [mgjy_probe] ctx.input="lkc" ctx.caret_pos=3 ctx:is_composing()=true
+I20261028 20:43:41.995354 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.995373 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.995383 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.995385 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.995389 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.995392 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="lkc"
+I20261028 20:43:41.995395 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:41.995398 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.995401 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.995406 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.995408 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.995412 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.995416 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.995419 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.995422 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.995426 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.995429 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.995433 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.995436 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD2C38 type=userdata
+I20261028 20:43:41.995439 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.995443 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.995446 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.995449 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.995453 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD1DD8 type=userdata
+I20261028 20:43:41.995457 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.995460 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.995466 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=3 text="TEXT-lkc" comment="COMMENT-lkc" dyn=Simple
+I20261028 20:43:41.995470 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-lkc text="mgjy_probe" comment="COMMENT-lkc"
+I20261028 20:43:41.995474 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.995481 33460 types.cc:1558] [mgjy_probe_b] translate input="lkc" start=0 end=3
+I20261028 20:43:41.995487 33460 types.cc:1558] [mgjy_filter] apply input="lkc"
+I20261028 20:43:41.995494 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="探针:lkc" comment="probe: lkc"
+I20261028 20:43:41.995564 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.995568 33460 types.cc:1558] [mgjy_probe] input="lkcc" #bytes=4 seg.start=0 seg._start=0 seg._end=4 seg.length=4
+I20261028 20:43:41.995571 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.995574 33460 types.cc:1558] [mgjy_probe] ctx.input="lkcc" ctx.caret_pos=4 ctx:is_composing()=true
+I20261028 20:43:41.995593 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.995603 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.995613 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.995615 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.995619 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.995622 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="lkcc"
+I20261028 20:43:41.995625 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:41.995627 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.995633 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.995638 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.995641 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.995644 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.995648 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.995651 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.995654 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.995657 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.995661 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.995664 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.995667 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD4088 type=userdata
+I20261028 20:43:41.995670 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.995674 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.995677 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.995680 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.995683 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD4448 type=userdata
+I20261028 20:43:41.995687 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.995691 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.995696 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=4 text="TEXT-lkcc" comment="COMMENT-lkcc" dyn=Simple
+I20261028 20:43:41.995700 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-lkcc text="mgjy_probe" comment="COMMENT-lkcc"
+I20261028 20:43:41.995704 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.995710 33460 types.cc:1558] [mgjy_probe_b] translate input="lkcc" start=0 end=4
+I20261028 20:43:41.995717 33460 types.cc:1558] [mgjy_filter] apply input="lkcc"
+I20261028 20:43:41.995723 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="力克兮兮" comment="custom: illegal pinyin lkcc"
+I20261028 20:43:41.995738 33460 types.cc:1558] [mgjy_filter] cand#2 type=mgjy_probe text="lkcc#01" comment="seq 1 for \"lkcc\""
+I20261028 20:43:41.995746 33460 types.cc:1558] [mgjy_filter] cand#3 type=mgjy_probe text="lkcc#02" comment="seq 2 for \"lkcc\""
+I20261028 20:43:41.995786 33460 types.cc:1558] [mgjy_filter] cand#4 type=mgjy_probe text="lkcc#03" comment="seq 3 for \"lkcc\""
+I20261028 20:43:41.995794 33460 types.cc:1558] [mgjy_filter] cand#5 type=mgjy_probe text="lkcc#04" comment="seq 4 for \"lkcc\""
+I20261028 20:43:41.995801 33460 types.cc:1558] [mgjy_filter] cand#6 type=mgjy_probe text="lkcc#05" comment="seq 5 for \"lkcc\""
+I20261028 20:43:41.995899 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.995904 33460 types.cc:1558] [mgjy_probe] input="niHao123" #bytes=8 seg.start=0 seg._start=0 seg._end=8 seg.length=8
+I20261028 20:43:41.995908 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.995911 33460 types.cc:1558] [mgjy_probe] ctx.input="niHao123" ctx.caret_pos=8 ctx:is_composing()=true
+I20261028 20:43:41.995924 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.995934 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.995945 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.995947 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.995952 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.995954 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="niHao123"
+I20261028 20:43:41.995957 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:41.995960 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.995963 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.995967 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.995970 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.995974 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.995978 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.995981 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.995984 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.995987 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.995991 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.995994 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.995998 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD2378 type=userdata
+I20261028 20:43:41.996001 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.996004 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.996008 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.996011 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.996014 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD3F48 type=userdata
+I20261028 20:43:41.996018 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.996022 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.996028 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=8 text="TEXT-niHao123" comment="COMMENT-niHao123" dyn=Simple
+I20261028 20:43:41.996062 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-niHao123 text="mgjy_probe" comment="COMMENT-niHao123"
+I20261028 20:43:41.996066 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.996074 33460 types.cc:1558] [mgjy_probe_b] translate input="niHao123" start=0 end=8
+I20261028 20:43:41.996081 33460 types.cc:1558] [mgjy_filter] apply input="niHao123"
+I20261028 20:43:41.996088 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="探针:niHao123" comment="probe: niHao123"
+I20261028 20:43:41.996103 33460 types.cc:1558] [mgjy_filter] cand#2 type=mgjy_probe text="niHao123#01" comment="seq 1 for \"niHao123\""
+I20261028 20:43:41.996111 33460 types.cc:1558] [mgjy_filter] cand#3 type=mgjy_probe text="niHao123#02" comment="seq 2 for \"niHao123\""
+I20261028 20:43:41.996118 33460 types.cc:1558] [mgjy_filter] cand#4 type=mgjy_probe text="niHao123#03" comment="seq 3 for \"niHao123\""
+I20261028 20:43:41.996125 33460 types.cc:1558] [mgjy_filter] cand#5 type=mgjy_probe text="niHao123#04" comment="seq 4 for \"niHao123\""
+I20261028 20:43:41.996132 33460 types.cc:1558] [mgjy_filter] cand#6 type=mgjy_probe text="niHao123#05" comment="seq 5 for \"niHao123\""
+I20261028 20:43:41.996229 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.996233 33460 types.cc:1558] [mgjy_probe] input="ni hao" #bytes=6 seg.start=0 seg._start=0 seg._end=6 seg.length=6
+I20261028 20:43:41.996237 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.996240 33460 types.cc:1558] [mgjy_probe] ctx.input="ni hao" ctx.caret_pos=6 ctx:is_composing()=true
+I20261028 20:43:41.996252 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.996263 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.996272 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.996275 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.996279 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.996282 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="ni hao"
+I20261028 20:43:41.996285 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:41.996287 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.996291 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.996295 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.996298 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.996302 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.996305 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.996308 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.996311 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.996315 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.996318 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.996322 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.996325 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD2008 type=userdata
+I20261028 20:43:41.996328 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.996450 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.996454 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.996458 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.996461 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD2FA8 type=userdata
+I20261028 20:43:41.996466 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.996470 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.996476 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=6 text="TEXT-ni hao" comment="COMMENT-ni hao" dyn=Simple
+I20261028 20:43:41.996480 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-ni hao text="mgjy_probe" comment="COMMENT-ni hao"
+I20261028 20:43:41.996484 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.996492 33460 types.cc:1558] [mgjy_probe_b] translate input="ni hao" start=0 end=6
+I20261028 20:43:41.996499 33460 types.cc:1558] [mgjy_filter] apply input="ni hao"
+I20261028 20:43:41.996506 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="探针:ni hao" comment="probe: ni hao"
+I20261028 20:43:41.996522 33460 types.cc:1558] [mgjy_filter] cand#2 type=mgjy_probe text="ni hao#01" comment="seq 1 for \"ni hao\""
+I20261028 20:43:41.996530 33460 types.cc:1558] [mgjy_filter] cand#3 type=mgjy_probe text="ni hao#02" comment="seq 2 for \"ni hao\""
+I20261028 20:43:41.996537 33460 types.cc:1558] [mgjy_filter] cand#4 type=mgjy_probe text="ni hao#03" comment="seq 3 for \"ni hao\""
+I20261028 20:43:41.996544 33460 types.cc:1558] [mgjy_filter] cand#5 type=mgjy_probe text="ni hao#04" comment="seq 4 for \"ni hao\""
+I20261028 20:43:41.996551 33460 types.cc:1558] [mgjy_filter] cand#6 type=mgjy_probe text="ni hao#05" comment="seq 5 for \"ni hao\""
+I20261028 20:43:41.996658 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.996664 33460 types.cc:1558] [mgjy_probe] input="ni'hao" #bytes=6 seg.start=0 seg._start=0 seg._end=6 seg.length=6
+I20261028 20:43:41.996667 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.996670 33460 types.cc:1558] [mgjy_probe] ctx.input="ni'hao" ctx.caret_pos=6 ctx:is_composing()=true
+I20261028 20:43:41.996683 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.996693 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.996703 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.996705 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.996710 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.996713 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="ni'hao"
+I20261028 20:43:41.996716 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:41.996718 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.996721 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.996726 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.996729 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.996733 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.996746 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.996750 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.996752 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.996756 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.996759 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.996763 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.996767 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD1EC8 type=userdata
+I20261028 20:43:41.996770 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.996773 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.996776 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.996780 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.996783 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD3778 type=userdata
+I20261028 20:43:41.996788 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.996791 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.996797 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=6 text="TEXT-ni'hao" comment="COMMENT-ni'hao" dyn=Simple
+I20261028 20:43:41.996801 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-ni'hao text="mgjy_probe" comment="COMMENT-ni'hao"
+I20261028 20:43:41.996805 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.996812 33460 types.cc:1558] [mgjy_probe_b] translate input="ni'hao" start=0 end=6
+I20261028 20:43:41.996819 33460 types.cc:1558] [mgjy_filter] apply input="ni'hao"
+I20261028 20:43:41.996826 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="探针:ni'hao" comment="probe: ni'hao"
+I20261028 20:43:41.996839 33460 types.cc:1558] [mgjy_filter] cand#2 type=mgjy_probe text="ni'hao#01" comment="seq 1 for \"ni'hao\""
+I20261028 20:43:41.996846 33460 types.cc:1558] [mgjy_filter] cand#3 type=mgjy_probe text="ni'hao#02" comment="seq 2 for \"ni'hao\""
+I20261028 20:43:41.996853 33460 types.cc:1558] [mgjy_filter] cand#4 type=mgjy_probe text="ni'hao#03" comment="seq 3 for \"ni'hao\""
+I20261028 20:43:41.996860 33460 types.cc:1558] [mgjy_filter] cand#5 type=mgjy_probe text="ni'hao#04" comment="seq 4 for \"ni'hao\""
+I20261028 20:43:41.996868 33460 types.cc:1558] [mgjy_filter] cand#6 type=mgjy_probe text="ni'hao#05" comment="seq 5 for \"ni'hao\""
+I20261028 20:43:41.996963 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.996968 33460 types.cc:1558] [mgjy_probe] input="ni" #bytes=2 seg.start=0 seg._start=0 seg._end=2 seg.length=2
+I20261028 20:43:41.996971 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.996975 33460 types.cc:1558] [mgjy_probe] ctx.input="ni,hao" ctx.caret_pos=6 ctx:is_composing()=true
+I20261028 20:43:41.996987 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.996997 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.997007 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.997009 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.997014 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.997025 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="ni"
+I20261028 20:43:41.997028 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:41.997031 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.997034 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.997038 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.997041 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.997045 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.997049 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.997052 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.997055 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.997058 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.997062 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.997065 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.997069 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD2328 type=userdata
+I20261028 20:43:41.997072 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.997075 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.997078 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.997082 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.997085 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD3A48 type=userdata
+I20261028 20:43:41.997089 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.997093 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.997098 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=2 text="TEXT-ni" comment="COMMENT-ni" dyn=Simple
+I20261028 20:43:41.997102 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-ni text="mgjy_probe" comment="COMMENT-ni"
+I20261028 20:43:41.997107 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.997113 33460 types.cc:1558] [mgjy_probe_b] translate input="ni" start=0 end=2
+I20261028 20:43:41.997120 33460 types.cc:1558] [mgjy_filter] apply input="ni,hao"
+I20261028 20:43:41.997126 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="探针:ni" comment="probe: ni"
+I20261028 20:43:41.997133 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.997136 33460 types.cc:1558] [mgjy_probe] input="," #bytes=1 seg.start=2 seg._start=2 seg._end=3 seg.length=1
+I20261028 20:43:41.997140 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.997143 33460 types.cc:1558] [mgjy_probe] ctx.input="ni,hao" ctx.caret_pos=6 ctx:is_composing()=true
+I20261028 20:43:41.997153 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.997163 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.997174 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.997183 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.997187 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.997190 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)=""
+I20261028 20:43:41.997193 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:41.997196 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.997199 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.997203 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.997206 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.997209 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.997213 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.997216 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.997219 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.997222 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.997226 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.997229 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.997233 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD09D8 type=userdata
+I20261028 20:43:41.997235 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.997239 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.997242 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.997245 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.997248 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD0B18 type=userdata
+I20261028 20:43:41.997252 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.997257 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.997265 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=2 _end=3 text="TEXT-," comment="COMMENT-," dyn=Simple
+I20261028 20:43:41.997269 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-, text="mgjy_probe" comment="COMMENT-,"
+I20261028 20:43:41.997273 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.997279 33460 types.cc:1558] [mgjy_probe_b] translate input="," start=2 end=3
+I20261028 20:43:41.997286 33460 types.cc:1558] [mgjy_filter] apply input="ni,hao"
+I20261028 20:43:41.997292 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="探针:," comment="probe: ,"
+I20261028 20:43:41.997298 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.997302 33460 types.cc:1558] [mgjy_probe] input="hao" #bytes=3 seg.start=3 seg._start=3 seg._end=6 seg.length=3
+I20261028 20:43:41.997305 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.997308 33460 types.cc:1558] [mgjy_probe] ctx.input="ni,hao" ctx.caret_pos=6 ctx:is_composing()=true
+I20261028 20:43:41.997319 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.997329 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.997345 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.997348 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.997352 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.997355 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)=""
+I20261028 20:43:41.997358 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:41.997360 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.997363 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.997367 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.997370 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.997374 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.997377 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.997380 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.997384 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.997387 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.997390 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.997394 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.997397 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0B91748 type=userdata
+I20261028 20:43:41.997400 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.997403 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.997406 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.997410 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.997413 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BDAD98 type=userdata
+I20261028 20:43:41.997417 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.997421 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.997427 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=3 _end=6 text="TEXT-hao" comment="COMMENT-hao" dyn=Simple
+I20261028 20:43:41.997431 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-hao text="mgjy_probe" comment="COMMENT-hao"
+I20261028 20:43:41.997434 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.997441 33460 types.cc:1558] [mgjy_probe_b] translate input="hao" start=3 end=6
+I20261028 20:43:41.997448 33460 types.cc:1558] [mgjy_filter] apply input="ni,hao"
+I20261028 20:43:41.997454 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="探针:hao" comment="probe: hao"
+I20261028 20:43:41.997468 33460 types.cc:1558] [mgjy_filter] cand#2 type=mgjy_probe text="ni#01" comment="seq 1 for \"ni\""
+I20261028 20:43:41.997475 33460 types.cc:1558] [mgjy_filter] cand#2 type=mgjy_probe text=",#01" comment="seq 1 for \",\""
+I20261028 20:43:41.997483 33460 types.cc:1558] [mgjy_filter] cand#2 type=mgjy_probe text="hao#01" comment="seq 1 for \"hao\""
+I20261028 20:43:41.997490 33460 types.cc:1558] [mgjy_filter] cand#3 type=mgjy_probe text="hao#02" comment="seq 2 for \"hao\""
+I20261028 20:43:41.997497 33460 types.cc:1558] [mgjy_filter] cand#4 type=mgjy_probe text="hao#03" comment="seq 3 for \"hao\""
+I20261028 20:43:41.997511 33460 types.cc:1558] [mgjy_filter] cand#5 type=mgjy_probe text="hao#04" comment="seq 4 for \"hao\""
+I20261028 20:43:41.997518 33460 types.cc:1558] [mgjy_filter] cand#6 type=mgjy_probe text="hao#05" comment="seq 5 for \"hao\""
+I20261028 20:43:41.997725 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.997731 33460 types.cc:1558] [mgjy_probe] input="NIHAO" #bytes=5 seg.start=0 seg._start=0 seg._end=5 seg.length=5
+I20261028 20:43:41.997734 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.997738 33460 types.cc:1558] [mgjy_probe] ctx.input="NIHAO" ctx.caret_pos=5 ctx:is_composing()=true
+I20261028 20:43:41.997751 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.997835 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.997846 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.997850 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.997855 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.997858 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="NIHAO"
+I20261028 20:43:41.997861 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:41.997864 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.997867 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.997872 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.997875 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.997879 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.997883 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.997887 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.997890 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.997893 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.997897 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.997900 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.997904 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BCADD8 type=userdata
+I20261028 20:43:41.997907 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.997911 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.997914 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.997918 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.997921 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BCA108 type=userdata
+I20261028 20:43:41.997926 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.997930 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.997936 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=5 text="TEXT-NIHAO" comment="COMMENT-NIHAO" dyn=Simple
+I20261028 20:43:41.997940 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-NIHAO text="mgjy_probe" comment="COMMENT-NIHAO"
+I20261028 20:43:41.997955 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.997963 33460 types.cc:1558] [mgjy_probe_b] translate input="NIHAO" start=0 end=5
+I20261028 20:43:41.997970 33460 types.cc:1558] [mgjy_filter] apply input="NIHAO"
+I20261028 20:43:41.997978 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="探针:NIHAO" comment="probe: NIHAO"
+I20261028 20:43:41.997994 33460 types.cc:1558] [mgjy_filter] cand#2 type=mgjy_probe text="NIHAO#01" comment="seq 1 for \"NIHAO\""
+I20261028 20:43:41.998002 33460 types.cc:1558] [mgjy_filter] cand#3 type=mgjy_probe text="NIHAO#02" comment="seq 2 for \"NIHAO\""
+I20261028 20:43:41.998009 33460 types.cc:1558] [mgjy_filter] cand#4 type=mgjy_probe text="NIHAO#03" comment="seq 3 for \"NIHAO\""
+I20261028 20:43:41.998016 33460 types.cc:1558] [mgjy_filter] cand#5 type=mgjy_probe text="NIHAO#04" comment="seq 4 for \"NIHAO\""
+I20261028 20:43:41.998023 33460 types.cc:1558] [mgjy_filter] cand#6 type=mgjy_probe text="NIHAO#05" comment="seq 5 for \"NIHAO\""
+I20261028 20:43:41.998130 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.998136 33460 types.cc:1558] [mgjy_probe] input="!!" #bytes=2 seg.start=0 seg._start=0 seg._end=2 seg.length=1
+I20261028 20:43:41.998139 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.998142 33460 types.cc:1558] [mgjy_probe] ctx.input="!!" ctx.caret_pos=2 ctx:is_composing()=true
+I20261028 20:43:41.998155 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.998166 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.998176 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.998178 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.998183 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.998185 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="!!"
+I20261028 20:43:41.998188 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:41.998191 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.998194 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.998199 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.998202 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.998205 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.998209 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.998212 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.998215 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.998219 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.998222 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.998225 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.998229 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BC9E38 type=userdata
+I20261028 20:43:41.998232 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.998236 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.998239 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.998352 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.998361 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BCC098 type=userdata
+I20261028 20:43:41.998369 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.998376 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.998386 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=2 text="TEXT-!!" comment="COMMENT-!!" dyn=Simple
+I20261028 20:43:41.998392 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-!! text="mgjy_probe" comment="COMMENT-!!"
+I20261028 20:43:41.998400 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.998412 33460 types.cc:1558] [mgjy_probe_b] translate input="!!" start=0 end=2
+I20261028 20:43:41.998424 33460 types.cc:1558] [mgjy_filter] apply input="!!"
+I20261028 20:43:41.998434 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="探针:!!" comment="probe: !!"
+I20261028 20:43:41.998457 33460 types.cc:1558] [mgjy_filter] cand#2 type=mgjy_probe text="!!#01" comment="seq 1 for \"!!\""
+I20261028 20:43:41.998468 33460 types.cc:1558] [mgjy_filter] cand#3 type=mgjy_probe text="!!#02" comment="seq 2 for \"!!\""
+I20261028 20:43:41.998479 33460 types.cc:1558] [mgjy_filter] cand#4 type=mgjy_probe text="!!#03" comment="seq 3 for \"!!\""
+I20261028 20:43:41.998490 33460 types.cc:1558] [mgjy_filter] cand#5 type=mgjy_probe text="!!#04" comment="seq 4 for \"!!\""
+I20261028 20:43:41.998500 33460 types.cc:1558] [mgjy_filter] cand#6 type=mgjy_probe text="!!#05" comment="seq 5 for \"!!\""
+I20261028 20:43:41.998625 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.998632 33460 types.cc:1558] [mgjy_probe] input="a" #bytes=1 seg.start=0 seg._start=0 seg._end=1 seg.length=1
+I20261028 20:43:41.998638 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.998644 33460 types.cc:1558] [mgjy_probe] ctx.input="a-b" ctx.caret_pos=3 ctx:is_composing()=true
+I20261028 20:43:41.998661 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.998676 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.998690 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.998694 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.998701 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.998706 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="a"
+I20261028 20:43:41.998711 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:41.998715 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.998720 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.998727 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.998732 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.998738 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.998745 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.998750 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.998755 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.998774 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.998780 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.998786 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.998792 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BC9ED8 type=userdata
+I20261028 20:43:41.998797 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.998803 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.998808 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.998815 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.998818 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BCB698 type=userdata
+I20261028 20:43:41.998823 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.998826 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.998832 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=1 text="TEXT-a" comment="COMMENT-a" dyn=Simple
+I20261028 20:43:41.998836 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-a text="mgjy_probe" comment="COMMENT-a"
+I20261028 20:43:41.998841 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.998942 33460 types.cc:1558] [mgjy_probe_b] translate input="a" start=0 end=1
+I20261028 20:43:41.998952 33460 types.cc:1558] [mgjy_filter] apply input="a-b"
+I20261028 20:43:41.998960 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="探针:a" comment="probe: a"
+I20261028 20:43:41.998967 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.998971 33460 types.cc:1558] [mgjy_probe] input="-" #bytes=1 seg.start=1 seg._start=1 seg._end=2 seg.length=1
+I20261028 20:43:41.998974 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.998977 33460 types.cc:1558] [mgjy_probe] ctx.input="a-b" ctx.caret_pos=3 ctx:is_composing()=true
+I20261028 20:43:41.998991 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.999001 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.999012 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.999015 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.999020 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.999022 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)=""
+I20261028 20:43:41.999026 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:41.999028 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.999031 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.999036 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.999039 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.999043 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.999047 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.999060 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.999063 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.999066 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.999070 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.999073 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.999077 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BC9208 type=userdata
+I20261028 20:43:41.999080 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.999084 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.999087 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.999090 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.999094 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BC8998 type=userdata
+I20261028 20:43:41.999098 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.999101 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.999106 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=1 _end=2 text="TEXT--" comment="COMMENT--" dyn=Simple
+I20261028 20:43:41.999110 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-- text="mgjy_probe" comment="COMMENT--"
+I20261028 20:43:41.999115 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.999121 33460 types.cc:1558] [mgjy_probe_b] translate input="-" start=1 end=2
+I20261028 20:43:41.999128 33460 types.cc:1558] [mgjy_filter] apply input="a-b"
+I20261028 20:43:41.999134 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="探针:-" comment="probe: -"
+I20261028 20:43:41.999140 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:41.999144 33460 types.cc:1558] [mgjy_probe] input="b" #bytes=1 seg.start=2 seg._start=2 seg._end=3 seg.length=1
+I20261028 20:43:41.999147 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:41.999150 33460 types.cc:1558] [mgjy_probe] ctx.input="a-b" ctx.caret_pos=3 ctx:is_composing()=true
+I20261028 20:43:41.999161 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.999171 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.999181 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:41.999184 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:41.999188 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:41.999191 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)=""
+I20261028 20:43:41.999194 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:41.999196 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:41.999199 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe name=MGJY Lua Probe page_size=5
+I20261028 20:43:41.999203 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:41.999206 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:41.999210 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe" (string)
+I20261028 20:43:41.999220 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:41.999223 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:41.999226 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:41.999230 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:41.999233 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:41.999236 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:41.999240 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BC9898 type=userdata
+I20261028 20:43:41.999242 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:41.999246 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:41.999249 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:41.999252 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:41.999255 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BC9988 type=userdata
+I20261028 20:43:41.999259 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:41.999262 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:41.999268 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=2 _end=3 text="TEXT-b" comment="COMMENT-b" dyn=Simple
+I20261028 20:43:41.999272 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-b text="mgjy_probe" comment="COMMENT-b"
+I20261028 20:43:41.999275 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:41.999281 33460 types.cc:1558] [mgjy_probe_b] translate input="b" start=2 end=3
+I20261028 20:43:41.999288 33460 types.cc:1558] [mgjy_filter] apply input="a-b"
+I20261028 20:43:41.999294 33460 types.cc:1558] [mgjy_filter] cand#1 type=mgjy_probe text="探针:b" comment="probe: b"
+I20261028 20:43:41.999311 33460 types.cc:1558] [mgjy_filter] cand#2 type=mgjy_probe text="a#01" comment="seq 1 for \"a\""
+I20261028 20:43:41.999321 33460 types.cc:1558] [mgjy_filter] cand#2 type=mgjy_probe text="-#01" comment="seq 1 for \"-\""
+I20261028 20:43:41.999328 33460 types.cc:1558] [mgjy_filter] cand#2 type=mgjy_probe text="b#01" comment="seq 1 for \"b\""
+I20261028 20:43:41.999336 33460 types.cc:1558] [mgjy_filter] cand#3 type=mgjy_probe text="b#02" comment="seq 2 for \"b\""
+I20261028 20:43:41.999343 33460 types.cc:1558] [mgjy_filter] cand#4 type=mgjy_probe text="b#03" comment="seq 3 for \"b\""
+I20261028 20:43:41.999350 33460 types.cc:1558] [mgjy_filter] cand#5 type=mgjy_probe text="b#04" comment="seq 4 for \"b\""
+I20261028 20:43:41.999356 33460 types.cc:1558] [mgjy_filter] cand#6 type=mgjy_probe text="b#05" comment="seq 5 for \"b\""
+I20261028 20:43:42.000142 33460 types.cc:1558] [mgjy_probe] ================ init ================
+I20261028 20:43:42.000177 33460 types.cc:1558] [mgjy_probe] env.name_space=*mgjy_probe
+I20261028 20:43:42.000182 33460 types.cc:1558] [mgjy_probe] env.engine=userdata env.engine.schema=userdata
+I20261028 20:43:42.000185 33460 types.cc:1558] [mgjy_probe] package.path=C:\Users\TANIMO~1\AppData\Local\Temp\mgjy-lua-probe\user\lua\?.lua;C:\Users\TANIMO~1\AppData\Local\Temp\mgjy-lua-probe\user\lua\?\init.lua;C:\Program Files\Rime\weasel-0.17.4\data\lua\?.lua;C:\Program Files\Rime\weasel-0.17.4\data\lua\?\init.lua;C:\Python314\lua\?.lua;C:\Python314\lua\?\init.lua;C:\Python314\?.lua;C:\Python314\?\init.lua;C:\Python314\..\share\lua\5.4\?.lua;C:\Python314\..\share\lua\5.4\?\init.lua;.\?.lua;.\?\init.lua
+I20261028 20:43:42.000198 33460 types.cc:1558] [mgjy_probe] package.cpath=C:\Python314\?.dll;C:\Python314\..\lib\lua\5.4\?.dll;C:\Python314\loadall.dll;.\?.dll
+I20261028 20:43:42.000201 33460 types.cc:1558] [mgjy_probe] rime_api.get_rime_version()=1.13.1
+I20261028 20:43:42.000205 33460 types.cc:1558] [mgjy_probe] rime_api.get_user_data_dir()=C:\Users\TANIMO~1\AppData\Local\Temp\mgjy-lua-probe\user
+I20261028 20:43:42.000208 33460 types.cc:1558] [mgjy_probe] rime_api.get_shared_data_dir()=C:\Program Files\Rime\weasel-0.17.4\data
+I20261028 20:43:42.000212 33460 types.cc:1558] [mgjy_probe] require("mgjy_probe_data") => ok | table magic=MGJY-DATA-OK values=3 | nil
+I20261028 20:43:42.000311 33460 types.cc:1558] [mgjy_probe] package.searchpath("mgjy_probe_data") => ok | C:\Users\TANIMO~1\AppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe_data.lua | nil
+I20261028 20:43:42.000316 33460 types.cc:1558] [mgjy_probe] type(io), type(os), type(debug), type(require) => ok | table,table,table,function | nil
+I20261028 20:43:42.000401 33460 types.cc:1558] [mgjy_probe] io.open(user_data_dir/probe_data.txt) => ok | MGJY-IO-OK	读到了外部 TSV 文件 | nil
+I20261028 20:43:42.000408 33460 types.cc:1558] [mgjy_probe] os.getenv(TEMP) => ok | C:\Users\TANIMO~1\AppData\Local\Temp | nil
+I20261028 20:43:42.000414 33460 types.cc:1558] [mgjy_probe] os.date() => ok | 2026-10-28 20:43:42 | nil
+I20261028 20:43:42.000429 33460 types.cc:1558] [mgjy_probe] init config schema/name="MGJY Lua Probe (strict alphabet)" menu/page_size=5
+I20261028 20:43:42.000431 33460 types.cc:1558] [mgjy_probe] ================ init done ================
+I20261028 20:43:42.000807 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:42.000816 33460 types.cc:1558] [mgjy_probe] input="a" #bytes=1 seg.start=0 seg._start=0 seg._end=1 seg.length=1
+I20261028 20:43:42.000821 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:42.000825 33460 types.cc:1558] [mgjy_probe] ctx.input="a" ctx.caret_pos=1 ctx:is_composing()=true
+I20261028 20:43:42.000843 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:42.000855 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:42.000866 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:42.000869 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:42.000874 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:42.000877 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="a"
+I20261028 20:43:42.000880 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:42.000883 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:42.000886 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe_strict name=MGJY Lua Probe (strict alphabet) page_size=5
+I20261028 20:43:42.000903 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:42.000906 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:42.000910 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe (strict alphabet)" (string)
+I20261028 20:43:42.000914 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:42.000917 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:42.000920 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:42.000924 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:42.000928 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:42.000931 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:42.000936 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD2C88 type=userdata
+I20261028 20:43:42.000939 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:42.000943 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:42.000946 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:42.000950 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:42.000954 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD3908 type=userdata
+I20261028 20:43:42.000959 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:42.000963 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:42.000969 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=1 text="TEXT-a" comment="COMMENT-a" dyn=Simple
+I20261028 20:43:42.000974 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-a text="mgjy_probe" comment="COMMENT-a"
+I20261028 20:43:42.000979 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:42.001064 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:42.001069 33460 types.cc:1558] [mgjy_probe] input="ab" #bytes=2 seg.start=0 seg._start=0 seg._end=2 seg.length=2
+I20261028 20:43:42.001072 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:42.001076 33460 types.cc:1558] [mgjy_probe] ctx.input="ab" ctx.caret_pos=2 ctx:is_composing()=true
+I20261028 20:43:42.001089 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:42.001100 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:42.001110 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:42.001112 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:42.001117 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:42.001120 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="ab"
+I20261028 20:43:42.001123 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:42.001126 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:42.001129 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe_strict name=MGJY Lua Probe (strict alphabet) page_size=5
+I20261028 20:43:42.001142 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:42.001145 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:42.001149 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe (strict alphabet)" (string)
+I20261028 20:43:42.001153 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:42.001156 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:42.001159 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:42.001162 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:42.001166 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:42.001169 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:42.001173 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD3EA8 type=userdata
+I20261028 20:43:42.001176 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:42.001180 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:42.001183 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:42.001186 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:42.001190 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD3F48 type=userdata
+I20261028 20:43:42.001194 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:42.001198 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:42.001203 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=2 text="TEXT-ab" comment="COMMENT-ab" dyn=Simple
+I20261028 20:43:42.001207 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-ab text="mgjy_probe" comment="COMMENT-ab"
+I20261028 20:43:42.001212 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:42.001350 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:42.001356 33460 types.cc:1558] [mgjy_probe] input="a" #bytes=1 seg.start=0 seg._start=0 seg._end=1 seg.length=1
+I20261028 20:43:42.001360 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:42.001363 33460 types.cc:1558] [mgjy_probe] ctx.input="a" ctx.caret_pos=1 ctx:is_composing()=true
+I20261028 20:43:42.001377 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:42.001388 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:42.001398 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:42.001401 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:42.001405 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:42.001408 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="a"
+I20261028 20:43:42.001411 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:42.001414 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:42.001417 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe_strict name=MGJY Lua Probe (strict alphabet) page_size=5
+I20261028 20:43:42.001422 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:42.001434 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:42.001438 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe (strict alphabet)" (string)
+I20261028 20:43:42.001442 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:42.001445 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:42.001448 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:42.001452 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:42.001455 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:42.001459 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:42.001462 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD2738 type=userdata
+I20261028 20:43:42.001466 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:42.001469 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:42.001472 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:42.001476 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:42.001480 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD2A58 type=userdata
+I20261028 20:43:42.001484 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:42.001487 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:42.001493 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=1 text="TEXT-a" comment="COMMENT-a" dyn=Simple
+I20261028 20:43:42.001497 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-a text="mgjy_probe" comment="COMMENT-a"
+I20261028 20:43:42.001502 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:42.001572 33460 types.cc:1558] [mgjy_probe] ---- translate called ----
+I20261028 20:43:42.001576 33460 types.cc:1558] [mgjy_probe] input="ab" #bytes=2 seg.start=0 seg._start=0 seg._end=2 seg.length=2
+I20261028 20:43:42.001580 33460 types.cc:1558] [mgjy_probe] seg.status=kVoid seg.tags.type=table seg.selected_index=0
+I20261028 20:43:42.001583 33460 types.cc:1558] [mgjy_probe] ctx.input="ab" ctx.caret_pos=2 ctx:is_composing()=true
+I20261028 20:43:42.001595 33460 types.cc:1558] [mgjy_probe] seg:active_text(input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:42.001605 33460 types.cc:1558] [mgjy_probe] seg.active_text(seg, input) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:42.001616 33460 types.cc:1558] [mgjy_probe] seg.active_text(input, seg) => ERROR | bad argument #2 to '?' (struct LuaType<struct rime::Segment & __ptr64> expected)
+I20261028 20:43:42.001618 33460 types.cc:1558] [mgjy_probe] type(seg.get_text)=nil
+I20261028 20:43:42.001623 33460 types.cc:1558] [mgjy_probe] seg:get_text() => ERROR | ...ppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe.lua:93: attempt to call a nil value (method 'get_text')
+I20261028 20:43:42.001625 33460 types.cc:1558] [mgjy_probe] input:sub(seg.start+1, seg._end)="ab"
+I20261028 20:43:42.001628 33460 types.cc:1558] [mgjy_probe] option mgjy_probe_enabled=true mgjy_probe_extra=false
+I20261028 20:43:42.001631 33460 types.cc:1558] [mgjy_probe] option ascii_mode=false (not declared in switches)
+I20261028 20:43:42.001634 33460 types.cc:1558] [mgjy_probe] schema id=mgjy_probe_strict name=MGJY Lua Probe (strict alphabet) page_size=5
+I20261028 20:43:42.001638 33460 types.cc:1558] [mgjy_probe] get_int(menu/page_size)=5 (number)
+I20261028 20:43:42.001641 33460 types.cc:1558] [mgjy_probe] get_int(/menu/page_size) leading slash=5
+I20261028 20:43:42.001645 33460 types.cc:1558] [mgjy_probe] get_string(schema/name)="MGJY Lua Probe (strict alphabet)" (string)
+I20261028 20:43:42.001657 33460 types.cc:1558] [mgjy_probe] get_bool(mgjy_probe/flag)=true (boolean)
+I20261028 20:43:42.001660 33460 types.cc:1558] [mgjy_probe] get_int(mgjy_probe/number)=7
+I20261028 20:43:42.001663 33460 types.cc:1558] [mgjy_probe] get_string(mgjy_probe/name)="探针配置"
+I20261028 20:43:42.001667 33460 types.cc:1558] [mgjy_probe] missing get_int=nil (nil)
+I20261028 20:43:42.001670 33460 types.cc:1558] [mgjy_probe] missing get_string=nil (nil)
+I20261028 20:43:42.001674 33460 types.cc:1558] [mgjy_probe] missing get_bool=nil (nil)
+I20261028 20:43:42.001677 33460 types.cc:1558] [mgjy_probe] get_list(mgjy_probe/list)=struct LuaType<class std::shared_ptr<class rime::ConfigList> >: 000001DBE0BD3778 type=userdata
+I20261028 20:43:42.001680 33460 types.cc:1558] [mgjy_probe] list.size=2 list.type=kList
+I20261028 20:43:42.001684 33460 types.cc:1558] [mgjy_probe] list[0] type=kScalar value="alpha"
+I20261028 20:43:42.001687 33460 types.cc:1558] [mgjy_probe] list[1] type=kScalar value="beta"
+I20261028 20:43:42.001690 33460 types.cc:1558] [mgjy_probe] missing get_list=nil (nil)
+I20261028 20:43:42.001694 33460 types.cc:1558] [mgjy_probe] get_map(mgjy_probe)=struct LuaType<class std::shared_ptr<class rime::ConfigMap> >: 000001DBE0BD39A8 type=userdata
+I20261028 20:43:42.001698 33460 types.cc:1558] [mgjy_probe] map.size=4 map.type=kMap keys=flag,list,name,number
+I20261028 20:43:42.001701 33460 types.cc:1558] [mgjy_probe] map:get_value(number)=7 map:get(list) type=userdata
+I20261028 20:43:42.001707 33460 types.cc:1558] [mgjy_probe] Candidate(type,start,end,text,comment): type=mgjy_probe start=0 _end=2 text="TEXT-ab" comment="COMMENT-ab" dyn=Simple
+I20261028 20:43:42.001711 33460 types.cc:1558] [mgjy_probe] swapped-args candidate: type=TEXT-ab text="mgjy_probe" comment="COMMENT-ab"
+I20261028 20:43:42.001715 33460 types.cc:1558] [mgjy_probe] after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+I20261028 20:43:42.002290 33460 types.cc:1558] [mgjy_probe] ================ init ================
+I20261028 20:43:42.002294 33460 types.cc:1558] [mgjy_probe] env.name_space=*mgjy_probe
+I20261028 20:43:42.002299 33460 types.cc:1558] [mgjy_probe] env.engine=userdata env.engine.schema=userdata
+I20261028 20:43:42.002302 33460 types.cc:1558] [mgjy_probe] package.path=C:\Users\TANIMO~1\AppData\Local\Temp\mgjy-lua-probe\user\lua\?.lua;C:\Users\TANIMO~1\AppData\Local\Temp\mgjy-lua-probe\user\lua\?\init.lua;C:\Program Files\Rime\weasel-0.17.4\data\lua\?.lua;C:\Program Files\Rime\weasel-0.17.4\data\lua\?\init.lua;C:\Python314\lua\?.lua;C:\Python314\lua\?\init.lua;C:\Python314\?.lua;C:\Python314\?\init.lua;C:\Python314\..\share\lua\5.4\?.lua;C:\Python314\..\share\lua\5.4\?\init.lua;.\?.lua;.\?\init.lua
+I20261028 20:43:42.002304 33460 types.cc:1558] [mgjy_probe] package.cpath=C:\Python314\?.dll;C:\Python314\..\lib\lua\5.4\?.dll;C:\Python314\loadall.dll;.\?.dll
+I20261028 20:43:42.002307 33460 types.cc:1558] [mgjy_probe] rime_api.get_rime_version()=1.13.1
+I20261028 20:43:42.002310 33460 types.cc:1558] [mgjy_probe] rime_api.get_user_data_dir()=C:\Users\TANIMO~1\AppData\Local\Temp\mgjy-lua-probe\user
+I20261028 20:43:42.002313 33460 types.cc:1558] [mgjy_probe] rime_api.get_shared_data_dir()=C:\Program Files\Rime\weasel-0.17.4\data
+I20261028 20:43:42.002317 33460 types.cc:1558] [mgjy_probe] require("mgjy_probe_data") => ok | table magic=MGJY-DATA-OK values=3 | nil
+I20261028 20:43:42.002407 33460 types.cc:1558] [mgjy_probe] package.searchpath("mgjy_probe_data") => ok | C:\Users\TANIMO~1\AppData\Local\Temp\mgjy-lua-probe\user\lua\mgjy_probe_data.lua | nil
+I20261028 20:43:42.002412 33460 types.cc:1558] [mgjy_probe] type(io), type(os), type(debug), type(require) => ok | table,table,table,function | nil
+I20261028 20:43:42.002501 33460 types.cc:1558] [mgjy_probe] io.open(user_data_dir/probe_data.txt) => ok | MGJY-IO-OK	读到了外部 TSV 文件 | nil
+I20261028 20:43:42.002508 33460 types.cc:1558] [mgjy_probe] os.getenv(TEMP) => ok | C:\Users\TANIMO~1\AppData\Local\Temp | nil
+I20261028 20:43:42.002514 33460 types.cc:1558] [mgjy_probe] os.date() => ok | 2026-10-28 20:43:42 | nil
+I20261028 20:43:42.002527 33460 types.cc:1558] [mgjy_probe] init config schema/name="MGJY Lua Probe" menu/page_size=5
+I20261028 20:43:42.002529 33460 types.cc:1558] [mgjy_probe] ================ init done ================
+I20261028 20:43:42.002535 33460 types.cc:1558] [mgjy_probe_b] init name_space=*mgjy_probe_b
+I20261028 20:43:42.002541 33460 types.cc:1558] [mgjy_filter] init name_space=*mgjy_probe_filter
+I20261028 20:43:42.003325 33460 types.cc:1558] [mgjy_global] init name_space=mgjy_global
+I20261028 20:43:42.003698 33460 types.cc:1558] [mgjy_global] translate input="l" start=0 end=1
+I20261028 20:43:42.003784 33460 types.cc:1558] [mgjy_global] translate input="lk" start=0 end=2
+I20261028 20:43:42.003846 33460 types.cc:1558] [mgjy_global] translate input="lkc" start=0 end=3
+I20261028 20:43:42.003900 33460 types.cc:1558] [mgjy_global] translate input="lkcc" start=0 end=4
+I20261028 20:43:42.004374 33460 types.cc:1558] [mgjy_probe] ================ init ================
+I20261028 20:43:42.004377 33460 types.cc:1558] [mgjy_probe] env.name_space=*mgjy_probe
+I20261028 20:43:42.004381 33460 types.cc:1558] [mgjy_probe] env.engine=userdata env.engine.schema=userdata
+I20261028 20:43:42.004384 33460 types.cc:1558] [mgjy_probe] package.path=C:\Users\TANIMO~1\AppData\Local\Temp\mgjy-lua-probe\user\lua\?.lua;C:\Users\TANIMO~1\AppData\Local\Temp\mgjy-lua-probe\user\lua\?\init.lua;C:\Program Files\Rime\weasel-0.17.4\data\lua\?.lua;C:\Program Files\Rime\weasel-0.17.4\data\lua\?\init.lua;C:\Python314\lua\?.lua;C:\Python314\lua\?\init.lua;C:\Python314\?.lua;C:\Python314\?\init.lua;C:\Python314\..\share\lua\5.4\?.lua;C:\Python314\..\share\lua\5.4\?\init.lua;.\?.lua;.\?\init.lua
+I20261028 20:43:42.004387 33460 types.cc:1558] [mgjy_probe] package.cpath=C:\Python314\?.dll;C:\Python314\..\lib\lua\5.4\?.dll;C:\Python314\loadall.dll;.\?.dll

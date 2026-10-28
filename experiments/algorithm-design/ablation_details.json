@@ -1,0 +1,238 @@
+{
+  "no_initial": {
+    "pass_rate": 0.9273,
+    "top1_rate": 0.9362,
+    "contains_rate": 0.5,
+    "failures": [
+      [
+        "initials_subseq_lkcc",
+        " top1='凌空破'",
+        [
+          "凌空破",
+          "路德",
+          "拉姆"
+        ]
+      ],
+      [
+        "initials_prefix_wmhlkcd",
+        " top1='野马航空'",
+        [
+          "野马航空",
+          "玛琳",
+          "玛蕾"
+        ]
+      ],
+      [
+        "initials_prefix_wmhl",
+        " top1='无名者'",
+        [
+          "无名者",
+          "玛琳",
+          "玛蕾"
+        ]
+      ],
+      [
+        "keyword_kcc_in_top5",
+        " missing=['我们会立刻彻底铲除你们！']",
+        [
+          "狂野驰骋",
+          "柯奇",
+          "卡姆"
+        ]
+      ]
+    ]
+  },
+  "no_keyword": {
+    "pass_rate": 0.9273,
+    "top1_rate": 0.9362,
+    "contains_rate": 0.5,
+    "failures": [
+      [
+        "poly_dan",
+        " top1='尖喙兽'",
+        [
+          "尖喙兽",
+          "忍术",
+          "驯兽师"
+        ]
+      ],
+      [
+        "initials_subseq_lkcc",
+        " top1='凌空破'",
+        [
+          "凌空破",
+          "路德",
+          "拉姆"
+        ]
+      ],
+      [
+        "initials_prefix_wmhl",
+        " top1='无名者'",
+        [
+          "无名者",
+          "玛琳",
+          "玛蕾"
+        ]
+      ],
+      [
+        "keyword_kcc_in_top5",
+        " missing=['我们会立刻彻底铲除你们！']",
+        [
+          "狂野驰骋",
+          "柯奇",
+          "卡姆"
+        ]
+      ]
+    ]
+  },
+  "no_syllable": {
+    "pass_rate": 0.9818,
+    "top1_rate": 0.9787,
+    "contains_rate": 1.0,
+    "failures": [
+      [
+        "typo_nuolei_syllable_swap",
+        " top1='诺艾米'",
+        [
+          "诺艾米",
+          "玛蕾",
+          "华勒斯"
+        ]
+      ]
+    ]
+  },
+  "no_edit": {
+    "pass_rate": 1.0,
+    "top1_rate": 1.0,
+    "contains_rate": 1.0,
+    "failures": []
+  },
+  "exact_only": {
+    "pass_rate": 0.8182,
+    "top1_rate": 0.8085,
+    "contains_rate": 0.5,
+    "failures": [
+      [
+        "initials_subseq_lkcc",
+        " top1='罗榭'",
+        [
+          "罗榭",
+          "雷诺",
+          "路德"
+        ]
+      ],
+      [
+        "typo_lienuo_vowel_swap",
+        " top1='乔'",
+        [
+          "乔",
+          "曾",
+          "神罗"
+        ]
+      ],
+      [
+        "typo_leino_missing_u",
+        " top1='乔'",
+        [
+          "乔",
+          "曾",
+          "神罗"
+        ]
+      ],
+      [
+        "typo_leiknuo_extra_k",
+        " top1='乔'",
+        [
+          "乔",
+          "曾",
+          "神罗"
+        ]
+      ],
+      [
+        "typo_leinou_adjacent_swap",
+        " top1='乔'",
+        [
+          "乔",
+          "曾",
+          "神罗"
+        ]
+      ],
+      [
+        "typo_nuolei_syllable_swap",
+        " top1='神罗'",
+        [
+          "神罗",
+          "杰西",
+          "雪崩"
+        ]
+      ],
+      [
+        "typo_leinuoo_extra_o",
+        " top1='乔'",
+        [
+          "乔",
+          "曾",
+          "神罗"
+        ]
+      ],
+      [
+        "typo_leinno_extra_n",
+        " top1='乔'",
+        [
+          "乔",
+          "曾",
+          "神罗"
+        ]
+      ],
+      [
+        "typo_lenuo_missing_i",
+        " top1='乔'",
+        [
+          "乔",
+          "曾",
+          "神罗"
+        ]
+      ],
+      [
+        "keyword_kcc_in_top5",
+        " missing=['我们会立刻彻底铲除你们！']",
+        [
+          "柯奇",
+          "狂暴",
+          "木材"
+        ]
+      ]
+    ]
+  },
+  "edit_heavy": {
+    "pass_rate": 0.9636,
+    "top1_rate": 0.9574,
+    "contains_rate": 1.0,
+    "failures": [
+      [
+        "poly_dan",
+        " top1='尖喙兽'",
+        [
+          "尖喙兽",
+          "忍术",
+          "单手是枪的男人"
+        ]
+      ],
+      [
+        "typo_nuolei_syllable_swap",
+        " top1='诺艾米'",
+        [
+          "诺艾米",
+          "华勒斯",
+          "玛蕾"
+        ]
+      ]
+    ]
+  },
+  "no_fuzzy_channels": {
+    "pass_rate": 1.0,
+    "top1_rate": 1.0,
+    "contains_rate": 1.0,
+    "failures": []
+  }
+}

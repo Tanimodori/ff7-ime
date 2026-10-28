@@ -1,0 +1,23 @@
+[
+  {"input": "shenluo", "expect_top1": "神罗"},
+  {"input": "senluo", "expect_top1": "神罗"},
+  {"input": "leinuo", "expect_top1": "雷诺"},
+  {"input": "lienuo", "expect_top1": "雷诺"},
+  {"input": "leino", "expect_top1": "雷诺"},
+  {"input": "leiknuo", "expect_top1": "雷诺"},
+  {"input": "nuolei", "expect_top1": "雷诺"},
+  {"input": "lkcc", "expect_top1": "我们会立刻彻底铲除你们！"},
+  {"input": "wmhlkcdccnm", "expect_top1": "我们会立刻彻底铲除你们！"},
+  {"input": "shenl", "expect_top1": "神罗"},
+  {"input": "zhongli", "expect_top1": "重力"},
+  {"input": "chongli", "expect_top1": "重力"},
+  {"input": "zeng", "expect_top1": "曾"},
+  {"input": "ceng", "expect_top1": "曾"},
+  {"input": "renshengjiushizhandou", "expect_top1": "人生就是战斗！"},
+  {"input": "difa", "expect_top1": "蒂法"},
+  {"input": "kelaode", "expect_top1": "克劳德"},
+  {"input": "safeiluosi", "expect_top1": "萨菲罗斯"},
+  {"input": "zzzzzz", "expect_nonempty": 9},
+  {"input": "", "expect_nonempty": 9},
+  {"input": "a", "expect_nonempty": 9}
+]

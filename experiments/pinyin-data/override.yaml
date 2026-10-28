@@ -1,0 +1,611 @@
+# 魔光键影 (ff7-ime) 拼音覆盖表
+#
+# 本文件是人工确认的读音覆盖，供 experiments/pinyin-data/extract.py 合并。
+# 数字声调：1-4 为四声，5 为轻声；ü 写作 v。
+#
+# 合并优先级（高 -> 低）：
+#   confirmed_phrases > char_rules > char_defaults > pypinyin 词组 > pypinyin 单字
+#
+# 说明：
+#   * confirmed_phrases.readings 只对应词条中的汉字，标点/间隔号不占位。
+#   * char_rules.when_contains 为子串条件；命中后把该词条中所有该字改为 reading。
+#   * misread_candidates 是给 Lua 容错输入用的“允许误读集合”，不是规范读音。
+#   * rare_watchlist 收录任务点名的生僻字；不在 dict.txt 中的也保留读音备查。
+
+version: 1
+updated: "2026-10-28"
+
+char_defaults:
+  - char: "曾"
+    reading: "zeng1"
+    reason: "曾作姓氏/人名（Tseng）读 zēng，不读 céng"
+  - char: "掴"
+    reading: "guo2"
+    reason: "掌掴 zhǎng guó；pypinyin 单字首选 guāi 不是规范主读音"
+  - char: "谁"
+    reading: "shei2"
+    reason: "谁规范口语读 shéi（又读 shuí）；主读音取 shéi"
+  - char: "杉"
+    reading: "shan1"
+    reason: "杉木 shān mù 为规范读音；shā 为又读，列入备选"
+  - char: "辟"
+    reading: "bi4"
+    reason: "辟邪 bì xié；不读 pì"
+  - char: "似"
+    reading: "si4"
+    reason: "似乎 sì hū；不读 shì"
+  - char: "傀"
+    reading: "kui3"
+    reason: "傀儡 kuǐ lěi；不读 guī"
+  - char: "脊"
+    reading: "ji3"
+    reason: "脊骨 jǐ gǔ；不读 jí"
+  - char: "勒"
+    reading: "le4"
+    reason: "译名华勒斯/盖恩斯伯勒的“勒”读 lè，不读 lēi"
+  - char: "缪"
+    reading: "miu4"
+    reason: "译名巴拔维拉缪的“缪”读 miù（如缪斯），不读 móu"
+  - char: "耶"
+    reading: "ye1"
+    reason: "译名琪里耶/杜耶斯提的“耶”读 yē，不读 yé"
+  - char: "伽"
+    reading: "jia1"
+    reason: "吉尔伽美什的“伽”读 jiā，不读 gā/qié"
+  - char: "嚼"
+    reading: "jiao2"
+    reason: "嚼嚼（咀嚼）读 jiáo，不读 jué"
+  - char: "哦"
+    reading: "o5"
+    reason: "句末语气词“哦”读轻声 o，不标阳平 ó"
+
+char_rules:
+  - char: "长"
+    when_contains: "长杖"
+    reading: "chang2"
+    reason: "长杖 = cháng zhàng；pypinyin 词组误作 zhǎng"
+  - char: "长"
+    when_contains: "长靴"
+    reading: "chang2"
+    reason: "长靴 = cháng xuē；pypinyin 词组误作 zhǎng"
+  - char: "长"
+    when_contains: "长矛"
+    reading: "chang2"
+    reason: "长矛 = cháng máo"
+  - char: "长"
+    when_contains: "月长石"
+    reading: "chang2"
+    reason: "月长石 = yuè cháng shí"
+  - char: "长"
+    when_contains: "专长"
+    reading: "chang2"
+    reason: "专长 = zhuān cháng"
+  - char: "重"
+    when_contains: "重拾"
+    reading: "chong2"
+    reason: "重拾 = chóng shí；pypinyin 误作 zhòng"
+  - char: "都"
+    when_contains: "之都"
+    reading: "du1"
+    reason: "之都 = zhī dū（都城）；不读 dōu"
+  - char: "得"
+    when_contains: "我得"
+    reading: "dei3"
+    reason: "我得 = wǒ děi（必须）；不读 dé"
+  - char: "得"
+    when_contains: "得活着"
+    reading: "dei3"
+    reason: "得活着 = děi huó zhe（必须）；不读 dé"
+  - char: "得"
+    when_contains: "跑得掉"
+    reading: "de5"
+    reason: "跑得掉 = pǎo de diào；结构助词读轻声 de"
+  - char: "得"
+    when_contains: "得到"
+    reading: "de2"
+    reason: "得到 = dé dào"
+  - char: "了"
+    when_contains: "不得了"
+    reading: "liao3"
+    reason: "不得了 = bù dé liǎo；不读 le"
+  - char: "弹"
+    when_contains: "弹跳"
+    reading: "tan2"
+    reason: "弹跳 = tán tiào；不读 dàn"
+  - char: "劲"
+    when_contains: "劲歌"
+    reading: "jing4"
+    reason: "劲歌 = jìng gē（强劲有力）；不读 jìn"
+  - char: "什"
+    when_contains: "美什"
+    reading: "shi2"
+    reason: "吉尔伽美什的“什”读 shí，不读 shén"
+  - char: "勒"
+    when_contains: "华勒斯"
+    reading: "le4"
+    reason: "华勒斯（Wallace）的“勒”读 lè"
+  - char: "勒"
+    when_contains: "盖恩斯伯勒"
+    reading: "le4"
+    reason: "盖恩斯伯勒（Gainsborough）的“勒”读 lè"
+  - char: "子"
+    when_contains: "子民"
+    reading: "zi3"
+    reason: "子民 = zǐ mín；不读轻声 zi"
+  - char: "只"
+    when_contains: "两只"
+    reading: "zhi1"
+    reason: "两只 = liǎng zhī（量词）；不读 zhǐ"
+  - char: "陆"
+    when_contains: "第陆区"
+    reading: "liu4"
+    reason: "第陆区 = dì liù qū（陆是“六”的大写）；不读 lù"
+  - char: "地"
+    when_contains: "推心置腹地"
+    reading: "de5"
+    reason: "推心置腹地 = tuī xīn zhì fù de（状语助词，轻声）；不读 dì"
+  - char: "子"
+    when_contains: "刽子手"
+    reading: "zi3"
+    reason: "刽子手 = guì zǐ shǒu；子读 zǐ，不读轻声 zi"
+  - char: "子"
+    when_contains: "原子"
+    reading: "zi3"
+    reason: "原子 = yuán zǐ；不读轻声 zi"
+  - char: "个"
+    when_contains: "一个"
+    reading: "ge5"
+    reason: "一个 = yí ge（量词轻声）"
+  - char: "个"
+    when_contains: "这个"
+    reading: "ge5"
+    reason: "这个 = zhè ge（量词轻声）"
+  - char: "卷"
+    when_contains: "卷卷"
+    reading: "juan3"
+    reason: "卷卷的 = juǎn juǎn de（卷曲）；不读 juàn"
+
+confirmed_phrases:
+  - phrase: "神罗"
+    readings: ["shen2", "luo2"]
+    reason: "Shinra；神 shén，罗 luó"
+  - phrase: "蒂法"
+    readings: ["di4", "fa3"]
+    reason: "Tifa；蒂 dì，不读 tì"
+  - phrase: "克劳德"
+    readings: ["ke4", "lao2", "de2"]
+    reason: "Cloud；克 kè，劳 láo，德 dé"
+  - phrase: "巴雷特"
+    readings: ["ba1", "lei2", "te4"]
+    reason: "Barret；巴 bā，雷 léi，特 tè"
+  - phrase: "杰西"
+    readings: ["jie2", "xi1"]
+    reason: "Jessie；杰 jié，西 xī"
+  - phrase: "爱丽丝"
+    readings: ["ai4", "li4", "si1"]
+    reason: "Aerith；爱 ài，丽 lì，丝 sī"
+  - phrase: "扎克斯"
+    readings: ["zha1", "ke4", "si1"]
+    reason: "Zack；扎 zhā，不读 zā"
+  - phrase: "萨菲罗斯"
+    readings: ["sa4", "fei1", "luo2", "si1"]
+    reason: "Sephiroth；萨 sà，菲 fēi，罗 luó，斯 sī"
+  - phrase: "雷诺"
+    readings: ["lei2", "nuo4"]
+    reason: "Reno；诺 nuò，不读 ruò"
+  - phrase: "路德"
+    readings: ["lu4", "de2"]
+    reason: "Rude；路 lù，德 dé"
+  - phrase: "曾"
+    readings: ["zeng1"]
+    reason: "Tseng；姓氏/人名读 zēng，不读 céng"
+  - phrase: "宝条"
+    readings: ["bao3", "tiao2"]
+    reason: "Hojo；宝 bǎo，条 tiáo"
+  - phrase: "五台"
+    readings: ["wu3", "tai2"]
+    reason: "Wutai；五 wǔ，台 tái"
+  - phrase: "蒂法·洛克哈特"
+    readings: ["di4", "fa3", "luo4", "ke4", "ha1", "te4"]
+    reason: "Tifa Lockhart；间隔号不注音"
+  - phrase: "克劳德·斯特莱夫"
+    readings: ["ke4", "lao2", "de2", "si1", "te4", "lai2", "fu1"]
+    reason: "Cloud Strife；间隔号不注音"
+  - phrase: "克劳蒂亚·斯特莱夫"
+    readings: ["ke4", "lao2", "di4", "ya4", "si1", "te4", "lai2", "fu1"]
+    reason: "Claudia Strife；蒂 dì"
+  - phrase: "巴雷特·华勒斯"
+    readings: ["ba1", "lei2", "te4", "hua2", "le4", "si1"]
+    reason: "Barret Wallace；勒 lè，不读 lēi"
+  - phrase: "玛琳·华勒斯"
+    readings: ["ma3", "lin2", "hua2", "le4", "si1"]
+    reason: "Marlene Wallace；勒 lè"
+  - phrase: "爱丽丝·盖恩斯伯勒"
+    readings: ["ai4", "li4", "si1", "gai4", "en1", "si1", "bo2", "le4"]
+    reason: "Aerith Gainsborough；勒 lè"
+  - phrase: "扎克斯·菲尔"
+    readings: ["zha1", "ke4", "si1", "fei1", "er3"]
+    reason: "Zack Fair；菲尔 fēi ěr"
+  - phrase: "尤菲·如月"
+    readings: ["you2", "fei1", "ru2", "yue4"]
+    reason: "Yuffie Kisaragi；如月 rú yuè"
+  - phrase: "吉尔伽美什"
+    readings: ["ji2", "er3", "jia1", "mei3", "shi2"]
+    reason: "Gilgamesh；伽 jiā，什 shí"
+  - phrase: "吉尔伽美什光束"
+    readings: ["ji2", "er3", "jia1", "mei3", "shi2", "guang1", "shu4"]
+    reason: "Gilgamesh 光束；伽 jiā，什 shí"
+  - phrase: "琪里耶"
+    readings: ["qi2", "li3", "ye1"]
+    reason: "Kyrie；耶 yē，不读 yé"
+  - phrase: "琪里耶·卡南"
+    readings: ["qi2", "li3", "ye1", "ka3", "nan2"]
+    reason: "Kyrie Canaan；耶 yē"
+  - phrase: "杜耶斯提"
+    readings: ["du4", "ye1", "si1", "ti2"]
+    reason: "译名；耶 yē"
+  - phrase: "里维·杜耶斯提"
+    readings: ["li3", "wei2", "du4", "ye1", "si1", "ti2"]
+    reason: "Reeve 姓氏译名；耶 yē"
+  - phrase: "巴拔维拉缪"
+    readings: ["ba1", "ba2", "wei2", "la1", "miu4"]
+    reason: "译名；缪 miù，不读 móu"
+  - phrase: "罗榭"
+    readings: ["luo2", "xie4"]
+    reason: "Roche；榭 xiè"
+  - phrase: "罗榭钥匙圈"
+    readings: ["luo2", "xie4", "yao4", "shi5", "quan1"]
+    reason: "榭 xiè；钥匙 yào shi（轻声）"
+  - phrase: "榭札蟹"
+    readings: ["xie4", "zha2", "xie4"]
+    reason: "榭 xiè，札 zhá"
+  - phrase: "圣露榭"
+    readings: ["sheng4", "lu4", "xie4"]
+    reason: "露 lù，榭 xiè"
+  - phrase: "猢狲木"
+    readings: ["hu2", "sun1", "mu4"]
+    reason: "猢 hú，狲 sūn"
+  - phrase: "梣木"
+    readings: ["cen2", "mu4"]
+    reason: "梣 cén，不读 qín"
+  - phrase: "赭红猎犬"
+    readings: ["zhe3", "hong2", "lie4", "quan3"]
+    reason: "赭 zhě"
+  - phrase: "赭红浮游死神"
+    readings: ["zhe3", "hong2", "fu2", "you2", "si3", "shen2"]
+    reason: "赭 zhě"
+  - phrase: "巨蜈蚣"
+    readings: ["ju4", "wu2", "gong1"]
+    reason: "蜈蚣 wú gōng"
+  - phrase: "全都讨厌得不得了！"
+    readings: ["quan2", "dou1", "tao3", "yan4", "de5", "bu4", "de2", "liao3"]
+    reason: "讨厌得不得了：结构助词 de，不得了 bù dé liǎo"
+  - phrase: "用两只脚站立还真难啊"
+    readings: ["yong4", "liang3", "zhi1", "jiao3", "zhan4", "li4", "hai2", "zhen1", "nan2", "a5"]
+    reason: "两只 liǎng zhī；啊为句末轻声"
+  - phrase: "是谁在妨碍我？"
+    readings: ["shi4", "shei2", "zai4", "fang2", "ai4", "wo3"]
+    reason: "谁读 shéi"
+  - phrase: "我得狠狠揍你这家伙一下才行"
+    readings: ["wo3", "dei3", "hen3", "hen3", "zou4", "ni3", "zhe4", "jia1", "huo5", "yi1", "xia4", "cai2", "xing2"]
+    reason: "我得 wǒ děi；家伙 jiā huo（轻声）；一标本调"
+  - phrase: "得活着才能是塔克斯"
+    readings: ["dei3", "huo2", "zhe5", "cai2", "neng2", "shi4", "ta3", "ke4", "si1"]
+    reason: "得活着 děi huó zhe（必须）"
+  - phrase: "忘却之都"
+    readings: ["wang4", "que4", "zhi1", "du1"]
+    reason: "之都 zhī dū（都城），不读 dōu"
+  - phrase: "嚼嚼弹跳"
+    readings: ["jiao2", "jiao2", "tan2", "tiao4"]
+    reason: "嚼 jiáo；弹跳 tán tiào"
+  - phrase: "神罗大厦"
+    readings: ["shen2", "luo2", "da4", "sha4"]
+    reason: "大厦 dà shà"
+  - phrase: "神罗总裁"
+    readings: ["shen2", "luo2", "zong3", "cai2"]
+    reason: "Shinra 总裁"
+  - phrase: "五台临时政府"
+    readings: ["wu3", "tai2", "lin2", "shi2", "zheng4", "fu3"]
+    reason: "五台 Wutai；台 tái"
+  - phrase: "英雄萨菲罗斯"
+    readings: ["ying1", "xiong2", "sa4", "fei1", "luo2", "si1"]
+    reason: "萨菲罗斯；菲 fēi"
+  - phrase: "尼福尔海姆"
+    readings: ["ni2", "fu2", "er3", "hai3", "mu3"]
+    reason: "Nibelheim；尔 ěr"
+  - phrase: "陆行鸟"
+    readings: ["lu4", "xing2", "niao3"]
+    reason: "Chocobo；行 xíng"
+  - phrase: "莫古力"
+    readings: ["mo4", "gu3", "li4"]
+    reason: "Moogle；莫 mò，古 gǔ，力 lì"
+  - phrase: "杰诺瓦"
+    readings: ["jie2", "nuo4", "wa3"]
+    reason: "Jenova；杰 jié，诺 nuò，瓦 wǎ"
+  - phrase: "赛特拉"
+    readings: ["sai4", "te4", "la1"]
+    reason: "Cetra；赛 sài，特 tè，拉 lā"
+  - phrase: "星殒峡谷"
+    readings: ["xing1", "yun3", "xia2", "gu3"]
+    reason: "星殒 xīng yǔn；殒不读 yún"
+  - phrase: "路法斯"
+    readings: ["lu4", "fa3", "si1"]
+    reason: "Rufus；路 lù，法 fǎ，斯 sī"
+  - phrase: "文森特"
+    readings: ["wen2", "sen1", "te4"]
+    reason: "Vincent；文 wén，森 sēn，特 tè"
+  - phrase: "西斯妮"
+    readings: ["xi1", "si1", "ni1"]
+    reason: "Cissnei；妮 nī"
+  - phrase: "纳纳奇"
+    readings: ["na4", "na4", "qi2"]
+    reason: "Nanaki；纳 nà，奇 qí"
+  - phrase: "卡姆"
+    readings: ["ka3", "mu3"]
+    reason: "Kalm；卡 kǎ"
+  - phrase: "贡加加村"
+    readings: ["gong4", "jia1", "jia1", "cun1"]
+    reason: "Gongaga；贡 gòng"
+  - phrase: "神罗战士"
+    readings: ["shen2", "luo2", "zhan4", "shi4"]
+    reason: "Shinra 战士"
+  - phrase: "雪崩"
+    readings: ["xue3", "beng1"]
+    reason: "Avalanche；雪 xuě，崩 bēng"
+
+misread_candidates:
+  # 译名重点字
+  "蒂": ["ti4"]
+  "克": ["ke1"]
+  "劳": ["lao1"]
+  "德": ["dei3"]
+  "萨": ["sa1"]
+  "菲": ["fei3"]
+  "蕾": ["lei2"]
+  "榭": ["she4"]
+  "赭": ["zhu1", "chi4"]
+  "猢": ["gu3"]
+  "狲": ["xun4"]
+  "梣": ["qin2", "chen2"]
+  "糠": ["kang4"]
+  "颚": ["e2"]
+  "蚣": ["zhong1"]
+  "獠": ["lao3"]
+  "鼬": ["you2"]
+  "蠍": ["jie2"]
+  "岑": ["qin2", "jin1"]
+  "诺": ["ruo4"]
+  "洛": ["ge4"]
+  "哈": ["ha3", "he2"]
+  "斯": ["shi1"]
+  "夫": ["fu2"]
+  "华": ["hua4"]
+  "勒": ["lei1"]
+  "伯": ["bai3"]
+  "盖": ["ge3"]
+  "杜": ["du3"]
+  "提": ["di1"]
+  "曾": ["ceng2"]
+  "缪": ["mou2", "miao4"]
+  "耶": ["ye2"]
+  # 生僻 / 易读半边
+  "捌": ["bie2"]
+  "殒": ["yun2"]
+  "陨": ["yuan2"]
+  "蠕": ["ru3"]
+  "噬": ["shi2"]
+  "蝎": ["jie2", "he2"]
+  "蟆": ["mo4", "ma3"]
+  "猬": ["wei2"]
+  "兀": ["wu1"]
+  "鹫": ["jiu1"]
+  "喙": ["yuan2", "zhou4"]
+  "槭": ["qi4", "cu4"]
+  "楔": ["qi4", "xie4"]
+  "棱": ["ling2"]
+  "鳖": ["bie3"]
+  "霹": ["pi4"]
+  "雳": ["li3"]
+  "邂": ["jie3"]
+  "逅": ["gou4"]
+  "魇": ["yan4"]
+  "魅": ["wei4"]
+  "腥": ["xing4"]
+  "肮": ["kang4", "hang2"]
+  "脊": ["ji2"]
+  "颈": ["jing4"]
+  "傀": ["gui1"]
+  "儡": ["lei2"]
+  "癫": ["dian4"]
+  "祠": ["si4"]
+  "祭": ["zhai4"]
+  "刽": ["kuai4"]
+  "镰": ["lian4"]
+  "铲": ["chan4"]
+  "铆": ["liu3"]
+  "镯": ["shu3"]
+  "瑟": ["bi4"]
+  "链": ["lian2"]
+  "镖": ["piao4"]
+  "窟": ["qu1"]
+  "恫": ["tong2"]
+  "拯": ["cheng2"]
+  "撸": ["lu3"]
+  "拟": ["yi3"]
+  "钳": ["gan1"]
+  # 多音字：允许的另一种读法（容错用）
+  "钥": ["yue4"]
+  "匙": ["chi2"]
+  "圈": ["juan4"]
+  "爪": ["zhua3"]
+  "壳": ["qiao4"]
+  "血": ["xie3"]
+  "嚼": ["jue2"]
+  "角": ["jue2"]
+  "卡": ["qia3"]
+  "阿": ["e1"]
+  "什": ["shi2"]
+  "伽": ["qie2", "ga1"]
+  "辟": ["pi4"]
+  "杉": ["sha1"]
+  "露": ["lou4"]
+  "落": ["la4", "lao4"]
+  "恶": ["wu4"]
+  "降": ["jiang4", "xiang2"]
+  "谁": ["shui2"]
+  "似": ["shi4"]
+  "掴": ["guai1"]
+  "陆": ["liu4", "lu4"]
+  "子": ["zi3", "zi5"]
+  "个": ["ge4", "ge5"]
+  "哦": ["o2", "o5"]
+  "长": ["zhang3"]
+  "重": ["chong2"]
+  "都": ["du1"]
+  "得": ["dei3", "de5"]
+  "了": ["liao3"]
+  "弹": ["tan2"]
+  "头": ["tou5"]
+  "的": ["di1", "di2", "di4"]
+  "地": ["de5"]
+  "着": ["zhao1", "zhao2", "zhuo2"]
+  "好": ["hao4"]
+  "中": ["zhong4"]
+  "种": ["zhong4", "chong2"]
+  "少": ["shao3", "shao4"]
+  "为": ["wei2", "wei4"]
+  "相": ["xiang4"]
+  "传": ["zhuan4"]
+  "转": ["zhuan4", "zhuai3"]
+  "数": ["shu3"]
+  "术": ["zhu2"]
+  "冠": ["guan4"]
+  "发": ["fa4"]
+  "行": ["hang2"]
+  "会": ["kuai4"]
+  "假": ["jia3", "jia4"]
+  "兴": ["xing1", "xing4"]
+  "尽": ["jin3", "jin4"]
+  "处": ["chu3", "chu4"]
+  "当": ["dang1", "dang4"]
+  "号": ["hao2"]
+  "干": ["gan1", "gan4"]
+  "劲": ["jin4", "jing4"]
+  "卷": ["juan3", "juan4", "quan2"]
+  "钻": ["zuan1", "zuan4"]
+  "场": ["chang2", "chang3"]
+  "将": ["jiang1", "jiang4"]
+  "强": ["qiang3", "jiang4"]
+  "教": ["jiao1", "jiao4"]
+  "散": ["san3", "san4"]
+  "挑": ["tiao1", "tiao3"]
+  "扎": ["za1", "zha2"]
+  "结": ["jie1", "jie2"]
+  "给": ["ji3", "gei3"]
+  "绿": ["lu4", "lv4"]
+  "那": ["nei4", "nuo2"]
+  "这": ["zhei4"]
+
+# luna 未收、但普通话规范有据的读音；视为“已记录的已知差异”，不算失败。
+luna_exceptions:
+  - char: "缪"
+    reading: "miu4"
+    reason: "luna 只收 miao/mou，漏收 miù；《现代汉语词典》缪 miù（纰缪、缪斯）"
+
+rare_watchlist:
+  "赭":
+    reading: "zhe3"
+    source: "pypinyin+luna"
+    note: "赭红 zhě hóng；两源一致"
+  "榭":
+    reading: "xie4"
+    source: "pypinyin+luna"
+    note: "罗榭/圣露榭 xiè；两源一致"
+  "蚣":
+    reading: "gong1"
+    source: "pypinyin+luna"
+    note: "蜈蚣 wú gōng；两源一致"
+  "猢":
+    reading: "hu2"
+    source: "pypinyin+luna"
+    note: "猢狲 hú sūn；两源一致"
+  "狲":
+    reading: "sun1"
+    source: "pypinyin+luna"
+    note: "猢狲 hú sūn；两源一致"
+  "梣":
+    reading: "cen2"
+    source: "pypinyin+luna"
+    note: "梣木 cén mù；pypinyin 另列 chen2/qin2 为备选"
+  "鼬":
+    reading: "you4"
+    source: "pypinyin"
+    note: "未出现在 dict.txt；读 yòu，易误读 yóu（由）"
+  "獠":
+    reading: "liao2"
+    source: "pypinyin+luna"
+    note: "獠牙 liáo yá；两源一致"
+  "蠍":
+    reading: "xie1"
+    source: "pypinyin"
+    note: "未出现在 dict.txt；“蝎”的异体，读 xiē，易误读 jié（竭）"
+  "糠":
+    reading: "kang1"
+    source: "pypinyin"
+    note: "未出现在 dict.txt；读 kāng，易误读 kàn/kǎng"
+  "颚":
+    reading: "e4"
+    source: "pypinyin"
+    note: "未出现在 dict.txt；读 è（上颚/下颚），易误读 é（额）"
+  "岑":
+    reading: "cen2"
+    source: "pypinyin"
+    note: "未出现在 dict.txt；读 cén，易误读 qín"
+
+name_notes:
+  "神罗": "Shinra；神 shén，罗 luó"
+  "葛斯老弟": "Gus；葛按译名习惯读 gé（姓氏读 gě，存疑）"
+  "蒂法": "Tifa；蒂 dì，不读 tì"
+  "克劳德": "Cloud；克 kè，劳 láo，德 dé"
+  "巴雷特": "Barret；巴 bā，雷 léi，特 tè"
+  "杰西": "Jessie；杰 jié，西 xī"
+  "爱丽丝": "Aerith；爱 ài，丽 lì，丝 sī"
+  "扎克斯": "Zack；扎 zhā，不读 zā"
+  "萨菲罗斯": "Sephiroth；萨 sà，菲 fēi，罗 luó，斯 sī"
+  "雷诺": "Reno；诺 nuò，不读 ruò"
+  "路德": "Rude；路 lù，德 dé"
+  "曾": "Tseng；姓氏/人名读 zēng，不读 céng"
+  "宝条": "Hojo；宝 bǎo，条 tiáo"
+  "五台": "Wutai；五 wǔ，台 tái"
+  "蒂法·洛克哈特": "Tifa Lockhart；间隔号“·”不注音"
+  "克劳德·斯特莱夫": "Cloud Strife；间隔号“·”不注音"
+  "克劳蒂亚·斯特莱夫": "Claudia Strife；蒂 dì"
+  "巴雷特·华勒斯": "Barret Wallace；勒 lè，不读 lēi"
+  "玛琳·华勒斯": "Marlene Wallace；勒 lè"
+  "爱丽丝·盖恩斯伯勒": "Aerith Gainsborough；勒 lè"
+  "扎克斯·菲尔": "Zack Fair；菲尔 fēi ěr"
+  "尤菲·如月": "Yuffie Kisaragi；如月 rú yuè"
+  "吉尔伽美什": "Gilgamesh；伽 jiā，什 shí"
+  "琪里耶": "Kyrie；耶 yē，不读 yé"
+  "琪里耶·卡南": "Kyrie Canaan；耶 yē"
+  "杜耶斯提": "译名；耶 yē"
+  "里维·杜耶斯提": "Reeve 姓氏译名；耶 yē"
+  "巴拔维拉缪": "译名；缪 miù，不读 móu"
+  "罗榭": "Roche；榭 xiè"
+  "罗榭钥匙圈": "榭 xiè；钥匙 yào shi（轻声）"
+  "榭札蟹": "榭 xiè，札 zhá"
+  "圣露榭": "露 lù，榭 xiè"
+  "猢狲木": "猢 hú，狲 sūn"
+  "梣木": "梣 cén，不读 qín"
+  "赭红猎犬": "赭 zhě"
+  "巨蜈蚣": "蜈蚣 wú gōng"
+  "星殒峡谷": "星殒 xīng yǔn；殒不读 yún"
+  "陆行鸟": "Chocobo；行 xíng"
+  "莫古力": "Moogle；莫 mò，古 gǔ，力 lì"
+  "杰诺瓦": "Jenova；杰 jié，诺 nuò，瓦 wǎ"
+  "赛特拉": "Cetra；赛 sài，特 tè，拉 lā"
+  "神罗大厦": "大厦 dà shà"
+  "米德加": "Midgar；米 mǐ，德 dé，加 jiā"
+  "尼福尔海姆": "Nibelheim；尔 ěr"
+  "五台临时政府": "五台 Wutai；台 tái"
+  "英雄萨菲罗斯": "萨菲罗斯；菲 fēi"

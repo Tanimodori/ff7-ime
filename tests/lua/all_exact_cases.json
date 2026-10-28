@@ -1,0 +1,4850 @@
+[
+{
+"input": "shenluo",
+"expect_top1": "神罗"
+},
+{
+"input": "difa",
+"expect_top1": "蒂法"
+},
+{
+"input": "kelaode",
+"expect_top1": "克劳德"
+},
+{
+"input": "baleite",
+"expect_top1": "巴雷特"
+},
+{
+"input": "jiexi",
+"expect_top1": "杰西"
+},
+{
+"input": "shenluozhanshi",
+"expect_top1": "神罗战士"
+},
+{
+"input": "xuebeng",
+"expect_top1": "雪崩"
+},
+{
+"input": "liedizhe",
+"expect_top1": "猎敌者"
+},
+{
+"input": "haidege",
+"expect_top1": "海德格"
+},
+{
+"input": "xingqiudeaihao",
+"expect_top1": "星球的哀号"
+},
+{
+"input": "dibaqu",
+"expect_top1": "第捌区"
+},
+{
+"input": "womeixingqu",
+"expect_top1": "我没兴趣"
+},
+{
+"input": "shenluozongcai",
+"expect_top1": "神罗总裁"
+},
+{
+"input": "bieshanzibawodangchengyihuode",
+"expect_top1": "别擅自把我当成一伙的"
+},
+{
+"input": "qiangyingheyuchunzhiyouyixianzhige",
+"expect_top1": "强硬和愚蠢只有一线之隔"
+},
+{
+"input": "pangmoguli",
+"expect_top1": "胖莫古力"
+},
+{
+"input": "yuzhouqishituan",
+"expect_top1": "宇宙骑士团"
+},
+{
+"input": "danshoushiqiangdenanren",
+"expect_top1": "单手是枪的男人"
+},
+{
+"input": "gulanggaisi",
+"expect_top1": "孤狼盖斯"
+},
+{
+"input": "gesilaodi",
+"expect_top1": "葛斯老弟"
+},
+{
+"input": "aisite",
+"expect_top1": "艾丝特"
+},
+{
+"input": "qiao",
+"expect_top1": "乔"
+},
+{
+"input": "renshengjiushizhandou",
+"expect_top1": "人生就是战斗！"
+},
+{
+"input": "takesidezhifuweishenmeshiheisedea",
+"expect_top1": "塔克斯的制服为什么是黑色的啊！"
+},
+{
+"input": "qingduozhijiao",
+"expect_top1": "请多指教！"
+},
+{
+"input": "luxingniaofang",
+"expect_top1": "陆行鸟房"
+},
+{
+"input": "aileinuoya",
+"expect_top1": "艾蕾诺雅"
+},
+{
+"input": "mina",
+"expect_top1": "蜜娜"
+},
+{
+"input": "geiwoshenglingyao",
+"expect_top1": "给我圣灵药！"
+},
+{
+"input": "geiwohuixuanbiao",
+"expect_top1": "给我回旋镖！"
+},
+{
+"input": "geiwolangyabang",
+"expect_top1": "给我狼牙棒！"
+},
+{
+"input": "geiwotujipao",
+"expect_top1": "给我突击炮！"
+},
+{
+"input": "geiwoduandai",
+"expect_top1": "给我缎带！"
+},
+{
+"input": "geiwoguangzhidun",
+"expect_top1": "给我光之盾！"
+},
+{
+"input": "geiwomojingshi",
+"expect_top1": "给我魔晶石！"
+},
+{
+"input": "zoulexinlaide",
+"expect_top1": "走了，新来的！"
+},
+{
+"input": "nashiwodegongzuobuxuyaoxieli",
+"expect_top1": "那是我的工作，不需要谢礼"
+},
+{
+"input": "malin",
+"expect_top1": "玛琳"
+},
+{
+"input": "nizhenzhijie",
+"expect_top1": "你真直接！"
+},
+{
+"input": "ailisi",
+"expect_top1": "爱丽丝"
+},
+{
+"input": "zhakesi",
+"expect_top1": "扎克斯"
+},
+{
+"input": "safeiluosi",
+"expect_top1": "萨菲罗斯"
+},
+{
+"input": "feila",
+"expect_top1": "菲拉"
+},
+{
+"input": "shenluobing",
+"expect_top1": "神罗兵"
+},
+{
+"input": "nifuerhaimu",
+"expect_top1": "尼福尔海姆"
+},
+{
+"input": "xingqiudeshengming",
+"expect_top1": "星球的生命"
+},
+{
+"input": "diyiqu",
+"expect_top1": "第壹区"
+},
+{
+"input": "junshiliequan",
+"expect_top1": "军事猎犬"
+},
+{
+"input": "shouxiazheduohuaba",
+"expect_top1": "收下这朵花吧"
+},
+{
+"input": "shenluozhianweihubudui",
+"expect_top1": "神罗治安维护部队"
+},
+{
+"input": "diqiqupinminku",
+"expect_top1": "第柒区贫民窟"
+},
+{
+"input": "buhuiqufuyuxiepo",
+"expect_top1": "不会屈服于胁迫"
+},
+{
+"input": "hafeichanghao",
+"expect_top1": "哈，非常好！"
+},
+{
+"input": "dibaquchezhan",
+"expect_top1": "第捌区车站"
+},
+{
+"input": "wohuikangqiyiqie",
+"expect_top1": "我会扛起一切！"
+},
+{
+"input": "womendexingqiujijiangxiaoshi",
+"expect_top1": "我们的星球即将消失"
+},
+{
+"input": "wufaweinijidingdeguidao",
+"expect_top1": "无法违逆既定的轨道"
+},
+{
+"input": "malei",
+"expect_top1": "玛蕾"
+},
+{
+"input": "huaimo",
+"expect_top1": "怀默"
+},
+{
+"input": "qiaoni",
+"expect_top1": "乔尼"
+},
+{
+"input": "jingbeibing",
+"expect_top1": "警备兵"
+},
+{
+"input": "wannengbangshou",
+"expect_top1": "万能帮手"
+},
+{
+"input": "dounide",
+"expect_top1": "逗你的"
+},
+{
+"input": "xianrulekunjing",
+"expect_top1": "陷入了困境"
+},
+{
+"input": "walidajie",
+"expect_top1": "瓦砾大街"
+},
+{
+"input": "diqitiantang",
+"expect_top1": "第七天堂"
+},
+{
+"input": "xingyunxiagu",
+"expect_top1": "星殒峡谷"
+},
+{
+"input": "pinminkushenghuoshouze",
+"expect_top1": "贫民窟生活守则"
+},
+{
+"input": "baolishibuduide",
+"expect_top1": "暴力是不对的！"
+},
+{
+"input": "babahuanyinghuilai",
+"expect_top1": "爸爸，欢迎回来！"
+},
+{
+"input": "womensihutebiezouyunne",
+"expect_top1": "我们似乎特别走运呢"
+},
+{
+"input": "luoxie",
+"expect_top1": "罗榭"
+},
+{
+"input": "wutai",
+"expect_top1": "五台"
+},
+{
+"input": "midejiatezhizonghui",
+"expect_top1": "米德加特制总汇"
+},
+{
+"input": "nihendadanmawodepengyou",
+"expect_top1": "你很大胆嘛，我的朋友！"
+},
+{
+"input": "jiguangsaosheji",
+"expect_top1": "激光扫射机"
+},
+{
+"input": "baofengpohuaizhe",
+"expect_top1": "暴风破坏者"
+},
+{
+"input": "quandoutaoyandebudele",
+"expect_top1": "全都讨厌得不得了！"
+},
+{
+"input": "kebiewangleweixiaoa",
+"expect_top1": "可别忘了微笑啊"
+},
+{
+"input": "angzangdeshubeihuanyingnimen",
+"expect_top1": "肮脏的鼠辈，欢迎你们！"
+},
+{
+"input": "womenhuilikechedichanchunimen",
+"expect_top1": "我们会立刻彻底铲除你们！"
+},
+{
+"input": "leinuo",
+"expect_top1": "雷诺"
+},
+{
+"input": "maizi",
+"expect_top1": "麦子"
+},
+{
+"input": "lude",
+"expect_top1": "路德"
+},
+{
+"input": "takesi",
+"expect_top1": "塔克斯"
+},
+{
+"input": "aimina",
+"expect_top1": "艾米娜"
+},
+{
+"input": "zaijiehe",
+"expect_top1": "再结合"
+},
+{
+"input": "kelaodiyasitelaifu",
+"expect_top1": "克劳蒂亚·斯特莱夫"
+},
+{
+"input": "shikaleite",
+"expect_top1": "史卡蕾特"
+},
+{
+"input": "lvyezhijia",
+"expect_top1": "绿叶之家"
+},
+{
+"input": "daraole",
+"expect_top1": "打扰了"
+},
+{
+"input": "diwuqupinminku",
+"expect_top1": "第伍区贫民窟"
+},
+{
+"input": "woxiangduogennizaiyiqima",
+"expect_top1": "我想多跟你在一起嘛"
+},
+{
+"input": "anian",
+"expect_top1": "阿尼安"
+},
+{
+"input": "zhehongliequan",
+"expect_top1": "赭红猎犬"
+},
+{
+"input": "beige",
+"expect_top1": "贝格"
+},
+{
+"input": "bade",
+"expect_top1": "巴德"
+},
+{
+"input": "suoqi",
+"expect_top1": "索奇"
+},
+{
+"input": "keqi",
+"expect_top1": "柯奇"
+},
+{
+"input": "luxingniao",
+"expect_top1": "陆行鸟"
+},
+{
+"input": "leizili",
+"expect_top1": "雷兹利"
+},
+{
+"input": "puqiu",
+"expect_top1": "普裘"
+},
+{
+"input": "paermo",
+"expect_top1": "帕尔默"
+},
+{
+"input": "diyuwu",
+"expect_top1": "地狱屋"
+},
+{
+"input": "xialiurenzha",
+"expect_top1": "下流人渣"
+},
+{
+"input": "jiunielano",
+"expect_top1": "就捏烂哦"
+},
+{
+"input": "diluqu",
+"expect_top1": "第陆区"
+},
+{
+"input": "judaojixie",
+"expect_top1": "巨刀机械"
+},
+{
+"input": "hexihexi",
+"expect_top1": "呵嘻，呵嘻！"
+},
+{
+"input": "mifengzhiguan",
+"expect_top1": "蜜蜂之馆"
+},
+{
+"input": "weiqiangshangdianjie",
+"expect_top1": "围墙商店街"
+},
+{
+"input": "gancuiniuduanhaole",
+"expect_top1": "干脆扭断好了"
+},
+{
+"input": "bucuowoyoudianxindong",
+"expect_top1": "不错，我有点心动"
+},
+{
+"input": "wodiyigexihuanshangderen",
+"expect_top1": "我第一个喜欢上的人"
+},
+{
+"input": "lvyigongyuan",
+"expect_top1": "绿意公园"
+},
+{
+"input": "laibaqidaiyijiudebiaoyanshijiandaole",
+"expect_top1": "来吧，期待已久的表演时间到了！"
+},
+{
+"input": "rangnichengweizuibangdexinniang",
+"expect_top1": "让你成为最棒的新娘"
+},
+{
+"input": "kelaodewokeyijiaonidagema",
+"expect_top1": "克劳德，我可以叫你大哥吗？"
+},
+{
+"input": "kelaodewokeyidongcuma",
+"expect_top1": "克劳德，我可以动粗吗？"
+},
+{
+"input": "abozu",
+"expect_top1": "阿勃祖"
+},
+{
+"input": "yuren",
+"expect_top1": "鱼人"
+},
+{
+"input": "liwei",
+"expect_top1": "里维"
+},
+{
+"input": "kelipuxie",
+"expect_top1": "克里普歇"
+},
+{
+"input": "ailige",
+"expect_top1": "埃力格"
+},
+{
+"input": "shanguangguihun",
+"expect_top1": "闪光鬼魂"
+},
+{
+"input": "liechemudi",
+"expect_top1": "列车墓地"
+},
+{
+"input": "duifuguibushiwodezhuanchang",
+"expect_top1": "对付鬼不是我的专长"
+},
+{
+"input": "tamiaozhundedirenmeiyouyigepaodediao",
+"expect_top1": "它瞄准的敌人，没有一个跑得掉"
+},
+{
+"input": "ceng",
+"expect_top1": "曾"
+},
+{
+"input": "zhuomicangjiudaociweizhile",
+"expect_top1": "捉迷藏就到此为止了"
+},
+{
+"input": "yanjizhenshichajin",
+"expect_top1": "演技真是差劲"
+},
+{
+"input": "qiangdao",
+"expect_top1": "强盗"
+},
+{
+"input": "younianabozu",
+"expect_top1": "幼年阿勃祖"
+},
+{
+"input": "jingrangaocuogaihuiqudedifang",
+"expect_top1": "竟然搞错该回去的地方"
+},
+{
+"input": "qiliye",
+"expect_top1": "琪里耶"
+},
+{
+"input": "gudaizhong",
+"expect_top1": "古代种"
+},
+{
+"input": "dannibuyaoxihuanshangwoo",
+"expect_top1": "但你不要喜欢上我哦"
+},
+{
+"input": "shiquhuishinibianqiang",
+"expect_top1": "失去会使你变强"
+},
+{
+"input": "wanshitongqiliyedetedaxinweno",
+"expect_top1": "万事通琪里耶的特大新闻哦！"
+},
+{
+"input": "luoxuanfeixingzhongpao",
+"expect_top1": "螺旋飞行重炮"
+},
+{
+"input": "reshenyundongjieshule",
+"expect_top1": "热身运动结束了"
+},
+{
+"input": "wohuigeiniyigenanwangdeyewan",
+"expect_top1": "我会给你一个难忘的夜晚"
+},
+{
+"input": "midejiadeshizhangzuibangle",
+"expect_top1": "米德加的市长最棒了！"
+},
+{
+"input": "hate",
+"expect_top1": "哈特"
+},
+{
+"input": "saitela",
+"expect_top1": "赛特拉"
+},
+{
+"input": "jienuowa",
+"expect_top1": "杰诺瓦"
+},
+{
+"input": "shenluodasha",
+"expect_top1": "神罗大厦"
+},
+{
+"input": "baotiao",
+"expect_top1": "宝条"
+},
+{
+"input": "jianwu",
+"expect_top1": "剑舞"
+},
+{
+"input": "lufasi",
+"expect_top1": "路法斯"
+},
+{
+"input": "yingxuzhidi",
+"expect_top1": "应许之地"
+},
+{
+"input": "kexuebumen",
+"expect_top1": "科学部门"
+},
+{
+"input": "duominuoshizhang",
+"expect_top1": "多米诺市长"
+},
+{
+"input": "pinminkudemaihuanv",
+"expect_top1": "贫民窟的卖花女"
+},
+{
+"input": "dushikaifabumen",
+"expect_top1": "都市开发部门"
+},
+{
+"input": "mingyunshouwangzhe",
+"expect_top1": "命运守望者"
+},
+{
+"input": "zheshiganrendechongfeng",
+"expect_top1": "这是感人的重逢"
+},
+{
+"input": "bingqikaifabumen",
+"expect_top1": "兵器开发部门"
+},
+{
+"input": "yuzhoukaifabumen",
+"expect_top1": "宇宙开发部门"
+},
+{
+"input": "ranhouhuidaoyingxuzhidi",
+"expect_top1": "然后，回到应许之地"
+},
+{
+"input": "wojuranwangjizhuyouyijingyongwanle",
+"expect_top1": "我居然忘记猪油已经用完了"
+},
+{
+"input": "laibazhanxiannihualidezitai",
+"expect_top1": "来吧，展现你华丽的姿态"
+},
+{
+"input": "mamayiqiquhuizhegexingqiuba",
+"expect_top1": "妈妈，一起取回这个星球吧"
+},
+{
+"input": "shenluohuizaiwoshouzhongtuotaihuangu",
+"expect_top1": "神罗会在我手中脱胎换骨"
+},
+{
+"input": "xingqiudeweilai",
+"expect_top1": "星球的未来"
+},
+{
+"input": "yongbaomengxiang",
+"expect_top1": "拥抱梦想"
+},
+{
+"input": "tiankongganjuezhenbushufu",
+"expect_top1": "天空感觉真不舒服"
+},
+{
+"input": "kuaiguolaikelaode",
+"expect_top1": "快过来，克劳德"
+},
+{
+"input": "mingyundefenqidian",
+"expect_top1": "命运的分歧点"
+},
+{
+"input": "weilaizhengzhangwozainideshouzhong",
+"expect_top1": "未来正掌握在你的手中"
+},
+{
+"input": "ziyoudedaijiaguoranhengao",
+"expect_top1": "自由的代价果然很高"
+},
+{
+"input": "zangan",
+"expect_top1": "赞甘"
+},
+{
+"input": "wokezhibuzhuwoziji",
+"expect_top1": "我克制不住我自己"
+},
+{
+"input": "gaodengjingbeibing",
+"expect_top1": "高等警备兵"
+},
+{
+"input": "nvwangrue",
+"expect_top1": "女王蠕蛾"
+},
+{
+"input": "nayao",
+"expect_top1": "娜瑶"
+},
+{
+"input": "nilu",
+"expect_top1": "尼禄"
+},
+{
+"input": "lamu",
+"expect_top1": "拉姆"
+},
+{
+"input": "fenhui",
+"expect_top1": "分会"
+},
+{
+"input": "moguli",
+"expect_top1": "莫古力"
+},
+{
+"input": "jijie",
+"expect_top1": "吉杰"
+},
+{
+"input": "weisi",
+"expect_top1": "魏斯"
+},
+{
+"input": "wuzibei",
+"expect_top1": "五字辈"
+},
+{
+"input": "bushimoguli",
+"expect_top1": "不是莫古力"
+},
+{
+"input": "guidashu",
+"expect_top1": "龟大叔"
+},
+{
+"input": "juwugong",
+"expect_top1": "巨蜈蚣"
+},
+{
+"input": "daqiaodou",
+"expect_top1": "大窍豆"
+},
+{
+"input": "guizongle",
+"expect_top1": "龟纵乐"
+},
+{
+"input": "feihongmengyan",
+"expect_top1": "绯红梦魇"
+},
+{
+"input": "meicuomoguli",
+"expect_top1": "没错，莫古力！"
+},
+{
+"input": "laiziwutaideshizhe",
+"expect_top1": "来自五台的使者"
+},
+{
+"input": "duoqujiujimojingshi",
+"expect_top1": "夺取究极魔晶石"
+},
+{
+"input": "shishuizaifangaiwo",
+"expect_top1": "是谁在妨碍我？"
+},
+{
+"input": "boerke",
+"expect_top1": "波尔可"
+},
+{
+"input": "meifei",
+"expect_top1": "梅菲"
+},
+{
+"input": "cajianbaoran",
+"expect_top1": "擦剑爆燃"
+},
+{
+"input": "hundunxingyun",
+"expect_top1": "混沌星云"
+},
+{
+"input": "wutaidedouzhi",
+"expect_top1": "五台的斗志"
+},
+{
+"input": "renshengshiyongwuzhijingdemigong",
+"expect_top1": "人生是永无止境的迷宫"
+},
+{
+"input": "youfei",
+"expect_top1": "尤菲"
+},
+{
+"input": "suonong",
+"expect_top1": "索侬"
+},
+{
+"input": "fuhuo",
+"expect_top1": "复活"
+},
+{
+"input": "qidao",
+"expect_top1": "祈祷"
+},
+{
+"input": "xiwa",
+"expect_top1": "希瓦"
+},
+{
+"input": "jienienie",
+"expect_top1": "杰涅涅"
+},
+{
+"input": "zibao",
+"expect_top1": "自爆"
+},
+{
+"input": "jiedu",
+"expect_top1": "解毒"
+},
+{
+"input": "cuimian",
+"expect_top1": "催眠"
+},
+{
+"input": "chenmo",
+"expect_top1": "沉默"
+},
+{
+"input": "kuangbao",
+"expect_top1": "狂暴"
+},
+{
+"input": "tingzhi",
+"expect_top1": "停止"
+},
+{
+"input": "xiaochuhudun",
+"expect_top1": "消除护盾"
+},
+{
+"input": "qumo",
+"expect_top1": "驱魔"
+},
+{
+"input": "wumingzhe",
+"expect_top1": "无名者"
+},
+{
+"input": "jieduyao",
+"expect_top1": "解毒药"
+},
+{
+"input": "mamunvshi",
+"expect_top1": "玛姆女士"
+},
+{
+"input": "yifulite",
+"expect_top1": "伊弗利特"
+},
+{
+"input": "bahamute",
+"expect_top1": "巴哈姆特"
+},
+{
+"input": "xiaoluxingniao",
+"expect_top1": "小陆行鸟"
+},
+{
+"input": "huanxiang",
+"expect_top1": "幻象"
+},
+{
+"input": "menglieqiangji",
+"expect_top1": "猛烈枪击"
+},
+{
+"input": "fengbaosaoji",
+"expect_top1": "风暴扫击"
+},
+{
+"input": "guaishu",
+"expect_top1": "怪鼠"
+},
+{
+"input": "xiaoxingyixi",
+"expect_top1": "小型翼蜥"
+},
+{
+"input": "meiying",
+"expect_top1": "魅影"
+},
+{
+"input": "nimingzhe",
+"expect_top1": "匿名者"
+},
+{
+"input": "liefulikongniao",
+"expect_top1": "列伏利恐鸟"
+},
+{
+"input": "chadeli",
+"expect_top1": "查德利"
+},
+{
+"input": "chouqi",
+"expect_top1": "臭气"
+},
+{
+"input": "xiongzhan",
+"expect_top1": "凶斩"
+},
+{
+"input": "wulungun",
+"expect_top1": "五轮棍"
+},
+{
+"input": "luxingniaoshanmu",
+"expect_top1": "陆行鸟·山姆"
+},
+{
+"input": "bingjingdongjie",
+"expect_top1": "冰晶冻结"
+},
+{
+"input": "pangluxingniao",
+"expect_top1": "胖陆行鸟"
+},
+{
+"input": "jiakuaijiezou",
+"expect_top1": "加快节奏"
+},
+{
+"input": "bianyishu",
+"expect_top1": "变异鼠"
+},
+{
+"input": "duyanquanzhang",
+"expect_top1": "独眼权杖"
+},
+{
+"input": "gongniumada",
+"expect_top1": "公牛马达"
+},
+{
+"input": "shenghuashu",
+"expect_top1": "生化鼠"
+},
+{
+"input": "waiwai",
+"expect_top1": "歪歪"
+},
+{
+"input": "fangyuzhangzhang",
+"expect_top1": "防御长杖"
+},
+{
+"input": "tishenji",
+"expect_top1": "提神剂"
+},
+{
+"input": "zhiyuweifeng",
+"expect_top1": "治愈微风"
+},
+{
+"input": "xingchenshouhu",
+"expect_top1": "星辰守护"
+},
+{
+"input": "mijijiefang",
+"expect_top1": "秘技解放"
+},
+{
+"input": "zhengquan",
+"expect_top1": "正拳"
+},
+{
+"input": "jianrenbuba",
+"expect_top1": "坚忍不拔"
+},
+{
+"input": "guangzhidun",
+"expect_top1": "光之盾"
+},
+{
+"input": "baoliequan",
+"expect_top1": "爆裂拳"
+},
+{
+"input": "zhonghuolibing",
+"expect_top1": "重火力兵"
+},
+{
+"input": "zhidanbing",
+"expect_top1": "掷弹兵"
+},
+{
+"input": "zhenyabing",
+"expect_top1": "镇压兵"
+},
+{
+"input": "zhandouyuan",
+"expect_top1": "战斗员"
+},
+{
+"input": "guaiyichong",
+"expect_top1": "怪异虫"
+},
+{
+"input": "xingfenji",
+"expect_top1": "兴奋剂"
+},
+{
+"input": "zhenjingji",
+"expect_top1": "镇静剂"
+},
+{
+"input": "wannengyao",
+"expect_top1": "万能药"
+},
+{
+"input": "diqiqu",
+"expect_top1": "第柒区"
+},
+{
+"input": "xingmingxue",
+"expect_top1": "星命学"
+},
+{
+"input": "qiliyekanan",
+"expect_top1": "琪里耶·卡南"
+},
+{
+"input": "leizilikaier",
+"expect_top1": "雷兹利·凯尔"
+},
+{
+"input": "qiangliuzhadan",
+"expect_top1": "枪榴炸弹"
+},
+{
+"input": "hunzhan",
+"expect_top1": "混战"
+},
+{
+"input": "dadizhongji",
+"expect_top1": "大地重击"
+},
+{
+"input": "yongmengmoshi",
+"expect_top1": "勇猛模式"
+},
+{
+"input": "jingongmoshi",
+"expect_top1": "进攻模式"
+},
+{
+"input": "yihaojiguangpao",
+"expect_top1": "壹号激光炮"
+},
+{
+"input": "shunyiguichui",
+"expect_top1": "瞬移诡锤"
+},
+{
+"input": "dianjisaosheji",
+"expect_top1": "电击扫射机"
+},
+{
+"input": "kuangnuliequan",
+"expect_top1": "狂怒猎犬"
+},
+{
+"input": "jicilanyu",
+"expect_top1": "棘刺蓝鱼"
+},
+{
+"input": "molvhaima",
+"expect_top1": "墨绿海马"
+},
+{
+"input": "jukoushixie",
+"expect_top1": "巨口噬蝎"
+},
+{
+"input": "xiezhaxie",
+"expect_top1": "榭札蟹"
+},
+{
+"input": "yixi",
+"expect_top1": "翼蜥"
+},
+{
+"input": "qiezeiabozu",
+"expect_top1": "窃贼阿勃祖"
+},
+{
+"input": "chuantoukuangyan",
+"expect_top1": "穿透狂眼"
+},
+{
+"input": "weizhenbaoguai",
+"expect_top1": "尾针爆怪"
+},
+{
+"input": "feitianbaoguai",
+"expect_top1": "飞天爆怪"
+},
+{
+"input": "duichenji",
+"expect_top1": "堆尘机"
+},
+{
+"input": "shiluozhiya",
+"expect_top1": "失落之牙"
+},
+{
+"input": "mumu",
+"expect_top1": "姆姆"
+},
+{
+"input": "jiatelinjiqiang",
+"expect_top1": "加特林机枪"
+},
+{
+"input": "pigeshoutao",
+"expect_top1": "皮革手套"
+},
+{
+"input": "renzhesheji",
+"expect_top1": "忍者射击"
+},
+{
+"input": "douqihuanguangqiu",
+"expect_top1": "斗气幻光球"
+},
+{
+"input": "shaonvzhiwen",
+"expect_top1": "少女之吻"
+},
+{
+"input": "disiyuanpan",
+"expect_top1": "第肆圆盘"
+},
+{
+"input": "lingrenjiaojideshuilu",
+"expect_top1": "令人焦急的水路"
+},
+{
+"input": "chongfengzhihua",
+"expect_top1": "重逢之花"
+},
+{
+"input": "yuwangzhidi",
+"expect_top1": "欲望之地"
+},
+{
+"input": "luorizhicheng",
+"expect_top1": "落日之城"
+},
+{
+"input": "kongzhongbing",
+"expect_top1": "空中兵"
+},
+{
+"input": "zhakesifeier",
+"expect_top1": "扎克斯·菲尔"
+},
+{
+"input": "youfeiruyue",
+"expect_top1": "尤菲·如月"
+},
+{
+"input": "fenlikuaigong",
+"expect_top1": "奋力快攻"
+},
+{
+"input": "lingkongpo",
+"expect_top1": "凌空破"
+},
+{
+"input": "haitunjifeng",
+"expect_top1": "海豚疾风"
+},
+{
+"input": "gaosulianzhan",
+"expect_top1": "高速连斩"
+},
+{
+"input": "baoransheji",
+"expect_top1": "爆燃射击"
+},
+{
+"input": "nengliangshanggouquan",
+"expect_top1": "能量上钩拳"
+},
+{
+"input": "yuanxingliedizhe",
+"expect_top1": "原型猎敌者"
+},
+{
+"input": "yuanxingjiguanqiang",
+"expect_top1": "原型机关枪"
+},
+{
+"input": "diannengguizishou",
+"expect_top1": "电能刽子手"
+},
+{
+"input": "hongmaciwei",
+"expect_top1": "红蟆刺猬"
+},
+{
+"input": "juwubashixie",
+"expect_top1": "巨无霸噬蝎"
+},
+{
+"input": "lianzurue",
+"expect_top1": "镰足蠕蛾"
+},
+{
+"input": "feiqizhizaoji",
+"expect_top1": "废气制造机"
+},
+{
+"input": "duqizhizaoji",
+"expect_top1": "毒气制造机"
+},
+{
+"input": "yurenwangzi",
+"expect_top1": "鱼人王子"
+},
+{
+"input": "qiheiliequan",
+"expect_top1": "漆黑猎犬"
+},
+{
+"input": "shengmingzhiliu",
+"expect_top1": "生命之流"
+},
+{
+"input": "mojingshilieren",
+"expect_top1": "魔晶石猎人"
+},
+{
+"input": "wuyingbaolei",
+"expect_top1": "兀鹰堡垒"
+},
+{
+"input": "shenluogongsi",
+"expect_top1": "神罗公司"
+},
+{
+"input": "zhangguokuaigong",
+"expect_top1": "掌掴快攻"
+},
+{
+"input": "pinminkudetaiyang",
+"expect_top1": "贫民窟的太阳"
+},
+{
+"input": "xunqiuxiwang",
+"expect_top1": "寻求希望"
+},
+{
+"input": "zhianweihubumen",
+"expect_top1": "治安维护部门"
+},
+{
+"input": "fanjijiashi",
+"expect_top1": "反击架式"
+},
+{
+"input": "xunshoushi",
+"expect_top1": "驯兽师"
+},
+{
+"input": "migongzhiquan",
+"expect_top1": "迷宫之犬"
+},
+{
+"input": "malinhualeisi",
+"expect_top1": "玛琳·华勒斯"
+},
+{
+"input": "aniankuniang",
+"expect_top1": "阿尼安·库尼昂"
+},
+{
+"input": "liweiduyesiti",
+"expect_top1": "里维·杜耶斯提"
+},
+{
+"input": "lingjulisheji",
+"expect_top1": "零距离射击"
+},
+{
+"input": "shengjiezhili",
+"expect_top1": "圣洁之力"
+},
+{
+"input": "shenpanguangxian",
+"expect_top1": "审判光线"
+},
+{
+"input": "mofashitu",
+"expect_top1": "魔法使徒"
+},
+{
+"input": "daodanfasheqi",
+"expect_top1": "导弹发射器"
+},
+{
+"input": "liudansaosheji",
+"expect_top1": "榴弹扫射机"
+},
+{
+"input": "hongmaciweiwang",
+"expect_top1": "红蟆刺猬王"
+},
+{
+"input": "huangbanrue",
+"expect_top1": "黄斑蠕蛾"
+},
+{
+"input": "tubianbaoguai",
+"expect_top1": "突变爆怪"
+},
+{
+"input": "jujiaokelipuxie",
+"expect_top1": "巨角克里普歇"
+},
+{
+"input": "xuebengdeshusizhandou",
+"expect_top1": "雪崩的殊死战斗"
+},
+{
+"input": "xuebengjingshen",
+"expect_top1": "雪崩精神"
+},
+{
+"input": "shenshengmofazhen",
+"expect_top1": "神圣魔法阵"
+},
+{
+"input": "buduizhanggongjia",
+"expect_top1": "部队长贡嘉"
+},
+{
+"input": "shenyezhuizhuzhan",
+"expect_top1": "深夜追逐战"
+},
+{
+"input": "huimiedeshijie",
+"expect_top1": "毁灭的世界"
+},
+{
+"input": "wanglingdeezuoju",
+"expect_top1": "亡灵的恶作剧"
+},
+{
+"input": "shizishoulijian",
+"expect_top1": "十字手里剑"
+},
+{
+"input": "xishoulingqi",
+"expect_top1": "吸收灵气"
+},
+{
+"input": "kelaodesitelaifu",
+"expect_top1": "克劳德·斯特莱夫"
+},
+{
+"input": "baleitehualeisi",
+"expect_top1": "巴雷特·华勒斯"
+},
+{
+"input": "jiexilaizibeili",
+"expect_top1": "杰西·莱兹贝利"
+},
+{
+"input": "chadelibaogao",
+"expect_top1": "查德利报告"
+},
+{
+"input": "yiduanleili",
+"expect_top1": "异端蕾莉"
+},
+{
+"input": "midejiagaosugonglu",
+"expect_top1": "米德加高速公路"
+},
+{
+"input": "wujinzhongjie",
+"expect_top1": "无尽终结"
+},
+{
+"input": "juhanqiangdao",
+"expect_top1": "巨汉强盗"
+},
+{
+"input": "zhiwenyeyixi",
+"expect_top1": "直纹叶翼蜥"
+},
+{
+"input": "baipaozhanche",
+"expect_top1": "百炮战车"
+},
+{
+"input": "dibaqudexiehou",
+"expect_top1": "第捌区的邂逅"
+},
+{
+"input": "jilimofazhen",
+"expect_top1": "激励魔法阵"
+},
+{
+"input": "qianrushenluodasha",
+"expect_top1": "潜入神罗大厦"
+},
+{
+"input": "mingyundeqidian",
+"expect_top1": "命运的奇点"
+},
+{
+"input": "jiujimojingshi",
+"expect_top1": "究极魔晶石"
+},
+{
+"input": "teshuzhandouyuan",
+"expect_top1": "特殊战斗员"
+},
+{
+"input": "qianghuazhandouyuan",
+"expect_top1": "强化战斗员"
+},
+{
+"input": "qiangmozhandouyuan",
+"expect_top1": "强魔战斗员"
+},
+{
+"input": "difaluokehate",
+"expect_top1": "蒂法·洛克哈特"
+},
+{
+"input": "wutailinshizhengfu",
+"expect_top1": "五台临时政府"
+},
+{
+"input": "teshukongzhongbing",
+"expect_top1": "特殊空中兵"
+},
+{
+"input": "ailisigaiensibolei",
+"expect_top1": "爱丽丝·盖恩斯伯勒"
+},
+{
+"input": "taolihundun",
+"expect_top1": "逃离混沌"
+},
+{
+"input": "zhongmozhuangzhandouyuan",
+"expect_top1": "重魔装战斗员"
+},
+{
+"input": "gaojizhidanbing",
+"expect_top1": "高级掷弹兵"
+},
+{
+"input": "gaodengzhenyabing",
+"expect_top1": "高等镇压兵"
+},
+{
+"input": "zhongzhuangjiazhandouyuan",
+"expect_top1": "重装甲战斗员"
+},
+{
+"input": "teshuzuozhanbing",
+"expect_top1": "特殊作战兵"
+},
+{
+"input": "tezhuangxingliedizhe",
+"expect_top1": "特装型猎敌者"
+},
+{
+"input": "yinmibufazhe",
+"expect_top1": "隐密步伐者"
+},
+{
+"input": "bianyileili",
+"expect_top1": "变异蕾莉"
+},
+{
+"input": "tanlanzhe",
+"expect_top1": "贪婪者"
+},
+{
+"input": "emochengju",
+"expect_top1": "恶魔乘具"
+},
+{
+"input": "bengzha",
+"expect_top1": "蹦扎"
+},
+{
+"input": "kamuzhiya",
+"expect_top1": "卡姆之牙"
+},
+{
+"input": "dianjizhiya",
+"expect_top1": "电击之牙"
+},
+{
+"input": "baisezhiya",
+"expect_top1": "白色之牙"
+},
+{
+"input": "nifuerlang",
+"expect_top1": "尼福尔狼"
+},
+{
+"input": "judushu",
+"expect_top1": "剧毒鼠"
+},
+{
+"input": "zhenchiyixi",
+"expect_top1": "振翅翼蜥"
+},
+{
+"input": "fengbaoyixi",
+"expect_top1": "风暴翼蜥"
+},
+{
+"input": "redaijicilanyu",
+"expect_top1": "热带棘刺蓝鱼"
+},
+{
+"input": "jicilanyuzhihuiguan",
+"expect_top1": "棘刺蓝鱼指挥官"
+},
+{
+"input": "piaofutunyu",
+"expect_top1": "漂浮豚鱼"
+},
+{
+"input": "pumolvhaima",
+"expect_top1": "普墨绿海马"
+},
+{
+"input": "ximolvhaima",
+"expect_top1": "稀墨绿海马"
+},
+{
+"input": "nanguayouguiciwei",
+"expect_top1": "南瓜幽鬼刺猬"
+},
+{
+"input": "xiangbanxie",
+"expect_top1": "响板蟹"
+},
+{
+"input": "chuiqianluxie",
+"expect_top1": "锤钳陆蟹"
+},
+{
+"input": "shayuren",
+"expect_top1": "砂鱼人"
+},
+{
+"input": "yurenyongshi",
+"expect_top1": "鱼人勇士"
+},
+{
+"input": "youyiliefulikongniao",
+"expect_top1": "有翼列伏利恐鸟"
+},
+{
+"input": "liefulidongniao",
+"expect_top1": "列伏利恫鸟"
+},
+{
+"input": "shuangnaozhe",
+"expect_top1": "双脑者"
+},
+{
+"input": "longxuanniao",
+"expect_top1": "龙旋鸟"
+},
+{
+"input": "yinxuanniao",
+"expect_top1": "音旋鸟"
+},
+{
+"input": "zhanjiniao",
+"expect_top1": "战机鸟"
+},
+{
+"input": "jufengniao",
+"expect_top1": "飓风鸟"
+},
+{
+"input": "yinsuniao",
+"expect_top1": "音速鸟"
+},
+{
+"input": "hailong",
+"expect_top1": "海龙"
+},
+{
+"input": "qiubierdinusi",
+"expect_top1": "丘比尔狄努斯"
+},
+{
+"input": "kuaidaochuxingzhe",
+"expect_top1": "快刀处刑者"
+},
+{
+"input": "guandingxiangguai",
+"expect_top1": "灌顶象怪"
+},
+{
+"input": "kaizeerkeyateer",
+"expect_top1": "凯泽尔科亚特尔"
+},
+{
+"input": "seyakeyateer",
+"expect_top1": "瑟雅科亚特尔"
+},
+{
+"input": "shijiu",
+"expect_top1": "狮鹫"
+},
+{
+"input": "yingtoushi",
+"expect_top1": "鹰头狮"
+},
+{
+"input": "nidehuoge",
+"expect_top1": "尼德霍格"
+},
+{
+"input": "shengguilong",
+"expect_top1": "圣柜龙"
+},
+{
+"input": "shenmilong",
+"expect_top1": "神秘龙"
+},
+{
+"input": "shanggulong",
+"expect_top1": "上古龙"
+},
+{
+"input": "ruanhuguai",
+"expect_top1": "软糊怪"
+},
+{
+"input": "shirenmo",
+"expect_top1": "食人魔"
+},
+{
+"input": "baoluanshirenmo",
+"expect_top1": "暴乱食人魔"
+},
+{
+"input": "saimuzeleitejuxiao",
+"expect_top1": "赛姆泽雷特巨枭"
+},
+{
+"input": "huaizileitejuxiao",
+"expect_top1": "怀兹雷特巨枭"
+},
+{
+"input": "jianhuishou",
+"expect_top1": "尖喙兽"
+},
+{
+"input": "kaotejianhuishou",
+"expect_top1": "考特尖喙兽"
+},
+{
+"input": "xuansuocao",
+"expect_top1": "旋索草"
+},
+{
+"input": "reyanxuansuocao",
+"expect_top1": "热炎旋索草"
+},
+{
+"input": "jingshenxiquzhe",
+"expect_top1": "精神吸取者"
+},
+{
+"input": "gulanjialan",
+"expect_top1": "古兰迦兰"
+},
+{
+"input": "xiaogulanjialan",
+"expect_top1": "小古兰迦兰"
+},
+{
+"input": "minigulanjialan",
+"expect_top1": "迷你古兰迦兰"
+},
+{
+"input": "haitanchatouguai",
+"expect_top1": "海滩插头怪"
+},
+{
+"input": "luobeichatouguai",
+"expect_top1": "螺贝插头怪"
+},
+{
+"input": "guanmaochangmaoshuimu",
+"expect_top1": "冠帽长矛水母"
+},
+{
+"input": "mohunmeidusha",
+"expect_top1": "魔魂美杜莎"
+},
+{
+"input": "zhenwenniao",
+"expect_top1": "针吻鸟"
+},
+{
+"input": "jianwenniao",
+"expect_top1": "剑吻鸟"
+},
+{
+"input": "haimoyu",
+"expect_top1": "海魔鱼"
+},
+{
+"input": "guanmaosousuozhe",
+"expect_top1": "冠帽搜索者"
+},
+{
+"input": "toubumaoyao",
+"expect_top1": "投捕帽妖"
+},
+{
+"input": "dumaoyao",
+"expect_top1": "毒帽妖"
+},
+{
+"input": "chongxinggui",
+"expect_top1": "虫型龟"
+},
+{
+"input": "jijiagui",
+"expect_top1": "机甲龟"
+},
+{
+"input": "shejishou",
+"expect_top1": "蛇鸡兽"
+},
+{
+"input": "shashoulaoyin",
+"expect_top1": "杀手烙印"
+},
+{
+"input": "shuangmianxiang",
+"expect_top1": "双面相"
+},
+{
+"input": "shaqiuruchong",
+"expect_top1": "沙丘蠕虫"
+},
+{
+"input": "juxingruchong",
+"expect_top1": "巨型蠕虫"
+},
+{
+"input": "shibinsaifeiyu",
+"expect_top1": "史宾赛飞鱼"
+},
+{
+"input": "feixiangkaitangshou",
+"expect_top1": "飞翔开膛手"
+},
+{
+"input": "qimeila",
+"expect_top1": "奇美拉"
+},
+{
+"input": "yinseqimeila",
+"expect_top1": "银色奇美拉"
+},
+{
+"input": "jujiaoshou",
+"expect_top1": "巨角兽"
+},
+{
+"input": "hujiaoshou",
+"expect_top1": "护角兽"
+},
+{
+"input": "kuangbaojujiaoshou",
+"expect_top1": "狂暴巨角兽"
+},
+{
+"input": "shihuaxilong",
+"expect_top1": "石化蜥龙"
+},
+{
+"input": "huanghejuxi",
+"expect_top1": "黄褐巨蜥"
+},
+{
+"input": "xiajixiyi",
+"expect_top1": "下级蜥蜴"
+},
+{
+"input": "chufanwa",
+"expect_top1": "触返蛙"
+},
+{
+"input": "payapayawa",
+"expect_top1": "帕亚帕亚蛙"
+},
+{
+"input": "chazhihua",
+"expect_top1": "岔枝花"
+},
+{
+"input": "shengkaihua",
+"expect_top1": "盛开花"
+},
+{
+"input": "juwa",
+"expect_top1": "巨蛙"
+},
+{
+"input": "hunchengkunchong",
+"expect_top1": "混成昆虫"
+},
+{
+"input": "hunchengnitaiguai",
+"expect_top1": "混成拟态怪"
+},
+{
+"input": "hunchengemo",
+"expect_top1": "混成恶魔"
+},
+{
+"input": "zhongxingtanke",
+"expect_top1": "重型坦克"
+},
+{
+"input": "zenghenhaojiao",
+"expect_top1": "憎恨号角"
+},
+{
+"input": "qiqiqiyaqiu",
+"expect_top1": "奇奇奇亚秋"
+},
+{
+"input": "dududuyaqiu",
+"expect_top1": "杜杜杜亚秋"
+},
+{
+"input": "juyanmoxiang",
+"expect_top1": "巨岩魔像"
+},
+{
+"input": "taigumoxiang",
+"expect_top1": "太古魔像"
+},
+{
+"input": "shihuayixi",
+"expect_top1": "石化翼蜥"
+},
+{
+"input": "danqieyixi",
+"expect_top1": "胆怯翼蜥"
+},
+{
+"input": "alakelan",
+"expect_top1": "阿拉克兰"
+},
+{
+"input": "jiabawoke",
+"expect_top1": "贾巴沃克"
+},
+{
+"input": "yizudewangling",
+"expect_top1": "义族的亡灵"
+},
+{
+"input": "cizhenzhizhu",
+"expect_top1": "刺针蜘蛛"
+},
+{
+"input": "walong",
+"expect_top1": "瓦隆"
+},
+{
+"input": "antuoshi",
+"expect_top1": "安托士"
+},
+{
+"input": "haidaoemo",
+"expect_top1": "海盗恶魔"
+},
+{
+"input": "jingnangliaoya",
+"expect_top1": "颈囊獠牙"
+},
+{
+"input": "senlinliaoya",
+"expect_top1": "森林獠牙"
+},
+{
+"input": "sharenfeng",
+"expect_top1": "杀人蜂"
+},
+{
+"input": "nvwangfeng",
+"expect_top1": "女王蜂"
+},
+{
+"input": "babaweilamou",
+"expect_top1": "巴拔维拉缪"
+},
+{
+"input": "heibianfu",
+"expect_top1": "黑蝙蝠"
+},
+{
+"input": "chongtuan",
+"expect_top1": "虫团"
+},
+{
+"input": "gaixiumeize",
+"expect_top1": "盖修梅泽"
+},
+{
+"input": "baimuguai",
+"expect_top1": "百目怪"
+},
+{
+"input": "tiejinjia",
+"expect_top1": "铁金甲"
+},
+{
+"input": "zhehongfuyousishen",
+"expect_top1": "赭红浮游死神"
+},
+{
+"input": "fuyousishen",
+"expect_top1": "浮游死神"
+},
+{
+"input": "jianjiaozhe",
+"expect_top1": "尖叫者"
+},
+{
+"input": "tanceyan",
+"expect_top1": "探测眼"
+},
+{
+"input": "xinweizhenbaoguai",
+"expect_top1": "新尾针爆怪"
+},
+{
+"input": "maduwanzhu",
+"expect_top1": "马杜万诛"
+},
+{
+"input": "eling",
+"expect_top1": "恶灵"
+},
+{
+"input": "weizhishengmingti",
+"expect_top1": "未知生命体"
+},
+{
+"input": "huanleguai",
+"expect_top1": "欢乐怪"
+},
+{
+"input": "shenpanzhe",
+"expect_top1": "审判者"
+},
+{
+"input": "yilina",
+"expect_top1": "伊莉娜"
+},
+{
+"input": "daiyin",
+"expect_top1": "戴因"
+},
+{
+"input": "jiaruianyeshou",
+"expect_top1": "迦瑞安野兽"
+},
+{
+"input": "xingzuowoniu",
+"expect_top1": "星座蜗牛"
+},
+{
+"input": "tezhuangxingluoxuanfeixingzhongpao",
+"expect_top1": "特装型螺旋飞行重炮"
+},
+{
+"input": "jinhuajuwa",
+"expect_top1": "进化巨蛙"
+},
+{
+"input": "zuofeishiyanti",
+"expect_top1": "作废实验体"
+},
+{
+"input": "mojingshikanshouzhe",
+"expect_top1": "魔晶石看守者"
+},
+{
+"input": "miyinmoxiang",
+"expect_top1": "秘银魔像"
+},
+{
+"input": "baiweilongyu",
+"expect_top1": "摆尾龙鱼"
+},
+{
+"input": "yinatatake",
+"expect_top1": "义·纳塔塔克"
+},
+{
+"input": "linghunhuoyan",
+"expect_top1": "灵魂火焰"
+},
+{
+"input": "honglong",
+"expect_top1": "红龙"
+},
+{
+"input": "emomen",
+"expect_top1": "恶魔门"
+},
+{
+"input": "taitan",
+"expect_top1": "泰坦"
+},
+{
+"input": "yalishanda",
+"expect_top1": "亚历山大"
+},
+{
+"input": "aoding",
+"expect_top1": "奥丁"
+},
+{
+"input": "shenmijianhao",
+"expect_top1": "神秘剑豪"
+},
+{
+"input": "yingxiongsafeiluosi",
+"expect_top1": "英雄萨菲罗斯"
+},
+{
+"input": "guangkuodeshijie",
+"expect_top1": "广阔的世界"
+},
+{
+"input": "heidoupengdequxiang",
+"expect_top1": "黑斗篷的去向"
+},
+{
+"input": "xinshidaidehaopao",
+"expect_top1": "新时代的号炮"
+},
+{
+"input": "kuangluandehaishanglvxing",
+"expect_top1": "狂乱的海上旅行"
+},
+{
+"input": "taiyangleyuan",
+"expect_top1": "太阳乐园"
+},
+{
+"input": "chongmanaohuideguixiang",
+"expect_top1": "充满懊悔的归乡"
+},
+{
+"input": "xingqiushouhuzhe",
+"expect_top1": "星球守护者"
+},
+{
+"input": "xiaguzhanshi",
+"expect_top1": "峡谷战士"
+},
+{
+"input": "moshengdeguxiang",
+"expect_top1": "陌生的故乡"
+},
+{
+"input": "xunzhaoxieshi",
+"expect_top1": "寻找楔石"
+},
+{
+"input": "maixiangzhongjiedeshijie",
+"expect_top1": "迈向终结的世界"
+},
+{
+"input": "woyaotidadangzhaonimensuanzhang",
+"expect_top1": "我要替搭档找你们算账"
+},
+{
+"input": "zhaohuanshoudecitang",
+"expect_top1": "召唤兽的祠堂"
+},
+{
+"input": "taiyanghaian",
+"expect_top1": "太阳海岸"
+},
+{
+"input": "haibinqiaoni",
+"expect_top1": "海滨乔尼"
+},
+{
+"input": "mohuanzhanfang",
+"expect_top1": "魔幻绽放"
+},
+{
+"input": "naoguijiudian",
+"expect_top1": "闹鬼酒店"
+},
+{
+"input": "qijiguangchang",
+"expect_top1": "奇迹广场"
+},
+{
+"input": "zhandouguangchang",
+"expect_top1": "战斗广场"
+},
+{
+"input": "suduguangchang",
+"expect_top1": "速度广场"
+},
+{
+"input": "ranshaodan",
+"expect_top1": "燃烧弹"
+},
+{
+"input": "xingyundiqu",
+"expect_top1": "星殒地区"
+},
+{
+"input": "xingyuntianwentai",
+"expect_top1": "星殒天文台"
+},
+{
+"input": "songxingyishi",
+"expect_top1": "送星仪式"
+},
+{
+"input": "yizudedongku",
+"expect_top1": "义族的洞窟"
+},
+{
+"input": "yizudecunluo",
+"expect_top1": "义族的村落"
+},
+{
+"input": "gudaizhongdeshendian",
+"expect_top1": "古代种的神殿"
+},
+{
+"input": "qingwatiaoyue",
+"expect_top1": "青蛙跳跃"
+},
+{
+"input": "zhanlvejibing",
+"expect_top1": "战略机兵"
+},
+{
+"input": "yeshouzhandouguangchang",
+"expect_top1": "野兽战斗广场"
+},
+{
+"input": "shejifeiting",
+"expect_top1": "射击飞艇"
+},
+{
+"input": "kuangyebenchi",
+"expect_top1": "狂野奔驰"
+},
+{
+"input": "kapianjianianhua",
+"expect_top1": "卡片嘉年华"
+},
+{
+"input": "luxingniaozuanquan",
+"expect_top1": "陆行鸟钻圈"
+},
+{
+"input": "shamokuangxi",
+"expect_top1": "沙漠狂袭"
+},
+{
+"input": "kuangchesheji",
+"expect_top1": "矿车射击"
+},
+{
+"input": "pinghengcheyuehui",
+"expect_top1": "平衡车约会"
+},
+{
+"input": "mogulizhuizhusai",
+"expect_top1": "莫古力追逐赛"
+},
+{
+"input": "dajixianrenzhang",
+"expect_top1": "打击仙人掌"
+},
+{
+"input": "jiroujingjichang",
+"expect_top1": "肌肉竞技场"
+},
+{
+"input": "haidaobaoluan",
+"expect_top1": "海盗暴乱"
+},
+{
+"input": "huangjiayanzouhui",
+"expect_top1": "皇家演奏会"
+},
+{
+"input": "luxingniaochongci",
+"expect_top1": "陆行鸟冲刺"
+},
+{
+"input": "huixing",
+"expect_top1": "彗星"
+},
+{
+"input": "yongqi",
+"expect_top1": "勇气"
+},
+{
+"input": "xinxin",
+"expect_top1": "信心"
+},
+{
+"input": "zuyongqi",
+"expect_top1": "阻勇气"
+},
+{
+"input": "zuxinxin",
+"expect_top1": "阻信心"
+},
+{
+"input": "zhongli",
+"expect_top1": "重力"
+},
+{
+"input": "huixuanbiao",
+"expect_top1": "回旋镖"
+},
+{
+"input": "fengchebiao",
+"expect_top1": "风车镖"
+},
+{
+"input": "xianrenzhangshoulijian",
+"expect_top1": "仙人掌手里剑"
+},
+{
+"input": "jinshugun",
+"expect_top1": "金属棍"
+},
+{
+"input": "morengun",
+"expect_top1": "魔人棍"
+},
+{
+"input": "gangtiejian",
+"expect_top1": "钢铁剑"
+},
+{
+"input": "miyinjian",
+"expect_top1": "秘银剑"
+},
+{
+"input": "pojiadajian",
+"expect_top1": "破甲大剑"
+},
+{
+"input": "langyabang",
+"expect_top1": "狼牙棒"
+},
+{
+"input": "shuangcijian",
+"expect_top1": "双刺剑"
+},
+{
+"input": "tujipao",
+"expect_top1": "突击炮"
+},
+{
+"input": "jianongdan",
+"expect_top1": "加农弹"
+},
+{
+"input": "yuanzitieqian",
+"expect_top1": "原子铁钳"
+},
+{
+"input": "jupao",
+"expect_top1": "巨炮"
+},
+{
+"input": "bodongpao",
+"expect_top1": "搏动炮"
+},
+{
+"input": "ruanyushoutao",
+"expect_top1": "软羽手套"
+},
+{
+"input": "yinsuquantao",
+"expect_top1": "音速拳套"
+},
+{
+"input": "jinshuzhihu",
+"expect_top1": "金属指虎"
+},
+{
+"input": "gaojishoutao",
+"expect_top1": "高级手套"
+},
+{
+"input": "quanjinshuzhangzhang",
+"expect_top1": "全金属长杖"
+},
+{
+"input": "yinzhizhangzhang",
+"expect_top1": "银制长杖"
+},
+{
+"input": "mofazhangzhang",
+"expect_top1": "魔法长杖"
+},
+{
+"input": "qiangjizhangzhang",
+"expect_top1": "强击长杖"
+},
+{
+"input": "sihuajian",
+"expect_top1": "丝滑剑"
+},
+{
+"input": "yuanlitunshizhe",
+"expect_top1": "原力吞噬者"
+},
+{
+"input": "shuijingjian",
+"expect_top1": "水晶剑"
+},
+{
+"input": "huoshanjian",
+"expect_top1": "火山剑"
+},
+{
+"input": "poliuzhe",
+"expect_top1": "破流者"
+},
+{
+"input": "dakoujingqiang",
+"expect_top1": "大口径枪"
+},
+{
+"input": "podifasheqi",
+"expect_top1": "破敌发射器"
+},
+{
+"input": "pojiajipao",
+"expect_top1": "破甲机炮"
+},
+{
+"input": "fafunaqiang",
+"expect_top1": "法夫纳枪"
+},
+{
+"input": "jianshihuojianpao",
+"expect_top1": "坚实火箭炮"
+},
+{
+"input": "gaoshengsihou",
+"expect_top1": "高声嘶吼"
+},
+{
+"input": "fengjingshoutao",
+"expect_top1": "风精手套"
+},
+{
+"input": "longzhao",
+"expect_top1": "龙爪"
+},
+{
+"input": "shuijingshoutao",
+"expect_top1": "水晶手套"
+},
+{
+"input": "yaengelipeier",
+"expect_top1": "雅恩格利佩尔"
+},
+{
+"input": "yonghengzhangzhang",
+"expect_top1": "永恒长杖"
+},
+{
+"input": "nvdizhangzhang",
+"expect_top1": "女帝长杖"
+},
+{
+"input": "zhizhezhangzhang",
+"expect_top1": "智者长杖"
+},
+{
+"input": "lengjingzhangzhang",
+"expect_top1": "棱镜长杖"
+},
+{
+"input": "miyinxiangquan",
+"expect_top1": "秘银项圈"
+},
+{
+"input": "fanpanxiangquan",
+"expect_top1": "反叛项圈"
+},
+{
+"input": "yinzhixiangquan",
+"expect_top1": "银制项圈"
+},
+{
+"input": "zishuijingxiangquan",
+"expect_top1": "紫水晶项圈"
+},
+{
+"input": "huangjinxiangquan",
+"expect_top1": "黄金项圈"
+},
+{
+"input": "bulixijiaman",
+"expect_top1": "布里希嘉曼"
+},
+{
+"input": "mofaxiangquan",
+"expect_top1": "魔法项圈"
+},
+{
+"input": "huixuanbishou",
+"expect_top1": "回旋匕首"
+},
+{
+"input": "shuangshengdushe",
+"expect_top1": "双生毒蛇"
+},
+{
+"input": "lieyingren",
+"expect_top1": "猎鹰人"
+},
+{
+"input": "shuijingshizijian",
+"expect_top1": "水晶十字剑"
+},
+{
+"input": "fengmoshoulijian",
+"expect_top1": "风魔手里剑"
+},
+{
+"input": "huangsekuoyinqi",
+"expect_top1": "黄色扩音器"
+},
+{
+"input": "gangtiekuoyinqi",
+"expect_top1": "钢铁扩音器"
+},
+{
+"input": "shuijingkuoyinqi",
+"expect_top1": "水晶扩音器"
+},
+{
+"input": "hongsekuoyinqi",
+"expect_top1": "红色扩音器"
+},
+{
+"input": "huishengkuoyinqi",
+"expect_top1": "回声扩音器"
+},
+{
+"input": "huangjinkuoyinqi",
+"expect_top1": "黄金扩音器"
+},
+{
+"input": "jialaerhaojiao",
+"expect_top1": "加拉尔号角"
+},
+{
+"input": "qingtongshouzhuo",
+"expect_top1": "青铜手镯"
+},
+{
+"input": "tieshouzhuo",
+"expect_top1": "铁手镯"
+},
+{
+"input": "shenmihuwan",
+"expect_top1": "神秘护腕"
+},
+{
+"input": "jixieshouzhuo",
+"expect_top1": "机械手镯"
+},
+{
+"input": "liliangshouhuan",
+"expect_top1": "力量手环"
+},
+{
+"input": "geteshouzhuo",
+"expect_top1": "哥特手镯"
+},
+{
+"input": "xingchenshouhuan",
+"expect_top1": "星辰手环"
+},
+{
+"input": "taishouzhuo",
+"expect_top1": "钛手镯"
+},
+{
+"input": "pigehuwan",
+"expect_top1": "皮革护腕"
+},
+{
+"input": "maodinghuwan",
+"expect_top1": "铆钉护腕"
+},
+{
+"input": "qiheishouhuan",
+"expect_top1": "漆黑手环"
+},
+{
+"input": "wushishouhuan",
+"expect_top1": "巫师手环"
+},
+{
+"input": "molihuwan",
+"expect_top1": "魔力护腕"
+},
+{
+"input": "fashihuwan",
+"expect_top1": "法师护腕"
+},
+{
+"input": "gangbanhuwan",
+"expect_top1": "钢板护腕"
+},
+{
+"input": "zhongjinshuhuwan",
+"expect_top1": "重金属护腕"
+},
+{
+"input": "gaojihuwan",
+"expect_top1": "高级护腕"
+},
+{
+"input": "jiheshouhuan",
+"expect_top1": "几何手环"
+},
+{
+"input": "fuwenhuwan",
+"expect_top1": "符文护腕"
+},
+{
+"input": "lianjieshouzhuo",
+"expect_top1": "链接手镯"
+},
+{
+"input": "midejiashouzhuo",
+"expect_top1": "米德加手镯"
+},
+{
+"input": "shenluoshouzhuo",
+"expect_top1": "神罗手镯"
+},
+{
+"input": "renzhehuwan",
+"expect_top1": "忍者护腕"
+},
+{
+"input": "moxianghuwan",
+"expect_top1": "魔翔护腕"
+},
+{
+"input": "guishenhuwan",
+"expect_top1": "鬼神护腕"
+},
+{
+"input": "fenghuanghuwan",
+"expect_top1": "凤凰护腕"
+},
+{
+"input": "jinshuhubi",
+"expect_top1": "金属护臂"
+},
+{
+"input": "pigeshouzhuo",
+"expect_top1": "皮革手镯"
+},
+{
+"input": "tongzhihubi",
+"expect_top1": "铜制护臂"
+},
+{
+"input": "mulinghushenfu",
+"expect_top1": "木灵护身符"
+},
+{
+"input": "jianyingshouzhuo",
+"expect_top1": "坚硬手镯"
+},
+{
+"input": "guzhishouhuan",
+"expect_top1": "骨制手环"
+},
+{
+"input": "maotouyinghubi",
+"expect_top1": "猫头鹰护臂"
+},
+{
+"input": "shourenhuwan",
+"expect_top1": "兽人护腕"
+},
+{
+"input": "shuishouhubi",
+"expect_top1": "水手护臂"
+},
+{
+"input": "xiangpishouzhuo",
+"expect_top1": "象皮手镯"
+},
+{
+"input": "yexingshouhuan",
+"expect_top1": "野性手环"
+},
+{
+"input": "nvwangshouzhuo",
+"expect_top1": "女王手镯"
+},
+{
+"input": "baoleihubi",
+"expect_top1": "堡垒护臂"
+},
+{
+"input": "huanhuohushenfu",
+"expect_top1": "幻惑护身符"
+},
+{
+"input": "shenyuanshouzhuo",
+"expect_top1": "深渊手镯"
+},
+{
+"input": "jushoushouhuan",
+"expect_top1": "巨兽手环"
+},
+{
+"input": "qishuhuwan",
+"expect_top1": "奇术护腕"
+},
+{
+"input": "feiyanhubi",
+"expect_top1": "飞燕护臂"
+},
+{
+"input": "hejinhubi",
+"expect_top1": "合金护臂"
+},
+{
+"input": "monvhushenfu",
+"expect_top1": "魔女护身符"
+},
+{
+"input": "fawaizhitushouzhuo",
+"expect_top1": "法外之徒手镯"
+},
+{
+"input": "eyushouhuan",
+"expect_top1": "鳄鱼手环"
+},
+{
+"input": "xianzhehuwan",
+"expect_top1": "贤者护腕"
+},
+{
+"input": "dajiaoshouhuan",
+"expect_top1": "大角手环"
+},
+{
+"input": "luxingniaohuwan",
+"expect_top1": "陆行鸟护腕"
+},
+{
+"input": "silinghubi",
+"expect_top1": "司令护臂"
+},
+{
+"input": "mingjiehushenfu",
+"expect_top1": "冥界护身符"
+},
+{
+"input": "daoluzhixingshouzhuo",
+"expect_top1": "道路之星手镯"
+},
+{
+"input": "luowenshouhuan",
+"expect_top1": "螺纹手环"
+},
+{
+"input": "gushenxingshouzhuo",
+"expect_top1": "谷神星手镯"
+},
+{
+"input": "jigushouhuan",
+"expect_top1": "脊骨手环"
+},
+{
+"input": "rongyaohubi",
+"expect_top1": "荣耀护臂"
+},
+{
+"input": "shijiezhishuhushenfu",
+"expect_top1": "世界之树护身符"
+},
+{
+"input": "jiamushouzhuo",
+"expect_top1": "迦姆手镯"
+},
+{
+"input": "wowadaosishouhuan",
+"expect_top1": "沃瓦道斯手环"
+},
+{
+"input": "nvwushenshouzhuo",
+"expect_top1": "女武神手镯"
+},
+{
+"input": "hadisihushenfu",
+"expect_top1": "哈迪斯护身符"
+},
+{
+"input": "saitelahubi",
+"expect_top1": "赛特拉护臂"
+},
+{
+"input": "saitelahushenfu",
+"expect_top1": "赛特拉护身符"
+},
+{
+"input": "saitelashouzhuo",
+"expect_top1": "赛特拉手镯"
+},
+{
+"input": "saitelahuwan",
+"expect_top1": "赛特拉护腕"
+},
+{
+"input": "weilihuwan",
+"expect_top1": "威力护腕"
+},
+{
+"input": "liaoyujinglian",
+"expect_top1": "疗愈颈链"
+},
+{
+"input": "quanlihuwan",
+"expect_top1": "全力护腕"
+},
+{
+"input": "jinglingerhuan",
+"expect_top1": "精灵耳环"
+},
+{
+"input": "bixiehufu",
+"expect_top1": "辟邪护符"
+},
+{
+"input": "erhuan",
+"expect_top1": "耳环"
+},
+{
+"input": "fangdanbeixin",
+"expect_top1": "防弹背心"
+},
+{
+"input": "baijinerhuan",
+"expect_top1": "白金耳环"
+},
+{
+"input": "yuanguhushenfu",
+"expect_top1": "远古护身符"
+},
+{
+"input": "yewaiqiushengbeixin",
+"expect_top1": "野外求生背心"
+},
+{
+"input": "toujin",
+"expect_top1": "头巾"
+},
+{
+"input": "xingzhizhuishi",
+"expect_top1": "星之坠饰"
+},
+{
+"input": "qingwajiezhi",
+"expect_top1": "青蛙戒指"
+},
+{
+"input": "jifenglingjin",
+"expect_top1": "疾风领巾"
+},
+{
+"input": "jiushuhuizhang",
+"expect_top1": "救赎徽章"
+},
+{
+"input": "xinyuexingyunfu",
+"expect_top1": "新月幸运符"
+},
+{
+"input": "fangyuzhangxue",
+"expect_top1": "防御长靴"
+},
+{
+"input": "zhushenhuanghun",
+"expect_top1": "诸神黄昏"
+},
+{
+"input": "touguan",
+"expect_top1": "头冠"
+},
+{
+"input": "guanjunyaodai",
+"expect_top1": "冠军腰带"
+},
+{
+"input": "huiyan",
+"expect_top1": "慧眼"
+},
+{
+"input": "mogulihufu",
+"expect_top1": "莫古力护符"
+},
+{
+"input": "taluopai",
+"expect_top1": "塔罗牌"
+},
+{
+"input": "shenqishuijing",
+"expect_top1": "神奇水晶"
+},
+{
+"input": "fennujiezhi",
+"expect_top1": "愤怒戒指"
+},
+{
+"input": "mofajiezhi",
+"expect_top1": "魔法戒指"
+},
+{
+"input": "mofachilun",
+"expect_top1": "魔法齿轮"
+},
+{
+"input": "nuqichuandaoqi",
+"expect_top1": "怒气传导器"
+},
+{
+"input": "huanshouhufu",
+"expect_top1": "幻兽护符"
+},
+{
+"input": "mingxingyaodai",
+"expect_top1": "明星腰带"
+},
+{
+"input": "zidongchongshengerhuan",
+"expect_top1": "自动重生耳环"
+},
+{
+"input": "chiguineicun",
+"expect_top1": "赤鬼内存"
+},
+{
+"input": "qingguineicun",
+"expect_top1": "青鬼内存"
+},
+{
+"input": "duandai",
+"expect_top1": "缎带"
+},
+{
+"input": "qianglibixiehufu",
+"expect_top1": "强力辟邪护符"
+},
+{
+"input": "molierhuan",
+"expect_top1": "魔力耳环"
+},
+{
+"input": "gaoweilihuwan",
+"expect_top1": "高威力护腕"
+},
+{
+"input": "jingshenxingyunfu",
+"expect_top1": "精神幸运符"
+},
+{
+"input": "youaierhuan",
+"expect_top1": "友爱耳环"
+},
+{
+"input": "xingrenhuizhang",
+"expect_top1": "行人徽章"
+},
+{
+"input": "luoxieyaoshiquan",
+"expect_top1": "罗榭钥匙圈"
+},
+{
+"input": "yuzhouqishituancongjunxunzhang",
+"expect_top1": "宇宙骑士团从军勋章"
+},
+{
+"input": "xielongjiezhi",
+"expect_top1": "邪龙戒指"
+},
+{
+"input": "qianzhu",
+"expect_top1": "祈安珠"
+},
+{
+"input": "haidaowangdeluopan",
+"expect_top1": "海盗王的罗盘"
+},
+{
+"input": "yuanshihushou",
+"expect_top1": "源氏护手"
+},
+{
+"input": "yizuhufu",
+"expect_top1": "义族护符"
+},
+{
+"input": "yuanhenweijin",
+"expect_top1": "怨恨围巾"
+},
+{
+"input": "xingyunhufu",
+"expect_top1": "幸运护符"
+},
+{
+"input": "baoshijiezhi",
+"expect_top1": "宝石戒指"
+},
+{
+"input": "xuebaipijian",
+"expect_top1": "雪白披肩"
+},
+{
+"input": "quanjinhuwan",
+"expect_top1": "全劲护腕"
+},
+{
+"input": "zhandouzhuangjia",
+"expect_top1": "战斗装甲"
+},
+{
+"input": "fashierhuan",
+"expect_top1": "法师耳环"
+},
+{
+"input": "saitelahufu",
+"expect_top1": "赛特拉护符"
+},
+{
+"input": "jixianzengfuqi",
+"expect_top1": "极限增幅器"
+},
+{
+"input": "buquzhijie",
+"expect_top1": "不屈之戒"
+},
+{
+"input": "daozeihushou",
+"expect_top1": "盗贼护手"
+},
+{
+"input": "pohuaizhuanjiayaoshiquan",
+"expect_top1": "破坏专家钥匙圈"
+},
+{
+"input": "luxingniaowangdedoupeng",
+"expect_top1": "陆行鸟王的斗篷"
+},
+{
+"input": "jinzhen",
+"expect_top1": "金针"
+},
+{
+"input": "zuodian",
+"expect_top1": "坐垫"
+},
+{
+"input": "chejiashouliudan",
+"expect_top1": "彻甲手榴弹"
+},
+{
+"input": "caoditai",
+"expect_top1": "草地钛"
+},
+{
+"input": "taiwenmanao",
+"expect_top1": "苔纹玛瑙"
+},
+{
+"input": "feihongshi",
+"expect_top1": "绯红石"
+},
+{
+"input": "yuechangshi",
+"expect_top1": "月长石"
+},
+{
+"input": "miyinkuangshi",
+"expect_top1": "秘银矿石"
+},
+{
+"input": "mofafenmo",
+"expect_top1": "魔法粉末"
+},
+{
+"input": "xingmoshi",
+"expect_top1": "星魔石"
+},
+{
+"input": "mucai",
+"expect_top1": "木材"
+},
+{
+"input": "fangchunxiangmu",
+"expect_top1": "芳醇橡木"
+},
+{
+"input": "wuyingshamu",
+"expect_top1": "兀鹰杉木"
+},
+{
+"input": "yanqimu",
+"expect_top1": "岩槭木"
+},
+{
+"input": "gongjiasongmu",
+"expect_top1": "贡加松木"
+},
+{
+"input": "husunmu",
+"expect_top1": "猢狲木"
+},
+{
+"input": "cenmu",
+"expect_top1": "梣木"
+},
+{
+"input": "mowuzhongzi",
+"expect_top1": "魔雾种子"
+},
+{
+"input": "shengluxie",
+"expect_top1": "圣露榭"
+},
+{
+"input": "zhenzhujiang",
+"expect_top1": "珍珠姜"
+},
+{
+"input": "mojiaolan",
+"expect_top1": "墨角兰"
+},
+{
+"input": "xingxingsuipian",
+"expect_top1": "星星碎片"
+},
+{
+"input": "haidaoyiwu",
+"expect_top1": "海盗遗物"
+},
+{
+"input": "xingzhienci",
+"expect_top1": "星之恩赐"
+},
+{
+"input": "xingzhiguoshi",
+"expect_top1": "星之果实"
+},
+{
+"input": "xingzhienhui",
+"expect_top1": "星之恩惠"
+},
+{
+"input": "xingzhiaomi",
+"expect_top1": "星之奥秘"
+},
+{
+"input": "xingzhizhufu",
+"expect_top1": "星之祝福"
+},
+{
+"input": "xingzhiqishi",
+"expect_top1": "星之启示"
+},
+{
+"input": "huifu",
+"expect_top1": "恢复"
+},
+{
+"input": "shijian",
+"expect_top1": "时间"
+},
+{
+"input": "xiaomie",
+"expect_top1": "消灭"
+},
+{
+"input": "zhiliao",
+"expect_top1": "治疗"
+},
+{
+"input": "zhongdu",
+"expect_top1": "中毒"
+},
+{
+"input": "shuxing",
+"expect_top1": "属性"
+},
+{
+"input": "fanweihua",
+"expect_top1": "范围化"
+},
+{
+"input": "mofazhuiji",
+"expect_top1": "魔法追击"
+},
+{
+"input": "difangzhaoshi",
+"expect_top1": "敌方招式"
+},
+{
+"input": "daojugaoshou",
+"expect_top1": "道具高手"
+},
+{
+"input": "jibu",
+"expect_top1": "计步"
+},
+{
+"input": "zidongliaoshang",
+"expect_top1": "自动疗伤"
+},
+{
+"input": "qianghuafangyu",
+"expect_top1": "强化防御"
+},
+{
+"input": "shanbizhan",
+"expect_top1": "闪避斩"
+},
+{
+"input": "tishengjingyanzhi",
+"expect_top1": "提升经验值"
+},
+{
+"input": "xianfazhiren",
+"expect_top1": "先发制人"
+},
+{
+"input": "tiaoxin",
+"expect_top1": "挑衅"
+},
+{
+"input": "xingyun",
+"expect_top1": "幸运"
+},
+{
+"input": "zhaoshigaoshou",
+"expect_top1": "招式高手"
+},
+{
+"input": "mojingshiyuesheng",
+"expect_top1": "魔晶石跃升"
+},
+{
+"input": "zidongmofa",
+"expect_top1": "自动魔法"
+},
+{
+"input": "qianghuamofa",
+"expect_top1": "强化魔法"
+},
+{
+"input": "kuaisuyongchang",
+"expect_top1": "快速咏唱"
+},
+{
+"input": "bianhua",
+"expect_top1": "变化"
+},
+{
+"input": "daojudashi",
+"expect_top1": "道具大师"
+},
+{
+"input": "jixianjiehe",
+"expect_top1": "极限结合"
+},
+{
+"input": "tiaoyue",
+"expect_top1": "跳跃"
+},
+{
+"input": "anhei",
+"expect_top1": "暗黑"
+},
+{
+"input": "rengqian",
+"expect_top1": "扔钱"
+},
+{
+"input": "qianghuajingzhunfangyu",
+"expect_top1": "强化精准防御"
+},
+{
+"input": "lianshouliansuo",
+"expect_top1": "联手连锁"
+},
+{
+"input": "jixiangongxiang",
+"expect_top1": "极限共享"
+},
+{
+"input": "jiergameishen",
+"expect_top1": "吉尔伽美什"
+},
+{
+"input": "mogulituan",
+"expect_top1": "莫古力团"
+},
+{
+"input": "huaqiaoluxingniao",
+"expect_top1": "花俏陆行鸟"
+},
+{
+"input": "chengjiechuanlian",
+"expect_top1": "惩戒串联"
+},
+{
+"input": "zhuijizhiyou",
+"expect_top1": "追击之友"
+},
+{
+"input": "xunleifenglie",
+"expect_top1": "迅雷风烈"
+},
+{
+"input": "beimaozhixing",
+"expect_top1": "背猫之刑"
+},
+{
+"input": "tianmifeitu",
+"expect_top1": "甜蜜匪徒"
+},
+{
+"input": "tiantangdanzhutai",
+"expect_top1": "天堂弹珠台"
+},
+{
+"input": "xingxingpaoxiao",
+"expect_top1": "行星咆哮"
+},
+{
+"input": "honglonghonglongpao",
+"expect_top1": "轰隆轰隆炮"
+},
+{
+"input": "reqingbodongpao",
+"expect_top1": "热情搏动炮"
+},
+{
+"input": "xuebenghunzhan",
+"expect_top1": "雪崩混战"
+},
+{
+"input": "maomijianongpao",
+"expect_top1": "猫咪加农炮"
+},
+{
+"input": "renzhejiguanqiang",
+"expect_top1": "忍者机关枪"
+},
+{
+"input": "hexiehuixuan",
+"expect_top1": "和谐回旋"
+},
+{
+"input": "menghukuaigong",
+"expect_top1": "猛虎快攻"
+},
+{
+"input": "moguliguanding",
+"expect_top1": "莫古力灌顶"
+},
+{
+"input": "lianhekuangbao",
+"expect_top1": "联合狂暴"
+},
+{
+"input": "kuileimaxituan",
+"expect_top1": "傀儡马戏团"
+},
+{
+"input": "feiyueyeshou",
+"expect_top1": "飞跃野兽"
+},
+{
+"input": "yemandadang",
+"expect_top1": "野蛮搭档"
+},
+{
+"input": "maomichongzhuang",
+"expect_top1": "猫咪冲撞"
+},
+{
+"input": "yunwaicangtian",
+"expect_top1": "云外苍天"
+},
+{
+"input": "chaojuefenshenshu",
+"expect_top1": "超绝分身术"
+},
+{
+"input": "luoxuantaifeng",
+"expect_top1": "螺旋台风"
+},
+{
+"input": "judamoguli",
+"expect_top1": "巨大莫古力"
+},
+{
+"input": "zhuanzhuanmuma",
+"expect_top1": "转转木马"
+},
+{
+"input": "juejuedantiao",
+"expect_top1": "嚼嚼弹跳"
+},
+{
+"input": "shenluozhanshidezunyan",
+"expect_top1": "神罗战士的尊严"
+},
+{
+"input": "jiaochaluoxuan",
+"expect_top1": "交叉螺旋"
+},
+{
+"input": "kongdongbaofa",
+"expect_top1": "空洞爆发"
+},
+{
+"input": "liandazhongji",
+"expect_top1": "连打重击"
+},
+{
+"input": "fanjisheji",
+"expect_top1": "反击射击"
+},
+{
+"input": "mengliebaofa",
+"expect_top1": "猛烈爆发"
+},
+{
+"input": "mofabaofa",
+"expect_top1": "魔法爆发"
+},
+{
+"input": "bianhuanfangyu",
+"expect_top1": "变换防御"
+},
+{
+"input": "zhiyinzhiyuan",
+"expect_top1": "知音支援"
+},
+{
+"input": "guangyaobaofa",
+"expect_top1": "光耀爆发"
+},
+{
+"input": "shuangchongfangyu",
+"expect_top1": "双重防御"
+},
+{
+"input": "chaojichongzhuang",
+"expect_top1": "超级冲撞"
+},
+{
+"input": "youyisheji",
+"expect_top1": "友谊射击"
+},
+{
+"input": "motianxiang",
+"expect_top1": "摩天翔"
+},
+{
+"input": "tianshengji",
+"expect_top1": "天升击"
+},
+{
+"input": "yaobaijiewu",
+"expect_top1": "摇摆捷舞"
+},
+{
+"input": "kuangyechicheng",
+"expect_top1": "狂野驰骋"
+},
+{
+"input": "meiyingsiyao",
+"expect_top1": "魅影撕咬"
+},
+{
+"input": "suodingshoulijian",
+"expect_top1": "锁定手里剑"
+},
+{
+"input": "huhuo",
+"expect_top1": "狐火"
+},
+{
+"input": "tujilaba",
+"expect_top1": "突击喇叭"
+},
+{
+"input": "weijiao",
+"expect_top1": "围剿"
+},
+{
+"input": "jingongchongci",
+"expect_top1": "进攻冲刺"
+},
+{
+"input": "shuangjianluanwu",
+"expect_top1": "双剑乱舞"
+},
+{
+"input": "shanguanglieyan",
+"expect_top1": "闪光烈焰"
+},
+{
+"input": "zhenyongmengjiefang",
+"expect_top1": "真勇猛解放"
+},
+{
+"input": "kongzhongqudong",
+"expect_top1": "空中驱动"
+},
+{
+"input": "hualongdianjing",
+"expect_top1": "画龙点睛"
+},
+{
+"input": "zhaojiafanji",
+"expect_top1": "招架反击"
+},
+{
+"input": "xujiqichang",
+"expect_top1": "蓄积气场"
+},
+{
+"input": "yumen",
+"expect_top1": "狱门"
+},
+{
+"input": "canxin",
+"expect_top1": "残心"
+},
+{
+"input": "badaoyishan",
+"expect_top1": "八刀一闪"
+},
+{
+"input": "fanjizhiren",
+"expect_top1": "反击之刃"
+},
+{
+"input": "shijianzhili",
+"expect_top1": "时间之力"
+},
+{
+"input": "shanguangmofazhen",
+"expect_top1": "闪光魔法阵"
+},
+{
+"input": "shenshengxuji",
+"expect_top1": "神圣蓄积"
+},
+{
+"input": "fennulaoyin",
+"expect_top1": "愤怒烙印"
+},
+{
+"input": "xuanfengfuchong",
+"expect_top1": "旋风俯冲"
+},
+{
+"input": "tiantangbuluo",
+"expect_top1": "天堂部落"
+},
+{
+"input": "lianxuzhan",
+"expect_top1": "连续斩"
+},
+{
+"input": "yunshiluanji",
+"expect_top1": "陨石乱击"
+},
+{
+"input": "ewaidanyao",
+"expect_top1": "额外弹药"
+},
+{
+"input": "linghunbaofa",
+"expect_top1": "灵魂爆发"
+},
+{
+"input": "xuexinghongzha",
+"expect_top1": "血腥轰炸"
+},
+{
+"input": "huixuanliya",
+"expect_top1": "回旋利牙"
+},
+{
+"input": "chaojifangyu",
+"expect_top1": "超级防御"
+},
+{
+"input": "xingchenshexian",
+"expect_top1": "星尘射线"
+},
+{
+"input": "yueyazhaoji",
+"expect_top1": "月牙爪击"
+},
+{
+"input": "bingzhupaoxiao",
+"expect_top1": "冰柱咆哮"
+},
+{
+"input": "diankuangkuaigan",
+"expect_top1": "癫狂快感"
+},
+{
+"input": "zhanshiliaoyu",
+"expect_top1": "战士疗愈"
+},
+{
+"input": "zhanshiguwu",
+"expect_top1": "战士鼓舞"
+},
+{
+"input": "zhiminghuiji",
+"expect_top1": "致命挥击"
+},
+{
+"input": "chuanciliaoya",
+"expect_top1": "穿刺獠牙"
+},
+{
+"input": "xuexingliaoya",
+"expect_top1": "血腥獠牙"
+},
+{
+"input": "dadikuangxiao",
+"expect_top1": "大地狂啸"
+},
+{
+"input": "touzhishoulijian",
+"expect_top1": "投掷手里剑"
+},
+{
+"input": "renshu",
+"expect_top1": "忍术"
+},
+{
+"input": "fenglinhuoshan",
+"expect_top1": "风林火山"
+},
+{
+"input": "wusuoyunmai",
+"expect_top1": "雾锁云埋"
+},
+{
+"input": "renshubianhua",
+"expect_top1": "忍术变化"
+},
+{
+"input": "chuqibuyi",
+"expect_top1": "出其不意"
+},
+{
+"input": "xuanfeng",
+"expect_top1": "旋风"
+},
+{
+"input": "feimaotuigong",
+"expect_top1": "飞毛腿功"
+},
+{
+"input": "xieguituisan",
+"expect_top1": "邪鬼退散"
+},
+{
+"input": "xishouxieqi",
+"expect_top1": "吸收邪气"
+},
+{
+"input": "jifengxunlei",
+"expect_top1": "疾风迅雷"
+},
+{
+"input": "xueji",
+"expect_top1": "血祭"
+},
+{
+"input": "shengzhebimie",
+"expect_top1": "生者必灭"
+},
+{
+"input": "toujiangshalu",
+"expect_top1": "头奖杀戮"
+},
+{
+"input": "fumaoguangshu",
+"expect_top1": "抚猫光束"
+},
+{
+"input": "quantipohuai",
+"expect_top1": "全体破坏"
+},
+{
+"input": "maopengongji",
+"expect_top1": "猫盆攻击"
+},
+{
+"input": "maomigongji",
+"expect_top1": "猫咪攻击"
+},
+{
+"input": "hujiaomoguli",
+"expect_top1": "呼叫莫古力"
+},
+{
+"input": "touzi",
+"expect_top1": "骰子"
+},
+{
+"input": "yunshigongji",
+"expect_top1": "运势攻击"
+},
+{
+"input": "mogulibaozha",
+"expect_top1": "莫古力爆炸"
+},
+{
+"input": "mogulidilei",
+"expect_top1": "莫古力地雷"
+},
+{
+"input": "mogulizhaohuanshu",
+"expect_top1": "莫古力召唤术"
+},
+{
+"input": "moguliquanji",
+"expect_top1": "莫古力拳击"
+},
+{
+"input": "mogulituji",
+"expect_top1": "莫古力突击"
+},
+{
+"input": "moguxiang",
+"expect_top1": "莫古箱"
+},
+{
+"input": "baiwanmoguxiang",
+"expect_top1": "百万莫古箱"
+},
+{
+"input": "shiyimoguxiang",
+"expect_top1": "十亿莫古箱"
+},
+{
+"input": "qianzhuiti",
+"expect_top1": "前坠踢"
+},
+{
+"input": "daqiguwu",
+"expect_top1": "打气鼓舞"
+},
+{
+"input": "shouhuguwu",
+"expect_top1": "守护鼓舞"
+},
+{
+"input": "kuangbaoguwu",
+"expect_top1": "狂暴鼓舞"
+},
+{
+"input": "chenmozhuangji",
+"expect_top1": "沉默撞击"
+},
+{
+"input": "shijianzhuangji",
+"expect_top1": "时间撞击"
+},
+{
+"input": "zhongduzhuangji",
+"expect_top1": "中毒撞击"
+},
+{
+"input": "shihuazhuangji",
+"expect_top1": "石化撞击"
+},
+{
+"input": "xuli",
+"expect_top1": "蓄力"
+},
+{
+"input": "kuaisuxuli",
+"expect_top1": "快速蓄力"
+},
+{
+"input": "gongjixuli",
+"expect_top1": "攻击蓄力"
+},
+{
+"input": "gaoduyingyongzhanji",
+"expect_top1": "高度英勇斩击"
+},
+{
+"input": "mengbaokuaigong",
+"expect_top1": "猛爆快攻"
+},
+{
+"input": "liaoyuzhifeng",
+"expect_top1": "疗愈之风"
+},
+{
+"input": "zuihoulunpan",
+"expect_top1": "最后轮盘"
+},
+{
+"input": "xianrenzhangzhadan",
+"expect_top1": "仙人掌炸弹"
+},
+{
+"input": "xianrenzhangmofahudun",
+"expect_top1": "仙人掌魔法护盾"
+},
+{
+"input": "chaodiancihuanguangqiu",
+"expect_top1": "超电磁幻光球"
+},
+{
+"input": "chaojichouqi",
+"expect_top1": "超级臭气"
+},
+{
+"input": "nufachongguanbaoji",
+"expect_top1": "怒发冲冠爆击"
+},
+{
+"input": "dajiadeyuanhen",
+"expect_top1": "大家的怨恨"
+},
+{
+"input": "yuanhenbaozha",
+"expect_top1": "怨恨爆炸"
+},
+{
+"input": "yangluchulexiaorong",
+"expect_top1": "阳露出了笑容"
+},
+{
+"input": "yinshengqile",
+"expect_top1": "阴生气了"
+},
+{
+"input": "moguzhadan",
+"expect_top1": "莫古炸弹"
+},
+{
+"input": "luxingniaoti",
+"expect_top1": "陆行鸟踢"
+},
+{
+"input": "zhicaizhilei",
+"expect_top1": "制裁之雷"
+},
+{
+"input": "takesifuchong",
+"expect_top1": "塔克斯俯冲"
+},
+{
+"input": "juekong",
+"expect_top1": "绝空"
+},
+{
+"input": "mingyunxuangao",
+"expect_top1": "命运宣告"
+},
+{
+"input": "wuxintianshi",
+"expect_top1": "无心天使"
+},
+{
+"input": "zhantiejian",
+"expect_top1": "斩铁剑"
+},
+{
+"input": "jiergameishenguangshu",
+"expect_top1": "吉尔伽美什光束"
+},
+{
+"input": "mogulijinjichudong",
+"expect_top1": "莫古力紧急出动"
+},
+{
+"input": "zuanshixingchen",
+"expect_top1": "钻石星尘"
+},
+{
+"input": "dadizhinu",
+"expect_top1": "大地之怒"
+},
+{
+"input": "zhuanshengzhiyan",
+"expect_top1": "转生之炎"
+},
+{
+"input": "shenshengshenpan",
+"expect_top1": "神圣审判"
+},
+{
+"input": "sanchongzaihuo",
+"expect_top1": "三重灾祸"
+},
+{
+"input": "mojingerhuan",
+"expect_top1": "魔晶耳环"
+},
+{
+"input": "nifuerhaimushiwodeguxiang",
+"expect_top1": "尼福尔海姆是我的故乡"
+},
+{
+"input": "shuitaguangchang",
+"expect_top1": "水塔广场"
+},
+{
+"input": "nifuershan",
+"expect_top1": "尼福尔山"
+},
+{
+"input": "woyizhirenweizijishitebiede",
+"expect_top1": "我一直认为自己是特别的"
+},
+{
+"input": "shenluogongguan",
+"expect_top1": "神罗公馆"
+},
+{
+"input": "jiasideboshi",
+"expect_top1": "贾斯德博士"
+},
+{
+"input": "jienuowajihua",
+"expect_top1": "杰诺瓦计划"
+},
+{
+"input": "shidaibianleakelaode",
+"expect_top1": "时代变了啊，克劳德"
+},
+{
+"input": "luoxiazangan",
+"expect_top1": "罗夏·赞甘"
+},
+{
+"input": "jichengleweidakexuejiagongzuodefanren",
+"expect_top1": "继承了伟大科学家工作的凡人"
+},
+{
+"input": "yaoduijianqidaojiuchenxianzai",
+"expect_top1": "要对剑祈祷就趁现在"
+},
+{
+"input": "shinixihuandefazhanne",
+"expect_top1": "是你喜欢的发展呢"
+},
+{
+"input": "baotiaonajiahuojuranzhenzhemezuo",
+"expect_top1": "宝条那家伙，居然真这么做"
+},
+{
+"input": "woyaoqujianmuqin",
+"expect_top1": "我要去见母亲"
+},
+{
+"input": "woxianzaijiuqujieni",
+"expect_top1": "我现在就去接你"
+},
+{
+"input": "woshitianxuanzhiren",
+"expect_top1": "我是天选之人"
+},
+{
+"input": "rihoujiangchengweixingqiudezhipeizhe",
+"expect_top1": "日后将成为星球的支配者"
+},
+{
+"input": "kamu",
+"expect_top1": "卡姆"
+},
+{
+"input": "buluode",
+"expect_top1": "布洛德"
+},
+{
+"input": "jinengshu",
+"expect_top1": "技能书"
+},
+{
+"input": "zhizuozhongduanji",
+"expect_top1": "制作终端机"
+},
+{
+"input": "kuaisuyidong",
+"expect_top1": "快速移动"
+},
+{
+"input": "miyinkuangkeng",
+"expect_top1": "秘银矿坑"
+},
+{
+"input": "aolifumuchang",
+"expect_top1": "奥利弗牧场"
+},
+{
+"input": "gelin",
+"expect_top1": "格林"
+},
+{
+"input": "gelinmuchang",
+"expect_top1": "格林牧场"
+},
+{
+"input": "gelingelin",
+"expect_top1": "格林葛林"
+},
+{
+"input": "bike",
+"expect_top1": "哔可"
+},
+{
+"input": "kelin",
+"expect_top1": "可琳"
+},
+{
+"input": "huangjinyumao",
+"expect_top1": "黄金羽毛"
+},
+{
+"input": "gelasilan",
+"expect_top1": "格拉斯兰"
+},
+{
+"input": "shijiebaogao",
+"expect_top1": "世界报告"
+},
+{
+"input": "mogulijiangpai",
+"expect_top1": "莫古力奖牌"
+},
+{
+"input": "huangjindianshu",
+"expect_top1": "黄金点数"
+},
+{
+"input": "zhandoubaogao",
+"expect_top1": "战斗报告"
+},
+{
+"input": "shengmingdian",
+"expect_top1": "生命点"
+},
+{
+"input": "gudaiwuzhi",
+"expect_top1": "古代物质"
+},
+{
+"input": "luxingniaodi",
+"expect_top1": "陆行鸟笛"
+},
+{
+"input": "leinuoqianbeibuzaijiuyouwolaibushang",
+"expect_top1": "雷诺前辈不在，就由我来补上！"
+},
+{
+"input": "rangrenmengmeiyiqiudexiujia",
+"expect_top1": "让人梦寐以求的休假"
+},
+{
+"input": "ailisijiubaituonimenle",
+"expect_top1": "爱丽丝就拜托你们了"
+},
+{
+"input": "zheshishangjidemingling",
+"expect_top1": "这是上级的命令"
+},
+{
+"input": "shinimentiaoqizhanzhengde",
+"expect_top1": "是你们挑起战争的"
+},
+{
+"input": "luodena",
+"expect_top1": "罗德娜"
+},
+{
+"input": "pulixila",
+"expect_top1": "普莉希拉"
+},
+{
+"input": "xiuxiuxiuxiu",
+"expect_top1": "咻咻咻咻！"
+},
+{
+"input": "weiniganshenmea",
+"expect_top1": "喂！你干什么啊！"
+},
+{
+"input": "aimiliou",
+"expect_top1": "艾米利欧"
+},
+{
+"input": "xiacijiutuixinzhifudiliaoliaoba",
+"expect_top1": "下次就推心置腹地聊聊吧"
+},
+{
+"input": "yaobifujiwoshibuhuishude",
+"expect_top1": "要比腹肌我是不会输的"
+},
+{
+"input": "sangjintianliangdeshenluogongsi",
+"expect_top1": "丧尽天良的神罗公司"
+},
+{
+"input": "gelunluosibulukeshangxiao",
+"expect_top1": "格伦·洛斯布鲁克上校"
+},
+{
+"input": "gelun",
+"expect_top1": "格伦"
+},
+{
+"input": "jituofu",
+"expect_top1": "季托夫"
+},
+{
+"input": "haiwende",
+"expect_top1": "海温德"
+},
+{
+"input": "juxingmojingshizhizheng",
+"expect_top1": "巨型魔晶石之争"
+},
+{
+"input": "shifuerzongdu",
+"expect_top1": "史夫尔总督"
+},
+{
+"input": "xingzhibobo",
+"expect_top1": "兴致勃勃！"
+},
+{
+"input": "ganjinshizu",
+"expect_top1": "干劲十足！"
+},
+{
+"input": "shanyaobamoliangbawodetaiyang",
+"expect_top1": "闪耀吧，磨亮吧，我的太阳"
+},
+{
+"input": "laibaxinshidaijijiangjiekaixumu",
+"expect_top1": "来吧，新时代即将揭开序幕"
+},
+{
+"input": "yifulitezhenxing",
+"expect_top1": "伊弗利特阵形"
+},
+{
+"input": "bahamutezhenxing",
+"expect_top1": "巴哈姆特阵形"
+},
+{
+"input": "lamuzhenxing",
+"expect_top1": "拉姆阵形"
+},
+{
+"input": "xiwazhenxing",
+"expect_top1": "希瓦阵形"
+},
+{
+"input": "midejiadiqibubingliandui",
+"expect_top1": "米德加第七步兵连队"
+},
+{
+"input": "xinzongcaijiurenqingzhuyouxing",
+"expect_top1": "新总裁就任庆祝游行"
+},
+{
+"input": "juxingmojingshi",
+"expect_top1": "巨型魔晶石"
+},
+{
+"input": "leiji",
+"expect_top1": "蕾吉"
+},
+{
+"input": "fazi",
+"expect_top1": "法兹"
+},
+{
+"input": "dibashenluowan",
+"expect_top1": "第八神罗丸"
+},
+{
+"input": "weilaidezuiqiangkapianduizhanzhe",
+"expect_top1": "未来的最强卡片对战者"
+},
+{
+"input": "huaizi",
+"expect_top1": "怀兹"
+},
+{
+"input": "kaishikapianduizhan",
+"expect_top1": "开始卡片对战！"
+},
+{
+"input": "fuleisha",
+"expect_top1": "弗雷沙"
+},
+{
+"input": "laibiyichangba",
+"expect_top1": "来比一场吧！"
+},
+{
+"input": "laibabiaoyanshijiandaole",
+"expect_top1": "来吧，表演时间到了"
+},
+{
+"input": "leijikennijin",
+"expect_top1": "蕾吉·肯尼金"
+},
+{
+"input": "shenluodujiacun",
+"expect_top1": "神罗度假村"
+},
+{
+"input": "yongliangzhijiaozhanlihaizhennana",
+"expect_top1": "用两只脚站立还真难啊"
+},
+{
+"input": "heidoupeng",
+"expect_top1": "黑斗篷"
+},
+{
+"input": "kabonuo",
+"expect_top1": "卡波诺"
+},
+{
+"input": "taiyanghaiandujiacun",
+"expect_top1": "太阳海岸度假村"
+},
+{
+"input": "nanaqi",
+"expect_top1": "纳纳奇"
+},
+{
+"input": "fulan",
+"expect_top1": "芙兰"
+},
+{
+"input": "nuoaimi",
+"expect_top1": "诺艾米"
+},
+{
+"input": "yueda",
+"expect_top1": "约达"
+},
+{
+"input": "xianghailuoyiyangjuanjuande",
+"expect_top1": "像海螺一样卷卷的"
+},
+{
+"input": "huolalayangyangdeduiba",
+"expect_top1": "火辣辣、痒痒的对吧！"
+},
+{
+"input": "shiyanxiuyaojiekaixumule",
+"expect_top1": "实验秀要揭开序幕了！"
+},
+{
+"input": "renfaqingtianpili",
+"expect_top1": "忍法，晴天霹雳！"
+},
+{
+"input": "zhaodaibuzhou",
+"expect_top1": "招待不周！"
+},
+{
+"input": "haiandeyingxiongqiaoni",
+"expect_top1": "海岸的英雄乔尼"
+},
+{
+"input": "youshishigaochaodemojingshilieren",
+"expect_top1": "有时是高超的魔晶石猎人！"
+},
+{
+"input": "youshishihualidecike",
+"expect_top1": "有时是华丽的刺客！"
+},
+{
+"input": "youshishichushouxiangzhudemeishaonvrenzhe",
+"expect_top1": "有时是出手相助的美少女忍者！"
+},
+{
+"input": "jiushidajiazuixihuandeyoufeio",
+"expect_top1": "就是大家最喜欢的尤菲哦！"
+},
+{
+"input": "ciweitou",
+"expect_top1": "刺猬头"
+},
+{
+"input": "zaihaianyujianai",
+"expect_top1": "在海岸遇见爱"
+},
+{
+"input": "aizhika",
+"expect_top1": "爱之卡"
+},
+{
+"input": "pinghengche",
+"expect_top1": "平衡车"
+},
+{
+"input": "taiyanghaianhaitan",
+"expect_top1": "太阳海岸·海滩"
+},
+{
+"input": "xilongyisheng",
+"expect_top1": "席隆医生"
+},
+{
+"input": "xiacijiushixuechizhizhanle",
+"expect_top1": "下次就是雪耻之战了"
+},
+{
+"input": "juxingmojingshijihua",
+"expect_top1": "巨型魔晶石计划"
+},
+{
+"input": "kelaojiu",
+"expect_top1": "克劳啾"
+},
+{
+"input": "nenghejiarenzaiyiqishizuihaode",
+"expect_top1": "能和家人在一起是最好的"
+},
+{
+"input": "diou",
+"expect_top1": "迪欧"
+},
+{
+"input": "huodongguangchang",
+"expect_top1": "活动广场"
+},
+{
+"input": "motianlunguangchang",
+"expect_top1": "摩天轮广场"
+},
+{
+"input": "luxingniaoguangchang",
+"expect_top1": "陆行鸟广场"
+},
+{
+"input": "guihunguangchang",
+"expect_top1": "鬼魂广场"
+},
+{
+"input": "leyuanzhongxin",
+"expect_top1": "乐园中心"
+},
+{
+"input": "diexiaqu",
+"expect_top1": "碟下区"
+},
+{
+"input": "huangjinjuchang",
+"expect_top1": "黄金剧场"
+},
+{
+"input": "jingerewuba",
+"expect_top1": "劲歌热舞吧！"
+},
+{
+"input": "huangjinleyuan",
+"expect_top1": "黄金乐园"
+},
+{
+"input": "chaoyuejixian",
+"expect_top1": "超越极限"
+},
+{
+"input": "bieyuanwo",
+"expect_top1": "别怨我"
+},
+{
+"input": "huangjinhuzhao",
+"expect_top1": "黄金护照"
+},
+{
+"input": "xingqiudexueye",
+"expect_top1": "星球的血液"
+},
+{
+"input": "zhendehenbaoqian",
+"expect_top1": "真的很抱歉"
+},
+{
+"input": "buxiangcaobuxing",
+"expect_top1": "不，香草不行"
+},
+{
+"input": "shuangrenshizhinazhongshuangrenma",
+"expect_top1": "双人……是指那种双人吗？"
+},
+{
+"input": "zheshiwodewomenzhijiandewenti",
+"expect_top1": "这是我的……我们之间的问题"
+},
+{
+"input": "wodeshouyijingzhanmanxianxuelea",
+"expect_top1": "我的手已经沾满鲜血了啊！"
+},
+{
+"input": "yueyeche",
+"expect_top1": "越野车"
+},
+{
+"input": "xingyunshiwushimogu",
+"expect_top1": "幸运食物是蘑菇"
+},
+{
+"input": "gousuoqiang",
+"expect_top1": "钩索枪"
+},
+{
+"input": "xisini",
+"expect_top1": "西斯妮"
+},
+{
+"input": "gongjiajiacun",
+"expect_top1": "贡加加村"
+},
+{
+"input": "gongjiagu",
+"expect_top1": "贡加菇"
+},
+{
+"input": "heimiliwenghuohongxili",
+"expect_top1": "黑迷利翁或红溪里"
+},
+{
+"input": "bijingwomeiyoutaoyantadeliyouma",
+"expect_top1": "毕竟我没有讨厌他的理由嘛"
+},
+{
+"input": "geernika",
+"expect_top1": "格尔尼卡"
+},
+{
+"input": "xianrukunjingshidedaoyingxiongzhengjiu",
+"expect_top1": "陷入困境时，得到英雄拯救"
+},
+{
+"input": "zheciwohuibaohuni",
+"expect_top1": "这次我会保护你"
+},
+{
+"input": "fangge",
+"expect_top1": "芳格"
+},
+{
+"input": "xiaoyema",
+"expect_top1": "小野马"
+},
+{
+"input": "yemahangkong",
+"expect_top1": "野马航空"
+},
+{
+"input": "gaizeerbugenhagen",
+"expect_top1": "盖泽尔·布根哈根"
+},
+{
+"input": "bugenhagen",
+"expect_top1": "布根哈根"
+},
+{
+"input": "tiankongbushuyurenheren",
+"expect_top1": "天空不属于任何人"
+},
+{
+"input": "shenluoquchishiba",
+"expect_top1": "神罗去吃屎吧！"
+},
+{
+"input": "chuyilumaozhixing",
+"expect_top1": "处以撸猫之刑！"
+},
+{
+"input": "xingmingxuedeshengdixingyunxiagu",
+"expect_top1": "星命学的圣地星殒峡谷"
+},
+{
+"input": "yuanxingqiuyugeweitongzai",
+"expect_top1": "愿星球与各位同在"
+},
+{
+"input": "xingqiudezimin",
+"expect_top1": "星球的子民"
+},
+{
+"input": "xingmingxuexiqi",
+"expect_top1": "星命学习器"
+},
+{
+"input": "yizu",
+"expect_top1": "义族"
+},
+{
+"input": "yinweiwoshilaizixingyunxiagudenanaqi",
+"expect_top1": "因为我是来自星殒峡谷的纳纳奇！"
+},
+{
+"input": "qiheidebaozhu",
+"expect_top1": "漆黑的宝珠"
+},
+{
+"input": "wensente",
+"expect_top1": "文森特"
+},
+{
+"input": "wensentewalunding",
+"expect_top1": "文森特·瓦伦丁"
+},
+{
+"input": "cunqi",
+"expect_top1": "村崎"
+},
+{
+"input": "renzhe",
+"expect_top1": "忍者"
+},
+{
+"input": "kanlaiwodezuixingyouzengjialeyitiao",
+"expect_top1": "看来我的罪行又增加了一条"
+},
+{
+"input": "xieshi",
+"expect_top1": "楔石"
+},
+{
+"input": "kelaodewoxiangdedaoheimojingshi",
+"expect_top1": "克劳德，我想得到黑魔晶石"
+},
+{
+"input": "guoqubeichengweiyingxiongdenanren",
+"expect_top1": "过去被称为英雄的男人"
+},
+{
+"input": "jiaerdiya",
+"expect_top1": "迦尔帝亚"
+},
+{
+"input": "aerfuleide",
+"expect_top1": "阿尔弗雷德"
+},
+{
+"input": "lusha",
+"expect_top1": "露莎"
+},
+{
+"input": "xiaochou",
+"expect_top1": "小丑"
+},
+{
+"input": "wowadaosi",
+"expect_top1": "沃瓦道斯"
+},
+{
+"input": "zunming",
+"expect_top1": "遵命！"
+},
+{
+"input": "wojintianbujiaban",
+"expect_top1": "我今天不加班"
+},
+{
+"input": "dadangshuoyixiapingchangnaju",
+"expect_top1": "搭档，说一下平常那句"
+},
+{
+"input": "nikebiexiaokantakesi",
+"expect_top1": "你可别小看塔克斯"
+},
+{
+"input": "wodehenhenzounizhejiahuoyixiacaixing",
+"expect_top1": "我得狠狠揍你这家伙一下才行"
+},
+{
+"input": "dehuozhecainengshitakesi",
+"expect_top1": "得活着才能是塔克斯"
+},
+{
+"input": "yunshi",
+"expect_top1": "陨石"
+},
+{
+"input": "buguanfashengshenmedouyaozaiyiqio",
+"expect_top1": "不管发生什么都要在一起哦"
+},
+{
+"input": "wokeaidekongkerenou",
+"expect_top1": "我可爱的空壳人偶"
+},
+{
+"input": "yongfennutianmannikongxudexin",
+"expect_top1": "用愤怒填满你空虚的心"
+},
+{
+"input": "bubibeishang",
+"expect_top1": "不必悲伤"
+},
+{
+"input": "chongmanhuiyidedifang",
+"expect_top1": "充满回忆的地方"
+},
+{
+"input": "xuanzezhihoujiuhuichuxianxinshijie",
+"expect_top1": "选择之后就会出现新世界"
+},
+{
+"input": "woxiangzhongshiwoderensheng",
+"expect_top1": "我想重拾我的人生"
+},
+{
+"input": "rangwobazhufusonggeiniba",
+"expect_top1": "让我把祝福送给你吧"
+},
+{
+"input": "shengmingxunhuanyuzhekexingqiu",
+"expect_top1": "生命循环于这颗星球"
+},
+{
+"input": "wangquezhidou",
+"expect_top1": "忘却之都"
+},
+{
+"input": "yuwomendeshijiezaijiehe",
+"expect_top1": "于我们的世界再结合"
+},
+{
+"input": "zhengzong",
+"expect_top1": "正宗"
+},
+{
+"input": "zhuiluodeyingxiong",
+"expect_top1": "坠落的英雄"
+},
+{
+"input": "jienuowazailin",
+"expect_top1": "杰诺瓦再临"
+},
+{
+"input": "piankejiaqi",
+"expect_top1": "片刻假期"
+},
+{
+"input": "taolileyuan",
+"expect_top1": "逃离乐园"
+},
+{
+"input": "liehuadeshenluozhanshi",
+"expect_top1": "劣化的神罗战士"
+},
+{
+"input": "chongmanhuiyideyuehui",
+"expect_top1": "充满回忆的约会"
+},
+{
+"input": "chadelijisuanyichu",
+"expect_top1": "查德利计算溢出"
+},
+{
+"input": "xingqiudebeiming",
+"expect_top1": "星球的悲鸣"
+},
+{
+"input": "zhongaimogulideshenluozhanshi",
+"expect_top1": "钟爱莫古力的神罗战士"
+},
+{
+"input": "gangqinjujiang",
+"expect_top1": "钢琴巨匠"
+},
+{
+"input": "xingqiuyongquandezhanlvedashi",
+"expect_top1": "星球涌泉的战略大师"
+},
+{
+"input": "wuyingbaoleimingjiang",
+"expect_top1": "兀鹰堡垒名将"
+},
+{
+"input": "diqibubinglianduiquantijihe",
+"expect_top1": "第七步兵连队全体集合"
+},
+{
+"input": "huodezuiyouxiubiaoyanjiang",
+"expect_top1": "获得最优秀表演奖"
+},
+{
+"input": "chaoyueyiqiezhe",
+"expect_top1": "超越一切者"
+},
+{
+"input": "fuchouzhilvqicheng",
+"expect_top1": "复仇之旅启程"
+},
+{
+"input": "taolidibaqu",
+"expect_top1": "逃离第捌区"
+},
+{
+"input": "wannengbangshoudegongzuo",
+"expect_top1": "万能帮手的工作"
+},
+{
+"input": "wengzhongzhibie",
+"expect_top1": "瓮中之鳖"
+},
+{
+"input": "shenluozhanshidereshen",
+"expect_top1": "神罗战士的热身"
+},
+{
+"input": "feibiaogaoshou",
+"expect_top1": "飞镖高手"
+},
+{
+"input": "shenluomotuocheqishou",
+"expect_top1": "神罗摩托车骑手"
+},
+{
+"input": "qiaonidechaojisidang",
+"expect_top1": "乔尼的超级死党"
+},
+{
+"input": "wudaohuanghou",
+"expect_top1": "舞蹈皇后"
+},
+{
+"input": "chuanshuojianhao",
+"expect_top1": "传说剑豪"
+},
+{
+"input": "wogaoxinpinqingninikebierangwoshiwang",
+"expect_top1": "我高薪聘请你，你可别让我失望"
+},
+{
+"input": "luokehate",
+"expect_top1": "洛克哈特"
+},
+{
+"input": "sitelaifu",
+"expect_top1": "斯特莱夫"
+},
+{
+"input": "hualeisi",
+"expect_top1": "华勒斯"
+},
+{
+"input": "maihuanv",
+"expect_top1": "卖花女"
+},
+{
+"input": "gaiensibolei",
+"expect_top1": "盖恩斯伯勒"
+},
+{
+"input": "feier",
+"expect_top1": "菲尔"
+},
+{
+"input": "duyesiti",
+"expect_top1": "杜耶斯提"
+},
+{
+"input": "fangmaguolaiba",
+"expect_top1": "放马过来吧！"
+},
+{
+"input": "zongdacunzhang",
+"expect_top1": "宗达村长"
+},
+{
+"input": "xiaoxinyiyirennaianjing",
+"expect_top1": "小心翼翼、忍耐安静……"
+},
+{
+"input": "renzhehouyi",
+"expect_top1": "忍者后裔"
+},
+{
+"input": "ruyue",
+"expect_top1": "如月"
+},
+{
+"input": "liketingzhidikangbingtouxiang",
+"expect_top1": "立刻停止抵抗并投降"
+},
+{
+"input": "geiwojinengshu",
+"expect_top1": "给我技能书！"
+},
+{
+"input": "meilishibufennannvde",
+"expect_top1": "美丽是不分男女的"
+},
+{
+"input": "zhishihuiguixingqiueryi",
+"expect_top1": "只是回归星球而已"
+},
+{
+"input": "geiwoqianzhu",
+"expect_top1": "给我祈安珠！"
+},
+{
+"input": "bawodangxia",
+"expect_top1": "把握当下"
+},
+{
+"input": "haohaoxiangshoubakelaode",
+"expect_top1": "好好享受吧，克劳德"
+},
+{
+"input": "geiwozhengzong",
+"expect_top1": "给我正宗！"
+},
+{
+"input": "geiwotieshouzhuo",
+"expect_top1": "给我铁手镯！"
+},
+{
+"input": "geiwoshouliudan",
+"expect_top1": "给我手榴弹！"
+},
+{
+"input": "geiwotishenji",
+"expect_top1": "给我提神剂！"
+},
+{
+"input": "geiwozhiliao",
+"expect_top1": "给我治疗！"
+},
+{
+"input": "geiwolingkongpo",
+"expect_top1": "给我凌空破！"
+},
+{
+"input": "geiwozhengquan",
+"expect_top1": "给我正拳！"
+},
+{
+"input": "geiwohongbaoshi",
+"expect_top1": "给我红宝石！"
+},
+{
+"input": "geiwoxiaoyema",
+"expect_top1": "给我小野马！"
+},
+{
+"input": "geiwofeikongting",
+"expect_top1": "给我飞空艇！"
+},
+{
+"input": "geiwodaqiaodou",
+"expect_top1": "给我大窍豆！"
+},
+{
+"input": "laibaxiaomaomitouruwodehuaibao",
+"expect_top1": "来吧小猫咪，投入我的怀抱！"
+},
+{
+"input": "yuzhoubushiwodeduikouzhuanye",
+"expect_top1": "宇宙不是我的对口专业"
+}
+]
