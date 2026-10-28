@@ -15,9 +15,10 @@
 | `tools/build_from_pinyin_data.py` | 生成最终 `lua/ff7-ime_data.lua` 与 `data/phrases.json` |
 | `lua/ff7-ime_matcher.lua` | 匹配与排序算法 |
 | `lua/ff7-ime.lua` | Rime 适配、配置读取与候选输出 |
+| `lua/ff7-ime_filter.lua` | 按键过滤：只放行字母与分隔符，吞掉数字/标点/符号 |
 | `ff7-ime.schema.yaml` | 方案接线与默认配置 |
 | `ff7-ime.custom.yaml` | 用户配置示例 |
-| `recipe.yaml` | Plum 安装清单；只安装 schema + 3 个 Lua 文件 |
+| `recipe.yaml` | Plum 安装清单；只安装 schema + 4 个 Lua 文件 |
 | `tools/check_package.py` | 校验 recipe、版本、schema 元信息与安装清单 |
 | `tests/` | Lua 核心用例与全量评估 |
 
@@ -79,7 +80,7 @@ npm install wasmoon
 
 5. 更新本机安装（二选一）：
    - **正式发布**：提交并推送后，在“获取更多输入方案”中重新输入
-     `Tanimodori/ff7-ime`，Plum 会覆盖 4 个运行时文件；
+     `Tanimodori/ff7-ime`，Plum 会覆盖 5 个运行时文件；
    - **本地验证**：只复制变化的数据文件，然后在 Weasel 托盘选择“重新部署”：
 
      ```powershell
@@ -215,12 +216,23 @@ python tools/check_package.py
 
 校验内容：
 
-- `recipe.yaml` 的安装清单恰好是 4 个运行时文件；
+- `recipe.yaml` 的安装清单恰好是 5 个运行时文件；
 - recipe 版本与 schema 版本一致；
 - `schema_id: ff7-ime`、`author: Tanimodori`、`description: 魔光键影专属拼音输入方案`；
 - `engine.translators` 含 `lua_translator@*ff7-ime`；
+- `engine.processors` 含 `lua_processor@*ff7-ime_filter`；
 - 不安装 `*.custom.yaml`、`data/`、测试或文档；
 - 安装路径没有绝对路径或 `..`。
+
+### 6.4 按键过滤
+
+```bash
+NODE_PATH="$PWD/tools/lua-sandbox/node_modules" \
+  node tests/lua/run_filter_cases.js
+```
+
+覆盖空闲状态下数字、标点、符号、空格与分隔符被吞掉，组合中分隔符/空格放行，
+候选展开时数字 1–9 选词，以及控制键、导航键和小键盘回车透传。
 
 ---
 
@@ -293,6 +305,7 @@ Get-ChildItem "$env:TEMP\rime.weasel\*.log" |
 | 安装后完全无法打字/无候选 | 安装器只复制文件，未生成 `build/ff7-ime.schema.yaml` | 重新部署；确认 build 产物存在，必要时重启 WeaselServer |
 | 有方案无候选 | Lua 模块未加载/文件名错 | 检查 `lua/ff7-ime*.lua`、`lua_translator@*ff7-ime`、日志 |
 | 输入被拆段 | `speller/algebra`/`finals`/`delimiter` 配置 | 保持 `alphabet` 全字母、`finals` 空、`delimiter` 为 `'`、无 algebra |
+| 数字/标点/空格无输出 | `lua_processor@*ff7-ime_filter` 正在过滤 | 正常行为；候选展开时 1–9 可选词，切换其他方案可输入符号 |
 | `lkcc` 被当 ASCII | `ascii_mode` 被外部打开 | 本方案已禁用 Shift 切换；切换到其他方案再切回，或重新部署 |
 | 改了配置不生效 | 秒级 mtime/未重建 | 等 2 秒后重新部署；重启 WeaselServer |
 | luna 丢失 | 其他工具改写了 `default.custom.yaml` | 在方案选单中同时勾选 luna 与“魔光键影”，重新部署 |
@@ -307,6 +320,6 @@ Get-ChildItem "$env:TEMP\rime.weasel\*.log" |
 - 方案自身不联网、不写日志、不上传输入；Rime/Weasel 的日志位置见第 8 节；
 - 只读取 `%APPDATA%\Rime` 与安装目录的 Rime 数据；
 - 所有候选来自本地 `ff7-ime_data.lua`；
-- Plum 安装器只复制 `recipe.yaml` 列出的 4 个运行时文件，不改写
+- Plum 安装器只复制 `recipe.yaml` 列出的 5 个运行时文件，不改写
   `default.custom.yaml`；
 - 卸载时只删除本方案文件，不删除 `luna_pinyin_simp` 等既有方案。

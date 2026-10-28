@@ -42,30 +42,32 @@
    Installing recipe: Tanimodori/ff7-ime
    Installing: lua/ff7-ime.lua
    Installing: lua/ff7-ime_data.lua
+   Installing: lua/ff7-ime_filter.lua
    Installing: lua/ff7-ime_matcher.lua
    Installing: ff7-ime.schema.yaml
-   Updated ~ 4 files from 1 packages in 'C:\Users\<你>\AppData\Roaming\Rime'
+   Updated ~ 5 files from 1 packages in 'C:\Users\<你>\AppData\Roaming\Rime'
    ```
 
 6. 关闭控制台。方案选单设定窗口会自动刷新；在列表中找到 **魔光键影** 并勾选，
    然后点击 **中** 保存。
 7. 如果候选没有立即生效，右键托盘 → **重新部署**，或重启 WeaselServer。
 8. 在任意输入框输入 `shenluo`，应出现“神罗”；输入 `lkcc`，应出现
-   “我们会立刻彻底铲除你们！”。
+   “我们会立刻彻底铲除你们！”。单独按 `1`、`,` 或 `!` 不应输入任何字符。
 
-> 如果安装器输出 4 个 `Installing:` 但完全无法打字，先检查
+> 如果安装器输出 5 个 `Installing:` 但完全无法打字，先检查
 > `%APPDATA%\Rime\build\ff7-ime.schema.yaml` 是否存在。缺失说明只复制了文件、
 > 还没有完成部署；执行第 7 步并在必要时重启 WeaselServer 即可恢复。
 
 ### 1.3 安装器做了什么
 
-仓库根目录的 `recipe.yaml` 告诉 Plum 只安装 4 个运行时文件：
+仓库根目录的 `recipe.yaml` 告诉 Plum 只安装 5 个运行时文件：
 
 ```
 ff7-ime.schema.yaml
 lua/ff7-ime.lua
 lua/ff7-ime_matcher.lua
 lua/ff7-ime_data.lua
+lua/ff7-ime_filter.lua
 ```
 
 安装目标是 Rime 用户目录（默认 `%APPDATA%\Rime`），并保留 `lua/` 子目录。
@@ -93,10 +95,11 @@ $rime = Join-Path $env:APPDATA 'Rime'
 Get-ChildItem "$rime\ff7-ime.schema.yaml",
               "$rime\lua\ff7-ime.lua",
               "$rime\lua\ff7-ime_matcher.lua",
-              "$rime\lua\ff7-ime_data.lua"
+              "$rime\lua\ff7-ime_data.lua",
+              "$rime\lua\ff7-ime_filter.lua"
 ```
 
-四个文件都应存在。
+五个文件都应存在。
 
 ### 2.2 检查方案列表
 
@@ -117,6 +120,9 @@ Select-String -Path "$env:APPDATA\Rime\build\default.yaml" -Pattern 'ff7-ime'
 | `nuolei` | 雷诺（音节换位） |
 | `lkcc` | 我们会立刻彻底铲除你们！ |
 | `meishao` | 有时是出手相助的美少女忍者！ |
+
+再验证按键过滤：单独按 `1`、`0`、`,`、`!`、空格或小键盘数字，不应输入任何字符；
+输入 `shenluo` 后按 `1`，应上屏“神罗”。回到 `luna_pinyin_simp` 后这些键恢复正常。
 
 ---
 
@@ -144,7 +150,7 @@ Select-String -Path "$env:APPDATA\Rime\build\default.yaml" -Pattern 'ff7-ime'
 Tanimodori/ff7-ime
 ```
 
-Plum 会更新 `%APPDATA%\plum\package\Tanimodori\ff7-ime` 并只覆盖清单中的 4 个文件。
+Plum 会更新 `%APPDATA%\plum\package\Tanimodori\ff7-ime` 并只覆盖清单中的 5 个文件。
 随后在方案选单设定中确认勾选并重新部署。用户自己的 `ff7-ime.custom.yaml`
 不会被改动。
 
@@ -162,6 +168,7 @@ Plum 会更新 `%APPDATA%\plum\package\Tanimodori\ff7-ime` 并只覆盖清单中
    %APPDATA%\Rime\lua\ff7-ime.lua
    %APPDATA%\Rime\lua\ff7-ime_matcher.lua
    %APPDATA%\Rime\lua\ff7-ime_data.lua
+   %APPDATA%\Rime\lua\ff7-ime_filter.lua
    %APPDATA%\Rime\ff7-ime.custom.yaml   # 如果创建过
    ```
 
@@ -173,7 +180,7 @@ Plum 会更新 `%APPDATA%\plum\package\Tanimodori\ff7-ime` 并只覆盖清单中
 
 ## 6. 与 `luna_pinyin_simp` 共存
 
-- 安装器只新增 4 个文件，不改动其他方案；
+- 安装器只新增 5 个文件，不改动其他方案；
 - 方案是否启用由“方案选单设定”里的勾选决定，勾选后 Weasel 自己写入
   `default.custom.yaml` 的 `schema_list`；
 - 同一用户目录中 `luna_pinyin_simp` 与本方案可以同时启用，互不覆盖；
@@ -246,11 +253,14 @@ patch:
 - 调小 `ff7-ime/typo/max_edit`（默认 2，可试 1）；
 - 关闭不需要的模糊音（尤其 `n_l`、`r_l`、`f_h`）。
 
-### 7.8 标点/间隔号
+### 7.8 标点、数字与空格
 
 - 词条中的 `！，·……` 是候选文本的一部分，由 Lua 原样输出；
 - 用户不需要输入标点；输入拼音即可；
-- 标点键由 Rime 的 `punctuator` 处理，不会影响候选文本。
+- 本方案移除了 `punctuator`，标点、数字、符号和空闲时的空格由
+  `lua/ff7-ime_filter.lua` 吞掉，不会进入候选或透传给游戏；
+- 候选菜单展开时，主键盘数字 1–9 仍由 `selector` 用于选词；
+- 需要输入数字、标点或空格时，切换到 `luna_pinyin_simp` 等其他方案。
 
 ### 7.9 日志与缓存位置
 

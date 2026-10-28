@@ -22,3 +22,4 @@ install_files:
   - lua/ff7-ime.lua
   - lua/ff7-ime_matcher.lua
   - lua/ff7-ime_data.lua
+  - lua/ff7-ime_filter.lua

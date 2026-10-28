@@ -22,9 +22,12 @@
 | 部分输入 | 全拼前缀或不完整音节 | `shenl` → 神罗 |
 | 漏/多/错/换位 | 漏字母、多字母、相邻换位、音节换位 | `lienuo` / `leino` / `leiknuo` / `nuolei` → 雷诺 |
 | 候选稳定 | 每次按键都给出 N 个候选；乱码、单字母、空输入也不空输出 | `zzzzzz` → 9 个候选 |
+| 按键过滤 | 只接受拼音字母与分隔符 `'`；数字、标点、符号和空闲时的空格不会透传给游戏 | `1` / `,` / `!` → 无输出；`shenluo1` → 神罗 |
 | 可配置 | 候选数、分页、注释、模糊开关、容错上限等均在 YAML 中 | `ff7-ime/top_n: 12` |
 
 本方案禁用了 Shift 中英切换：按 Shift 不会进入英文模式，Shift 会透传给游戏，不会吞掉冲刺/奔跑键。需要输入英文时切换到 `luna_pinyin_simp`。
+
+同时，本方案只接受拼音字母和音节分隔符 `'`。数字、标点、符号以及没有候选时的空格会被吞掉，不会落到游戏里；候选菜单展开时，数字 1–9 仍然用于选词。
 
 ---
 
@@ -49,11 +52,11 @@
    Tanimodori/ff7-ime
    ```
 
-4. 看到 `Installing recipe: Tanimodori/ff7-ime` 和 4 个 `Installing:` 文件后关闭控制台；
+4. 看到 `Installing recipe: Tanimodori/ff7-ime` 和 5 个 `Installing:` 文件后关闭控制台；
 5. 在自动刷新的方案列表里勾选 **魔光键影**，点击 **中**；
 6. 若未立即生效，右键托盘 → **重新部署**，或重启 WeaselServer。
 
-通过 Plum 安装时，安装器只复制 4 个运行时文件，不改写 `default.custom.yaml`，也不会
+通过 Plum 安装时，安装器只复制 5 个运行时文件，不改写 `default.custom.yaml`，也不会
 覆盖用户自己的 `ff7-ime.custom.yaml`。完整说明、更新、卸载与故障排查见
 [docs/INSTALL.md](docs/INSTALL.md)。
 
@@ -82,7 +85,9 @@
 | 含标点词条 | `renshengjiushizhandou` | 人生就是战斗！ |
 
 候选窗口默认显示 9 个；注释显示命中通道与主拼音，例如 `全拼 · shen luo`、
-`关键词 · wo men hui ...`、`容错 · lei nuo`。空格、回车或小键盘回车提交高亮候选。
+`关键词 · wo men hui ...`、`容错 · lei nuo`。候选菜单展开时可用数字 1–9 选词；
+空格、回车或小键盘回车提交高亮候选。没有展开候选时，数字、标点、符号和空格
+不会输入到游戏中。
 
 更完整的输入规则与示例见 [docs/USAGE.md](docs/USAGE.md)。
 
@@ -118,6 +123,7 @@ lua/
   ff7-ime.lua                 Rime translator 适配层
   ff7-ime_matcher.lua         纯 Lua 匹配与排序引擎
   ff7-ime_data.lua            构建生成的词条数据
+  ff7-ime_filter.lua          按键过滤（只放行字母与分隔符）
 recipe.yaml                   Plum 安装清单（只装 schema + lua）
 docs/                         安装、使用、维护文档
 tools/                        数据构建、包校验、测试脚本
@@ -139,7 +145,8 @@ LICENSE                       MIT
 | 安装依赖 | Git for Windows（含 Git Bash） |
 | 运行时依赖 | 无外部服务或运行时 |
 
-其他 Rime 前端（macOS/Linux）未做验证；需要确认其 `lua_translator` 与中文路径支持。
+其他 Rime 前端（macOS/Linux）未做验证；需要确认其 `lua_translator`、`lua_processor`
+与中文路径支持。
 
 ---
 

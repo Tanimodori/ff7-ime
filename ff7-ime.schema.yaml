@@ -17,10 +17,6 @@ switches:
   - name: ascii_mode
     reset: 0
     states: [ 中文, 西文 ]
-  - name: full_shape
-    states: [ 半角, 全角 ]
-  - name: ascii_punct
-    states: [ 。，, ．， ]
 
   # 以下开关仅在 ff7-ime/use_switches: true 时生效；
   # 默认 use_switches: false，以 ff7-ime/fuzzy/* 配置为准。
@@ -162,8 +158,10 @@ engine:
   processors:
     - ascii_composer
     - key_binder
+    # 只让拼音字母与分隔符进入输入缓冲；数字、标点、符号和空闲时的空格
+    # 由该 processor 吞掉，不再透传给游戏。候选展开时 1-9 仍可选词。
+    - lua_processor@*ff7-ime_filter
     - speller
-    - punctuator
     - selector
     - navigator
     - express_editor
@@ -176,9 +174,6 @@ engine:
     - lua_translator@*ff7-ime
   filters:
     - uniquifier
-
-punctuator:
-  import_preset: default
 
 key_binder:
   import_preset: default

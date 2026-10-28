@@ -13,6 +13,7 @@ Checks:
   * the simulated install contains the schema and all Lua modules at the paths
     Rime expects (``ff7-ime.schema.yaml``, ``lua/*.lua``);
   * the schema references ``lua_translator@*ff7-ime``;
+  * the schema loads ``lua_processor@*ff7-ime_filter`` before ``speller``;
   * user config files are not installed (they would overwrite user patches).
 """
 from __future__ import annotations
@@ -33,6 +34,7 @@ REQUIRED_FILES = {
     "lua/ff7-ime.lua",
     "lua/ff7-ime_matcher.lua",
     "lua/ff7-ime_data.lua",
+    "lua/ff7-ime_filter.lua",
 }
 FORBIDDEN_SUFFIXES = (".custom.yaml",)
 EXPECTED_DESCRIPTION = "魔光键影专属拼音输入方案"
@@ -111,6 +113,12 @@ def validate_schema(schema_path: Path) -> dict:
     translators = schema.get("engine", {}).get("translators") or []
     if f"lua_translator@*{SCHEMA_ID}" not in translators:
         fail(f"{schema_path.name} does not load lua_translator@*{SCHEMA_ID}")
+    processors = schema.get("engine", {}).get("processors") or []
+    filter_name = f"lua_processor@*{SCHEMA_ID}_filter"
+    if filter_name not in processors:
+        fail(f"{schema_path.name} does not load {filter_name}")
+    if "speller" in processors and processors.index(filter_name) > processors.index("speller"):
+        fail(f"{schema_path.name} must load {filter_name} before speller")
     return schema
 
 
