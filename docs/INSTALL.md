@@ -150,9 +150,10 @@ Select-String -Path "$env:APPDATA\Rime\build\default.yaml" -Pattern 'ff7-ime'
 Tanimodori/ff7-ime
 ```
 
-Plum 会更新 `%APPDATA%\plum\package\Tanimodori\ff7-ime` 并只覆盖清单中的 5 个文件。
-随后在方案选单设定中确认勾选并重新部署。用户自己的 `ff7-ime.custom.yaml`
-不会被改动。
+Plum 会更新 `%APPDATA%\plum\package\Tanimodori\ff7-ime`，并只覆盖清单中的运行时
+文件。内容未变化的文件会跳过，所以更新时可能只显示 1–2 个 `Installing:`/`Updating:`；
+首次安装则显示全部 5 个。随后在方案选单设定中确认勾选并重新部署。用户自己的
+`ff7-ime.custom.yaml` 不会被改动。
 
 ---
 

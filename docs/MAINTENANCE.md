@@ -80,7 +80,7 @@ npm install wasmoon
 
 5. 更新本机安装（二选一）：
    - **正式发布**：提交并推送后，在“获取更多输入方案”中重新输入
-     `Tanimodori/ff7-ime`，Plum 会覆盖 5 个运行时文件；
+     `Tanimodori/ff7-ime`，Plum 会更新清单中的运行时文件（未变化的文件会跳过）；
    - **本地验证**：只复制变化的数据文件，然后在 Weasel 托盘选择“重新部署”：
 
      ```powershell
