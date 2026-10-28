@@ -1,0 +1,164 @@
+# 魔光键影 · Rime schema
+# encoding: utf-8
+#
+# 目标：小狼毫 Weasel 0.17.4 / librime 1.13.1 / Windows x64
+# 只输出 dict.txt 中的 1212 条词条；输入为普通话无调全拼。
+# 匹配算法与索引均在 lua/mgjy_matcher.lua 中，本文件只负责接线与配置。
+
+schema:
+  schema_id: moguang_jianying
+  name: 魔光键影
+  version: "1.0.0"
+  author:
+    - "ff7-ime"
+  description: |
+    魔光键影：只输出《最终幻想7》词库（dict.txt）中的固定词条。
+    支持 zh/ch/sh→z/c/s、ng→n 等模糊音；多音字与允许误读；
+    全声母、声母子序列（如 lkcc）、前缀；漏字/多字/相邻换位/音节换位。
+    任何输入都给出 N 个候选。
+
+switches:
+  - name: ascii_mode
+    reset: 0
+    states: [ 中文, 西文 ]
+  - name: full_shape
+    states: [ 半角, 全角 ]
+  - name: ascii_punct
+    states: [ 。，, ．， ]
+
+  # 以下开关仅在 mgjy/use_switches: true 时生效；
+  # 默认 use_switches: false，以 mgjy/fuzzy/* 配置为准。
+  - name: mgjy_fuzzy_zh_z
+    reset: 1
+    states: [ 关, 开 ]
+  - name: mgjy_fuzzy_ch_c
+    reset: 1
+    states: [ 关, 开 ]
+  - name: mgjy_fuzzy_sh_s
+    reset: 1
+    states: [ 关, 开 ]
+  - name: mgjy_fuzzy_ng_n
+    reset: 1
+    states: [ 关, 开 ]
+  - name: mgjy_fuzzy_n_l
+    reset: 0
+    states: [ 关, 开 ]
+  - name: mgjy_fuzzy_r_l
+    reset: 0
+    states: [ 关, 开 ]
+  - name: mgjy_fuzzy_f_h
+    reset: 0
+    states: [ 关, 开 ]
+  - name: mgjy_fuzzy_en_eng
+    reset: 0
+    states: [ 关, 开 ]
+  - name: mgjy_fuzzy_in_ing
+    reset: 0
+    states: [ 关, 开 ]
+  - name: mgjy_fuzzy_an_ang
+    reset: 0
+    states: [ 关, 开 ]
+  - name: mgjy_fuzzy_uan_uang
+    reset: 0
+    states: [ 关, 开 ]
+  - name: mgjy_fuzzy_v_u
+    reset: 1
+    states: [ 关, 开 ]
+  - name: mgjy_initial
+    reset: 1
+    states: [ 关, 开 ]
+  - name: mgjy_typo
+    reset: 1
+    states: [ 关, 开 ]
+
+menu:
+  page_size: 9
+
+# ---------------------------------------------------------------------------
+# 方案配置（Lua 读取；用户可在 moguang_jianying.custom.yaml 中覆盖）
+# ---------------------------------------------------------------------------
+mgjy:
+  # 候选数量 N；建议与 menu/page_size 保持一致（或小于等于 page_size）
+  top_n: 9
+  # 需要音节级 DP 时，只对双/三字母重叠度最高的 K 个候选运行
+  dp_max_candidates: 56
+  # 是否显示候选注释（通道 + 拼音）
+  show_comment: true
+  # 是否在注释中显示分数（调试用）
+  show_score: false
+  debug: false
+  # true: F4 开关优先；false: 本文件的 fuzzy/* 配置优先
+  use_switches: false
+
+  fuzzy:
+    zh_z: true
+    ch_c: true
+    sh_s: true
+    ng_n: true
+    n_l: false
+    r_l: false
+    f_h: false
+    en_eng: false
+    in_ing: false
+    an_ang: false
+    uan_uang: false
+    v_u: true
+
+  weights:
+    exact: 1.0
+    fuzzy: 0.97
+    fuzzy_prefix: 0.95
+    prefix: 0.96
+    swap: 0.93
+    dp: 0.94
+    initial_exact: 0.96
+    initial: 0.86
+    keyword: 0.80
+    fallback: 0.55
+
+  typo:
+    enabled: true
+    max_edit: 2
+    transposition: true
+    syllable_swap: true
+
+  initial:
+    enabled: true
+
+  keyword:
+    gap_penalty: 0.02
+
+# ---------------------------------------------------------------------------
+# 输入与引擎接线
+# ---------------------------------------------------------------------------
+speller:
+  alphabet: zyxwvutsrqponmlkjihgfedcba
+  initials: zyxwvutsrqponmlkjihgfedcba
+  delimiter: "'"
+  use_space: false
+  # 不做 compile-time algebra：模糊音由 Lua 在运行时处理
+
+engine:
+  processors:
+    - ascii_composer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - abc_segmentor
+    - fallback_segmentor
+  translators:
+    # * 前缀表示 require("mgjy")，模块位于 <user_data_dir>/lua/mgjy.lua
+    - lua_translator@*mgjy
+  filters:
+    - uniquifier
+
+punctuator:
+  import_preset: default
+
+key_binder:
+  import_preset: default

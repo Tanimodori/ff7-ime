@@ -1,0 +1,66 @@
+# 魔光键影 · 用户配置示例
+# encoding: utf-8
+#
+# 复制/安装到 %APPDATA%\Rime\moguang_jianying.custom.yaml 后生效。
+# 修改后运行 WeaselDeployer.exe /deploy（或“重新部署”）。
+#
+# 注意：默认 mgjy/use_switches: false，因此下面的 mgjy/fuzzy/* 是权威配置。
+# 如果把 use_switches 改成 true，则 F4 菜单里的 mgjy_fuzzy_* 开关优先，
+# 下面的 fuzzy 配置只在开关未定义时作为兜底。
+
+patch:
+  # ------------------------------------------------------------------
+  # 候选数量 / 分页 / 注释
+  # ------------------------------------------------------------------
+  mgjy/top_n: 9
+  menu/page_size: 9
+  # DP 候选上限：越大越稳，越小越快（默认 64）
+  mgjy/dp_max_candidates: 56
+  mgjy/show_comment: true
+  mgjy/show_score: false
+  mgjy/use_switches: false
+
+  # ------------------------------------------------------------------
+  # 模糊音开关
+  # A 类（题目要求）：zh/ch/sh -> z/c/s，ng -> n
+  # B 类（可选，默认关）：n/l、r/l、f/h、en/eng、in/ing、an/ang、uan/uang
+  # v_u：把 ü 的 v 拼写与 u 拼写视为互通（默认开）
+  # ------------------------------------------------------------------
+  mgjy/fuzzy/zh_z: true
+  mgjy/fuzzy/ch_c: true
+  mgjy/fuzzy/sh_s: true
+  mgjy/fuzzy/ng_n: true
+  mgjy/fuzzy/n_l: false
+  mgjy/fuzzy/r_l: false
+  mgjy/fuzzy/f_h: false
+  mgjy/fuzzy/en_eng: false
+  mgjy/fuzzy/in_ing: false
+  mgjy/fuzzy/an_ang: false
+  mgjy/fuzzy/uan_uang: false
+  mgjy/fuzzy/v_u: true
+
+  # ------------------------------------------------------------------
+  # 容错
+  # ------------------------------------------------------------------
+  mgjy/typo/enabled: true
+  mgjy/typo/max_edit: 2
+  mgjy/typo/transposition: true
+  mgjy/typo/syllable_swap: true
+
+  # 声母 / 关键词模式（lkcc 等）
+  mgjy/initial/enabled: true
+  mgjy/keyword/gap_penalty: 0.02
+
+  # ------------------------------------------------------------------
+  # 通道权重（高级调参；一般无需修改）
+  # ------------------------------------------------------------------
+  mgjy/weights/exact: 1.0
+  mgjy/weights/fuzzy: 0.97
+  mgjy/weights/fuzzy_prefix: 0.95
+  mgjy/weights/prefix: 0.96
+  mgjy/weights/swap: 0.93
+  mgjy/weights/dp: 0.94
+  mgjy/weights/initial_exact: 0.96
+  mgjy/weights/initial: 0.86
+  mgjy/weights/keyword: 0.80
+  mgjy/weights/fallback: 0.55
