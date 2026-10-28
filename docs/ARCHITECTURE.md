@@ -155,7 +155,7 @@ normalize: lower + 去非字母
 build_index（首次/模糊开关变化时）
   │  by_first / by_init_letter / by_full / by_canon
   │  by_bigram / by_trigram / by_canon_bigram / by_canon_trigram
-  │  static_top
+  │  by_syl_prefix / static_top
   ▼
 阶段 1：廉价通道（无 DP）
   │  候选：by_first[首字母] 或 initial_mode 的声母字母并集
@@ -163,6 +163,8 @@ build_index（首次/模糊开关变化时）
   ▼
 若 best_cheap_raw < 0.93 且非 initial_mode：
   │  阶段 2：双/三字母重叠度排序 → Top-K(56) → 完整 score（含音节 DP）
+  ▼
+阶段 3：by_syl_prefix 召回 → 音节前缀子序列（meishao 等中段关键词）
   ▼
 排序（score → channel_rank → 长度 → 权重 → 词典序）
   │
@@ -185,6 +187,7 @@ yield N 个 Candidate（quality 递减）
 - `by_canon`：安全 canon 全拼 → id；
 - `by_bigram` / `by_trigram`：原始全拼的双/三字母；
 - `by_canon_bigram` / `by_canon_trigram`：逐音节模糊规范化全拼的双/三字母（DP 召回关键）；
+- `by_syl_prefix`：每个音节读音的 1–3 字母前缀（原始 + 规范化），用于中段关键词召回；
 - `static_top`：按权重/长度/order 的静态优先序。
 
 ### 5.2 重建条件
@@ -232,6 +235,7 @@ yield N 个 Candidate（quality 递减）
 | `mgjy/typo/syllable_swap` | bool | true | 相邻音节换位 |
 | `mgjy/initial/enabled` | bool | true | 声母/关键词通道 |
 | `mgjy/keyword/gap_penalty` | double | 0.02 | 关键词跳跃惩罚 |
+| `mgjy/keyword/syllable_subsequence` | bool | true | 中段音节前缀子序列（meishao） |
 | `mgjy/weights/*` | double | 见 schema | 通道权重 |
 
 ### 6.3 Switches

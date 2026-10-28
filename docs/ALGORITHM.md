@@ -245,7 +245,68 @@ raw = 0.45
 - 短词的精确声母（`initial_exact`）权重 0.96，高于关键词通道，因此“短词精确缩写”不会被长句关键词压过；
 - `initial_mode` 下关键词权重提升到 0.90。
 
-### 5.8 最近邻回退
+### 5.8 音节前缀子序列（中段关键词）
+
+声母子序列只能匹配“每个音节的首字母”；`meishao` 这类带完整韵母的
+缩写需要另一条通道。典型例子：
+
+```
+有时是出手相助的美少女忍者！
+youshishichushouxiangzhudemeishaonvrenzhe
+                        ^^^^^^^
+meishao 从第 27 个字母开始，既不是全拼前缀，也不是声母子序列
+```
+
+`meishao` 可以切成 `mei` + `shao`，分别是第 9、10 个音节的前缀。因此新增：
+
+- **召回索引 `by_syl_prefix`**：对每个音节的每个读音（含备选读音），
+  索引原始前缀和音节级模糊规范化前缀（长度 1–3）→ 词条 id；
+- **召回**：用输入首块的 3/2 字母键查询；若首字母是 `a/e/o`（单字母音节）
+  或 2/3 字母键没有召回，再补 1 字母键（如 `aan` → `a` + `an`）；
+- **校验 DP**：对每条召回词条，枚举起始音节 `start`，把输入切成若干块，
+  每块必须是某个音节读音的前缀；允许跳过中间音节，但不做编辑距离。
+  状态记录 `(消耗字母数, 音节数)` 的块质量、块数、是否含 ≥2 字母块。
+
+评分（`L` 为输入长度，`span` 为命中音节跨度，`chunks` 为块数）：
+
+```
+chunk_quality = Σ(块长 / 音节长) / chunks
+compactness   = chunks / span
+phrase_cov    = L / #primary_full
+start_pen     = (start - 1) / n
+gap           = span - chunks
+
+raw = 0.50
+    + 0.25 * chunk_quality
+    + 0.15 * compactness
+    + 0.10 * (1 - start_pen)
+    + 0.05 * phrase_cov
+    - 0.02 * gap
+```
+
+示例（默认权重 `keyword=0.80`）：
+
+| 输入 | 命中块 | raw | 加权 |
+|---|---|---:|---:|
+| `meishao` | mei + shao | 0.947 | 0.758 |
+| `chushou` | chu + shou | 0.985 | 0.788 |
+| `shouxiang` | shou + xiang | 0.980 | 0.784 |
+| `zhiwen` | zhi + wen | 0.975 | 0.780 |
+
+集成规则：
+
+- 该通道放在 **阶段 3**，在 DP 之后运行，不参与 `best_cheap_raw` /
+  `best_raw` 的门槛判断，避免“高 raw、低权重”的关键词结果阻断 DP；
+- 独立于 DP 短名单召回，因此目标即使不在 Top-56 也能被评分；
+- `initial_mode` 下跳过（声母子序列已覆盖纯缩写）；
+- `best_cheap_raw >= 0.99`（已有精确全拼）时跳过；
+- 通道名仍为 `keyword`，`detail = "syllable"`，权重沿用 `keyword`；
+- 用 `mgjy/keyword/syllable_subsequence: false` 可关闭。
+
+前缀优先仍然成立：`zhiwen` 的 `少女之吻` 加权 0.780，但
+`直纹叶翼蜥` 的全拼前缀得分 0.907，仍排第一。
+
+### 5.9 最近邻回退
 
 若以上强通道都没有命中，`fallback_score`：
 
@@ -261,7 +322,7 @@ raw = 0.45
 
 ## 6. 候选召回与 DP 截断
 
-全量 1212 条逐键扫描 + 对每条跑 DP 会超时。实际采用两阶段：
+全量 1212 条逐键扫描 + 对每条跑 DP 会超时。实际采用三阶段：
 
 ### 6.1 索引
 
@@ -275,6 +336,7 @@ raw = 0.45
 | `by_canon` | 安全 canon 全拼 → 词条 id |
 | `by_bigram` / `by_trigram` | 原始全拼的双/三字母 → 词条 id |
 | `by_canon_bigram` / `by_canon_trigram` | **逐音节模糊规范化**全拼的双/三字母 → 词条 id |
+| `by_syl_prefix` | 每个音节读音的 1–3 字母前缀（原始 + 规范化）→ 词条 id |
 | `static_top` | 按权重/长度/词典序的静态优先序 |
 
 canonical 双/三字母索引是关键：`ng→n` 后 `zonli` 与 `重力` 的 `zongli` 才能共享 `on`/`nl`/`li` 等片段，使正确候选进入 DP 短名单。
@@ -310,6 +372,27 @@ overlap = 2 * bigram_hits + 4 * trigram_hits
 - 纯声母/关键词输入跳过 DP，避免 DP 误抢关键词；
 - DP 短名单既控制延迟，又通过 canonical 重叠度确保正确候选不被截掉。
 
+### 6.4 阶段 3：中段关键词召回
+
+仅当：
+
+- `mgjy/keyword/syllable_subsequence` 未关闭；
+- 非 `initial_mode`；
+- `#q >= 2`；
+- `best_cheap_raw < 0.99`（没有精确全拼命中）
+
+时运行。候选集来自 `by_syl_prefix` 的首块前缀查询，不依赖阶段 2 的
+Top-K；对每条候选调用 `syllable_keyword_score`，按 `keyword` 权重
+（默认 0.80）加入结果。若同一词条已有更高的精确/前缀/DP 分数，
+`add_result` 会保留更高者。
+
+这一阶段与阶段 2 的门槛完全解耦：
+
+- 不会因为关键词 raw 很高而把 `best_raw` 推到 0.90 以上、阻断 DP；
+- 也不会因为 `best_cheap_raw >= 0.93` 跳过阶段 2 而漏掉中段关键词；
+- 代价是每条输入多一次前缀索引查询和少量候选的 DP，实测真实
+  librime 下 7–9 键输入总耗时约 120–205 ms（约 17–23 ms/键）。
+
 ---
 
 ## 7. 通道权重与融合
@@ -332,7 +415,7 @@ final = raw_channel * weight[channel] + 0.0001 * phrase_weight
 | dp | 0.94 | 音节对齐 |
 | swap | 0.93 | 相邻音节换位 |
 | initial | 0.86 | canon 声母相等 |
-| keyword | 0.80 | 声母子序列；`initial_mode` 下 0.90 |
+| keyword | 0.80 | 声母子序列 / 音节前缀子序列；`initial_mode` 下 0.90 |
 | fallback | 0.55 | 最近邻 |
 
 ### 7.1 `initial_mode`
@@ -347,7 +430,7 @@ initial_mode = #q >= 2 and (
 
 - `lkcc`、`wmhlkcdccnm`、`jdzhyo` 等进入声母/关键词模式；
 - `shenluo`（3 元音/7）、`xingyun`（2/7）、`zongguo`（3/8）不会被误判为缩写；
-- `initial_mode` 下跳过 DP，关键词/声母权重提升。
+- `initial_mode` 下跳过 DP 和阶段 3，关键词/声母权重提升。
 
 ### 7.2 排序 tie-break
 
@@ -377,9 +460,12 @@ initial_mode = #q >= 2 and (
 
 - 阶段 1：索引并集大小 \(C\)（通常 50–500），每词条 O(#fulls + #inits + L)，约 \(O(C \cdot L)\)；
 - 阶段 2：重叠度排序 \(O(C \log C)\)，DP \(O(K \cdot L \cdot n \cdot A \cdot k)\)；
+- 阶段 3：前缀索引召回通常 10–100 条，每条 O(\(n \cdot L \cdot A \cdot 3\))；
 - 实测本机（librime 1.13.1 原生 Lua 5.4）：
   - 精确/前缀：1–15 ms/键；
   - 模糊/容错：20–50 ms/键（最坏约 50 ms）；
+  - 中段关键词：约 17–23 ms/键（`meishao` 7 键总耗时 123 ms，
+    `shouxiang` 9 键总耗时 205 ms）；
   - 20 键长句 `renshengjiushizhandou` 总耗时约 57 ms。
 
 `dp_max_candidates`、`max_edit`、`top_n` 均可调，用于性能/召回权衡。
@@ -396,10 +482,15 @@ initial_mode = #q >= 2 and (
 | fuzzy | 878 | top1 | 100% |
 | initial | 1212 | top1 或 top3 | 100%（top1 98.3%） |
 | typo | 600 | top3 | 100%（top1 99.7%） |
-| keyword | 238 | top5 | 97.1%（top1 75.6%） |
+| keyword | 238 | top5 | 97.9%（233/238；top1 75.6%） |
+| mid_keyword | 300 | top5 | 100%（top1 91.0%） |
 | fallback | 7 | 返回 N | 100% |
 
-keyword 的少数失败均为极稀疏子序列的天然歧义（如 `mlh` 同时像“墨绿海马”与“莫古力召唤术”）；需求示例 `lkcc` 稳定 top1。详见 `docs/TEST_REPORT.md`。
+`mid_keyword` 使用长句中段**唯一出现**的 2–3 音节串（排除另一个词条的
+全拼前缀、精确全拼、以及跨词条共享的串），覆盖 `meishao` 这类输入。
+`keyword` 的 5 个失败仍是极稀疏声母子序列的天然歧义（如 `mlh` 同时像
+“墨绿海马”与“莫古力召唤术”）；需求示例 `lkcc` 稳定 top1。详见
+`docs/TEST_REPORT.md`。
 
 ---
 
@@ -410,6 +501,7 @@ keyword 的少数失败均为极稀疏子序列的天然歧义（如 `mlh` 同�
 | 只输出固定 1212 条 | 会引入词典外候选/造句 | Lua 只 yield 1212 条 |
 | 运行时模糊开关 | `speller/algebra` 编译期固定 | DP/配置运行时读取 |
 | 关键词 `lkcc` | 无此通道 | 声母子序列 |
+| 中段关键词 `meishao` | 无此通道 | 音节前缀子序列 |
 | 漏/多/换位 | 无通用编辑距离 | Damerau + 音节 DP |
 | 多音/误读权重 | 词典多读音有限 | 上下文读音 + 误读表 |
 | 永远 N | 可能空 | 静态回退保证 |

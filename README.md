@@ -17,6 +17,7 @@
 | 多音字/误读 | 语料内上下文多音 + 允许“有边读边”等误读，规范读音优先 | `chongli` → 重力；`qinmu` → 梣木 |
 | 全声母 | 每个音节首字母 | `wmhlkcdccnm` → 我们会立刻彻底铲除你们！ |
 | 关键词子序列 | 声母的稀疏子序列，长句可缩写 | `lkcc` → 我们会立刻彻底铲除你们！ |
+| 中段关键词 | 词条中段的音节前缀子序列，可跳过前导音节 | `meishao` → 有时是出手相助的美少女忍者！ |
 | 部分输入 | 全拼前缀/不完整音节 | `shenl` → 神罗 |
 | 漏/多/错/换位 | 漏字母、多字母、相邻换位、音节换位 | `lienuo` / `leino` / `leiknuo` / `nuolei` → 雷诺 |
 | 永远 N 个 | 乱码、单字母、空输入也不空输出 | `zzzzzz` → 9 个候选 |
@@ -62,6 +63,7 @@ C:\Users\Tanimodori\AppData\Roaming\Rime\
 | 误读 | `qinmu` | 梣木（“梣”被读半边 qín） |
 | 全声母 | `wmhlkcdccnm` | 我们会立刻彻底铲除你们！ |
 | 关键词 | `lkcc` | 我们会立刻彻底铲除你们！ |
+| 中段关键词 | `meishao` | 有时是出手相助的美少女忍者！ |
 | 前缀 | `shenl` | 神罗 |
 | 漏字母 | `leino` | 雷诺 |
 | 相邻换位 | `lienuo` | 雷诺 |
@@ -102,7 +104,7 @@ src/
     mgjy_matcher.lua             纯 Lua 匹配/排序引擎
     mgjy_data.lua                构建期生成的数据表（1212 条）
 packaging/                       安装/卸载/校验/无头部署脚本
-dist/moguang_jianying-portable/  portable 包（含 zip）
+dist/                            portable 包（构建产物，不入库）
 tools/                           数据构建、测试、打包脚本
 tests/                           核心用例、全量评估、Lua 沙箱测试
 experiments/                     研究/探针/中间产物（不参与运行时）
@@ -120,7 +122,8 @@ PLAN.md                          总体方案与验收门
 | 模糊音 | 878 | top1 | **878/878（100%）** |
 | 全声母/前缀 | 1212 | top1 或 top3 | **1212/1212（100%；top1 98.3%）** |
 | 漏/多/换位 | 600 | top3 | **600/600（100%；top1 99.7%）** |
-| 关键词稀疏子序列 | 238 | top5 | **231/238（97.1%；top1 75.6%）** |
+| 关键词稀疏子序列 | 238 | top5 | **233/238（97.9%；top1 75.6%）** |
+| 中段关键词 | 300 | top5 | **300/300（100%；top1 91.0%）** |
 | 乱码/单字母/空 | 7 | 返回 N | **7/7（100%）** |
 
 核心需求用例：
@@ -130,13 +133,14 @@ shenluo             → 神罗（全拼）
 senluo              → 神罗（模糊）
 leinuo / lienuo / leino / leiknuo / nuolei → 雷诺（全拼/漏/换位/多字/音节换位）
 lkcc                → 我们会立刻彻底铲除你们！（关键词）
+meishao             → 有时是出手相助的美少女忍者！（中段关键词）
 wmhlkcdccnm         → 我们会立刻彻底铲除你们！（全声母）
 zanguokuaigon       → 掌掴快攻（跨音节 ng→n 模糊）
 renshengjiushizhandou → 人生就是战斗！（含标点）
 zzzzzz              → 仍有 9 个候选
 ```
 
-真实 Rime 逐键性能（K=56，测量于本机 `rime.dll`）：精确/前缀输入通常 1–15 ms/键，长模糊/容错输入最坏约 50 ms/键；20 键长句 `renshengjiushizhandou` 总耗时约 57 ms。GUI 已在记事本中实测 `lkcc`、`lienuo`、`senluo`、`zanguokuaigon`、`renshengjiushizhandou` 均正确提交。
+真实 Rime 逐键性能（K=56，测量于本机 `rime.dll`）：精确/前缀输入通常 1–15 ms/键，长模糊/容错输入最坏约 50 ms/键，中段关键词约 17–23 ms/键（`meishao` 7 键总耗时 123 ms）；20 键长句 `renshengjiushizhandou` 总耗时约 57 ms。GUI 已在记事本中实测 `lkcc`、`lienuo`、`senluo`、`zanguokuaigon`、`renshengjiushizhandou` 均正确提交。
 
 详见 [docs/TEST_REPORT.md](docs/TEST_REPORT.md) 与 [docs/acceptance/](docs/acceptance/)。
 
@@ -158,12 +162,13 @@ zzzzzz              → 仍有 9 个候选
 
 ## 7. 已知限制
 
-1. **关键词模式存在天然歧义**：极稀疏的子序列（如 `mlh`）可能同时匹配多个词条；方案保证返回 Top-N，但 top1 不保证是用户心中那一条。需求示例 `lkcc` 已稳定 top1。
-2. **只输出 1212 条**：词库外输入只做最近邻回退，不会造句或输出其他内容。
-3. **小狼毫没有官方 portable 模式**：本包是“便携方案包”，安装到 `%APPDATA%\Rime`；真正的便携用户目录需要 `WeaselSetup.exe /userdir:<dir>` 并重启服务。
-4. **WeaselDeployer 的 `/deploy` 在部分环境会打开“方案选单设定”GUI 并改写 `default.custom.yaml`**。本包改用 `deploy-rime.ps1`（直接调用 `rime.dll` 的维护接口）无头部署，避免该问题。
-5. **数据读音为工程化整理**：以 pypinyin + luna_pinyin + 人工覆盖为准；若发现译名读音争议，改 `experiments/pinyin-data/override.yaml` 后重新构建。
-6. **性能取决于词条长度与输入类型**：纯精确/前缀很快；长模糊/容错输入会跑音节 DP，最坏约 50 ms/键。可通过 `mgjy/dp_max_candidates` 调整。
+1. **关键词模式存在天然歧义**：极稀疏声母子序列（如 `mlh`）和多个词条共享的中段音节串（如“是我的”“护身符”）可能同时匹配多个词条；方案保证返回 Top-N，但 top1 不保证是用户心中那一条。需求示例 `lkcc`、`meishao` 已稳定 top1。
+2. **中段关键词低于全拼前缀**：`zhiwen` 会先给前缀词 `直纹叶翼蜥`，包含 `zhi wen` 的 `少女之吻` 排在其后；这是有意保留“前缀优先”。
+3. **只输出 1212 条**：词库外输入只做最近邻回退，不会造句或输出其他内容。
+4. **小狼毫没有官方 portable 模式**：本包是“便携方案包”，安装到 `%APPDATA%\Rime`；真正的便携用户目录需要 `WeaselSetup.exe /userdir:<dir>` 并重启服务。
+5. **WeaselDeployer 的 `/deploy` 在部分环境会打开“方案选单设定”GUI 并改写 `default.custom.yaml`**。本包改用 `deploy-rime.ps1`（直接调用 `rime.dll` 的维护接口）无头部署，避免该问题。
+6. **数据读音为工程化整理**：以 pypinyin + luna_pinyin + 人工覆盖为准；若发现译名读音争议，改 `experiments/pinyin-data/override.yaml` 后重新构建。
+7. **性能取决于词条长度与输入类型**：纯精确/前缀很快；长模糊/容错输入会跑音节 DP，最坏约 50 ms/键；中段关键词约 17–23 ms/键。可通过 `mgjy/dp_max_candidates` 调整。
 
 ---
 

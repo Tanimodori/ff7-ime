@@ -123,12 +123,13 @@ NODE_PATH="$PWD/tools/lua-sandbox/node_modules" \
 
 期望：
 
-- 核心 21/21；
+- 核心 29/29（含 `meishao` 中段关键词回归）；
 - exact 1212/1212；
 - fuzzy 878/878；
 - initial 1212/1212（top1 或 top3）；
 - typo 600/600（top3）；
-- keyword ≥ 97% top5；
+- keyword 233/238 top5（极稀疏声母子序列的天然歧义）；
+- mid_keyword 300/300 top5（长句中段唯一音节串）；
 - fallback 7/7。
 
 ### 2.5 真实 Rime 集成测试
@@ -165,6 +166,9 @@ python tools/build_package.py
 - `dist/moguang_jianying-portable/`
 - `dist/moguang_jianying-portable.zip`
 
+> `dist/` 是构建产物，已在 `.gitignore` 中忽略，不进入版本库；需要分发时再构建。
+> 包内 `docs/` 不包含 `install-real*.log` 等开发机日志。
+
 包内容：
 
 ```
@@ -175,7 +179,8 @@ rime/moguang_jianying.schema.yaml
 rime/moguang_jianying.custom.yaml
 rime/lua/mgjy.lua, mgjy_matcher.lua, mgjy_data.lua
 docs/...
-source/dict.txt, phrases.tsv, override.yaml, 构建脚本
+source/README-build.md
+source/dict.txt, phrases.tsv, override.yaml, extract.py, 构建脚本
 tools/rime_harness.py
 ```
 

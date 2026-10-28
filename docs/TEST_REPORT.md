@@ -77,11 +77,19 @@ data/phrases.json = 646 KB
 | `difa` | 蒂法 | ✅ |
 | `kelaode` | 克劳德 | ✅ |
 | `safeiluosi` | 萨菲罗斯 | ✅ |
+| `meishao` | 有时是出手相助的美少女忍者！ | ✅ |
+| `meishaonv` | 有时是出手相助的美少女忍者！ | ✅ |
+| `meishaonvrenzhe` | 有时是出手相助的美少女忍者！ | ✅ |
+| `chushou` | 有时是出手相助的美少女忍者！ | ✅ |
+| `shouxiang` | 有时是出手相助的美少女忍者！（top3） | ✅ |
+| `zhiwen` | 少女之吻（top3） | ✅ |
+| `aan` | 阿尼安·库尼昂（top5） | ✅ |
+| `keye` | 凯泽尔科亚特尔（top5） | ✅ |
 | `zzzzzz` | 非空 9 候选 | ✅ |
 | 空输入 | 非空 9 候选 | ✅ |
 | `a` | 非空 9 候选 | ✅ |
 
-结果：**21/21 通过**。
+结果：**29/29 通过**。
 
 ---
 
@@ -91,27 +99,35 @@ data/phrases.json = 646 KB
 
 | 类别 | 用例 | 通过标准 | 通过 | top1 率 | 平均耗时 |
 |---|---:|---|---:|---:|---:|
-| exact | 1212 | top1 | **1212/1212（100%）** | 100% | 1.1 ms |
-| fuzzy | 878 | top1 | **878/878（100%）** | 100% | 36.6 ms |
+| exact | 1212 | top1 | **1212/1212（100%）** | 100% | 1.2 ms |
+| fuzzy | 878 | top1 | **878/878（100%）** | 100% | 37.2 ms |
 | initial | 1212 | top1 或 top3 | **1212/1212（100%）** | 98.3% | 5.3 ms |
-| typo | 600 | top3 | **600/600（100%）** | 99.7% | 54.5 ms |
-| keyword | 238 | top5 | **231/238（97.1%）** | 75.6% | 5.4 ms |
+| typo | 600 | top3 | **600/600（100%）** | 99.7% | 55.2 ms |
+| keyword | 238 | top5 | **233/238（97.9%）** | 75.6% | 5.4 ms |
+| mid_keyword | 300 | top5 | **300/300（100%）** | 91.0% | 26.5 ms |
 | fallback | 7 | 返回 N | **7/7（100%）** | — | 2.6 ms |
 
-### 3.1 keyword 的 7 个失败
+### 3.1 keyword 的 5 个失败
 
-均为极稀疏子序列的天然歧义，例如：
+均为极稀疏声母子序列的天然歧义，例如：
 
 ```
 mlh   → 墨绿海马（短/紧凑） vs 莫古力召唤术（长/稀疏）
 lds   → 神罗大厦 vs 里维·杜耶斯提
 slsh  → 神罗手镯 vs 赛特拉护身符
+dzhsh → 盗贼护手 vs 道路之星手镯
 mgj   → 猫咪攻击 vs 迷你古兰迦兰
 ```
 
 需求示例 `lkcc`、`wmhlkcdccnm`、`jdzhyo`、`adbym`、`asbnl` 均为 top1。该限制已写入 README/USAGE。
 
-### 3.2 initial 的 top1 非 100%
+### 3.2 mid_keyword 的 300 例
+
+覆盖长句中段**唯一出现**的 2–3 音节串，例如 `meishao`、`chushou`、
+`shouxiang`。生成器排除了另一词条的全拼前缀、精确全拼和跨词条共享
+的音节串，避免把天然歧义算成失败。结果：**300/300 进 top5，top1 91.0%**。
+
+### 3.3 initial 的 top1 非 100%
 
 20 组声母完全相同的词条（如 `ml` = 玛琳/玛蕾，`fl` = 菲拉/芙兰，`qd` = 强盗/祈祷）无法仅靠声母区分；方案把它们都放进 top3，通过标准为 top1 或 top3，全部通过。
 
@@ -134,6 +150,10 @@ mgj   → 猫咪攻击 vs 迷你古兰迦兰
 | `zanguokuaigon` | 掌掴快攻 | 容错 · zhang guo kuai gong |
 | `senguilon` | 圣柜龙 | 容错 · sheng gui long |
 | `shuanganozhe` | 双脑者 | 容错 · shuang nao zhe |
+| `meishao` | 有时是出手相助的美少女忍者！ | 关键词 · you shi shi chu shou xiang… |
+| `meishaonv` | 有时是出手相助的美少女忍者！ | 关键词 · you shi shi chu shou xiang… |
+| `chushou` | 有时是出手相助的美少女忍者！ | 关键词 · you shi shi chu shou xiang… |
+| `shouxiang` | 有时是出手相助的美少女忍者！ | 关键词 · you shi shi chu shou xiang… |
 
 候选顺序、注释、Top-N（9）均正确。
 
@@ -203,20 +223,23 @@ mgj   → 猫咪攻击 vs 迷你古兰迦兰
 | `senguilon`（ng 模糊） | 110.2 ms | 36.0 ms | 12.2 ms |
 | `zanguokuaigon`（长模糊） | 250.1 ms | 49.4 ms | 19.2 ms |
 | `shuanganozhe`（音节内换位） | 141.1 ms | 35.6 ms | 11.8 ms |
+| `meishao`（中段关键词，7 键） | 123 ms | — | 17.6 ms |
+| `shouxiang`（中段关键词，9 键） | 205 ms | — | 22.8 ms |
 | `renshengjiushizhandou`（20 键精确） | 57.1 ms | 10.7 ms | 2.7 ms |
 
-结论：精确/前缀输入流畅；长模糊/容错输入最坏约 50 ms/键，符合目标（单键 <50–100 ms）。可调 `dp_max_candidates` 进一步降延迟。
+结论：精确/前缀输入流畅；长模糊/容错输入最坏约 50 ms/键，中段关键词约 17–23 ms/键，符合目标（单键 <50–100 ms）。可调 `dp_max_candidates` 进一步降延迟。
 
 ---
 
 ## 9. 已知限制
 
-1. keyword 极稀疏子序列存在天然歧义（7/238 未进 top5）；`lkcc` 等需求示例稳定。
-2. 只输出 1212 条，词库外输入仅最近邻回退。
-3. 小狼毫无官方 portable 模式，本包为“便携方案包”。
-4. WeaselDeployer `/deploy` 在部分环境会打开 GUI 并改写方案列表；包内改用 `deploy-rime.ps1` 无头部署。
-5. 数据读音为工程化整理，争议读音需改 `override.yaml` 后重建。
-6. 20 组声母完全相同的词条，top1 无法仅靠声母唯一确定；Top-3 内均包含。
+1. keyword 极稀疏子序列存在天然歧义（5/238 未进 top5）；`lkcc` 等需求示例稳定。
+2. 中段共享音节串（如“是我的”“护身符”）存在天然歧义；`mid_keyword` 评测只使用唯一出现的 2–3 音节串。
+3. 只输出 1212 条，词库外输入仅最近邻回退。
+4. 小狼毫无官方 portable 模式，本包为“便携方案包”。
+5. WeaselDeployer `/deploy` 在部分环境会打开 GUI 并改写方案列表；包内改用 `deploy-rime.ps1` 无头部署。
+6. 数据读音为工程化整理，争议读音需改 `override.yaml` 后重建。
+7. 20 组声母完全相同的词条，top1 无法仅靠声母唯一确定；Top-3 内均包含。
 
 ---
 
