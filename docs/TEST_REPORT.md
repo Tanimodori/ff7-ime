@@ -272,6 +272,7 @@ keyword 5.3→5.9 ms，其余类别基本持平或略降。
   - 自动备份 `default.custom.yaml`；
   - 无头部署（`deploy-rime.ps1`）保留两方案；
   - 不再依赖 `WeaselDeployer.exe /deploy`（该命令在本机会打开“方案选单设定”GUI，并可能重写 `default.custom.yaml`，导致 luna 丢失）。
+  - 用 `rime_harness.py` 直接查真实 user dir 时必须加 `--no-write-custom`；否则 harness 默认会把 `default.custom.yaml` 重写成只含当前 schema。本轮已踩到并恢复。
 - portable 分发包：
   - zip 共 32 个成员、单一顶层目录、全部为 POSIX 路径，`testzip()` 通过；
   - `MANIFEST.txt`、`SHA256SUMS`（31 个文件）、`.zip.sha256` 齐备且逐项匹配；

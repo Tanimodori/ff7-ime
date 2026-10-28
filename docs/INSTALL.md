@@ -231,7 +231,9 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\uninstall.ps1
 
 ### 7.3 `luna_pinyin_simp` 从方案列表消失
 
-通常是不当使用 `WeaselDeployer` 导致 `default.custom.yaml` 被改写。恢复：
+通常是不当使用 `WeaselDeployer` 导致 `default.custom.yaml` 被改写。另一个常见原因是
+用 `rime_harness.py` 直接查真实 user dir 时没加 `--no-write-custom`；harness 默认会写一份
+只含当前 schema 的 `default.custom.yaml`。恢复：
 
 ```powershell
 # 找到最新备份
