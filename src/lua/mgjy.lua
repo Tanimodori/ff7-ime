@@ -160,6 +160,11 @@ local function build_options(env)
   local gap_penalty = cfg_double(config, "mgjy/keyword/gap_penalty")
   if gap_penalty == nil then gap_penalty = defaults.keyword.gap_penalty end
 
+  local syllable_subsequence = cfg_bool(config, "mgjy/keyword/syllable_subsequence")
+  if syllable_subsequence == nil then
+    syllable_subsequence = defaults.keyword.syllable_subsequence
+  end
+
   local show_comment = cfg_bool(config, "mgjy/show_comment")
   if show_comment == nil then show_comment = true end
 
@@ -182,7 +187,10 @@ local function build_options(env)
       syllable_swap = syllable_swap,
     },
     initial = { enabled = initial_enabled },
-    keyword = { gap_penalty = gap_penalty },
+    keyword = {
+      gap_penalty = gap_penalty,
+      syllable_subsequence = syllable_subsequence,
+    },
     show_comment = show_comment,
     show_score = show_score,
     debug = debug,

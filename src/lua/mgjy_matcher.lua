@@ -7,7 +7,8 @@
 -- 设计要点：
 --   1. 精确全拼 > 模糊全拼 > 前缀 > 音节对齐 > 声母 > 关键词 > 最近邻回退。
 --   2. 音节级对齐 DP 负责漏字、多字、相邻换位、音节前缀；
---      声母子序列负责 lkcc 这类关键词缩写。
+--      声母子序列负责 lkcc 这类缩写，音节前缀子序列负责 meishao
+--      这类词条中段关键词（如“有时是出手相助的美少女忍者！”）。
 --   3. 任何输入都返回 top_n 个候选，绝不空输出。
 
 local M = {}
@@ -55,6 +56,8 @@ M.defaults = {
   keyword = {
     enabled = true,
     gap_penalty = 0.02,
+    -- 词条中段的音节前缀子序列（meishao -> 美少女）。
+    syllable_subsequence = true,
   },
   score_epsilon = 1e-9,
 }
@@ -497,6 +500,126 @@ local function keyword_score(input, tokens, fuzzy, cfg)
   return best, best_exact
 end
 
+-- 音节前缀子序列：把输入切成若干块，每块是某个音节读音的前缀，
+-- 允许跳过中间音节。用于命中词条中段的关键词：
+--   meishao     -> 有时是出手相助的【美少】女忍者！
+--   chushou     -> 有时是【出手】相助的美少女忍者！
+--   shouxiang   -> 有时是出手【相助】的美少女忍者！
+-- 只比较前缀/精确读音，不做编辑距离；错字仍由 DP 通道负责。
+local function syllable_keyword_score(input, p, fuzzy, cfg)
+  local L = #input
+  if L < 2 or p.n < 1 then
+    return 0
+  end
+
+  local best = 0
+  local W = p.n + 1
+  local gap_penalty = cfg.keyword.gap_penalty or 0.02
+  local first = input:sub(1, 1)
+
+  for start = 1, p.n do
+    -- 起始音节必须能承接输入首字母（原始或模糊规范化后），否则整条 DP 必空。
+    local start_ok = false
+    for _, r in ipairs(p.readings[start]) do
+      if r.s:sub(1, 1) == first
+          or canon_syllable(r.s, fuzzy):sub(1, 1) == first then
+        start_ok = true
+        break
+      end
+    end
+
+    if start_ok then
+      -- dp[i * W + j]：消耗 i 个输入字母、处理到第 j 个音节后的最优块状态。
+      -- j 从 start-1 开始，因此第一块落在 start 音节的任意前缀上。
+      local dp = {}
+      local init_j = start - 1
+      dp[init_j] = { q = 0, c = 0, has2 = false }
+
+      local function better(prev, qsum, chunks, has2)
+        return not prev
+          or qsum > prev.q
+          or (qsum == prev.q and chunks > prev.c)
+          or (qsum == prev.q and chunks == prev.c and has2 and not prev.has2)
+      end
+
+      for i = 0, L do
+        local base = i * W
+        for j = init_j, p.n do
+          local cur = dp[base + j]
+          if cur then
+            -- 跳过下一个音节（允许关键词出现在词条中段）。
+            if j < p.n then
+              local at = base + j + 1
+              if better(dp[at], cur.q, cur.c, cur.has2) then
+                dp[at] = cur
+              end
+            end
+
+            -- 用当前音节的一个前缀消耗输入块。
+            if i < L and j < p.n then
+              local readings = p.readings[j + 1]
+              for _, r in ipairs(readings) do
+                local forms = { r.s }
+                local cr = canon_syllable(r.s, fuzzy)
+                if cr ~= r.s then
+                  forms[2] = cr
+                end
+                for _, syl in ipairs(forms) do
+                  local maxk = math.min(#syl, L - i)
+                  for k = 1, maxk do
+                    local chunk = input:sub(i + 1, i + k)
+                    if chunk == syl:sub(1, k) then
+                      local at = (i + k) * W + (j + 1)
+                      local qsum = cur.q + k / #syl
+                      local chunks = cur.c + 1
+                      local has2 = cur.has2 or (k >= 2)
+                      if better(dp[at], qsum, chunks, has2) then
+                        dp[at] = {
+                          q = qsum,
+                          c = chunks,
+                          has2 = has2,
+                        }
+                      end
+                    end
+                  end
+                end
+              end
+            end
+          end
+        end
+      end
+
+      for j = start, p.n do
+        local cur = dp[L * W + j]
+        if cur and cur.has2 and cur.c > 0 then
+          local span = j - start + 1
+          local chunk_quality = cur.q / cur.c
+          local compact = cur.c / span
+          local phrase_cov = L / math.max(1, #p.primary_full)
+          local start_pen = (start - 1) / p.n
+          local gap = span - cur.c
+          local s = 0.50
+            + 0.25 * chunk_quality
+            + 0.15 * compact
+            + 0.10 * (1 - start_pen)
+            + 0.05 * phrase_cov
+            - gap_penalty * gap
+          if s > best then
+            best = s
+          end
+        end
+      end
+    end
+  end
+
+  if best < 0 then
+    best = 0
+  elseif best > 1 then
+    best = 1
+  end
+  return best
+end
+
 -- 音节级对齐 DP：允许整音节/前缀/近似匹配、漏音节、多字母、相邻换位。
 local function dp_score(input, p, fuzzy, cfg, cache, strict)
   local L, n = #input, p.n
@@ -850,6 +973,7 @@ local function build_index(phrases, cfg)
     by_trigram = {},
     by_canon_bigram = {},
     by_canon_trigram = {},
+    by_syl_prefix = {},
     by_full = {},
     by_canon = {},
     static_top = {},
@@ -920,6 +1044,29 @@ local function build_index(phrases, cfg)
       end
     end
 
+    -- 音节前缀召回索引（1..3 字母）：中段关键词的第一块召回。
+    -- 只索引每个读音的前缀，完整匹配仍由 syllable_keyword_score 校验。
+    local seen_sp = {}
+    for j = 1, p.n do
+      for _, r in ipairs(p.readings[j]) do
+        local forms = { r.s }
+        local cr = canon_syllable(r.s, cfg.fuzzy)
+        if cr ~= r.s then
+          forms[2] = cr
+        end
+        for _, syl in ipairs(forms) do
+          local maxk = math.min(3, #syl)
+          for k = 1, maxk do
+            local key = syl:sub(1, k)
+            if not seen_sp[key] then
+              seen_sp[key] = true
+              add_index(idx.by_syl_prefix, key, id)
+            end
+          end
+        end
+      end
+    end
+
     idx.static_top[#idx.static_top + 1] = id
   end
 
@@ -966,6 +1113,35 @@ local function collect_primary(q, idx, cfg, initial_mode)
       list = idx.by_first[cf]
       if list then
         for _, id in ipairs(list) do cand[id] = true end
+      end
+    end
+  end
+  return cand
+end
+
+-- 中段关键词召回：用输入首块的 3/2 字母前缀查 by_syl_prefix。
+-- 单字母音节只有 a/e/o；若首字母是它们，或 2/3 字母键没有召回，
+-- 再补 1 字母键（如 aan -> a + an）。
+local function collect_syllable_keyword(q, idx)
+  local cand = {}
+  local maxk = math.min(3, #q)
+  for k = maxk, 2, -1 do
+    local list = idx.by_syl_prefix[q:sub(1, k)]
+    if list then
+      for _, id in ipairs(list) do
+        cand[id] = true
+      end
+    end
+  end
+
+  local first = q:sub(1, 1)
+  local add_one = (first == "a" or first == "e" or first == "o")
+    or next(cand) == nil
+  if add_one then
+    local list = idx.by_syl_prefix[first]
+    if list then
+      for _, id in ipairs(list) do
+        cand[id] = true
       end
     end
   end
@@ -1173,6 +1349,29 @@ function M.rank(input, phrases, opts)
         r.index = id
         r.phrase = p
         add_result(results, pos, id, p, r)
+      end
+    end
+  end
+
+  -- 阶段 3：音节前缀子序列（词条中段关键词）。
+  -- 独立于 DP 短名单和“廉价通道是否足够强”的判断：高 raw/低权重的
+  -- 关键词不应阻断 DP，也不应因为没有走 DP 而漏掉中段命中。
+  if cfg.keyword.syllable_subsequence ~= false and not initial_mode
+      and #q >= 2 and best_cheap_raw < 0.99 then
+    local kw_cand = collect_syllable_keyword(q, idx)
+    local kw_weight = channel_weight(cfg, "keyword", initial_mode)
+    for id in pairs(kw_cand) do
+      local p = phrases[id]
+      local raw = syllable_keyword_score(q, p, fuzzy, cfg)
+      if raw > 0 then
+        add_result(results, pos, id, p, {
+          index = id,
+          phrase = p,
+          score = raw * kw_weight + 0.0001 * (p.w or 1.0),
+          raw = raw,
+          channel = "keyword",
+          detail = "syllable",
+        })
       end
     end
   end

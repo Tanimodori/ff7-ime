@@ -50,6 +50,8 @@ patch:
   # 声母 / 关键词模式（lkcc 等）
   mgjy/initial/enabled: true
   mgjy/keyword/gap_penalty: 0.02
+  # 中段音节前缀子序列（meishao -> 美少女）；关闭后只保留声母关键词
+  mgjy/keyword/syllable_subsequence: true
 
   # ------------------------------------------------------------------
   # 通道权重（高级调参；一般无需修改）
