@@ -8,7 +8,7 @@
 - 输入法：中国大陆普通话**无调全拼**；不需要输入声调。
 - 候选：默认每页 9 个，数字键 1–9 选择；空格/回车/小键盘回车提交高亮候选；`-`/`=` 或 `,`/`.` 翻页（取决于 `key_binder`）。
 - 预编辑：输入框内实时显示预测音节分隔符（`diou` → `di'ou`，`shenl` → `shen'l`）；只影响显示，不影响上屏文本。
-- 只输出 `dict.txt` 的 1212 条词条；不会出现词库外候选、造句、用户新词。
+- 只输出 `data/dict.txt` 的 1212 条词条；不会出现词库外候选、造句、用户新词。
 - 所有候选项右侧有注释：`通道 · 主拼音`，例如：
   - `全拼 · shen luo`
   - `模糊 · shen luo`
@@ -105,7 +105,7 @@
 - 允许跳过中间音节，所以关键词可以出现在词条中段；
 - 不做编辑距离；错字仍走“容错”通道；
 - 如果输入同时是另一个词条的全拼前缀，前缀候选仍然优先。例如 `zhiwen` 会先给 `直纹叶翼蜥`，`少女之吻` 排在其后；
-- 可用 `mgjy/keyword/syllable_subsequence: false` 关闭，只保留声母子序列。
+- 可用 `ff7-ime/keyword/syllable_subsequence: false` 关闭，只保留声母子序列。
 
 ### 2.7 部分输入
 
@@ -143,7 +143,7 @@
 ## 3. 候选与 Top-N
 
 - 每次按键都会重新计算并给出 **N 个候选**（默认 9）。
-- N 可在 `mgjy/top_n` 修改；`menu/page_size` 建议与 N 相同（或更小，用翻页）。
+- N 可在 `ff7-ime/top_n` 修改；`menu/page_size` 建议与 N 相同（或更小，用翻页）。
 - 即使输入乱码、单字母或空串，也不会空输出：
   - 乱码/无匹配：按共享 bigram/trigram 召回，再用 Damerau + Dice-LCS 排序；
   - 已有强命中时只补 16 个小池候选；无强命中时补 96 个；
@@ -154,51 +154,51 @@
 
 ## 4. 配置
 
-编辑 `%APPDATA%\Rime\moguang_jianying.custom.yaml`，修改后重新部署。默认配置见 `src/moguang_jianying.custom.yaml`。
+编辑 `%APPDATA%\Rime\ff7-ime.custom.yaml`，修改后重新部署。默认配置见 `ff7-ime.custom.yaml`。
 
 ### 4.1 候选与注释
 
 ```yaml
 patch:
-  mgjy/top_n: 9
+  ff7-ime/top_n: 9
   menu/page_size: 9
-  mgjy/show_comment: true
-  mgjy/show_score: false      # 调试时打开，注释显示分数
+  ff7-ime/show_comment: true
+  ff7-ime/show_score: false      # 调试时打开，注释显示分数
 ```
 
 ### 4.2 模糊音开关
 
 | 配置 | 默认 | 说明 |
 |---|---|---|
-| `mgjy/fuzzy/zh_z` | true | zh→z |
-| `mgjy/fuzzy/ch_c` | true | ch→c |
-| `mgjy/fuzzy/sh_s` | true | sh→s |
-| `mgjy/fuzzy/ng_n` | true | ng→n |
-| `mgjy/fuzzy/n_l` | false | n→l（音节首） |
-| `mgjy/fuzzy/r_l` | false | r→l |
-| `mgjy/fuzzy/f_h` | false | f→h |
-| `mgjy/fuzzy/en_eng` | false | eng→en |
-| `mgjy/fuzzy/in_ing` | false | ing→in |
-| `mgjy/fuzzy/an_ang` | false | ang→an |
-| `mgjy/fuzzy/uan_uang` | false | uang→uan |
-| `mgjy/fuzzy/v_u` | true | v/u 互通 |
+| `ff7-ime/fuzzy/zh_z` | true | zh→z |
+| `ff7-ime/fuzzy/ch_c` | true | ch→c |
+| `ff7-ime/fuzzy/sh_s` | true | sh→s |
+| `ff7-ime/fuzzy/ng_n` | true | ng→n |
+| `ff7-ime/fuzzy/n_l` | false | n→l（音节首） |
+| `ff7-ime/fuzzy/r_l` | false | r→l |
+| `ff7-ime/fuzzy/f_h` | false | f→h |
+| `ff7-ime/fuzzy/en_eng` | false | eng→en |
+| `ff7-ime/fuzzy/in_ing` | false | ing→in |
+| `ff7-ime/fuzzy/an_ang` | false | ang→an |
+| `ff7-ime/fuzzy/uan_uang` | false | uang→uan |
+| `ff7-ime/fuzzy/v_u` | true | v/u 互通 |
 
 示例：
 
 ```yaml
 patch:
-  mgjy/fuzzy/n_l: true
-  mgjy/fuzzy/ng_n: false
+  ff7-ime/fuzzy/n_l: true
+  ff7-ime/fuzzy/ng_n: false
 ```
 
 ### 4.3 容错
 
 ```yaml
 patch:
-  mgjy/typo/enabled: true
-  mgjy/typo/max_edit: 2        # 0–4
-  mgjy/typo/transposition: true
-  mgjy/typo/syllable_swap: true
+  ff7-ime/typo/enabled: true
+  ff7-ime/typo/max_edit: 2        # 0–4
+  ff7-ime/typo/transposition: true
+  ff7-ime/typo/syllable_swap: true
 ```
 
 - `typo/enabled: false` 进入**严格模式**：只允许精确/模糊整音节，不允许漏/多/前缀/编辑距离/换位。
@@ -209,9 +209,9 @@ patch:
 
 ```yaml
 patch:
-  mgjy/initial/enabled: true
-  mgjy/keyword/gap_penalty: 0.02
-  mgjy/keyword/syllable_subsequence: true
+  ff7-ime/initial/enabled: true
+  ff7-ime/keyword/gap_penalty: 0.02
+  ff7-ime/keyword/syllable_subsequence: true
 ```
 
 - `initial/enabled: false`：`lkcc`、`wmhlkcdccnm` 等不再命中，只保留全拼/前缀/模糊/容错；
@@ -221,13 +221,13 @@ patch:
 
 ```yaml
 patch:
-  mgjy/dp_max_candidates: 56   # 8–500；越小越快，越大召回越稳
+  ff7-ime/dp_max_candidates: 56   # 8–500；越小越快，越大召回越稳
   # 回退与置信度
-  mgjy/fallback/use_lcs: true
-  mgjy/fallback/dp_min_raw: 0.65
-  mgjy/fallback/strong_raw: 0.70
-  mgjy/fallback/fast_max_candidates: 16
-  mgjy/fallback/max_candidates: 96
+  ff7-ime/fallback/use_lcs: true
+  ff7-ime/fallback/dp_min_raw: 0.65
+  ff7-ime/fallback/strong_raw: 0.70
+  ff7-ime/fallback/fast_max_candidates: 16
+  ff7-ime/fallback/max_candidates: 96
 ```
 
 - 精确/前缀输入不跑 DP，通常 5–10 ms/键；
@@ -241,16 +241,16 @@ patch:
 
 ```yaml
 patch:
-  mgjy/weights/exact: 1.0
-  mgjy/weights/fuzzy: 0.97
-  mgjy/weights/fuzzy_prefix: 0.95
-  mgjy/weights/prefix: 0.96
-  mgjy/weights/swap: 0.93
-  mgjy/weights/dp: 0.94
-  mgjy/weights/initial_exact: 0.96
-  mgjy/weights/initial: 0.86
-  mgjy/weights/keyword: 0.80
-  mgjy/weights/fallback: 0.55
+  ff7-ime/weights/exact: 1.0
+  ff7-ime/weights/fuzzy: 0.97
+  ff7-ime/weights/fuzzy_prefix: 0.95
+  ff7-ime/weights/prefix: 0.96
+  ff7-ime/weights/swap: 0.93
+  ff7-ime/weights/dp: 0.94
+  ff7-ime/weights/initial_exact: 0.96
+  ff7-ime/weights/initial: 0.86
+  ff7-ime/weights/keyword: 0.80
+  ff7-ime/weights/fallback: 0.55
 ```
 
 - `exact` 是唯一可到 1.0 的通道；
@@ -259,8 +259,8 @@ patch:
 
 ### 4.7 F4 开关 vs 配置文件
 
-- 默认 `mgjy/use_switches: false`：**以 `*.custom.yaml` 的 `mgjy/fuzzy/*` 等配置为准**；
-- 改为 `true`：F4 菜单中的 `mgjy_fuzzy_*`、`mgjy_initial`、`mgjy_typo` 开关优先，custom 中对应配置被忽略；
+- 默认 `ff7-ime/use_switches: false`：**以 `*.custom.yaml` 的 `ff7-ime/fuzzy/*` 等配置为准**；
+- 改为 `true`：F4 菜单中的 `ff7-ime_fuzzy_*`、`ff7-ime_initial`、`ff7-ime_typo` 开关优先，custom 中对应配置被忽略；
 - 如果既想用 F4，又想保留配置默认值，可把 `use_switches: true` 并在 schema 的 switches `reset` 中设置默认。
 
 > **不要**在 `*.custom.yaml` 中按名字 patch switches（如 `switches/@fuzzy_zh_z/reset`），Rime 会把它解析成数字索引 0，改错 `ascii_mode`。要 patch 请用数字索引 `switches/@<数字>/reset`。
@@ -281,8 +281,8 @@ schema 内已设置 `style/inline_preedit: true`，Weasel 会把预编辑串直�
 
 ```yaml
 patch:
-  mgjy/preedit/enabled: true      # false: 不预测分隔符，仍显示原始输入
-  mgjy/preedit/separator: "'"     # 改成 " " 即显示为 di ou
+  ff7-ime/preedit/enabled: true      # false: 不预测分隔符，仍显示原始输入
+  ff7-ime/preedit/separator: "'"     # 改成 " " 即显示为 di ou
   style/inline_preedit: true      # false: 回到候选窗口内显示预编辑
 ```
 
@@ -314,7 +314,7 @@ Damerau + Dice-LCS 排序；只有回退池为空才用静态优先序兜底。�
 
 - 若词库中存在另一个词的原始声母正好是 `lkcc`，它会以 `initial_exact`（0.96）排在关键词（0.80/0.90）之前；
 - 若输入被判定为非缩写模式（例如含较多元音），关键词权重会降低；
-- 可调高 `mgjy/weights/keyword` 或检查 `mgjy/initial/enabled`。
+- 可调高 `ff7-ime/weights/keyword` 或检查 `ff7-ime/initial/enabled`。
 
 ### 6.3 为什么某些生僻字读法不对？
 
@@ -323,18 +323,18 @@ Damerau + Dice-LCS 排序；只有回退池为空才用静态优先序兜底。�
 1. 编辑 `experiments/pinyin-data/override.yaml` 的 `confirmed_phrases` / `char_rules` / `char_defaults` / `misread_candidates`；
 2. 重新生成 `phrases.tsv`（或直接改 `data/phrases.json`）；
 3. 运行 `python tools/build_from_pinyin_data.py`；
-4. 复制 `src/lua/mgjy_data.lua` 到 `%APPDATA%\Rime\lua\` 并重新部署。
+4. 复制 `lua/ff7-ime_data.lua` 到 `%APPDATA%\Rime\lua\` 并重新部署。
 
 ### 6.4 如何只输出某个词条？
 
-本方案只输出 `dict.txt` 的 1212 条，不能临时添加词库外内容。要增删词条，修改 `dict.txt` 后重新构建（见 `docs/BUILD.md`）。
+本方案只输出 `data/dict.txt` 的 1212 条，不能临时添加词库外内容。要增删词条，修改 `data/dict.txt` 后重新构建（见 `docs/BUILD.md`）。
 
 ### 6.5 如何关闭某类容错？
 
-- 关闭全部容错：`mgjy/typo/enabled: false`；
-- 只关闭音节换位：`mgjy/typo/syllable_swap: false`；
-- 只关闭声母/关键词：`mgjy/initial/enabled: false`；
-- 只关闭某模糊音：`mgjy/fuzzy/<name>: false`。
+- 关闭全部容错：`ff7-ime/typo/enabled: false`；
+- 只关闭音节换位：`ff7-ime/typo/syllable_swap: false`；
+- 只关闭声母/关键词：`ff7-ime/initial/enabled: false`；
+- 只关闭某模糊音：`ff7-ime/fuzzy/<name>: false`。
 
 ---
 

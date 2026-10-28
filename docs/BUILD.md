@@ -1,6 +1,6 @@
 # 构建说明
 
-> 本文说明如何从 `dict.txt` 重新生成拼音数据、Lua 数据、portable 分发包，以及如何运行测试。
+> 本文说明如何从 `data/dict.txt` 重新生成拼音数据、Lua 数据、Plum 安装包，以及如何运行测试。
 > 运行时不需要 Python/Node；它们只用于构建与测试。
 
 ---
@@ -37,7 +37,7 @@ npm install wasmoon
 
 ### 2.1 确认词表
 
-`dict.txt` 必须是：
+`data/dict.txt` 必须是：
 
 - UTF-16 LE + BOM（当前文件就是）；
 - 每行一个词条；
@@ -48,7 +48,7 @@ npm install wasmoon
 
 ```bash
 python - <<'PY'
-raw = open('dict.txt','rb').read().decode('utf-16')
+raw = open('data/dict.txt','rb').read().decode('utf-16')
 lines = [l.strip('\ufeff\r\n\t ') for l in raw.splitlines() if l.strip('\ufeff\r\n\t ')]
 print(len(lines), len(set(lines)))
 PY
@@ -62,7 +62,7 @@ PY
 python experiments/pinyin-data/extract.py
 ```
 
-- 读取 `dict.txt`、`override.yaml`；
+- 读取 `data/dict.txt`、`override.yaml`；
 - 使用 pypinyin + luna_pinyin + terra_pinyin 交叉校验；
 - 输出 `experiments/pinyin-data/phrases.tsv`、`chars.tsv`。
 
@@ -89,7 +89,7 @@ python tools/build_from_pinyin_data.py
 
 输出：
 
-- `src/lua/mgjy_data.lua`
+- `lua/ff7-ime_data.lua`
 - `data/phrases.json`
 
 规则：
@@ -103,7 +103,7 @@ python tools/build_from_pinyin_data.py
 
 ```
 phrases=1212 alt-slots=586 full-variants=1973 init-variants=1543
-wrote src/lua/mgjy_data.lua
+wrote lua/ff7-ime_data.lua
 ```
 
 ### 2.4 运行核心与全量测试
@@ -111,7 +111,7 @@ wrote src/lua/mgjy_data.lua
 ```bash
 # 核心用例
 NODE_PATH="$PWD/tools/lua-sandbox/node_modules" \
-  node tests/lua/run_cases.js tests/lua/core_cases.json src/lua/mgjy_data.lua
+  node tests/lua/run_cases.js tests/lua/core_cases.json lua/ff7-ime_data.lua
 
 # 生成全量评估用例
 python tools/gen_eval_cases.py
@@ -140,8 +140,8 @@ NODE_PATH="$PWD/tools/lua-sandbox/node_modules" \
 cd experiments/rime-harness
 python rime_harness.py \
   --shared "C:\Program Files\Rime\weasel-0.17.4\data" \
-  --user "%TEMP%\mgjy-build-test" \
-  --schema moguang_jianying \
+  --user "%TEMP%\ff7-ime-build-test" \
+  --schema ff7-ime \
   --input lkcc --deploy always --json
 ```
 
@@ -167,68 +167,61 @@ for q in shenluo senluo leinuo lienuo leino leiknuo nuolei zanguokuaigon; do
 done
 ```
 
-### 2.6 构建分发包（portable）
+### 2.6 校验 Plum 包布局
+
+仓库本身就是 Plum 包：根 `recipe.yaml` 只安装 schema + 3 个 Lua 文件。
 
 ```bash
-python tools/build_package.py
+python tools/check_package.py
 ```
 
-这里的 **portable 指可分发档案**：一个自包含的 Rime 方案 zip，`rime/` 目录即 Rime 用户目录覆盖层，可直接复制安装，也可用包内脚本安装。
-
-输出：
-
-- `dist/moguang_jianying-portable/`
-- `dist/moguang_jianying-portable.zip`
-- `dist/moguang_jianying-portable.zip.sha256`
-
-> `dist/` 是构建产物，已在 `.gitignore` 中忽略，不进入版本库；需要分发时再构建。
-> 包内 `docs/` 不包含 `install-real*.log` 等开发机日志。
-
-包内容：
+期望：
 
 ```
-README.md, VERSION, MANIFEST.txt, SHA256SUMS
-install.ps1/.cmd, uninstall.ps1/.cmd, verify.ps1/.cmd
-deploy-rime.ps1
-rime/moguang_jianying.schema.yaml
-rime/moguang_jianying.custom.yaml
-rime/lua/mgjy.lua, mgjy_matcher.lua, mgjy_data.lua
-docs/...
-source/README-build.md
-source/dict.txt, phrases.tsv, override.yaml, extract.py, 构建脚本
-tools/rime_harness.py
+recipe: ff7-ime 1.0.0
+installed files (4):
+  ff7-ime.schema.yaml
+  lua/ff7-ime.lua
+  lua/ff7-ime_data.lua
+  lua/ff7-ime_matcher.lua
+package layout OK
 ```
 
-构建脚本会校验 zip：无绝对路径/`..`/反斜杠成员名，且只有一个顶层目录。`MANIFEST.txt` 记录 schema、版本、目标平台与安装入口；`SHA256SUMS` 覆盖包内每个文件；`.zip.sha256` 覆盖压缩包本身。
+脚本会检查：
 
-### 2.7 分发包冒烟测试
+- `recipe.yaml` 的安装清单恰好是 4 个运行时文件；
+- recipe 版本与 schema 版本一致；
+- `schema_id: ff7-ime`、`author: Tanimodori`、`description: 魔光键影专属拼音输入方案`；
+- `engine.translators` 含 `lua_translator@*ff7-ime`；
+- 不安装 `*.custom.yaml`、`data/dict.txt`、测试或文档；
+- 安装路径没有绝对路径或 `..`。
 
-先核对压缩包哈希：
+### 2.7 本地 Plum 安装验证
+
+仓库尚未公开时，可以用本地克隆模拟 GitHub 的 Plum 安装：
+
+1. 先把当前改动提交；
+2. 把仓库克隆到 Plum 缓存目录：
+
+   ```bash
+   mkdir -p "$APPDATA/plum/package/Tanimodori"
+   git clone --depth 1 <本仓库路径> "$APPDATA/plum/package/Tanimodori/ff7-ime"
+   ```
+
+3. 运行官方 `rime-install.bat`，输入 `Tanimodori/ff7-ime`；
+4. 确认输出包含 `Installing recipe:` 和 4 个 `Installing:` 文件；
+5. 检查用户目录只有 `ff7-ime.schema.yaml` 与 `lua/ff7-ime*.lua`，
+   没有 custom、`data/dict.txt`、tests。
+
+用临时 user dir 做真实 librime 验证（不碰真实配置）：
 
 ```bash
-(cd dist && sha256sum -c moguang_jianying-portable.zip.sha256)
+python experiments/rime-harness/rime_harness.py \
+  --user "$TEMP/ff7-ime-plum-test" \
+  --schema ff7-ime --input shenluo --deploy always --json
 ```
 
-再在临时 user dir 重放安装：
-
-```powershell
-$Test = "$env:TEMP\mgjy-pkg-test"
-Remove-Item -Recurse -Force $Test -ErrorAction SilentlyContinue
-New-Item -ItemType Directory -Force $Test | Out-Null
-
-.\dist\moguang_jianying-portable\install.ps1 -RimeUserDir $Test -NoDeploy
-.\dist\moguang_jianying-portable\deploy-rime.ps1 -UserDataDir $Test
-```
-
-检查：
-
-```powershell
-Get-Content "$Test\default.custom.yaml"
-Get-Content "$Test\build\default.yaml" | Select-String schema_list -Context 0,3
-Test-Path "$Test\build\moguang_jianying.schema.yaml"
-```
-
-期望：两个方案都在列表、构建产物存在。
+真实用户目录的安装、旧 `moguang_jianying` 迁移见 [INSTALL.md](INSTALL.md)。
 
 ---
 
@@ -243,12 +236,12 @@ python experiments/pinyin-data/extract.py --check
 python tools/build_from_pinyin_data.py
 
 NODE_PATH="$PWD/tools/lua-sandbox/node_modules" \
-  node tests/lua/run_cases.js tests/lua/core_cases.json src/lua/mgjy_data.lua
+  node tests/lua/run_cases.js tests/lua/core_cases.json lua/ff7-ime_data.lua
 
 python tools/gen_eval_cases.py
 NODE_PATH="$PWD/tools/lua-sandbox/node_modules" node tests/lua/bulk_eval.js
 
-python tools/build_package.py
+python tools/check_package.py
 ```
 
 ---
@@ -257,8 +250,8 @@ python tools/build_package.py
 
 修改以下位置：
 
-1. `src/moguang_jianying.schema.yaml` 的 `schema/version`；
-2. `tools/build_package.py` 写入的 `VERSION`；
+1. `ff7-ime.schema.yaml` 的 `schema/version`；
+2. `recipe.yaml` 的 `recipe/version`（必须与 schema 一致）；
 3. `README.md` 的版本段；
 4. 如数据有变，重跑 2.2–2.6。
 
@@ -272,15 +265,16 @@ python tools/build_package.py
 | `ModuleNotFoundError: yaml` | `python -m pip install pyyaml` |
 | wasmoon 报 `cannot open ...` | 测试脚本用 `fs.readFileSync` + `doString`，不依赖虚拟文件系统；确认 `NODE_PATH` 指向 `tools/lua-sandbox/node_modules` |
 | `extract.py --check` 报读音冲突 | 检查 `override.yaml` 的 `char_rules`/`confirmed_phrases`，修正后重跑 |
-| 数据条数不是 1212 | 检查 `dict.txt` 编码/空行/重复；不要用 Excel 另存导致编码变化 |
+| 数据条数不是 1212 | 检查 `data/dict.txt` 编码/空行/重复；不要用 Excel 另存导致编码变化 |
 | Lua 数据过大 | 默认最多 8 个 full 变体；可降低 `--cap`，但会减少多音组合覆盖 |
-| 包安装后 `build` 无产物 | 运行 `deploy-rime.ps1` 查看错误；确认 `rime.dll` 架构为 x64、`shared_data_dir` 有 `default.yaml` |
-| 中文路径失败 | PowerShell 脚本用 UTF-8 无 BOM 写配置；`deploy-rime.ps1` 用 UTF-8 传路径；如仍失败，改用纯 ASCII 临时路径测试定位 |
+| `check_package.py` 报版本不一致 | 同步 `ff7-ime.schema.yaml` 的 `schema/version` 与 `recipe.yaml` 的 `recipe/version` |
+| 包安装后 `build` 无产物 | 确认 `rime.dll` 架构为 x64、`shared_data_dir` 有 `default.yaml`；用 harness 的 `--deploy always` 查看部署错误 |
+| 中文路径失败 | 用纯 ASCII 临时路径测试定位；确认 Python/Node 以 UTF-8 读取路径 |
 
 ---
 
 ## 6. 不修改的目录
 
 - `experiments/` 下的探针/研究产物可保留，不参与运行时；
-- `tools/lua-sandbox/node_modules` 仅为测试依赖，不进入 portable 分发包；
-- `dist/` 由 `build_package.py` 重新生成，不要手改。
+- `tools/lua-sandbox/node_modules` 仅为测试依赖，不进入 Plum 安装包；
+- `recipe.yaml` 是安装清单，改动后必须跑 `tools/check_package.py`。

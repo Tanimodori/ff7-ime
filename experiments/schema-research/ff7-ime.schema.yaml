@@ -1,4 +1,4 @@
-# Rime schema skeleton for 魔光键影 / moguang_jianying
+# Rime schema skeleton for 魔光键影 / ff7-ime
 # encoding: utf-8
 #
 # 设计目标
@@ -18,14 +18,14 @@
 #
 # 部署位置
 # ---------
-#   %APPDATA%\Rime\moguang_jianying.schema.yaml
-#   %APPDATA%\Rime\moguang_jianying.custom.yaml      （可选，用户 patch）
-#   %APPDATA%\Rime\lua\moguang_jianying.lua
-#   %APPDATA%\Rime\moguang_jianying_data.tsv         （Lua 读取的数据文件）
+#   %APPDATA%\Rime\ff7-ime.schema.yaml
+#   %APPDATA%\Rime\ff7-ime.custom.yaml      （可选，用户 patch）
+#   %APPDATA%\Rime\lua\ff7-ime.lua
+#   %APPDATA%\Rime\ff7-ime_data.tsv         （Lua 读取的数据文件）
 # 修改后必须重新部署：WeaselDeployer.exe /deploy
 
 schema:
-  schema_id: moguang_jianying
+  schema_id: ff7-ime
   name: 魔光键影
   version: "0.1.0"
   author:
@@ -106,7 +106,7 @@ engine:
     # 从 <user_data_dir>/lua/ 或 <shared_data_dir>/lua/ 加载 名字.lua。
     # 不用 '*前缀' 的写法需要在 lua/rime.lua 里手动注册全局变量，
     # 会与用户已有的 rime.lua 冲突，故这里使用自动 require。
-    - lua_translator@*moguang_jianying
+    - lua_translator@*ff7-ime
 
   # 故意留空：uniquifier 会按候选文本去重（可能吞掉同文不同注释的词条），
   # simplifier 会做简繁转换，二者都会破坏“固定 1212 条”的语义。
@@ -131,15 +131,15 @@ speller:
   use_space: false
 
 # lua_translator 的真实配置命名空间。注意 env.name_space 在自动 require 时
-# 是 "*moguang_jianying"（带星号），所以 Lua 里统一按 "moguang_jianying/..."
+# 是 "*ff7-ime"（带星号），所以 Lua 里统一按 "ff7-ime/..."
 # 这个固定前缀读取，不依赖 env.name_space。
-moguang_jianying:
+ff7-ime:
   # 最多返回多少个候选（Lua 内部再与 100 取小）
   top_n: 10
   # 是否给候选加注释（注释内容由数据文件提供）
   show_comment: true
   # 数据文件：相对用户目录，或绝对路径
-  data_file: "moguang_jianying_data.tsv"
+  data_file: "ff7-ime_data.tsv"
   # 输入长度保护
   min_input_length: 1
   max_input_length: 32
@@ -194,9 +194,9 @@ ascii_composer:
     Eisu_toggle: clear
 
 menu:
-  # 每页候选数；用户可在 moguang_jianying.custom.yaml 里 patch menu/page_size。
+  # 每页候选数；用户可在 ff7-ime.custom.yaml 里 patch menu/page_size。
   page_size: 5
 
 # 不要在本文件根部添加 __patch。librime 的 AutoPatchConfigPlugin 只有在
-# 根节点没有显式 __patch 时才会自动应用 moguang_jianying.custom.yaml。
+# 根节点没有显式 __patch 时才会自动应用 ff7-ime.custom.yaml。
 # 一旦写了 __patch，自定义 patch 会被静默跳过。

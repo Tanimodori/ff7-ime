@@ -1,6 +1,6 @@
 # 算法设计
 
-> 本文描述 `src/lua/mgjy_matcher.lua` 的实际算法，不是概念草案。所有公式、权重、阈值均与 1.0.0 代码一致。
+> 本文描述 `lua/ff7-ime_matcher.lua` 的实际算法，不是概念草案。所有公式、权重、阈值均与 1.0.0 代码一致。
 
 ---
 
@@ -201,7 +201,7 @@ channel = "swap"
 
 #### 5.5.4 严格模式
 
-当 `mgjy/typo/enabled: false` 时，DP 进入 strict 模式：
+当 `ff7-ime/typo/enabled: false` 时，DP 进入 strict 模式：
 
 - 只接受整音节精确或音节级模糊相等；
 - 不允许前缀、漏字、多字、编辑距离、换位；
@@ -301,7 +301,7 @@ raw = 0.50
 - `initial_mode` 下跳过（声母子序列已覆盖纯缩写）；
 - `best_cheap_raw >= 0.99`（已有精确全拼）时跳过；
 - 通道名仍为 `keyword`，`detail = "syllable"`，权重沿用 `keyword`；
-- 用 `mgjy/keyword/syllable_subsequence: false` 可关闭。
+- 用 `ff7-ime/keyword/syllable_subsequence: false` 可关闭。
 
 前缀优先仍然成立：`zhiwen` 的 `少女之吻` 加权 0.780，但
 `直纹叶翼蜥` 的全拼前缀得分 0.907，仍排第一。
@@ -309,7 +309,7 @@ raw = 0.50
 ### 5.9 置信度门槛与最近邻回退
 
 DP 是近似对齐，必须防止它在垃圾串上“硬凑”出低分候选。`dp_score` 的
-归一化分数低于 `mgjy/fallback/dp_min_raw`（默认 0.65）时，该 DP 结果
+归一化分数低于 `ff7-ime/fallback/dp_min_raw`（默认 0.65）时，该 DP 结果
 不进入强通道；例如 `asdfghjkl` 对若干四音节词的 raw 约 0.55，会被丢弃，
 而不是返回 9 个看似匹配的随机词。
 
@@ -355,7 +355,7 @@ DP 是近似对齐，必须防止它在垃圾串上“硬凑”出低分候选�
    - 覆盖全部字符；音节数越少越好；同分时优先更长的音节；
    - 允许一个未完成的尾音节，只要它是合法音节的前缀（`shenl` → `shen'l`）；
    - 无法切分时原样返回（`lkcc` → `lkcc`）；
-3. 用 `mgjy/preedit/separator`（默认 `'`）连接。
+3. 用 `ff7-ime/preedit/separator`（默认 `'`）连接。
 
 显示层写入 `cand.preedit`；Rime 的 composition preedit 使用该字段，Weasel 在 `style/inline_preedit: true` 时把它画进输入框。commit 文本仍是候选的 `text`，不受影响。
 
@@ -413,14 +413,14 @@ overlap = 2 * bigram_hits + 4 * trigram_hits
 - 精确/前缀/模糊/声母/换位已够强时完全跳过 DP，长句逐键约 5–10 ms；
 - 纯声母/关键词输入跳过 DP，避免 DP 误抢关键词；
 - DP 短名单既控制延迟，又通过 canonical 重叠度确保正确候选不被截掉；
-- DP 的归一化 raw 低于 `mgjy/fallback/dp_min_raw`（默认 0.65）时丢弃，
+- DP 的归一化 raw 低于 `ff7-ime/fallback/dp_min_raw`（默认 0.65）时丢弃，
   避免垃圾串被强行对齐成随机词。
 
 ### 6.4 阶段 3：中段关键词召回
 
 仅当：
 
-- `mgjy/keyword/syllable_subsequence` 未关闭；
+- `ff7-ime/keyword/syllable_subsequence` 未关闭；
 - 非 `initial_mode`；
 - `#q >= 2`；
 - `best_cheap_raw < 0.99`（没有精确全拼命中）
@@ -495,7 +495,7 @@ initial_mode = #q >= 2 and (
    Damerau/Dice-LCS 排序补足；已有强命中时只做 16 个候选的小池；
 3. 候选池为空或仍不足 N 时，`fill_static` 才从 `static_top` 兜底；
 4. 空输入直接取 `static_top` 前 N；
-5. 若 `matcher.rank` 抛错，`mgjy.lua` 用预构建的 fallback 顺序产出 N 个候选；
+5. 若 `matcher.rank` 抛错，`ff7-ime.lua` 用预构建的 fallback 顺序产出 N 个候选；
 6. `top_n` 默认 9，可配置 1–64；1212 条词条保证任何 N≤1212 都能填满。
 
 ---
@@ -562,9 +562,9 @@ initial_mode = #q >= 2 and (
 
 ## 12. Lua 实现注意事项
 
-- 不使用 `io`/`os` 读外部数据；数据在构建期嵌入 `mgjy_data.lua`，加载即用。
-- `require("mgjy_matcher")` / `require("mgjy_data")` 由 `lua_translator@*mgjy` 自动加载。
-- 数据表与索引在 `mgjy.lua` 的 `init` 中预热；模糊开关变化时 `build_index` 自动重建。
+- 不使用 `io`/`os` 读外部数据；数据在构建期嵌入 `ff7-ime_data.lua`，加载即用。
+- `require("ff7-ime_matcher")` / `require("ff7-ime_data")` 由 `lua_translator@*ff7-ime` 自动加载。
+- 数据表与索引在 `ff7-ime.lua` 的 `init` 中预热；模糊开关变化时 `build_index` 自动重建。
 - 字符串均为 ASCII 拼音；中文只作为 `text` 原样输出，不做 UTF-8 子串操作。
 - Candidate 参数顺序：`Candidate(type, start, end, text, comment)`；`seg._end` 为 0-based 结束偏移。
 - 候选 `quality` 按 yield 顺序递减，保证 Rime 菜单顺序与 `M.rank` 返回顺序一致。

@@ -78,9 +78,9 @@ Lua 插件源码来自上游 `hchunhui/librime-lua`（本目录 `refs/` 保存�
 所有实验都在：
 
 ```
-%TEMP%\mgjy-lua-probe\user
-%TEMP%\mgjy-lua-probe\logs
-%TEMP%\mgjy-lua-probe-shared\...
+%TEMP%\ff7-ime-lua-probe\user
+%TEMP%\ff7-ime-lua-probe\logs
+%TEMP%\ff7-ime-lua-probe-shared\...
 ```
 
 真实 `C:\Users\Tanimodori\AppData\Roaming\Rime` 与安装目录均只读，未修改。
@@ -121,11 +121,11 @@ finished updating schemas: 3 success, 0 failure.
 `minimal.schema.yaml` 直接拷进用户目录，部署报：
 
 ```
-deployment_tasks.cc:208] missing input schema: mgjy_probe
+deployment_tasks.cc:208] missing input schema: ff7-ime_probe
 deployment_tasks.cc:243] finished updating schemas: 0 success, 2 failure.
 ```
 
-`harness.py` 现在会把它复制成 `mgjy_probe.schema.yaml` 再部署。交付文件仍叫
+`harness.py` 现在会把它复制成 `ff7-ime_probe.schema.yaml` 再部署。交付文件仍叫
 `minimal.schema.yaml`，两者内容相同。
 
 ---
@@ -136,12 +136,12 @@ deployment_tasks.cc:243] finished updating schemas: 0 success, 2 failure.
 
 #### 搜索路径（运行时实测）
 
-`mgjy_probe.lua` 在 `init` 里打印 `package.path`：
+`ff7-ime_probe.lua` 在 `init` 里打印 `package.path`：
 
 ```
-[mgjy_probe] package.path=
-C:\Users\TANIMO~1\AppData\Local\Temp\mgjy-lua-probe\user\lua\?.lua;
-C:\Users\TANIMO~1\AppData\Local\Temp\mgjy-lua-probe\user\lua\?\init.lua;
+[ff7-ime_probe] package.path=
+C:\Users\TANIMO~1\AppData\Local\Temp\ff7-ime-lua-probe\user\lua\?.lua;
+C:\Users\TANIMO~1\AppData\Local\Temp\ff7-ime-lua-probe\user\lua\?\init.lua;
 C:\Program Files\Rime\weasel-0.17.4\data\lua\?.lua;
 C:\Program Files\Rime\weasel-0.17.4\data\lua\?\init.lua;
 C:\Python314\lua\?.lua; ...;.\?.lua;.\?\init.lua
@@ -173,7 +173,7 @@ C:\Python314\lua\?.lua; ...;.\?.lua;.\?\init.lua
 实测日志：
 
 ```
-[mgjy_probe] rime.lua loaded from user data dir
+[ff7-ime_probe] rime.lua loaded from user data dir
 ```
 
 说明 `rime.lua` **确实自动执行**，且用户目录优先。共享目录的 `rime.lua` 兜底是源码明确行为，
@@ -181,33 +181,33 @@ C:\Python314\lua\?.lua; ...;.\?.lua;.\?\init.lua
 
 #### require 用户目录
 
-`lua/mgjy_probe_data.lua` 返回一个表：
+`lua/ff7-ime_probe_data.lua` 返回一个表：
 
 ```lua
-return { magic = "MGJY-DATA-OK", values = { "alpha", "beta", "gamma" } }
+return { magic = "FF7-IME-DATA-OK", values = { "alpha", "beta", "gamma" } }
 ```
 
 实测：
 
 ```
-require("mgjy_probe_data") => ok | table magic=MGJY-DATA-OK values=3
-package.searchpath("mgjy_probe_data") => ...\user\lua\mgjy_probe_data.lua
+require("ff7-ime_probe_data") => ok | table magic=FF7-IME-DATA-OK values=3
+package.searchpath("ff7-ime_probe_data") => ...\user\lua\ff7-ime_probe_data.lua
 ```
 
 #### require 共享目录（实测，非推测）
 
 `shared_test.py` 把安装目录的 `data` 完整复制到临时 `shared/`，在
-`shared/lua/mgjy_shared_data.lua` 放：
+`shared/lua/ff7-ime_shared_data.lua` 放：
 
 ```lua
-return { magic = "MGJY-SHARED-OK" }
+return { magic = "FF7-IME-SHARED-OK" }
 ```
 
-用户目录的 translator 只 `require("mgjy_shared_data")`，用户目录没有这个文件。结果：
+用户目录的 translator 只 `require("ff7-ime_shared_data")`，用户目录没有这个文件。结果：
 
 ```
-[mgjy_shared_probe] require mgjy_shared_data ok=true magic=MGJY-SHARED-OK
-context: [00] text='MGJY-SHARED-OK:lkcc' comment='loaded from shared_data_dir/lua'
+[ff7-ime_shared_probe] require ff7-ime_shared_data ok=true magic=FF7-IME-SHARED-OK
+context: [00] text='FF7-IME-SHARED-OK:lkcc' comment='loaded from shared_data_dir/lua'
 PASS: shared_data_dir/lua is searched by require
 ```
 
@@ -217,15 +217,15 @@ PASS: shared_data_dir/lua is searched by require
 
 | schema 写法 | 行为 |
 |---|---|
-| `- lua_translator@*mgjy_probe` | `require("mgjy_probe")`，模块返回 table（含 `init`/`func`/`fini`）或 function |
-| `- lua_translator@mgjy_global` | 不 require，直接取 `rime.lua` 里的全局变量 `mgjy_global` |
+| `- lua_translator@*ff7-ime_probe` | `require("ff7-ime_probe")`，模块返回 table（含 `init`/`func`/`fini`）或 function |
+| `- lua_translator@ff7_ime_global` | 不 require，直接取 `rime.lua` 里的全局变量 `ff7_ime_global` |
 
-实测两种都成功。注意 `env.name_space` 在带 `*` 时是 **`*mgjy_probe`**（包含星号），
-全局写法是 `mgjy_global`：
+实测两种都成功。注意 `env.name_space` 在带 `*` 时是 **`*ff7-ime_probe`**（包含星号），
+全局写法是 `ff7_ime_global`：
 
 ```
-[mgjy_probe] env.name_space=*mgjy_probe
-[mgjy_global] init name_space=mgjy_global
+[ff7-ime_probe] env.name_space=*ff7-ime_probe
+[ff7_ime_global] init name_space=ff7_ime_global
 ```
 
 ---
@@ -237,8 +237,8 @@ PASS: shared_data_dir/lua is searched by require
 ```yaml
 engine:
   translators:
-    - lua_translator@*mgjy_probe
-    - lua_translator@*mgjy_probe_b
+    - lua_translator@*ff7-ime_probe
+    - lua_translator@*ff7-ime_probe_b
 ```
 
 `@` 后是 name_space/模块名；`*` 表示 require。注册名
@@ -251,8 +251,8 @@ engine:
 Ticket t(a.engine, a.name_space, a.name_space);
 ```
 
-所以 `lua_translator@*mgjy_probe` 最终查找的模块名是 `*mgjy_probe`，`raw_init` 看到首字符
-`*` 就 `require("mgjy_probe")`；不带 `*` 则 `lua_getglobal("mgjy_global")`。
+所以 `lua_translator@*ff7-ime_probe` 最终查找的模块名是 `*ff7-ime_probe`，`raw_init` 看到首字符
+`*` 就 `require("ff7-ime_probe")`；不带 `*` 则 `lua_getglobal("ff7_ime_global")`。
 
 #### Lua 模块最小形态
 
@@ -264,7 +264,7 @@ function M.init(env)
 end
 
 function M.func(input, seg, env)
-  yield(Candidate("mgjy_probe", seg.start, seg._end, "文本", "注释"))
+  yield(Candidate("ff7-ime_probe", seg.start, seg._end, "文本", "注释"))
 end
 
 return M
@@ -282,12 +282,12 @@ return M
 
 ```yaml
 schema:
-  schema_id: mgjy_probe
-  name: "MGJY Lua Probe"
+  schema_id: ff7-ime_probe
+  name: "FF7-IME Lua Probe"
   version: "0.1.0"
 
 switches:
-  - name: mgjy_probe_enabled
+  - name: ff7-ime_probe_enabled
     reset: 1
 
 menu:
@@ -310,14 +310,14 @@ engine:
     - abc_segmentor
     - fallback_segmentor
   translators:
-    - lua_translator@*mgjy_probe
+    - lua_translator@*ff7-ime_probe
   filters:
-    - lua_filter@*mgjy_probe_filter
+    - lua_filter@*ff7-ime_probe_filter
     - uniquifier
 ```
 
 不需要任何词典/`translator` 配置，部署即可 3/3 成功。只有一个 translator 时也能工作；
-`mgjy_probe_b` 是为了验证多 translator 顺序与 uniquifier 才加的。
+`ff7-ime_probe_b` 是为了验证多 translator 顺序与 uniquifier 才加的。
 
 ---
 
@@ -411,7 +411,7 @@ an<T> make(const string type, size_t start, size_t end,
 
 ```lua
 yield(Candidate(
-  "mgjy_probe",      -- 1 type（候选类型字符串）
+  "ff7-ime_probe",      -- 1 type（候选类型字符串）
   seg.start,         -- 2 start（0-based）
   seg._end,          -- 3 end（0-based，右开）
   "力克兮兮",         -- 4 text（真正上屏的文本）
@@ -423,19 +423,19 @@ yield(Candidate(
 
 ```
 Candidate(type,start,end,text,comment):
-  type=mgjy_probe start=0 _end=1 text="TEXT-l" comment="COMMENT-l" dyn=Simple
+  type=ff7-ime_probe start=0 _end=1 text="TEXT-l" comment="COMMENT-l" dyn=Simple
 ```
 
 如果按“文本放第一位”的直觉写：
 
 ```lua
-Candidate("TEXT-"..input, seg.start, seg._end, "mgjy_probe", "COMMENT")
+Candidate("TEXT-"..input, seg.start, seg._end, "ff7-ime_probe", "COMMENT")
 ```
 
 会得到：
 
 ```
-type=TEXT-l text="mgjy_probe" comment="COMMENT-l"
+type=TEXT-l text="ff7-ime_probe" comment="COMMENT-l"
 ```
 
 即文本和类型互换。**任务描述里的示例顺序需要纠正。**
@@ -482,15 +482,15 @@ type=TEXT-l text="mgjy_probe" comment="COMMENT-l"
 ```lua
 cfg:get_int("menu/page_size")        --> 5          (Lua number)
 cfg:get_int("/menu/page_size")       --> 5          (前导 / 也接受)
-cfg:get_string("schema/name")        --> "MGJY Lua Probe"
-cfg:get_bool("mgjy_probe/flag")      --> true       (Lua boolean)
-cfg:get_int("mgjy_probe/number")     --> 7
-cfg:get_string("mgjy_probe/name")    --> "探针配置"
+cfg:get_string("schema/name")        --> "FF7-IME Lua Probe"
+cfg:get_bool("ff7-ime_probe/flag")      --> true       (Lua boolean)
+cfg:get_int("ff7-ime_probe/number")     --> 7
+cfg:get_string("ff7-ime_probe/name")    --> "探针配置"
 cfg:get_int("no/such/int")           --> nil
 cfg:get_string("no/such/string")     --> nil
 cfg:get_bool("no/such/bool")         --> nil
-cfg:get_list("mgjy_probe/list")      --> ConfigList userdata
-cfg:get_map("mgjy_probe")            --> ConfigMap userdata
+cfg:get_list("ff7-ime_probe/list")      --> ConfigList userdata
+cfg:get_map("ff7-ime_probe")            --> ConfigMap userdata
 ```
 
 列表（0-based）：
@@ -520,35 +520,35 @@ schema：
 
 ```yaml
 switches:
-  - name: mgjy_probe_enabled
+  - name: ff7-ime_probe_enabled
     reset: 1
-  - name: mgjy_probe_extra
+  - name: ff7-ime_probe_extra
     reset: 0
 ```
 
 Lua：
 
 ```lua
-local on = env.engine.context:get_option("mgjy_probe_enabled")
+local on = env.engine.context:get_option("ff7-ime_probe_enabled")
 ```
 
 实测：
 
 ```
-option mgjy_probe_enabled=true mgjy_probe_extra=false
+option ff7-ime_probe_enabled=true ff7-ime_probe_extra=false
 ```
 
 用 C API / 其他组件改开关后，下一次翻译立刻反映：
 
 ```
-RimeSetOption(mgjy_probe_extra, True)
-option mgjy_probe_enabled=true mgjy_probe_extra=true
+RimeSetOption(ff7-ime_probe_extra, True)
+option ff7-ime_probe_enabled=true ff7-ime_probe_extra=true
 ```
 
 并且候选列表中出现：
 
 ```
-[01] text='EXTRA-ON:lkcc' comment='switch mgjy_probe_extra is ON'
+[01] text='EXTRA-ON:lkcc' comment='switch ff7-ime_probe_extra is ON'
 ```
 
 关掉后该候选消失。**这正是正式方案用 `*.custom.yaml` 开关控制模糊规则所需的机制**：
@@ -566,7 +566,7 @@ option mgjy_probe_enabled=true mgjy_probe_extra=true
 实测日志文件（设置 `RimeTraits.log_dir` 并调用 `RimeSetup` 后）：
 
 ```
-%TEMP%\mgjy-lua-probe\logs\rime.mgjyprobe.<host>.<user>.log.INFO.<timestamp>.<pid>.log
+%TEMP%\ff7-ime-lua-probe\logs\rime.ff7-imeprobe.<host>.<user>.log.INFO.<timestamp>.<pid>.log
 ```
 
 Weasel 自己的 glog 目录实测是 `%TEMP%\rime.weasel\`，文件形如：
@@ -575,7 +575,7 @@ Weasel 自己的 glog 目录实测是 `%TEMP%\rime.weasel\`，文件形如：
 rime.weasel.DESKTOP-0P43DKN.Tanimodori.log.INFO.20261028-195100.2276.log
 ```
 
-因此 `log.info("[mgjy] ...")` 在 Weasel 里会落到 `%TEMP%\rime.weasel\rime.weasel.*.log`。
+因此 `log.info("[ff7-ime] ...")` 在 Weasel 里会落到 `%TEMP%\rime.weasel\rime.weasel.*.log`。
 
 **坑 1**：`log` 在 `rime.lua` 执行时已经可用（`types_init` 先于加载 `rime.lua`），可以在
 `rime.lua` 里直接写。
@@ -586,7 +586,7 @@ stderr（本 harness 第一次就是这样）。Weasel 自己会正确 setup；�
 **坑 3**：`print` 写宿主进程 stdout。harness 里能看到：
 
 ```
-[mgjy_probe] print() from Lua: hello
+[ff7-ime_probe] print() from Lua: hello
 ```
 
 但 Weasel 是后台服务，没有控制台，**正式代码不要用 `print`，统一用 `log.*`**。
@@ -600,7 +600,7 @@ librime-lua 的 `Lua::Lua()` 走 `luaL_newstate()` + `luaL_openlibs()`，没有�
 
 ```
 type(io), type(os), type(debug), type(require) => table,table,table,function
-io.open(user_data_dir/probe_data.txt) => ok | MGJY-IO-OK	读到了外部 TSV 文件
+io.open(user_data_dir/probe_data.txt) => ok | FF7-IME-IO-OK	读到了外部 TSV 文件
 os.getenv(TEMP) => C:\Users\TANIMO~1\AppData\Local\Temp
 os.date() => 2026-10-28 20:40:26
 ```
@@ -616,8 +616,8 @@ os.date() => 2026-10-28 20:40:26
 
 **没有内置 JSON 解析器**。可选方案：
 
-1. **构建期嵌入 Lua 表（推荐）**：本项目 `lua/mgjy_probe_data.lua` 就是示例，
-   `require("mgjy_probe_data")` 直接得到 table；
+1. **构建期嵌入 Lua 表（推荐）**：本项目 `lua/ff7-ime_probe_data.lua` 就是示例，
+   `require("ff7-ime_probe_data")` 直接得到 table；
 2. 构建期把 JSON/TSV 转成 Lua 源码（生成 `return { ... }`），随 `lua/` 一起分发；
 3. 运行时 `io.open` 读文件再手写解析/带纯 Lua JSON 库——可行，但路径、权限、编码、
    Weasel 服务工作目录都增加不确定性，**不建议作为正式方案的主路径**。
@@ -634,21 +634,21 @@ schema 顺序：
 
 ```yaml
 translators:
-  - lua_translator@*mgjy_probe     # A
-  - lua_translator@*mgjy_probe_b   # B
+  - lua_translator@*ff7-ime_probe     # A
+  - lua_translator@*ff7-ime_probe_b   # B
 filters:
-  - lua_filter@*mgjy_probe_filter
+  - lua_filter@*ff7-ime_probe_filter
   - uniquifier
 ```
 
 A 每次 yield 8 个候选，B yield 2 个。实测 `lkcc`：
 
 ```
-[00] 力克兮兮        (A, type=mgjy_probe)
+[00] 力克兮兮        (A, type=ff7-ime_probe)
 [01] lkcc#01         (A)
 ...
 [07] lkcc#07         (A)
-[08] B:lkcc          (B, type=mgjy_probe_b)
+[08] B:lkcc          (B, type=ff7-ime_probe_b)
 ```
 
 即 A 的 8 个全部排在 B 之前。原因在 `MergedTranslation` / `Candidate::compare`：
@@ -666,11 +666,11 @@ B 的第 1 个候选与 A 的首候选 text 相同（`力克兮兮`），B 的 c
 `B duplicate comment`。透传 Lua filter 在 uniquifier **之前**运行，因此它看到 10 个：
 
 ```
-[mgjy_filter] cand#1  text="力克兮兮" comment="custom: illegal pinyin lkcc"
+[ff7-ime_filter] cand#1  text="力克兮兮" comment="custom: illegal pinyin lkcc"
 ...
-[mgjy_filter] cand#9  text="力克兮兮" comment="B duplicate comment"
-[mgjy_filter] cand#10 text="B:lkcc"   comment="B distinct comment"
-[mgjy_filter] passed 10 candidates
+[ff7-ime_filter] cand#9  text="力克兮兮" comment="B duplicate comment"
+[ff7-ime_filter] cand#10 text="B:lkcc"   comment="B distinct comment"
+[ff7-ime_filter] passed 10 candidates
 ```
 
 最终菜单只有 9 个唯一候选，`力克兮兮` 只出现一次，comment 保留**第一个**的
@@ -775,15 +775,15 @@ type, start, _start, _end, quality, text, comment, preedit
 实测：
 
 ```lua
-local c = Candidate("mgjy_probe", seg.start, seg._end, "TEXT", "COMMENT")
-c.type = "mgjy_probe_typed"
+local c = Candidate("ff7-ime_probe", seg.start, seg._end, "TEXT", "COMMENT")
+c.type = "ff7-ime_probe_typed"
 c.quality = 0.0
 ```
 
 日志：
 
 ```
-after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
+after write: type=ff7-ime_probe_typed quality=0.0; gen_type field type=nil
 ```
 
 - `type` 可通过构造函数第 1 参或 `c.type = ...` 设置；
@@ -798,7 +798,7 @@ after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
 
 如果正式方案需要区分“生成来源”，只能：
 
-- 用 `type` 字符串自己编码（如 `mgjy_fuzzy`、`mgjy_phrase`）；
+- 用 `type` 字符串自己编码（如 `ff7-ime_fuzzy`、`ff7-ime_phrase`）；
 - 或用 `get_dynamic_type()` 区分 Simple/Phrase/Uniquified；
 - 或把来源写进 comment/自定义 userdata（不推荐）。
 
@@ -853,8 +853,8 @@ after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
 1. **Candidate 参数顺序**：第一参是 `type`，不是 text。写错会“类型=文本、文本=类型”。
 2. **schema 文件名**：必须是 `<schema_id>.schema.yaml`，否则部署 `missing input schema`。
 3. **`seg.length` 不可靠**：fallback segment 上可能不等于 `_end-start`，统一用 `_end-start`。
-4. **`env.name_space` 带 `*`**：`lua_translator@*mgjy_probe` 的 name_space 是
-   `*mgjy_probe`；日志/条件判断时注意。
+4. **`env.name_space` 带 `*`**：`lua_translator@*ff7-ime_probe` 的 name_space 是
+   `*ff7-ime_probe`；日志/条件判断时注意。
 5. **`Return` 提交原始输入**：`express_editor` 下 Return 不等同于选词；验证候选要用
    `RimeSelectCandidateOnCurrentPage` / 数字键 / 空格。
 6. **空格进入 composition 需要 `speller/use_space: true`**，且空格要放进 delimiter。
@@ -869,11 +869,11 @@ after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
 
 ### 4.1 可以直接依赖的 API
 
-- 注册：`engine/translators: - lua_translator@*mgjy_xxx`
+- 注册：`engine/translators: - lua_translator@*ff7-ime_xxx`
 - 入口：模块返回 table，提供 `init(env)` 和 `func(input, seg, env)`
 - 候选：`yield(Candidate(type, seg.start, seg._end, text, comment))`
 - 配置：`env.engine.schema.config:get_int/get_string/get_bool/get_list/get_map`
-- 开关：`env.engine.context:get_option("mgjy_xxx_enabled")`
+- 开关：`env.engine.context:get_option("ff7-ime_xxx_enabled")`
 - 日志：`log.info/warning/error`
 - 子串：`input:sub(seg.start+1, seg._end)`
 
@@ -890,16 +890,16 @@ after write: type=mgjy_probe_typed quality=0.0; gen_type field type=nil
 ```
 rime.lua                     # 极简：全局 log、共享 helper；不要塞大逻辑
 lua/
-  mgjy_fuzzy.lua             # 主 translator（require）
-  mgjy_fuzzy_data.lua        # 构建期生成的数据表（规则/词表）
-  mgjy_fuzzy_filter.lua      # 可选 filter（改 comment / 插候选）
-  mgjy_common.lua            # 共享工具（require）
+  ff7-ime_fuzzy.lua             # 主 translator（require）
+  ff7-ime_fuzzy_data.lua        # 构建期生成的数据表（规则/词表）
+  ff7-ime_fuzzy_filter.lua      # 可选 filter（改 comment / 插候选）
+  ff7-ime_common.lua            # 共享工具（require）
 ```
 
 - 一个 translator 一个模块，`return M`；
 - `init(env)` 里读取 schema 配置、构建规则索引、缓存开关初始值；
 - `func` 里只做轻量查询 + yield；
-- 模块之间用 `require("mgjy_common")`，不要依赖全局变量（除 `lua_translator@global` 的兼容写法）；
+- 模块之间用 `require("ff7-ime_common")`，不要依赖全局变量（除 `lua_translator@global` 的兼容写法）；
 - 数据在构建期嵌入 Lua 表，避免运行时 IO；
 - 需要热更新开关时，`func` 里读 `ctx:get_option`（很轻），或用 `option_update_notifier` 监听。
 
@@ -909,9 +909,9 @@ lua/
 
   ```yaml
   switches:
-    - name: mgjy_fuzzy_enabled
+    - name: ff7-ime_fuzzy_enabled
       reset: 1
-    - name: mgjy_fuzzy_loose
+    - name: ff7-ime_fuzzy_loose
       reset: 0
   ```
 
@@ -919,8 +919,8 @@ lua/
 - Lua 里：
 
   ```lua
-  local fuzzy_on = env.engine.context:get_option("mgjy_fuzzy_enabled")
-  local loose = env.engine.context:get_option("mgjy_fuzzy_loose")
+  local fuzzy_on = env.engine.context:get_option("ff7-ime_fuzzy_enabled")
+  local loose = env.engine.context:get_option("ff7-ime_fuzzy_loose")
   ```
 
 - 规则表本身放 schema 配置（`get_list`/`get_map`）或构建期数据表；开关只控制“是否应用”，
@@ -940,14 +940,14 @@ lua/
 | 文件 | 说明 |
 |---|---|
 | `REPORT.md` | 本报告 |
-| `minimal.schema.yaml` | 最小可运行 schema（schema_id `mgjy_probe`，部署时需改名） |
+| `minimal.schema.yaml` | 最小可运行 schema（schema_id `ff7-ime_probe`，部署时需改名） |
 | `strict.schema.yaml` | 对照 schema（仅小写 alphabet，无 fallback） |
-| `global.schema.yaml` | 对照 schema（`lua_translator@mgjy_global`，不带 `*`） |
+| `global.schema.yaml` | 对照 schema（`lua_translator@ff7_ime_global`，不带 `*`） |
 | `rime.lua` | 自动加载 + 全局 translator 示例 |
-| `lua/mgjy_probe.lua` | 主探针 translator（日志/配置/开关/候选） |
-| `lua/mgjy_probe_b.lua` | 第二 translator（顺序/重复候选） |
-| `lua/mgjy_probe_filter.lua` | 透传 Lua filter（观察 filter 与 uniquifier 顺序） |
-| `lua/mgjy_probe_data.lua` | 构建期数据嵌入示例 |
+| `lua/ff7-ime_probe.lua` | 主探针 translator（日志/配置/开关/候选） |
+| `lua/ff7-ime_probe_b.lua` | 第二 translator（顺序/重复候选） |
+| `lua/ff7-ime_probe_filter.lua` | 透传 Lua filter（观察 filter 与 uniquifier 顺序） |
+| `lua/ff7-ime_probe_data.lua` | 构建期数据嵌入示例 |
 | `harness.py` | ctypes 部署 + 按键 + 读候选 + 收集日志 |
 | `shared_test.py` | 共享目录 `data/lua` 的 require 验证 |
 | `logs/console.txt` | 主 harness 完整控制台记录 |
@@ -965,12 +965,12 @@ lua/
 
 - `CONTEXT lkcc after typing`、`CONTEXT lkcc before selecting first candidate`
 - `CONTEXT nihao (page 0)`、`[commit] '你好'`
-- `scenario: lua_translator@mgjy_global`
+- `scenario: lua_translator@ff7_ime_global`
 - `scenario: strict alphabet`
 - `RimeSetInput('niHao123')` 及其后的边界输入段落
-- `[mgjy_filter] passed 10 candidates`
-- `get_int(menu/page_size)`、`get_map(mgjy_probe)`、`missing get_int`
-- `logs/shared_test_console.txt` 中的 `MGJY-SHARED-OK:lkcc` 与 `PASS`
+- `[ff7-ime_filter] passed 10 candidates`
+- `get_int(menu/page_size)`、`get_map(ff7-ime_probe)`、`missing get_int`
+- `logs/shared_test_console.txt` 中的 `FF7-IME-SHARED-OK:lkcc` 与 `PASS`
 
 ---
 

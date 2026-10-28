@@ -1,15 +1,15 @@
--- mgjy.lua
+-- ff7-ime.lua
 -- 魔光键影 · Rime Lua translator 适配层。
 --
 -- 职责：
---   1. 加载构建期生成的 mgjy_data.lua；
+--   1. 加载构建期生成的 ff7-ime_data.lua；
 --   2. 从 schema 配置与 switches 读取 top_n / 模糊音 / 权重 / 容错开关；
---   3. 调用 mgjy_matcher.lua 得到 Top-N，并 yield 为 Rime Candidate。
+--   3. 调用 ff7-ime_matcher.lua 得到 Top-N，并 yield 为 Rime Candidate。
 --
--- 约定：lua_translator@*mgjy 会 require 本文件；本文件返回带 init/func 的表。
+-- 约定：lua_translator@*ff7-ime 会 require 本文件；本文件返回带 init/func 的表。
 
-local matcher = require("mgjy_matcher")
-local data = require("mgjy_data")
+local matcher = require("ff7-ime_matcher")
+local data = require("ff7-ime_data")
 
 local M = {}
 
@@ -27,18 +27,18 @@ local CHANNEL_LABEL = {
 }
 
 local FUZZY_KEYS = {
-  { key = "zh_z", switch = "mgjy_fuzzy_zh_z" },
-  { key = "ch_c", switch = "mgjy_fuzzy_ch_c" },
-  { key = "sh_s", switch = "mgjy_fuzzy_sh_s" },
-  { key = "ng_n", switch = "mgjy_fuzzy_ng_n" },
-  { key = "n_l", switch = "mgjy_fuzzy_n_l" },
-  { key = "r_l", switch = "mgjy_fuzzy_r_l" },
-  { key = "f_h", switch = "mgjy_fuzzy_f_h" },
-  { key = "en_eng", switch = "mgjy_fuzzy_en_eng" },
-  { key = "in_ing", switch = "mgjy_fuzzy_in_ing" },
-  { key = "an_ang", switch = "mgjy_fuzzy_an_ang" },
-  { key = "uan_uang", switch = "mgjy_fuzzy_uan_uang" },
-  { key = "v_u", switch = "mgjy_fuzzy_v_u" },
+  { key = "zh_z", switch = "ff7-ime_fuzzy_zh_z" },
+  { key = "ch_c", switch = "ff7-ime_fuzzy_ch_c" },
+  { key = "sh_s", switch = "ff7-ime_fuzzy_sh_s" },
+  { key = "ng_n", switch = "ff7-ime_fuzzy_ng_n" },
+  { key = "n_l", switch = "ff7-ime_fuzzy_n_l" },
+  { key = "r_l", switch = "ff7-ime_fuzzy_r_l" },
+  { key = "f_h", switch = "ff7-ime_fuzzy_f_h" },
+  { key = "en_eng", switch = "ff7-ime_fuzzy_en_eng" },
+  { key = "in_ing", switch = "ff7-ime_fuzzy_in_ing" },
+  { key = "an_ang", switch = "ff7-ime_fuzzy_an_ang" },
+  { key = "uan_uang", switch = "ff7-ime_fuzzy_uan_uang" },
+  { key = "v_u", switch = "ff7-ime_fuzzy_v_u" },
 }
 
 local WEIGHT_KEYS = {
@@ -100,23 +100,23 @@ local function build_options(env)
   local config = config_of(env)
   local defaults = matcher.defaults
 
-  local use_switches = cfg_bool(config, "mgjy/use_switches")
+  local use_switches = cfg_bool(config, "ff7-ime/use_switches")
   if use_switches == nil then use_switches = false end
 
-  local top_n = cfg_int(config, "mgjy/top_n") or defaults.top_n
+  local top_n = cfg_int(config, "ff7-ime/top_n") or defaults.top_n
   if top_n < 1 then top_n = 1 end
   if top_n > 64 then top_n = 64 end
 
-  local dp_max = cfg_int(config, "mgjy/dp_max_candidates") or defaults.dp_max_candidates
+  local dp_max = cfg_int(config, "ff7-ime/dp_max_candidates") or defaults.dp_max_candidates
   if dp_max < 8 then dp_max = 8 end
   if dp_max > 500 then dp_max = 500 end
 
   local fuzzy = {}
   for _, item in ipairs(FUZZY_KEYS) do
-    -- use_switches=true 时 F4 开关优先；否则以 mgjy/fuzzy/* 配置为准。
+    -- use_switches=true 时 F4 开关优先；否则以 ff7-ime/fuzzy/* 配置为准。
     local v = switch_value(env, item.switch, use_switches)
     if v == nil then
-      v = cfg_bool(config, "mgjy/fuzzy/" .. item.key)
+      v = cfg_bool(config, "ff7-ime/fuzzy/" .. item.key)
     end
     if v == nil then
       v = defaults.fuzzy[item.key]
@@ -126,7 +126,7 @@ local function build_options(env)
 
   local weights = {}
   for _, key in ipairs(WEIGHT_KEYS) do
-    local v = cfg_double(config, "mgjy/weights/" .. key)
+    local v = cfg_double(config, "ff7-ime/weights/" .. key)
     if v == nil then
       v = defaults.weights[key]
     end
@@ -135,86 +135,86 @@ local function build_options(env)
 
   local typo_enabled = nil
   if use_switches then
-    typo_enabled = switch_value(env, "mgjy_typo", true)
+    typo_enabled = switch_value(env, "ff7-ime_typo", true)
   end
   if typo_enabled == nil then
-    typo_enabled = cfg_bool(config, "mgjy/typo/enabled")
+    typo_enabled = cfg_bool(config, "ff7-ime/typo/enabled")
   end
   if typo_enabled == nil then typo_enabled = true end
-  local max_edit = cfg_int(config, "mgjy/typo/max_edit")
+  local max_edit = cfg_int(config, "ff7-ime/typo/max_edit")
   if max_edit == nil then max_edit = defaults.typo.max_edit end
   if max_edit < 0 then max_edit = 0 end
   if max_edit > 4 then max_edit = 4 end
   if not typo_enabled then max_edit = 0 end
 
-  local transposition = cfg_bool(config, "mgjy/typo/transposition")
+  local transposition = cfg_bool(config, "ff7-ime/typo/transposition")
   if transposition == nil then transposition = defaults.typo.transposition end
   if not typo_enabled then transposition = false end
 
-  local syllable_swap = cfg_bool(config, "mgjy/typo/syllable_swap")
+  local syllable_swap = cfg_bool(config, "ff7-ime/typo/syllable_swap")
   if syllable_swap == nil then syllable_swap = defaults.typo.syllable_swap end
   if not typo_enabled then syllable_swap = false end
 
   local initial_enabled = nil
   if use_switches then
-    initial_enabled = switch_value(env, "mgjy_initial", true)
+    initial_enabled = switch_value(env, "ff7-ime_initial", true)
   end
   if initial_enabled == nil then
-    initial_enabled = cfg_bool(config, "mgjy/initial/enabled")
+    initial_enabled = cfg_bool(config, "ff7-ime/initial/enabled")
   end
   if initial_enabled == nil then initial_enabled = true end
 
-  local gap_penalty = cfg_double(config, "mgjy/keyword/gap_penalty")
+  local gap_penalty = cfg_double(config, "ff7-ime/keyword/gap_penalty")
   if gap_penalty == nil then gap_penalty = defaults.keyword.gap_penalty end
 
-  local syllable_subsequence = cfg_bool(config, "mgjy/keyword/syllable_subsequence")
+  local syllable_subsequence = cfg_bool(config, "ff7-ime/keyword/syllable_subsequence")
   if syllable_subsequence == nil then
     syllable_subsequence = defaults.keyword.syllable_subsequence
   end
 
-  local preedit_enabled = cfg_bool(config, "mgjy/preedit/enabled")
+  local preedit_enabled = cfg_bool(config, "ff7-ime/preedit/enabled")
   if preedit_enabled == nil then preedit_enabled = true end
-  local preedit_separator = cfg_string(config, "mgjy/preedit/separator")
+  local preedit_separator = cfg_string(config, "ff7-ime/preedit/separator")
   if preedit_separator == nil then
     preedit_separator = defaults.preedit.separator
   end
 
-  local fallback_use_lcs = cfg_bool(config, "mgjy/fallback/use_lcs")
+  local fallback_use_lcs = cfg_bool(config, "ff7-ime/fallback/use_lcs")
   if fallback_use_lcs == nil then
     fallback_use_lcs = defaults.fallback.use_lcs
   end
-  local dp_min_raw = cfg_double(config, "mgjy/fallback/dp_min_raw")
+  local dp_min_raw = cfg_double(config, "ff7-ime/fallback/dp_min_raw")
   if dp_min_raw == nil then
     dp_min_raw = defaults.fallback.dp_min_raw
   end
   if dp_min_raw < 0 then dp_min_raw = 0 end
   if dp_min_raw > 1 then dp_min_raw = 1 end
-  local fallback_max = cfg_int(config, "mgjy/fallback/max_candidates")
+  local fallback_max = cfg_int(config, "ff7-ime/fallback/max_candidates")
   if fallback_max == nil then
     fallback_max = defaults.fallback.max_candidates
   end
   if fallback_max < 8 then fallback_max = 8 end
   if fallback_max > 500 then fallback_max = 500 end
-  local fallback_strong_raw = cfg_double(config, "mgjy/fallback/strong_raw")
+  local fallback_strong_raw = cfg_double(config, "ff7-ime/fallback/strong_raw")
   if fallback_strong_raw == nil then
     fallback_strong_raw = defaults.fallback.strong_raw
   end
   if fallback_strong_raw < 0 then fallback_strong_raw = 0 end
   if fallback_strong_raw > 1 then fallback_strong_raw = 1 end
-  local fallback_fast_max = cfg_int(config, "mgjy/fallback/fast_max_candidates")
+  local fallback_fast_max = cfg_int(config, "ff7-ime/fallback/fast_max_candidates")
   if fallback_fast_max == nil then
     fallback_fast_max = defaults.fallback.fast_max_candidates
   end
   if fallback_fast_max < 8 then fallback_fast_max = 8 end
   if fallback_fast_max > 500 then fallback_fast_max = 500 end
 
-  local show_comment = cfg_bool(config, "mgjy/show_comment")
+  local show_comment = cfg_bool(config, "ff7-ime/show_comment")
   if show_comment == nil then show_comment = true end
 
-  local show_score = cfg_bool(config, "mgjy/show_score")
+  local show_score = cfg_bool(config, "ff7-ime/show_score")
   if show_score == nil then show_score = false end
 
-  local debug = cfg_bool(config, "mgjy/debug")
+  local debug = cfg_bool(config, "ff7-ime/debug")
   if debug == nil then debug = false end
 
   return {
@@ -356,7 +356,7 @@ function M.func(input, seg, env)
   local total = #results
   for i = 1, total do
     local r = results[i]
-    local cand = Candidate("mgjy", start_pos, end_pos, r.phrase.text, format_comment(r, opts))
+    local cand = Candidate("ff7-ime", start_pos, end_pos, r.phrase.text, format_comment(r, opts))
     if preedit then
       pcall(function() cand.preedit = preedit end)
     end

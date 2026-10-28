@@ -33,7 +33,7 @@ RIME_ROOT = Path(r"C:\Program Files\Rime\weasel-0.17.4")
 RIME_DLL = RIME_ROOT / "rime.dll"
 SHARED_DATA = RIME_ROOT / "data"
 
-TEMP_ROOT = Path(tempfile.gettempdir()) / "mgjy-lua-probe"
+TEMP_ROOT = Path(tempfile.gettempdir()) / "ff7-ime-lua-probe"
 USER_DATA = TEMP_ROOT / "user"
 LOG_DIR = TEMP_ROOT / "logs"
 PROJECT_LOGS = PROJECT / "logs"
@@ -194,9 +194,9 @@ def load_rime():
 DEFAULT_CUSTOM = """\
 patch:
   schema_list:
-    - schema: mgjy_probe
-    - schema: mgjy_probe_strict
-    - schema: mgjy_probe_global
+    - schema: ff7-ime_probe
+    - schema: ff7-ime_probe_strict
+    - schema: ff7-ime_probe_global
 """
 
 
@@ -207,22 +207,22 @@ def deploy_assets():
     LOG_DIR.mkdir(parents=True)
 
     # 部署时文件名必须是 <schema_id>.schema.yaml
-    shutil.copy2(PROJECT / "minimal.schema.yaml", USER_DATA / "mgjy_probe.schema.yaml")
-    shutil.copy2(PROJECT / "strict.schema.yaml", USER_DATA / "mgjy_probe_strict.schema.yaml")
-    shutil.copy2(PROJECT / "global.schema.yaml", USER_DATA / "mgjy_probe_global.schema.yaml")
+    shutil.copy2(PROJECT / "minimal.schema.yaml", USER_DATA / "ff7-ime_probe.schema.yaml")
+    shutil.copy2(PROJECT / "strict.schema.yaml", USER_DATA / "ff7-ime_probe_strict.schema.yaml")
+    shutil.copy2(PROJECT / "global.schema.yaml", USER_DATA / "ff7-ime_probe_global.schema.yaml")
     shutil.copy2(PROJECT / "rime.lua", USER_DATA / "rime.lua")
     shutil.copytree(PROJECT / "lua", USER_DATA / "lua")
     (USER_DATA / "default.custom.yaml").write_text(DEFAULT_CUSTOM, encoding="utf-8")
     (USER_DATA / "probe_data.txt").write_text(
-        "MGJY-IO-OK\t读到了外部 TSV 文件\n", encoding="utf-8"
+        "FF7-IME-IO-OK\t读到了外部 TSV 文件\n", encoding="utf-8"
     )
     # 给 deployer 一个稳定的 installation id
     (USER_DATA / "installation.yaml").write_text(
-        "distribution_code_name: mgjy-lua-probe\n"
-        "distribution_name: MGJY Lua Probe\n"
+        "distribution_code_name: ff7-ime-lua-probe\n"
+        "distribution_name: FF7-IME Lua Probe\n"
         "distribution_version: '0.1.0'\n"
         "install_time: '2026-10-28T00:00:00+08:00'\n"
-        "installation_id: mgjy-lua-probe\n"
+        "installation_id: ff7-ime-lua-probe\n"
         "rime_version: 1.13.1\n",
         encoding="utf-8",
     )
@@ -249,10 +249,10 @@ class Rime:
 
         traits.shared_data_dir = keep(SHARED_DATA)
         traits.user_data_dir = keep(USER_DATA)
-        traits.distribution_name = keep("MGJY Lua Probe")
-        traits.distribution_code_name = keep("mgjy-lua-probe")
+        traits.distribution_name = keep("FF7-IME Lua Probe")
+        traits.distribution_code_name = keep("ff7-ime-lua-probe")
         traits.distribution_version = keep("0.1.0")
-        traits.app_name = keep("rime.mgjyprobe")
+        traits.app_name = keep("rime.ff7-imeprobe")
         traits.modules = None
         traits.min_log_level = 0
         traits.log_dir = keep(LOG_DIR)
@@ -405,7 +405,7 @@ class Rime:
 # 场景
 # --------------------------------------------------------------------------
 def scenario_main(r: Rime, result: dict):
-    print("\n########## scenario: mgjy_probe / lkcc key typing ##########")
+    print("\n########## scenario: ff7-ime_probe / lkcc key typing ##########")
     r.status()
     r.keys("lkcc")
     result["lkcc_page0"] = r.context("lkcc after typing (page 0)")
@@ -434,16 +434,16 @@ def scenario_main(r: Rime, result: dict):
     r.select_candidate_on_page(0)
     result["nihao_commit"] = r.commit()
 
-    print("\n########## scenario: switch mgjy_probe_extra ##########")
+    print("\n########## scenario: switch ff7-ime_probe_extra ##########")
     r.clear()
-    print(f"[option] mgjy_probe_extra before = {r.option('mgjy_probe_extra')}")
-    r.set_option("mgjy_probe_extra", True)
+    print(f"[option] ff7-ime_probe_extra before = {r.option('ff7-ime_probe_extra')}")
+    r.set_option("ff7-ime_probe_extra", True)
     r.keys("lkcc")
-    result["extra_on"] = r.context("lkcc with mgjy_probe_extra=ON (page 0)")
-    r.set_option("mgjy_probe_extra", False)
+    result["extra_on"] = r.context("lkcc with ff7-ime_probe_extra=ON (page 0)")
+    r.set_option("ff7-ime_probe_extra", False)
     r.clear()
     r.keys("lkcc")
-    result["extra_off"] = r.context("lkcc with mgjy_probe_extra=OFF (page 0)")
+    result["extra_off"] = r.context("lkcc with ff7-ime_probe_extra=OFF (page 0)")
 
     print("\n########## scenario: boundary strings via RimeSetInput ##########")
     for s in ["niHao123", "ni hao", "ni'hao", "ni,hao", "NIHAO", "!!", "a-b"]:
@@ -455,7 +455,7 @@ def scenario_main(r: Rime, result: dict):
 
 def scenario_strict(r: Rime, result: dict):
     print("\n########## scenario: strict alphabet ##########")
-    r.select_schema("mgjy_probe_strict")
+    r.select_schema("ff7-ime_probe_strict")
     r.status()
     r.clear()
     print("-- lowercase ab --")
@@ -479,19 +479,19 @@ def scenario_strict(r: Rime, result: dict):
     r.keys("123")
     result["strict_123"] = r.context("strict: 1 2 3")
 
-    r.select_schema("mgjy_probe")
+    r.select_schema("ff7-ime_probe")
 
 
 def scenario_global(r: Rime, result: dict):
-    print("\n########## scenario: lua_translator@mgjy_global (no star) ##########")
-    r.select_schema("mgjy_probe_global")
+    print("\n########## scenario: lua_translator@ff7_ime_global (no star) ##########")
+    r.select_schema("ff7-ime_probe_global")
     r.status()
     r.clear()
     r.keys("lkcc")
     result["global_lkcc"] = r.context("global schema lkcc")
     r.select_candidate_on_page(0)
     result["global_commit"] = r.commit()
-    r.select_schema("mgjy_probe")
+    r.select_schema("ff7-ime_probe")
 
 
 # --------------------------------------------------------------------------
@@ -519,7 +519,7 @@ def collect_logs():
     lua_lines = []
     for block in combined:
         for line in block.splitlines():
-            if "[mgjy_" in line:
+            if "[ff7-ime_" in line:
                 lua_lines.append(line)
     (PROJECT_LOGS / "lua_probe_log.txt").write_text("\n".join(lua_lines), encoding="utf-8")
     print(f"[logs] lua probe lines: {len(lua_lines)}")
@@ -531,7 +531,7 @@ def collect_logs():
 # --------------------------------------------------------------------------
 def main() -> int:
     print("=" * 78)
-    print("MGJY librime-lua probe harness")
+    print("FF7-IME librime-lua probe harness")
     print(f"python={sys.version}")
     print(f"project={PROJECT}")
     print(f"rime_dll={RIME_DLL}")
@@ -546,8 +546,8 @@ def main() -> int:
     try:
         r.initialize()
         r.create_session()
-        if not r.select_schema("mgjy_probe"):
-            raise SystemExit("RimeSelectSchema(mgjy_probe) failed")
+        if not r.select_schema("ff7-ime_probe"):
+            raise SystemExit("RimeSelectSchema(ff7-ime_probe) failed")
         scenario_main(r, result)
         scenario_strict(r, result)
         scenario_global(r, result)

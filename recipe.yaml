@@ -1,0 +1,24 @@
+# 魔光键影 · Rime package recipe (℞)
+# encoding: utf-8
+#
+# 供 rime/plum 及小狼毫「方案选单设定 → 获取更多输入方案」使用。
+# 安装标识：Tanimodori/ff7-ime
+#
+# Plum 会克隆本仓库，然后只把 install_files 列出的文件复制到 Rime 用户目录，
+# 并保留相对路径（lua/ 目录由此进入用户目录）。数据、工具、测试和文档不会安装。
+#
+# 注意：不要安装 ff7-ime.custom.yaml。它是用户配置示例；安装时会覆盖
+# 用户已有的自定义配置。方案默认值已经写在 schema 与 lua/ff7-ime.lua 中。
+#
+# 不安装 data/dict.txt：运行时数据在 lua/ff7-ime_data.lua，data/dict.txt 只是重建数据的源文件。
+
+recipe:
+  Rx: ff7-ime
+  version: "1.0.0"
+  description: 魔光键影专属拼音输入方案
+
+install_files:
+  - ff7-ime.schema.yaml
+  - lua/ff7-ime.lua
+  - lua/ff7-ime_matcher.lua
+  - lua/ff7-ime_data.lua

@@ -1,5 +1,5 @@
 -- Sample phrase table for matcher unit tests.
--- Runtime data will be generated from dict.txt + pinyin annotations.
+-- Runtime data will be generated from data/dict.txt + pinyin annotations.
 return {
   { text = "神罗", syls = { "shen", "luo" }, fulls = { "shenluo" }, w = 1.0, order = 1 },
   { text = "蒂法", syls = { "di", "fa" }, fulls = { "difa" }, w = 1.0, order = 2 },

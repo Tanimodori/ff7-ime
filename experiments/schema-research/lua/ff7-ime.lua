@@ -1,10 +1,10 @@
--- moguang_jianying.lua
--- 魔光键影 / moguang_jianying 的 Lua translator 骨架。
+-- ff7-ime.lua
+-- 魔光键影 / ff7-ime 的 Lua translator 骨架。
 --
 -- 放置位置：
---   %APPDATA%\Rime\lua\moguang_jianying.lua
+--   %APPDATA%\Rime\lua\ff7-ime.lua
 --
--- schema 中通过 lua_translator@*moguang_jianying 自动 require 本文件。
+-- schema 中通过 lua_translator@*ff7-ime 自动 require 本文件。
 -- 本文件返回一个 table：{ init = init, func = translate }。
 --
 -- 设计约束（与 schema 配套）：
@@ -29,19 +29,19 @@ local M = {}
 -- ---------------------------------------------------------------------------
 
 local function cfg_int(config, key, default)
-  local v = config:get_int("moguang_jianying/" .. key)
+  local v = config:get_int("ff7-ime/" .. key)
   if v == nil then return default end
   return v
 end
 
 local function cfg_bool(config, key, default)
-  local v = config:get_bool("moguang_jianying/" .. key)
+  local v = config:get_bool("ff7-ime/" .. key)
   if v == nil then return default end
   return v
 end
 
 local function cfg_str(config, key, default)
-  local v = config:get_string("moguang_jianying/" .. key)
+  local v = config:get_string("ff7-ime/" .. key)
   if v == nil or v == "" then return default end
   return v
 end
@@ -166,7 +166,7 @@ local function load_tsv(path)
 end
 
 local function load_entries(env, config)
-  local data_file = cfg_str(config, "data_file", "moguang_jianying_data.tsv")
+  local data_file = cfg_str(config, "data_file", "ff7-ime_data.tsv")
   local path = data_file
   local third = string.sub(data_file, 3, 3)
   local is_absolute = (string.sub(data_file, 2, 2) == ":" and
@@ -178,10 +178,10 @@ local function load_entries(env, config)
   end
   local entries, err = load_tsv(path)
   if not entries then
-    log.error("moguang_jianying: cannot open data file '" .. path .. "': " .. tostring(err))
+    log.error("ff7-ime: cannot open data file '" .. path .. "': " .. tostring(err))
     return {}
   end
-  log.info("moguang_jianying: loaded " .. tostring(#entries) .. " entries from " .. path)
+  log.info("ff7-ime: loaded " .. tostring(#entries) .. " entries from " .. path)
   return entries
 end
 

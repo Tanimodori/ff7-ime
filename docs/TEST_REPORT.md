@@ -10,8 +10,8 @@
 
 | 指标 | 结果 |
 |---|---:|
-| `dict.txt` 有效词条 | 1212 |
-| `data/phrases.json` / `mgjy_data.lua` 词条 | 1212 |
+| `data/dict.txt` 有效词条 | 1212 |
+| `data/phrases.json` / `ff7-ime_data.lua` 词条 | 1212 |
 | 重复词条 | 0 |
 | 汉字总出现 | 5560 |
 | 唯一汉字 | 1326 |
@@ -47,7 +47,7 @@ phrases=1212
 alt-slots=586
 full-variants=1973
 init-variants=1543
-mgjy_data.lua = 416 KB
+ff7-ime_data.lua = 416 KB
 data/phrases.json = 646 KB
 ```
 
@@ -247,15 +247,15 @@ keyword 5.3→5.9 ms，其余类别基本持平或略降。
 
 | 配置 | 输入 | 结果 |
 |---|---|---|
-| `mgjy/top_n: 12` + `menu/page_size: 12` | `shenluo` | 12 个候选 ✅ |
-| `mgjy/show_comment: false` | `shenluo` | 注释为空 ✅ |
-| `mgjy/typo/enabled: false` | `lienuo` | 不再命中雷诺（回退 神罗）✅ |
-| `mgjy/initial/enabled: false` | `lkcc` | 不再命中长句（回退 曾）✅ |
-| `mgjy/fuzzy/ng_n: false` + `typo: false` | `senguilon` | 不再命中圣柜龙（回退 神罗）✅ |
-| `use_switches: true` + `mgjy_fuzzy_ng_n=false` + `mgjy_typo=false` | `senguilon` | 神秘龙（回退）✅ |
+| `ff7-ime/top_n: 12` + `menu/page_size: 12` | `shenluo` | 12 个候选 ✅ |
+| `ff7-ime/show_comment: false` | `shenluo` | 注释为空 ✅ |
+| `ff7-ime/typo/enabled: false` | `lienuo` | 不再命中雷诺（回退 神罗）✅ |
+| `ff7-ime/initial/enabled: false` | `lkcc` | 不再命中长句（回退 曾）✅ |
+| `ff7-ime/fuzzy/ng_n: false` + `typo: false` | `senguilon` | 不再命中圣柜龙（回退 神罗）✅ |
+| `use_switches: true` + `ff7-ime_fuzzy_ng_n=false` + `ff7-ime_typo=false` | `senguilon` | 神秘龙（回退）✅ |
 | 同上，开关打开 | `senguilon` | 圣柜龙 ✅ |
-| `mgjy/preedit/enabled: false` | `diou` | preedit=`diou` ✅ |
-| `mgjy/preedit/separator: " "` | `diou` | preedit=`di ou` ✅ |
+| `ff7-ime/preedit/enabled: false` | `diou` | preedit=`diou` ✅ |
+| `ff7-ime/preedit/separator: " "` | `diou` | preedit=`di ou` ✅ |
 
 说明：`typo.enabled=false` 为严格模式，只允许精确/模糊整音节；`senguilon` 仍可命中圣柜龙，因为 `ng→n` 属模糊而非 typo。
 
@@ -264,20 +264,18 @@ keyword 5.3→5.9 ms，其余类别基本持平或略降。
 ## 7. 共存与部署
 
 - 真实 user dir：
-  - `default.custom.yaml` 的 `schema_list` 同时含 `luna_pinyin_simp`、`moguang_jianying`；
+  - `default.custom.yaml` 的 `schema_list` 同时含 `luna_pinyin_simp`、`ff7-ime`；
   - `build/default.yaml` 同时含两者；
-  - `build/moguang_jianying.schema.yaml` 存在；
+  - `build/ff7-ime.schema.yaml` 存在；
   - `luna_pinyin_simp` 输入 `nihao` → 你好（前 5 候选：你好/妳好/逆号/拟好/你）。
-- 安装脚本：
-  - 自动备份 `default.custom.yaml`；
-  - 无头部署（`deploy-rime.ps1`）保留两方案；
-  - 不再依赖 `WeaselDeployer.exe /deploy`（该命令在本机会打开“方案选单设定”GUI，并可能重写 `default.custom.yaml`，导致 luna 丢失）。
-  - 用 `rime_harness.py` 直接查真实 user dir 时必须加 `--no-write-custom`；否则 harness 默认会把 `default.custom.yaml` 重写成只含当前 schema。本轮已踩到并恢复。
-- portable 分发包：
-  - zip 共 32 个成员、单一顶层目录、全部为 POSIX 路径，`testzip()` 通过；
-  - `MANIFEST.txt`、`SHA256SUMS`（31 个文件）、`.zip.sha256` 齐备且逐项匹配；
-  - 从 zip 解压后重放 `install.ps1 -NoDeploy` + `deploy-rime.ps1`，生成 `build/moguang_jianying.schema.yaml`，查询 `meishao`→长句、`fagnge`→芳格、`asdfghjkl`/`zzzzzz`→回退候选均正确；
-  - `uninstall.ps1` 只移除本方案，luna 保留。
+- 官方安装器：
+  - `recipe.yaml` 只安装 `ff7-ime.schema.yaml` 与 `lua/ff7-ime*.lua` 共 4 个文件；
+  - 安装器不改写 `default.custom.yaml`，方案启用由“方案选单设定”的勾选完成；
+  - 用 `rime_harness.py` 直接查真实 user dir 时必须加 `--no-write-custom`；否则 harness 默认会把 `default.custom.yaml` 重写成只含当前 schema。
+- 包校验与 Plum 安装：
+  - `python tools/check_package.py` 通过，安装清单恰好 4 个运行时文件；
+  - 用本地克隆模拟 Plum 安装，用户目录只出现 schema + 3 个 Lua，没有 custom、`data/dict.txt`、tests；
+  - 官方 `rime-install.bat` 输出 `Installing recipe:` 与 4 个 `Installing:` 文件。
 
 ---
 
@@ -315,8 +313,8 @@ keyword 5.3→5.9 ms，其余类别基本持平或略降。
 1. keyword 极稀疏子序列存在天然歧义（5/238 未进 top5）；`lkcc` 等需求示例稳定。
 2. 中段共享音节串（如“是我的”“护身符”）存在天然歧义；`mid_keyword` 评测只使用唯一出现的 2–3 音节串。
 3. 只输出 1212 条，词库外输入仅做 n-gram + Damerau/Dice-LCS 回退；回退候选只保证表面字母相关，不保证语义相关。
-4. portable 是“可分发档案”，不是小狼毫便携运行时；安装目标仍是 Rime 用户目录，Weasel 的用户目录由前端/注册表决定。
-5. WeaselDeployer `/deploy` 在部分环境会打开 GUI 并改写方案列表；包内改用 `deploy-rime.ps1` 无头部署。
+4. 安装源是整仓 Plum 包：用户浅克隆整个仓库（约 6 MB，含 tests/experiments/docs），需要公开仓库 + Git Bash；Weasel 0.17.4 的本地 ZIP 路径不复制 `lua/`。
+5. 安装器不改 `default.custom.yaml`；启用方案靠官方“方案选单设定”的勾选，避免与 luna 等方案冲突。
 6. 数据读音为工程化整理，争议读音需改 `override.yaml` 后重建。
 7. 20 组声母完全相同的词条，top1 无法仅靠声母唯一确定；Top-3 内均包含。
 
@@ -330,20 +328,19 @@ cd "D:/Tanimodori/Projects/@FF14/ff7-ime"
 # 数据与核心
 python tools/build_from_pinyin_data.py
 NODE_PATH="$PWD/tools/lua-sandbox/node_modules" \
-  node tests/lua/run_cases.js tests/lua/core_cases.json src/lua/mgjy_data.lua
+  node tests/lua/run_cases.js tests/lua/core_cases.json lua/ff7-ime_data.lua
 
 # 全量评估
 python tools/gen_eval_cases.py
 NODE_PATH="$PWD/tools/lua-sandbox/node_modules" node tests/lua/bulk_eval.js
 
-# 分发包与完整性
-python tools/build_package.py
-(cd dist && sha256sum -c moguang_jianying-portable.zip.sha256)
+# 包校验
+python tools/check_package.py
 
 # 真实 Rime
 cd experiments/rime-harness
 python rime_harness.py \
   --shared "C:\Program Files\Rime\weasel-0.17.4\data" \
-  --user "%TEMP%\mgjy-test" \
-  --schema moguang_jianying --input lkcc --deploy always --json
+  --user "%TEMP%\ff7-ime-test" \
+  --schema ff7-ime --input lkcc --deploy always --json
 ```

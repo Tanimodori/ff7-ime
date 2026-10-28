@@ -1,308 +1,297 @@
-# 安装与部署
+# 安装、更新与卸载
 
 > 目标：小狼毫 Weasel 0.17.4（Windows x64，librime 1.13.1）。
-> 本方案只新增文件，不覆盖 `luna_pinyin_simp`；安装脚本会备份 `default.custom.yaml`。
+> 本方案通过 **Rime 官方包管理器（Plum）** 安装，不使用本项目自带的 PowerShell/CMD 安装脚本。
 
 ---
 
-## 1. 交付物
+## 1. 安装方式
 
-| 路径 | 说明 |
+### 1.1 前置条件
+
+| 项目 | 要求 |
 |---|---|
-| `dist/moguang_jianying-portable.zip` | portable 分发包（可分发档案，推荐分发） |
-| `dist/moguang_jianying-portable.zip.sha256` | 压缩包本身的 SHA-256 |
-| `dist/moguang_jianying-portable/` | 解压后的目录 |
-| `dist/moguang_jianying-portable/rime/` | Rime 用户目录覆盖层：schema/custom/lua/data |
-| `dist/moguang_jianying-portable/MANIFEST.txt` | 包元数据：版本、目标、安装入口 |
-| `dist/moguang_jianying-portable/SHA256SUMS` | 包内每个文件的 SHA-256 |
-| `dist/moguang_jianying-portable/install.ps1` / `.cmd` | 安装 |
-| `dist/moguang_jianying-portable/uninstall.ps1` / `.cmd` | 卸载 |
-| `dist/moguang_jianying-portable/verify.ps1` / `.cmd` | 只读校验 |
-| `dist/moguang_jianying-portable/deploy-rime.ps1` | 无头部署（直接调 rime.dll） |
-| `dist/moguang_jianying-portable/source/` | `dict.txt`、拼音 TSV、override、构建脚本 |
-| `dist/moguang_jianying-portable/docs/` | 完整文档 |
+| 小狼毫 | 0.17.4 x64（自带 `rime-install.bat`） |
+| Git for Windows | 需要其中的 `git` 与 `bash`；Plum 依赖它们 |
+| 网络 | 首次安装需要访问 GitHub |
 
-### 1.1 “portable”的定义
+> 小狼毫的“获取更多输入方案”按钮实际运行安装目录下的 `rime-install.bat`。
+> 检测到 Git Bash 时它会把安装交给 Plum；没有 Git Bash 时只会解压 zip 并复制
+> 根目录的 `*.yaml`/`*.txt`，**不会复制 `lua/`**，方案会缺少翻译器。
+> 如果目标机器没有 Git，可先在同一个控制台输入 `git` 让官方安装器自动安装，
+> 关闭控制台后重新打开，再安装本方案。
 
-本项目中的 **portable 指“可以分发的档案”**，即一个自包含的 Rime 方案 zip：
+### 1.2 通过“获取更多输入方案”安装
 
-- 包含完整方案源文件（`*.schema.yaml`、`*.custom.yaml`、`lua/`），`rime/` 目录就是 Rime 用户目录覆盖层；
-- 包含安装/卸载/校验脚本、文档、重建数据与测试 harness，不依赖 Python/Node/网络；
-- schema 自带 `style/inline_preedit: true`（内嵌预编辑）与 `Return`/`KP_Enter` 确认候选绑定，无需改 `weasel.custom.yaml`；
-- 解压后既可以运行 `install.ps1` 自动安装，也可以按 Rime 的常规做法把 `rime/` 下的文件复制到用户目录再部署；
-- 用 `MANIFEST.txt` + `SHA256SUMS` 标识版本与完整性，适合作为发布附件或离线拷贝。
+1. 确认本仓库已公开（安装标识为 **`Tanimodori/ff7-ime`**；若你 fork 或改名，
+   换成你自己的 `用户名/仓库名`）。
+2. 右键小狼毫托盘图标 → **方案选单设定**（或运行 `WeaselDeployer.exe`）。
+3. 点击左下角 **获取更多输入方案…**，会打开标题为 **Rime package installer** 的控制台。
+4. 在 `Enter package name, URL, user/repo or downloaded ZIP to install:` 后输入：
 
-它**不是**“小狼毫便携运行时”：Weasel 的用户目录由前端/注册表决定，见第 8 节。
+   ```
+   Tanimodori/ff7-ime
+   ```
+
+   按回车。
+5. 看到类似输出即表示安装成功：
+
+   ```
+   Installing recipe: Tanimodori/ff7-ime
+   Installing: lua/ff7-ime.lua
+   Installing: lua/ff7-ime_data.lua
+   Installing: lua/ff7-ime_matcher.lua
+   Installing: ff7-ime.schema.yaml
+   Updated ~ 4 files from 1 packages in 'C:\Users\<你>\AppData\Roaming\Rime'
+   ```
+
+6. 关闭控制台。方案选单设定窗口会自动刷新；在列表中找到 **魔光键影** 并勾选，
+   然后点击 **中** 保存。
+7. 如果候选没有立即生效，右键托盘 → **重新部署**，或重启 WeaselServer。
+8. 在任意输入框输入 `shenluo`，应出现“神罗”；输入 `lkcc`，应出现
+   “我们会立刻彻底铲除你们！”。
+
+### 1.3 安装器做了什么
+
+仓库根目录的 `recipe.yaml` 告诉 Plum 只安装 4 个运行时文件：
+
+```
+ff7-ime.schema.yaml
+lua/ff7-ime.lua
+lua/ff7-ime_matcher.lua
+lua/ff7-ime_data.lua
+```
+
+安装目标是 Rime 用户目录（默认 `%APPDATA%\Rime`），并保留 `lua/` 子目录。
+安装器**不会**：
+
+- 改写 `default.custom.yaml`（方案是否启用由第 6 步的勾选决定）；
+- 覆盖 `ff7-ime.custom.yaml`（用户配置示例，见第 3 节）；
+- 安装 `data/dict.txt`、工具、测试或文档（它们只用于开发/重建数据）。
+
+这些文件也足以运行：词库数据在 `lua/ff7-ime_data.lua`，`data/dict.txt` 只是重建数据的源文件。
+
+> **不需要 opencc/**：本方案没有启用 `simplifier`，输出文本已经是简体；安装器里
+> `opencc/*` 的复制规则与本包无关。
 
 ---
 
-## 2. 快速安装
+## 2. 验证安装
 
-1. 解压到一个**可写**目录（不要放在 `Program Files`）。
-2. 双击 `install.cmd`；或在 PowerShell 中：
+### 2.1 检查文件
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
-```
-
-3. 等待脚本输出：
-
-```
-[MGJY] Deploying via rime.dll (headless) ...
-[MGJY] rime maintenance started=1
-[MGJY] Installed. Press F4 or Ctrl+` and select 魔光键影.
-```
-
-4. 按 **F4** 或 **Ctrl+`** 打开方案选单，选择 **魔光键影**。
-5. 在记事本输入 `shenluo`，候选应出现“神罗”；输入 `lkcc`，候选应出现“我们会立刻彻底铲除你们！”。
-
-### 手工安装（不运行脚本）
-
-解压后把 `rime/` 下的全部文件复制到 Rime 用户目录，将 `moguang_jianying` 加入 `default.custom.yaml` 的 `patch/schema_list`，然后重新部署。完整步骤见第 4 节。
-
-### 校验分发包
+在 PowerShell 中：
 
 ```powershell
-# 压缩包本身（在 dist/ 或下载目录执行）
-$expected = (Get-Content .\moguang_jianying-portable.zip.sha256).Split()[0]
-$actual = (Get-FileHash .\moguang_jianying-portable.zip -Algorithm SHA256).Hash.ToLower()
-if ($actual -ne $expected) { Write-Error "zip hash mismatch" }
-
-# 解压后逐文件核对（在包根目录执行）
-Get-Content .\SHA256SUMS | ForEach-Object {
-    $hash, $file = $_ -split '  ', 2
-    $actual = (Get-FileHash -LiteralPath $file -Algorithm SHA256).Hash.ToLower()
-    if ($actual -ne $hash) { Write-Error "mismatch: $file" }
-}
+$rime = Join-Path $env:APPDATA 'Rime'
+Get-ChildItem "$rime\ff7-ime.schema.yaml",
+              "$rime\lua\ff7-ime.lua",
+              "$rime\lua\ff7-ime_matcher.lua",
+              "$rime\lua\ff7-ime_data.lua"
 ```
 
-标准 `sha256sum` 环境（Git Bash/WSL）也可以直接 `sha256sum -c SHA256SUMS`。
+四个文件都应存在。
 
-### 参数
+### 2.2 检查方案列表
 
 ```powershell
-# 非默认安装目录
-.\install.ps1 -WeaselDir "D:\Apps\Rime\weasel-0.17.4"
-
-# 非默认用户目录（仅本方案复制/部署到这个目录，不修改注册表）
-.\install.ps1 -RimeUserDir "D:\RimeUser"
-
-# 只复制和 patch，不部署
-.\install.ps1 -NoDeploy
+Select-String -Path "$env:APPDATA\Rime\build\default.yaml" -Pattern 'ff7-ime'
 ```
 
-> `-RimeUserDir` 只影响本脚本操作的目标目录；小狼毫真正的用户目录由注册表
-> `HKCU\Software\Rime\Weasel\RimeUserDir` 决定。若要让小狼毫使用其他目录，需要：
->
-> ```powershell
-> & "C:\Program Files\Rime\weasel-0.17.4\WeaselSetup.exe" /userdir:"D:\RimeUser"
-> ```
->
-> 然后重启 WeaselServer。该操作是全局的，会影响现有方案，务必先备份。
+安装后在方案选单里勾选过“魔光键影”，这里才会有条目。若没有，回到第 1.2 节第 6 步。
+
+### 2.3 检查输入
+
+在记事本中测试：
+
+| 输入 | 期望 top1 |
+|---|---|
+| `shenluo` | 神罗 |
+| `senluo` | 神罗（模糊音） |
+| `nuolei` | 雷诺（音节换位） |
+| `lkcc` | 我们会立刻彻底铲除你们！ |
+| `meishao` | 有时是出手相助的美少女忍者！ |
 
 ---
 
-## 3. 安装脚本做了什么
+## 3. 用户配置
 
-`install.ps1`：
+`ff7-ime.custom.yaml` 是**示例**，安装器不会安装它。需要改配置时：
 
-1. 校验 `rime/lua/mgjy_data.lua` 等文件存在；
-2. 创建 `%APPDATA%\Rime\lua`；
-3. 备份 `default.custom.yaml` → `default.custom.yaml.mgjy-backup-<timestamp>`；
-4. 复制：
-   - `moguang_jianying.schema.yaml`
-   - `moguang_jianying.custom.yaml`
-   - `lua/mgjy.lua`、`mgjy_matcher.lua`、`mgjy_data.lua`
-5. 幂等 patch `default.custom.yaml` 的 `schema_list`：
-   - 已有 `schema_list:` 块 → 在最后一个列表项后追加本方案；
-   - 没有 → 在 `patch:` 下加 `schema_list/+:`；
-   - 已包含本方案 → 跳过；
-6. 停止 WeaselServer（如果正在运行）；
-7. 调用 `deploy-rime.ps1`：通过 C# P/Invoke 调 `rime.dll` 的维护接口，无 GUI 完成重建；
-8. 重启 WeaselServer；
-9. 检查 `build/moguang_jianying.schema.yaml` 与 `build/default.yaml`。
+1. 在仓库中打开 `ff7-ime.custom.yaml`，按需修改；
+2. 复制到 `%APPDATA%\Rime\ff7-ime.custom.yaml`（如果已存在，先备份/合并）；
+3. 重新部署。
 
-> **不要用 `WeaselDeployer.exe /deploy` 代替第 7 步**：本机实测它会打开“方案选单设定”GUI，
-> 并可能把 `default.custom.yaml` 改写成只剩当前方案，导致 `luna_pinyin_simp` 丢失。
-> 如已发生，按第 7 节恢复。
+方案本身已经包含全部默认值（schema 的 `ff7-ime:` 块与 `lua/ff7-ime.lua` 的内置默认），
+不创建 custom 文件也能正常工作。
+
+常用配置见 [USAGE.md](USAGE.md#32-常用配置)。
 
 ---
 
-## 4. 手动安装（不使用脚本）
+## 4. 更新
 
-1. 解压分发包，把 `rime/` 下的文件复制到 `%APPDATA%\Rime`（保持 `lua/` 子目录）：
-
-```
-moguang_jianying.schema.yaml
-moguang_jianying.custom.yaml
-lua\mgjy.lua
-lua\mgjy_matcher.lua
-lua\mgjy_data.lua
-```
-
-2. 编辑 `%APPDATA%\Rime\default.custom.yaml`，确认 `patch/schema_list` 同时含：
-
-```yaml
-patch:
-  schema_list:
-    - {schema: luna_pinyin_simp}
-    - {schema: moguang_jianying}
-```
-
-若原本没有 `schema_list`，可写：
-
-```yaml
-patch:
-  schema_list/+:
-    - {schema: moguang_jianying}
-```
-
-3. 部署（任选其一）：
-   - 包内无头部署：
-     ```powershell
-     powershell -NoProfile -ExecutionPolicy Bypass -File .\deploy-rime.ps1
-     ```
-   - 小狼毫托盘菜单 → “重新部署”；
-   - `WeaselDeployer.exe` → 在“方案选单设定”窗口中勾选/确认后点击部署。
-
-4. 检查：
+再次打开 **获取更多输入方案**，输入同一个标识：
 
 ```
-%APPDATA%\Rime\build\moguang_jianying.schema.yaml
-%APPDATA%\Rime\build\default.yaml   # schema_list 应含两个方案
+Tanimodori/ff7-ime
 ```
+
+Plum 会更新 `%APPDATA%\plum\package\Tanimodori\ff7-ime` 并只覆盖清单中的 4 个文件。
+随后在方案选单设定中确认勾选并重新部署。用户自己的 `ff7-ime.custom.yaml`
+不会被改动。
+
+### 4.1 从旧 `moguang_jianying` 迁移
+
+旧版本的 schema_id 是 `moguang_jianying`，Lua 模块是 `lua/mgjy*.lua`；新版本改为
+`ff7-ime` 与 `lua/ff7-ime*.lua`。两套标识不能同时启用，迁移步骤：
+
+1. 备份 `%APPDATA%\Rime\default.custom.yaml`、旧 `moguang_jianying.custom.yaml`
+   和旧 `lua/mgjy*.lua`。
+2. 按第 1.2 节安装新包（`Tanimodori/ff7-ime`）。
+3. 打开 **方案选单设定**，取消勾选旧的 `moguang_jianying` 条目，勾选新的
+   **魔光键影**（`ff7-ime`），点击 **中**。
+4. 如果旧 `moguang_jianying.custom.yaml` 里有自定义项，把它复制为
+   `ff7-ime.custom.yaml`，并把键名中的 `mgjy/`、`mgjy_` 替换为
+   `ff7-ime/`、`ff7-ime_`；没有自定义则跳过。
+5. 删除旧文件（存在才删）：
+
+   ```
+   %APPDATA%\Rime\moguang_jianying.schema.yaml
+   %APPDATA%\Rime\moguang_jianying.custom.yaml
+   %APPDATA%\Rime\lua\mgjy.lua
+   %APPDATA%\Rime\lua\mgjy_matcher.lua
+   %APPDATA%\Rime\lua\mgjy_data.lua
+   %APPDATA%\Rime\build\moguang_jianying.schema.yaml
+   ```
+
+6. 重新部署，确认方案列表里只剩新的 `ff7-ime`，旧条目消失。
 
 ---
 
 ## 5. 卸载
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\uninstall.ps1
-```
+官方安装器没有卸载命令，按 Rime 的标准方式处理：
 
-- 删除本方案的 schema/custom/lua 文件；
-- 从 `default.custom.yaml` 删除含 `moguang_jianying` 的行；
-- 清理空的 `schema_list/+` 块；
-- 无头重建，`luna_pinyin_simp` 保持可用。
+1. 打开 **方案选单设定**，取消勾选 **魔光键影**，点击 **中**；
+2. 删除以下文件（存在才删）：
 
-恢复安装前的方案列表：
+   ```
+   %APPDATA%\Rime\ff7-ime.schema.yaml
+   %APPDATA%\Rime\lua\ff7-ime.lua
+   %APPDATA%\Rime\lua\ff7-ime_matcher.lua
+   %APPDATA%\Rime\lua\ff7-ime_data.lua
+   %APPDATA%\Rime\ff7-ime.custom.yaml   # 如果创建过
+   ```
 
-```powershell
-.\uninstall.ps1 -RestoreBackup
-```
+3. 重新部署。
 
-> 备份文件：`default.custom.yaml.mgjy-backup-<timestamp>`。
-> 恢复会覆盖安装后对 `default.custom.yaml` 的其他修改；如安装后又改过配置，请手动合并。
-
-仅检查不修改：
-
-```powershell
-.\verify.ps1
-```
+`luna_pinyin_simp` 及其他方案的设置不受影响。若只想暂时停用，取消勾选即可，不必删文件。
 
 ---
 
-## 6. 与 luna_pinyin_simp 共存
+## 6. 与 `luna_pinyin_simp` 共存
 
-- 安装脚本只追加 `schema_list` 条目，不删除/覆盖 luna 文件；
-- 无头部署保留 `build/default.yaml` 的完整 `schema_list`；
-- 已实测：同一 user dir 中 `luna_pinyin_simp` 输入 `nihao` 仍得到“你好”，本方案输入 `shenluo` 得到“神罗”；
-- 切换方案：F4 / Ctrl+`，或 `Ctrl+Shift+1`（若 key_binder 生效）。
+- 安装器只新增 4 个文件，不改动其他方案；
+- 方案是否启用由“方案选单设定”里的勾选决定，勾选后 Weasel 自己写入
+  `default.custom.yaml` 的 `schema_list`；
+- 已实测：同一用户目录中 `luna_pinyin_simp` 输入 `nihao` 仍得到“你好”，
+  本方案输入 `shenluo` 得到“神罗”；
+- 切换方案：F4 / Ctrl+`。
 
 ---
 
 ## 7. 故障排查
 
-### 7.1 方案选单里没有“魔光键影”
+### 7.1 控制台提示找不到包
 
-1. 检查 `%APPDATA%\Rime\build\default.yaml` 的 `schema_list` 是否含 `moguang_jianying`；
-2. 检查 `%APPDATA%\Rime\default.custom.yaml` 是否有该条目；
-3. 重新运行 `deploy-rime.ps1`；
-4. 若仍无，检查文件名必须是 `moguang_jianying.schema.yaml`（Rime 只认 `<schema_id>.schema.yaml`）；
-5. 查看日志：`%TEMP%\rime.weasel\rime.weasel.*.log`。
+- 确认标识拼写为 `Tanimodori/ff7-ime`（或你的实际 `用户名/仓库名`）；
+- 确认仓库是**公开**的；Plum 通过 `https://github.com/<user>/<repo>.git` 克隆；
+- 私有仓库需要目标机器已配置 GitHub 凭据，官方安装器不会提示登录。
 
-### 7.2 有方案但输入无候选
+### 7.2 控制台输出 `Unpacking ...` 而不是 `Installing recipe ...`
 
-1. 检查 `%APPDATA%\Rime\lua\mgjy.lua`、`mgjy_matcher.lua`、`mgjy_data.lua` 是否存在；
-2. 检查 schema 中是否为 `lua_translator@*mgjy`（`*` 不能少）；
-3. 查看日志中的 Lua 错误（`lua_translator` / `lua error` / `module not found`）；
+说明没有使用 Plum，而是走了内置 ZIP 安装路径。该路径只复制根目录
+`*.yaml`/`*.txt` 和 `opencc/`，**不会复制 `lua/`**，因此输入不会有候选。
+
+处理：
+
+1. 安装 Git for Windows（含 Git Bash）；
+2. 关闭并重新打开控制台；
+3. 重新输入 `Tanimodori/ff7-ime`，确认输出为 `Installing recipe:`。
+
+### 7.3 方案列表里有“魔光键影”，但输入没有候选
+
+1. 检查 `%APPDATA%\Rime\lua\ff7-ime.lua`、`ff7-ime_matcher.lua`、`ff7-ime_data.lua` 是否存在；
+2. 检查 schema 中是否为 `lua_translator@*ff7-ime`（`*` 不能少）；
+3. 查看日志 `%TEMP%\rime.weasel\rime.weasel.*.log` 中的
+   `lua_translator` / `lua error` / `module not found`；
 4. 确认 `speller/alphabet` 包含全部小写字母，`delimiter` 为 `'`，无 `algebra`；
 5. 重新部署并重启 WeaselServer。
 
-### 7.3 `luna_pinyin_simp` 从方案列表消失
+### 7.4 方案列表里没有“魔光键影”
 
-通常是不当使用 `WeaselDeployer` 导致 `default.custom.yaml` 被改写。另一个常见原因是
-用 `rime_harness.py` 直接查真实 user dir 时没加 `--no-write-custom`；harness 默认会写一份
-只含当前 schema 的 `default.custom.yaml`。恢复：
+1. 确认 `%APPDATA%\Rime\ff7-ime.schema.yaml` 存在；
+2. 关闭并重新打开“方案选单设定”，让它重新扫描；
+3. 查看日志中的 YAML 解析错误；
+4. 如果文件存在但你之前手动改过 `default.custom.yaml`，检查其中是否有重复的
+   `schema_list` 或 `schema_list/+` 键（YAML 后出现的键会覆盖前面的）。
 
-```powershell
-# 找到最新备份
-Get-ChildItem "$env:APPDATA\Rime\default.custom.yaml.mgjy-backup-*" |
-  Sort-Object LastWriteTime -Descending | Select-Object -First 1
+### 7.5 `luna_pinyin_simp` 从方案列表消失
 
-# 恢复后手动确认同时含两个方案，再无头部署
-Copy-Item <备份文件> "$env:APPDATA\Rime\default.custom.yaml" -Force
-.\deploy-rime.ps1
-```
-
-或直接编辑 `default.custom.yaml` 为：
+通常是 `default.custom.yaml` 被其他工具改写。把它改为同时包含两个方案：
 
 ```yaml
 patch:
   schema_list:
     - {schema: luna_pinyin_simp}
-    - {schema: moguang_jianying}
+    - {schema: ff7-ime}
 ```
 
-然后跑 `deploy-rime.ps1`。
+然后重新部署。若使用 `experiments/rime-harness/rime_harness.py` 直接查询真实用户目录，
+记得加 `--no-write-custom`，否则 harness 会写一份只含当前 schema 的 `default.custom.yaml`。
 
-### 7.4 修改配置后不生效
+### 7.6 修改配置后不生效
 
 - Rime 部署签名是**秒级 mtime**；改完等 1–2 秒再部署；
 - Lua 模块只在 engine 初始化时加载；部署后建议重启 WeaselServer；
-- 检查 `mgjy/use_switches`：
-  - `false`（默认）：`mgjy/fuzzy/*` 等配置生效；
-  - `true`：F4 的 `mgjy_fuzzy_*` 开关优先，custom 中的 fuzzy 配置会被忽略。
+- 检查 `ff7-ime/use_switches`：
+  - `false`（默认）：`ff7-ime/fuzzy/*` 等配置生效；
+  - `true`：F4 的 `ff7-ime_fuzzy_*` 开关优先。
 
-### 7.5 输入卡顿
+### 7.7 输入卡顿
 
-- 调小 `mgjy/dp_max_candidates`（默认 56，可试 32/40）；
-- 调小 `mgjy/fallback/max_candidates`（默认 96）或 `fast_max_candidates`（默认 16）；
-- 调小 `mgjy/typo/max_edit`（默认 2，可试 1）；
+- 调小 `ff7-ime/dp_max_candidates`（默认 56，可试 32/40）；
+- 调小 `ff7-ime/fallback/max_candidates`（默认 96）或 `fast_max_candidates`（默认 16）；
+- 调小 `ff7-ime/typo/max_edit`（默认 2，可试 1）；
 - 关闭不需要的模糊音（尤其 `n_l`、`r_l`、`f_h`）；
 - 精确/前缀输入本身不跑 DP，通常 5–10 ms/键；长模糊/容错输入最坏约 65 ms/键。
 
-### 7.6 标点/间隔号
+### 7.8 标点/间隔号
 
 - 词条中的 `！，·……` 是候选文本的一部分，由 Lua 原样输出；
 - 用户不需要输入标点；输入拼音即可；
 - 标点键由 Rime 的 `punctuator` 处理，不会影响候选文本。
 
-### 7.7 日志位置
+### 7.9 日志与缓存位置
 
 | 内容 | 路径 |
 |---|---|
 | Rime/Weasel 日志 | `%TEMP%\rime.weasel\rime.weasel.*.log` |
 | 构建产物 | `%APPDATA%\Rime\build\` |
-| 本方案备份 | `%APPDATA%\Rime\default.custom.yaml.mgjy-backup-*` |
+| Plum 包缓存 | `%APPDATA%\plum\package\Tanimodori\ff7-ime` |
 
 ---
 
-## 8. 分发包（portable）的定义与边界
+## 8. 分发边界
 
-本项目把 **portable 定义为“可以分发的档案”**，而不是“整个小狼毫随 U 盘走”的便携运行时。具体含义：
+本项目的分发单位是**仓库 + `recipe.yaml`**，不是自带安装脚本的 ZIP：
 
-- 单个 zip 自带 schema、custom、`lua/`、安装/卸载/校验脚本、文档、源数据与测试 harness；
-- `rime/` 是 Rime 用户目录覆盖层，可按 Rime 的通用安装方式直接复制到用户目录；
-- 不依赖 Python/Node/网络；安装脚本可指定 `-RimeUserDir` 与 `-WeaselDir`；
-- 卸载可回滚，包内 `MANIFEST.txt`/`SHA256SUMS` 用于版本识别与完整性校验。
-
-边界：Weasel 的用户目录由前端/注册表决定（默认 `%APPDATA%\Rime`），分发包不会改变这一点。若确实需要“整个小狼毫随 U 盘走”，需要：
-
-1. 在目标机器安装 Weasel；
-2. `WeaselSetup.exe /userdir:<U盘目录>` 切换全局用户目录；
-3. 重启 WeaselServer；
-4. 注意这会改变该机器上所有 Rime 方案的用户目录，需迁移/备份。
+- `recipe.yaml` 声明运行时文件，Plum 负责克隆、更新、复制；
+- 用户通过小狼毫官方入口“获取更多输入方案”安装，不需要 PowerShell/CMD 脚本；
+- 方案是否启用交给“方案选单设定”的勾选，安装器不直接编辑 `default.custom.yaml`；
+- 这不是“小狼毫便携运行时”。Weasel 的用户目录由前端/注册表决定
+  （默认 `%APPDATA%\Rime`）。
 
 ---
 
@@ -314,4 +303,5 @@ patch:
 | librime | 1.13.1 |
 | Lua | 5.4.7（内嵌） |
 | 系统 | Windows 10 19045 x64（理论 Windows 11 亦可） |
-| 依赖 | 无外部运行时；安装脚本需 PowerShell 5.1+ |
+| 安装依赖 | Git for Windows（含 Git Bash） |
+| 运行时依赖 | 无外部运行时 |

@@ -15,15 +15,15 @@
 │  │  键盘 → processors → segmentors → translators → filters   │  │
 │  │                          │                                 │  │
 │  │                          ▼                                 │  │
-│  │              lua_translator@*mgjy                          │  │
+│  │              lua_translator@*ff7-ime                          │  │
 │  │                          │                                 │  │
 │  │            ┌─────────────┴─────────────┐                   │  │
 │  │            ▼                           ▼                   │  │
-│  │      mgjy.lua                    mgjy_data.lua             │  │
+│  │      ff7-ime.lua                    ff7-ime_data.lua             │  │
 │  │  （配置/开关/适配）              （1212 条 + 变体/索引数据）│  │
 │  │            │                                               │  │
 │  │            ▼                                               │  │
-│  │      mgjy_matcher.lua                                      │  │
+│  │      ff7-ime_matcher.lua                                      │  │
 │  │  （规范化 → 多通道 → 索引召回 → DP → 排序 → Top-N）        │  │
 │  │            │                                               │  │
 │  │            ▼                                               │  │
@@ -41,13 +41,13 @@
 
 | 层 | 文件 | 职责 | 不做什么 |
 |---|---|---|---|
-| Rime 方案 | `src/moguang_jianying.schema.yaml` | schema 元信息、switches、engine 组件、speller、配置块 | 不写匹配逻辑 |
-| 用户配置 | `src/moguang_jianying.custom.yaml` | 覆盖 top_n/注释/模糊/容错/权重 | 不写代码 |
-| Rime 适配 | `src/lua/mgjy.lua` | 读配置与开关、加载数据、调用 matcher、yield、异常回退 | 不实现匹配 |
-| 匹配引擎 | `src/lua/mgjy_matcher.lua` | 规范化、八类通道、索引、DP、排序、Top-N | 不依赖 Rime |
-| 数据 | `src/lua/mgjy_data.lua` | 1212 条词条、读音、变体、声母、换位、权重 | 不手改（构建生成） |
-| 构建 | `tools/build_from_pinyin_data.py` | `phrases.tsv + override.yaml → mgjy_data.lua` | 不部署 |
-| 部署 | `packaging/*.ps1` | 复制、patch schema_list、无头部署、卸载 | 不改用户其他方案 |
+| Rime 方案 | `ff7-ime.schema.yaml` | schema 元信息、switches、engine 组件、speller、配置块 | 不写匹配逻辑 |
+| 用户配置 | `ff7-ime.custom.yaml` | 覆盖 top_n/注释/模糊/容错/权重 | 不写代码 |
+| Rime 适配 | `lua/ff7-ime.lua` | 读配置与开关、加载数据、调用 matcher、yield、异常回退 | 不实现匹配 |
+| 匹配引擎 | `lua/ff7-ime_matcher.lua` | 规范化、八类通道、索引、DP、排序、Top-N | 不依赖 Rime |
+| 数据 | `lua/ff7-ime_data.lua` | 1212 条词条、读音、变体、声母、换位、权重 | 不手改（构建生成） |
+| 构建 | `tools/build_from_pinyin_data.py` | `phrases.tsv + override.yaml → ff7-ime_data.lua` | 不部署 |
+| 安装 | `recipe.yaml` + Plum | 克隆仓库、复制 4 个运行时文件、官方选单启用 | 不改用户其他方案 |
 | 测试 | `tests/`、`experiments/rime-harness/` | Lua 沙箱、全量评估、Rime C API、GUI | 不参与运行时 |
 
 ---
@@ -71,13 +71,13 @@ engine:
     - abc_segmentor
     - fallback_segmentor
   translators:
-    - lua_translator@*mgjy
+    - lua_translator@*ff7-ime
   filters:
     - uniquifier
 ```
 
 - **没有** `script_translator` / `table_translator`：因此不会造句、不会产生词库外候选、不会创建用户词典。
-- **没有** `simplifier`：输出词条就是 `dict.txt` 的简体原文（含标点），不做简繁转换。
+- **没有** `simplifier`：输出词条就是 `data/dict.txt` 的简体原文（含标点），不做简繁转换。
 - **只有一个 translator**：候选顺序完全由 Lua 的 yield 顺序决定。
 - `uniquifier`：去重；1212 条文本本身唯一，不影响顺序。
 - `punctuator`：保留标点键行为；词条内部的标点由 Lua 原样输出，不经过 punctuator。
@@ -103,7 +103,7 @@ speller:
 
 | 项 | 结论 |
 |---|---|
-| 注册 | `lua_translator@*mgjy` → `require("mgjy")` |
+| 注册 | `lua_translator@*ff7-ime` → `require("ff7-ime")` |
 | 入口 | 模块返回表，字段 `init(env)` / `func(input, seg, env)` / `fini` |
 | 候选 | `Candidate(type, start, end, text, comment)`，第一参是 type；`cand.preedit` 控制输入框内的预编辑串 |
 | 偏移 | `seg.start` / `seg._end`，0-based 字节偏移 |
@@ -123,7 +123,7 @@ speller:
 ### 4.1 构建期
 
 ```
-dict.txt (UTF-16 LE BOM, 1212)
+data/dict.txt (UTF-16 LE BOM, 1212)
    │
    ├─ experiments/pinyin-data/extract.py
    │     pypinyin + luna_pinyin + terra_pinyin + override.yaml
@@ -137,9 +137,9 @@ experiments/pinyin-data/phrases.tsv
    │     单字/双字组合 → fulls（最多 8）
    │     声母变体、相邻换位
    ▼
-src/lua/mgjy_data.lua (416 KB)
+lua/ff7-ime_data.lua (416 KB)
    │
-   ├─ packaging/ → dist/moguang_jianying-portable/rime/lua/
+   ├─ recipe.yaml → Plum → Rime 用户目录（只装 schema + 3 个 Lua）
    └─ tests/lua/bulk_eval.js / run_cases.js
 ```
 
@@ -183,7 +183,7 @@ yield N 个 Candidate（quality 递减）
 
 ### 5.1 索引构建
 
-`build_index` 在第一次 `rank` 或 `init` 时构建，挂在数据表 `_mgjy_index` 上：
+`build_index` 在第一次 `rank` 或 `init` 时构建，挂在数据表 `_ff7-ime_index` 上：
 
 - `by_first`：每个 `fulls`/`swaps` 变体首字母 → id；
 - `by_init_letter`：每个声母 token 首字母 → id；
@@ -199,10 +199,10 @@ yield N 个 Candidate（quality 递减）
 
 `build_index` 计算 `fuzzy_key`（12 个模糊开关的位串）：
 
-- 与当前 `_mgjy_index_key` 相同：直接复用；
-- 不同：清空每条词条的 `_mgjy_prepared` 与索引，重建 canons 和全部索引。
+- 与当前 `_ff7-ime_index_key` 相同：直接复用；
+- 不同：清空每条词条的 `_ff7-ime_prepared` 与索引，重建 canons 和全部索引。
 
-这样 F4 开关或 `mgjy/use_switches` 切换模糊音后，canons/索引不会过期。
+这样 F4 开关或 `ff7-ime/use_switches` 切换模糊音后，canons/索引不会过期。
 
 ### 5.3 缓存
 
@@ -216,40 +216,40 @@ yield N 个 Candidate（quality 递减）
 
 ### 6.1 配置优先级
 
-`mgjy.lua` 的 `build_options`：
+`ff7-ime.lua` 的 `build_options`：
 
-1. `mgjy/use_switches: true` 时，F4 开关优先（`context:get_option`）；
-2. 否则读 `mgjy/fuzzy/*` / `mgjy/typo/*` / `mgjy/initial/*`；
-3. 都没有用 `mgjy_matcher.defaults`。
+1. `ff7-ime/use_switches: true` 时，F4 开关优先（`context:get_option`）；
+2. 否则读 `ff7-ime/fuzzy/*` / `ff7-ime/typo/*` / `ff7-ime/initial/*`；
+3. 都没有用 `ff7-ime_matcher.defaults`。
 
-默认 `mgjy/use_switches: false`，即 **`*.custom.yaml` 是权威配置**；需要 F4 实时切换时改为 `true`。
+默认 `ff7-ime/use_switches: false`，即 **`*.custom.yaml` 是权威配置**；需要 F4 实时切换时改为 `true`。
 
 ### 6.2 关键配置
 
 | 路径 | 类型 | 默认 | 说明 |
 |---|---|---:|---|
-| `mgjy/top_n` | int | 9 | 候选数 N |
-| `mgjy/dp_max_candidates` | int | 56 | DP 短名单上限 |
-| `mgjy/show_comment` | bool | true | 显示通道/拼音注释 |
-| `mgjy/show_score` | bool | false | 注释显示分数（调试） |
-| `mgjy/use_switches` | bool | false | true=F4 开关优先 |
-| `mgjy/fuzzy/zh_z` … | bool | 见 schema | 12 个模糊规则 |
-| `mgjy/typo/enabled` | bool | true | false=严格模式（只精确/模糊） |
-| `mgjy/typo/max_edit` | int | 2 | Damerau 上限 0–4 |
-| `mgjy/typo/transposition` | bool | true | 相邻字母换位 |
-| `mgjy/typo/syllable_swap` | bool | true | 相邻音节换位 |
-| `mgjy/initial/enabled` | bool | true | 声母/关键词通道 |
-| `mgjy/keyword/gap_penalty` | double | 0.02 | 关键词跳跃惩罚 |
-| `mgjy/keyword/syllable_subsequence` | bool | true | 中段音节前缀子序列（meishao） |
-| `mgjy/fallback/use_lcs` | bool | true | 回退排序是否融合 Dice-LCS |
-| `mgjy/fallback/dp_min_raw` | double | 0.65 | DP 低置信度门槛 |
-| `mgjy/fallback/strong_raw` | double | 0.70 | 有强命中时改用小池 |
-| `mgjy/fallback/fast_max_candidates` | int | 16 | 强命中时回退池上限 |
-| `mgjy/fallback/max_candidates` | int | 96 | 无强命中时回退池上限 |
-| `mgjy/preedit/enabled` | bool | true | 预测预编辑音节分隔符 |
-| `mgjy/preedit/separator` | string | `'` | 预编辑分隔符（可改为空格） |
+| `ff7-ime/top_n` | int | 9 | 候选数 N |
+| `ff7-ime/dp_max_candidates` | int | 56 | DP 短名单上限 |
+| `ff7-ime/show_comment` | bool | true | 显示通道/拼音注释 |
+| `ff7-ime/show_score` | bool | false | 注释显示分数（调试） |
+| `ff7-ime/use_switches` | bool | false | true=F4 开关优先 |
+| `ff7-ime/fuzzy/zh_z` … | bool | 见 schema | 12 个模糊规则 |
+| `ff7-ime/typo/enabled` | bool | true | false=严格模式（只精确/模糊） |
+| `ff7-ime/typo/max_edit` | int | 2 | Damerau 上限 0–4 |
+| `ff7-ime/typo/transposition` | bool | true | 相邻字母换位 |
+| `ff7-ime/typo/syllable_swap` | bool | true | 相邻音节换位 |
+| `ff7-ime/initial/enabled` | bool | true | 声母/关键词通道 |
+| `ff7-ime/keyword/gap_penalty` | double | 0.02 | 关键词跳跃惩罚 |
+| `ff7-ime/keyword/syllable_subsequence` | bool | true | 中段音节前缀子序列（meishao） |
+| `ff7-ime/fallback/use_lcs` | bool | true | 回退排序是否融合 Dice-LCS |
+| `ff7-ime/fallback/dp_min_raw` | double | 0.65 | DP 低置信度门槛 |
+| `ff7-ime/fallback/strong_raw` | double | 0.70 | 有强命中时改用小池 |
+| `ff7-ime/fallback/fast_max_candidates` | int | 16 | 强命中时回退池上限 |
+| `ff7-ime/fallback/max_candidates` | int | 96 | 无强命中时回退池上限 |
+| `ff7-ime/preedit/enabled` | bool | true | 预测预编辑音节分隔符 |
+| `ff7-ime/preedit/separator` | string | `'` | 预编辑分隔符（可改为空格） |
 | `style/inline_preedit` | bool | true | Weasel 从 schema 读取，内嵌显示预编辑 |
-| `mgjy/weights/*` | double | 见 schema | 通道权重 |
+| `ff7-ime/weights/*` | double | 见 schema | 通道权重 |
 
 ### 6.3 Switches
 
@@ -257,17 +257,17 @@ schema 定义 3 个标准开关 + 12 个模糊开关 + 2 个模式开关：
 
 ```
 ascii_mode, full_shape, ascii_punct,
-mgjy_fuzzy_zh_z … mgjy_fuzzy_v_u,
-mgjy_initial, mgjy_typo
+ff7-ime_fuzzy_zh_z … ff7-ime_fuzzy_v_u,
+ff7-ime_initial, ff7-ime_typo
 ```
 
-> **坑**：Rime 的 `switches` 是列表，按名字 patch 会被解析成数字索引 0，改错开关。若要 patch 开关默认值，使用 `switches/@<数字>/reset`，并数清顺序；日常建议直接改 `mgjy/fuzzy/*` 配置。
+> **坑**：Rime 的 `switches` 是列表，按名字 patch 会被解析成数字索引 0，改错开关。若要 patch 开关默认值，使用 `switches/@<数字>/reset`，并数清顺序；日常建议直接改 `ff7-ime/fuzzy/*` 配置。
 
 ---
 
 ## 7. 错误处理与回退
 
-- `mgjy.lua` 的 `init` 用 `pcall` 包住 `prepare_all`；失败时用默认配置再试。
+- `ff7-ime.lua` 的 `init` 用 `pcall` 包住 `prepare_all`；失败时用默认配置再试。
 - `func` 用 `pcall` 包住 `matcher.rank`；失败或空结果时 `fallback_results(top_n)` 用预构建顺序产出 N 个候选。
 - `matcher.rank` 结果不足 N 时先 `fill_fallback`（n-gram 召回 + Damerau/Dice-LCS），仍不足才 `fill_static`。
 - `format_comment` 对 `show_comment=false` 返回空串；`show_score=true` 才显示分数。
@@ -282,43 +282,37 @@ mgjy_initial, mgjy_typo
 
 ```
 %APPDATA%\Rime\
-  moguang_jianying.schema.yaml
-  moguang_jianying.custom.yaml
+  ff7-ime.schema.yaml
+  ff7-ime.custom.yaml
   lua\
-    mgjy.lua
-    mgjy_matcher.lua
-    mgjy_data.lua
+    ff7-ime.lua
+    ff7-ime_matcher.lua
+    ff7-ime_data.lua
   default.custom.yaml        # schema_list 加入本方案
   build\                     # 部署生成
 ```
 
 ### 8.2 安装流程
 
-`install.ps1`：
+安装由小狼毫官方入口完成，不依赖项目自带脚本：
 
-1. 校验包完整性；
-2. 备份 `default.custom.yaml` 为 `default.custom.yaml.mgjy-backup-<timestamp>`；
-3. 复制 schema/custom/lua；
-4. 幂等 patch `schema_list`：
-   - 已有 `schema_list:` 块：在最后一个列表项后插入 `- {schema: moguang_jianying}`；
-   - 没有：在 `patch:` 下插入 `schema_list/+:`；
-   - 已包含本方案：跳过；
-5. 停止 WeaselServer（如运行）；
-6. 调用 `deploy-rime.ps1`：用 C# P/Invoke 调 `rime.dll` 的 `RimeSetup → RimeInitialize → RimeStartMaintenance → RimeJoinMaintenanceThread → RimeFinalize`；
-7. 重启 WeaselServer；
-8. 检查 `build/moguang_jianying.schema.yaml` 和 `build/default.yaml` 是否含本方案。
-
-> **为什么不用 `WeaselDeployer.exe /deploy`**：在本机实测，它会打开“方案选单设定”GUI，并可能把 `default.custom.yaml` 改写成只剩当前方案，导致 `luna_pinyin_simp` 丢失。`deploy-rime.ps1` 直接调 librime 维护接口，无 GUI、保留完整 `schema_list`。
+1. 用户在 **方案选单设定 → 获取更多输入方案** 中输入 `Tanimodori/ff7-ime`；
+2. `rime-install.bat` 检测到 Git Bash 后交给 Plum；
+3. Plum 浅克隆整个仓库到 `%APPDATA%\plum\package\Tanimodori\ff7-ime`；
+4. Plum 读取根 `recipe.yaml`，只复制 4 个文件到 Rime 用户目录：
+   `ff7-ime.schema.yaml`、`lua/ff7-ime.lua`、`lua/ff7-ime_matcher.lua`、`lua/ff7-ime_data.lua`；
+5. 安装器**不修改** `default.custom.yaml`；
+6. 控制台关闭后，方案选单自动刷新；用户勾选“魔光键影”并确认，Weasel 自己写入
+   `schema_list`；
+7. Weasel 部署，生成 `build/ff7-ime.schema.yaml` 与 `build/default.yaml` 条目。
 
 ### 8.3 卸载流程
 
-`uninstall.ps1`：
-
-1. 删除本方案的 schema/custom/lua 文件；
-2. 从 `default.custom.yaml` 删除含 `moguang_jianying` 的行（可选 `-RestoreBackup` 恢复安装前备份）；
-3. 清理空的 `schema_list/+` 块；
-4. 停/启 WeaselServer，调用 `deploy-rime.ps1` 重建；
-5. 其他方案（luna）保持可用。
+1. 在 **方案选单设定** 中取消勾选“魔光键影”，点击 **中**；
+2. 删除用户目录中的 `ff7-ime.schema.yaml` 与 `lua/ff7-ime*.lua`（以及可选的
+   `ff7-ime.custom.yaml`）；
+3. 重新部署；
+4. 其他方案（luna）保持可用。
 
 ---
 

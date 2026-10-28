@@ -1,11 +1,11 @@
-# moguang_jianying.custom.yaml
+# ff7-ime.custom.yaml
 # encoding: utf-8
 #
-# 用户自定义补丁模板。放在 %APPDATA%\Rime\moguang_jianying.custom.yaml。
+# 用户自定义补丁模板。放在 %APPDATA%\Rime\ff7-ime.custom.yaml。
 # 修改后执行 WeaselDeployer.exe /deploy 生效。
 #
 # 重要：schema 根节点没有 __patch，所以 librime 会自动把本文件的 patch
-# 合并进 moguang_jianying.schema.yaml；不需要在 schema 里写 __include。
+# 合并进 ff7-ime.schema.yaml；不需要在 schema 里写 __include。
 #
 # 本文件默认只写了一个与 schema 相同的 menu/page_size（等于不改变默认值）。
 # 需要改哪一项，就取消对应行的注释并改成想要的值；注意保持两个空格缩进。
@@ -21,13 +21,13 @@ patch:
 #   menu/page_size: 7
 #
 # Lua 最多返回多少候选（最终还会被 menu/page_size 分页）
-#   moguang_jianying/top_n: 20
+#   ff7-ime/top_n: 20
 #
 # 是否显示候选注释（数据文件第三列）
-#   moguang_jianying/show_comment: false
+#   ff7-ime/show_comment: false
 #
 # 数据文件（相对用户目录；也可以写绝对路径，建议统一用正斜杠）
-#   moguang_jianying/data_file: "moguang_jianying_data.tsv"
+#   ff7-ime/data_file: "ff7-ime_data.tsv"
 
 # ---------------------------------------------------------------------------
 # 开关默认值（取消注释并保持缩进后生效）

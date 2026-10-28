@@ -1,7 +1,7 @@
 # 魔光键影 安装与部署指南（Windows / 小狼毫 Weasel）
 
 适用：小狼毫 Weasel 0.17.4（librime 1.13.1），Windows x64。
-目标：只新增 `moguang_jianying` 方案，不覆盖、不破坏现有 `luna_pinyin_simp`。
+目标：只新增 `ff7-ime` 方案，不覆盖、不破坏现有 `luna_pinyin_simp`。
 
 > 说明：本指南中的部署命令依据 Weasel 0.17.4 源码与真实日志整理；研究阶段未对真实
 > `%APPDATA%\Rime` 执行部署（避免影响现有输入法）。临时 user dir 的等价部署已验证，
@@ -79,22 +79,22 @@ Python 安装脚本也会把它修改/覆盖/删除的每个文件复制到：
 ```bat
 set RIME_USER=%APPDATA%\Rime
 
-copy moguang_jianying.schema.yaml "%RIME_USER%\moguang_jianying.schema.yaml"
-copy moguang_jianying.custom.yaml "%RIME_USER%\moguang_jianying.custom.yaml"
-copy moguang_jianying_data.sample.tsv "%RIME_USER%\moguang_jianying_data.tsv"
+copy ff7-ime.schema.yaml "%RIME_USER%\ff7-ime.schema.yaml"
+copy ff7-ime.custom.yaml "%RIME_USER%\ff7-ime.custom.yaml"
+copy ff7-ime_data.sample.tsv "%RIME_USER%\ff7-ime_data.tsv"
 mkdir "%RIME_USER%\lua" 2>nul
-copy lua\moguang_jianying.lua "%RIME_USER%\lua\moguang_jianying.lua"
+copy lua\ff7-ime.lua "%RIME_USER%\lua\ff7-ime.lua"
 ```
 
 最终结构：
 
 ```
 %APPDATA%\Rime\
-├─ moguang_jianying.schema.yaml
-├─ moguang_jianying.custom.yaml
-├─ moguang_jianying_data.tsv
+├─ ff7-ime.schema.yaml
+├─ ff7-ime.custom.yaml
+├─ ff7-ime_data.tsv
 └─ lua\
-   └─ moguang_jianying.lua
+   └─ ff7-ime.lua
 ```
 
 ### 2.2 使用安装脚本（推荐）
@@ -103,15 +103,15 @@ copy lua\moguang_jianying.lua "%RIME_USER%\lua\moguang_jianying.lua"
 
 ```bat
 python -c "import yaml" 2>nul || python -m pip install pyyaml
-python install_moguang.py --user-dir "%APPDATA%\Rime"
+python install_ff7_ime.py --user-dir "%APPDATA%\Rime"
 ```
 
 脚本行为：
 
 - 复制 schema / custom / lua / data；
-- `moguang_jianying.custom.yaml` 默认只写了一个与 schema 相同的 `menu/page_size: 5`（等于不改变默认值）；需要改开关/候选数时再取消其中注释；
+- `ff7-ime.custom.yaml` 默认只写了一个与 schema 相同的 `menu/page_size: 5`（等于不改变默认值）；需要改开关/候选数时再取消其中注释；
 - 如果目标 custom 或 data 已存在，**不覆盖**（保留用户配置/用户数据）；
-- 如果 `default.custom.yaml` 已有 `patch/schema_list`，追加 `{schema: moguang_jianying}`；
+- 如果 `default.custom.yaml` 已有 `patch/schema_list`，追加 `{schema: ff7-ime}`；
 - 如果没有，写入 `patch/schema_list/+`，保留 `default.yaml` 的完整方案列表；
 - 幂等：重复运行不会重复追加；
 - 所有修改前备份。
@@ -119,7 +119,7 @@ python install_moguang.py --user-dir "%APPDATA%\Rime"
 先看将做什么（不写任何文件）：
 
 ```bat
-python install_moguang.py --user-dir "%APPDATA%\Rime" --dry-run
+python install_ff7_ime.py --user-dir "%APPDATA%\Rime" --dry-run
 ```
 
 ---
@@ -142,7 +142,7 @@ patch:
 patch:
   schema_list:
     - {schema: luna_pinyin_simp}
-    - {schema: moguang_jianying}
+    - {schema: ff7-ime}
 ```
 
 保留 `customization:` 段和其余 patch 项，不要删除。
@@ -154,14 +154,14 @@ patch:
 ```yaml
 patch:
   schema_list/+:
-    - {schema: moguang_jianying}
+    - {schema: ff7-ime}
 ```
 
 ### 3.3 注意
 
 - 必须放在 `patch:` 下；顶层 `schema_list:` 不会被 Rime 当成 patch。
 - YAML 缩进用空格，不要 Tab。
-- 不要写 `schema_list/@moguang_jianying` 之类的命名索引；列表索引只支持数字/`next`/`last` 等。
+- 不要写 `schema_list/@ff7-ime` 之类的命名索引；列表索引只支持数字/`next`/`last` 等。
 - 修改后必须重新部署。
 
 ---
@@ -213,24 +213,24 @@ start "" "C:\Program Files\Rime\weasel-0.17.4\WeaselServer.exe"
 ### 5.1 构建产物
 
 ```bat
-if exist "%APPDATA%\Rime\build\moguang_jianying.schema.yaml" (
+if exist "%APPDATA%\Rime\build\ff7-ime.schema.yaml" (
   echo BUILD_OK
 ) else (
   echo BUILD_MISSING
 )
-findstr /C:"schema_id: moguang_jianying" "%APPDATA%\Rime\build\moguang_jianying.schema.yaml"
+findstr /C:"schema_id: ff7-ime" "%APPDATA%\Rime\build\ff7-ime.schema.yaml"
 ```
 
 ### 5.2 方案列表
 
 ```bat
-findstr /C:"moguang_jianying" "%APPDATA%\Rime\build\default.yaml"
+findstr /C:"ff7-ime" "%APPDATA%\Rime\build\default.yaml"
 ```
 
 应能看到：
 
 ```
-  - schema: moguang_jianying
+  - schema: ff7-ime
 ```
 
 ### 5.3 日志
@@ -247,7 +247,7 @@ Get-ChildItem "$env:TEMP\rime.weasel\*.log" |
 
 ```powershell
 Select-String -Path "$env:TEMP\rime.weasel\*.log" `
-  -Pattern "updating schemas|schema: moguang_jianying|lua|ERROR" |
+  -Pattern "updating schemas|schema: ff7-ime|lua|ERROR" |
   Select-Object -Last 30
 ```
 
@@ -256,8 +256,8 @@ Select-String -Path "$env:TEMP\rime.weasel\*.log" `
 ```
 deployment_tasks.cc:163] updating workspace.
 deployment_tasks.cc:186] updating schemas.
-deployment_tasks.cc:195] schema: moguang_jianying
-config_data.cc:92] saving config file '...\build\moguang_jianying.schema.yaml'
+deployment_tasks.cc:195] schema: ff7-ime
+config_data.cc:92] saving config file '...\build\ff7-ime.schema.yaml'
 ```
 
 失败时优先看 `Error parsing YAML`、`nonexistent config file`、`autoload error`、`module ... not found`。
@@ -281,7 +281,7 @@ config_data.cc:92] saving config file '...\build\moguang_jianying.schema.yaml'
 
 - `Ctrl+\`` 或 `F4`：方案选单；
 - 本方案 `key_binder` 还绑定了 `Ctrl+Shift+1`：切换到下一个方案；
-- 想默认进入本方案：把 `{schema: moguang_jianying}` 放在 `schema_list` 第一位；
+- 想默认进入本方案：把 `{schema: ff7-ime}` 放在 `schema_list` 第一位；
 - Rime 会在 `user.yaml` 记录 `previously_selected_schema`，已有用户可能仍沿用上次方案。
 
 ---
@@ -302,11 +302,11 @@ config_data.cc:92] saving config file '...\build\moguang_jianying.schema.yaml'
 
 ## 8. 升级方案
 
-1. 备份 `default.custom.yaml` 和 `moguang_jianying.custom.yaml`（脚本会自动备份被覆盖文件）；
-2. 用新版本覆盖 `moguang_jianying.schema.yaml` 和 `lua/moguang_jianying.lua`；
-3. 如果数据格式变化，替换 `moguang_jianying_data.tsv`（脚本默认不覆盖已有 data，需要手动替换）；
+1. 备份 `default.custom.yaml` 和 `ff7-ime.custom.yaml`（脚本会自动备份被覆盖文件）；
+2. 用新版本覆盖 `ff7-ime.schema.yaml` 和 `lua/ff7-ime.lua`；
+3. 如果数据格式变化，替换 `ff7-ime_data.tsv`（脚本默认不覆盖已有 data，需要手动替换）；
 4. 修改文件后等待 1-2 秒，再部署；
-5. 验证 `build/moguang_jianying.schema.yaml` 的 `__build_info/timestamps` 已更新。
+5. 验证 `build/ff7-ime.schema.yaml` 的 `__build_info/timestamps` 已更新。
 
 注意：`switches` 的顺序是 patch 索引的一部分。升级时如果调整了开关顺序，用户 custom 里的 `switches/@N/reset` 会指向别的开关；应保持顺序稳定，或在升级说明中给出迁移表。
 
@@ -315,9 +315,9 @@ config_data.cc:92] saving config file '...\build\moguang_jianying.schema.yaml'
 ## 9. 安全安装检查清单
 
 - [ ] 已备份 `default.custom.yaml`、`user.yaml`、`luna_pinyin.userdb`
-- [ ] 只新增 `moguang_jianying.*`、`lua/moguang_jianying.lua`、数据文件
+- [ ] 只新增 `ff7-ime.*`、`lua/ff7-ime.lua`、数据文件
 - [ ] `default.custom.yaml` 只追加 schema，不删除 luna_pinyin_simp
 - [ ] 没有修改 `installation.yaml`
 - [ ] 没有写入 `C:\Program Files\Rime\weasel-0.17.4`
-- [ ] 部署后 luna_pinyin_simp 和 moguang_jianying 都能输入
+- [ ] 部署后 luna_pinyin_simp 和 ff7-ime 都能输入
 - [ ] 记录了回滚方法（见 `uninstall.md`）

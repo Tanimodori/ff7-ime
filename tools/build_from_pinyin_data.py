@@ -265,7 +265,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--input", default="experiments/pinyin-data/phrases.tsv")
     ap.add_argument("--override", default="experiments/pinyin-data/override.yaml")
-    ap.add_argument("--lua", default="src/lua/mgjy_data.lua")
+    ap.add_argument("--lua", default="lua/ff7-ime_data.lua")
     ap.add_argument("--json", default="data/phrases.json")
     ap.add_argument("--cap", type=int, default=8)
     args = ap.parse_args()

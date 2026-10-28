@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Convert a phrases TSV into the Lua data table consumed by mgjy_matcher.lua.
+"""Convert a phrases TSV into the Lua data table consumed by ff7-ime_matcher.lua.
 
 Expected columns (header names, order-independent):
     text      original phrase, punctuation preserved

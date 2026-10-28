@@ -165,7 +165,7 @@ def main(argv=None):
         print("cannot find %s" % args.dll, file=sys.stderr)
         return 2
 
-    tmp_root = tempfile.mkdtemp(prefix="mgjy-luna-test-")
+    tmp_root = tempfile.mkdtemp(prefix="ff7-ime-luna-test-")
     user_dir = os.path.join(tmp_root, "user")
     bad_user_dir = os.path.join(tmp_root, "user-bad")
     never_user_dir = os.path.join(tmp_root, "user-never")

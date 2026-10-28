@@ -8,7 +8,7 @@
 
 ## 0. 结论摘要
 
-1. **本机 rime.dll 确实带 librime-lua**。`rime.dll` 内含 Lua 5.4.7，并注册 `lua_translator`、`lua_filter`、`lua_segmentor`、`lua_processor` 四个组件。实测 `lua_translator@*moguang_jianying` 能自动 `require` 用户目录 `lua/moguang_jianying.lua`，不需要修改 `rime.lua`。
+1. **本机 rime.dll 确实带 librime-lua**。`rime.dll` 内含 Lua 5.4.7，并注册 `lua_translator`、`lua_filter`、`lua_segmentor`、`lua_processor` 四个组件。实测 `lua_translator@*ff7-ime` 能自动 `require` 用户目录 `lua/ff7-ime.lua`，不需要修改 `rime.lua`。
 2. **`lkcc` 可以作为单个 segment 进入 Lua**。条件是：
    - `speller/alphabet` 覆盖全部字母；
    - `speller/initials` 与 alphabet 相同，`speller/finals` 为空（或不写）；
@@ -52,7 +52,7 @@
 
 项目词表 `dict.txt` 是 **UTF-16LE + BOM + CRLF**，解码后 1212 行、无空行；
 最长词条 15 个字符，106 条含 `！，。·……` 等标点。Lua 运行时数据文件使用
-UTF-8 TSV（样例 `moguang_jianying_data.sample.tsv`），两者编码不同，数据构建
+UTF-8 TSV（样例 `ff7-ime_data.sample.tsv`），两者编码不同，数据构建
 脚本需要显式转换。
 
 **本研究的部署实验全部在 `experiments/schema-research/_testuser*` 等临时 user dir 中完成，没有修改真实用户目录或安装目录。**
@@ -91,15 +91,15 @@ I... modules.cc:96] registering components from module 'lua'.
 I... modules.cc:87] rime.lua info: rime.lua should be either in the rime user data directory or in the rime shared data directory
 I... registry.cc:14] registering component: lua_translator
 ...
-I... types.cc:1558] moguang_jianying: loaded 6 entries from .../moguang_jianying_data.tsv
+I... types.cc:1558] ff7-ime: loaded 6 entries from .../ff7-ime_data.tsv
 ```
 
 说明：
 
-- 不需要 `lua/rime.lua`；`lua_translator@*moguang_jianying` 的 `*` 前缀会走 `require`（librime-lua `raw_init` 的 autoload 分支）。
-- 如果把 `lua/moguang_jianying.lua` 删掉，日志会明确报：
+- 不需要 `lua/rime.lua`；`lua_translator@*ff7-ime` 的 `*` 前缀会走 `require`（librime-lua `raw_init` 的 autoload 分支）。
+- 如果把 `lua/ff7-ime.lua` 删掉，日志会明确报：
   ```
-  E... lua_gears.cc:83] Lua Compoment of autoload error: ... module 'moguang_jianying' not found:
+  E... lua_gears.cc:83] Lua Compoment of autoload error: ... module 'ff7-ime' not found:
   E... lua_gears.cc:131] ... func type error expect function
   E... lua_gears.cc:17] LuaTranslation::Next error(2): ...
   ```
@@ -133,24 +133,24 @@ I... types.cc:1558] moguang_jianying: loaded 6 entries from .../moguang_jianying
 
 ## 2. Schema 结构设计
 
-骨架文件：`experiments/schema-research/moguang_jianying.schema.yaml`
+骨架文件：`experiments/schema-research/ff7-ime.schema.yaml`
 
 ### 2.1 组件取舍
 
 | 区块 | 配置 | 理由 |
 |---|---|---|
-| `schema` | `schema_id: moguang_jianying`、`name: 魔光键影` | schema_id 必须与文件名一致 |
+| `schema` | `schema_id: ff7-ime`、`name: 魔光键影` | schema_id 必须与文件名一致 |
 | `switches` | `ascii_mode` + 11 个自定义开关 | 见 §4 |
 | `engine/processors` | `ascii_composer`, `recognizer`, `key_binder`, `speller`, `selector`, `navigator`, `express_editor` | 不加载 `punctuator` |
 | `engine/segmentors` | `ascii_segmentor`, `matcher`, `abc_segmentor`, `fallback_segmentor` | `abc_segmentor` 是纯字母整段的关键；不加载 `punct_segmentor` |
-| `engine/translators` | 仅 `lua_translator@*moguang_jianying` | 没有 script/table translator，因此没有造句 |
+| `engine/translators` | 仅 `lua_translator@*ff7-ime` | 没有 script/table translator，因此没有造句 |
 | `engine/filters` | `[]` | 不挂 `simplifier`、`uniquifier`、`charset_filter` |
 | `speller` | alphabet 大小写、delimiter 空、initials=alphabet、max_code_length 0 | 见 §3 |
 | `punctuator` | 空 map，且不加载组件 | 明确禁用 |
 | `recognizer` | `patterns: {}` | 不引入 default 的 email/url/uppercase；避免 recognizer 在 speller 之前接受字母表外字符 |
 | `key_binder` | 自写 bindings，不 import default | 避免 comma/period 翻页占用标点键 |
 | `menu` | `page_size: 5` | 可按用户 patch |
-| `moguang_jianying` | `top_n`、`show_comment`、`data_file`、长度限制、matcher | Lua 读取的配置命名空间 |
+| `ff7-ime` | `top_n`、`show_comment`、`data_file`、长度限制、matcher | Lua 读取的配置命名空间 |
 | `translator` | 仅说明性 `tag: abc` | 不参与引擎；tag 过滤在 Lua 内 |
 
 各组件在本方案中的作用：
@@ -182,11 +182,11 @@ Rime 的 `script_translator` / `table_translator` 会：
 - 用 `user_dict` 学习；
 - 受 `translator/enable_completion`、`initial_quality` 等影响。
 
-本方案只需要“固定词表 + 自定义匹配”，所以 translator 只留 Lua。`express_editor` 不会造句；没有 `Memory` 就不会创建 `.userdb`。实测临时 user dir 中只有 `build/`、`user.yaml`、`installation.yaml`，没有 `moguang_jianying.userdb`。
+本方案只需要“固定词表 + 自定义匹配”，所以 translator 只留 Lua。`express_editor` 不会造句；没有 `Memory` 就不会创建 `.userdb`。实测临时 user dir 中只有 `build/`、`user.yaml`、`installation.yaml`，没有 `ff7-ime.userdb`。
 
 ### 2.3 Lua translator 的调用约定
 
-- `lua_translator@*moguang_jianying` 的组件别名是 `*moguang_jianying`，`env.name_space` 也带 `*`。因此 Lua 里不要用 `env.name_space` 拼配置路径，直接写 `moguang_jianying/...`。
+- `lua_translator@*ff7-ime` 的组件别名是 `*ff7-ime`，`env.name_space` 也带 `*`。因此 Lua 里不要用 `env.name_space` 拼配置路径，直接写 `ff7-ime/...`。
 - `Query(input, segment)` 中 `input` 是**当前 segment 的子串**，不是整串输入；前缀输入时每敲一个字母都会调用一次。
 - translator 必须自己判断 tag：
   ```lua
@@ -345,7 +345,7 @@ after 'lkcc,' preedit='' len=0 menu_candidates=0 page_size=0
 
 ### 5.2 用户 patch 开关默认值
 
-正确写法（按索引；下面这些行在交付的 `moguang_jianying.custom.yaml` 里默认是注释，取消注释即可）：
+正确写法（按索引；下面这些行在交付的 `ff7-ime.custom.yaml` 里默认是注释，取消注释即可）：
 
 ```yaml
 patch:
@@ -377,9 +377,9 @@ local ctx = env.engine.context
 local enabled = ctx:get_option("fuzzy_zh_z")   -- boolean
 
 local config = env.engine.schema.config
-local top_n = config:get_int("moguang_jianying/top_n")
-local show_comment = config:get_bool("moguang_jianying/show_comment")
-local data_file = config:get_string("moguang_jianying/data_file")
+local top_n = config:get_int("ff7-ime/top_n")
+local show_comment = config:get_bool("ff7-ime/show_comment")
+local data_file = config:get_string("ff7-ime/data_file")
 ```
 
 - `context:get_option(name)` 返回 boolean；开关由 `switches` 的 reset 初始化。
@@ -391,9 +391,9 @@ local data_file = config:get_string("moguang_jianying/data_file")
 
 | 配置 | 位置 | 默认 | 说明 |
 |---|---|---|---|
-| 候选总数 | `moguang_jianying/top_n` | 10 | Lua 内 `math.min(n, 100)` |
+| 候选总数 | `ff7-ime/top_n` | 10 | Lua 内 `math.min(n, 100)` |
 | 每页数量 | `menu/page_size` | 5 | 必须写在 **schema** 或其 custom patch；写在 `default.custom.yaml` 不会覆盖 schema 的 `menu/page_size`（实测 schema 值优先） |
-| 是否显示注释 | `moguang_jianying/show_comment` | true | false 时传空字符串 |
+| 是否显示注释 | `ff7-ime/show_comment` | true | false 时传空字符串 |
 
 `menu/page_size` 建议 ≤ 10，否则数字选词键只有 `1-9,0`，第 11 个以后只能鼠标点选或翻页。
 
@@ -414,14 +414,14 @@ local data_file = config:get_string("moguang_jianying/data_file")
 ├─ user.yaml                     # Rime 自动维护
 ├─ installation.yaml             # Rime 自动维护；不需要改
 ├─ weasel.custom.yaml            # Weasel 自动创建；可选
-├─ moguang_jianying.schema.yaml  # 方案
-├─ moguang_jianying.custom.yaml  # 可选用户 patch
-├─ moguang_jianying_data.tsv     # Lua 运行时读取的数据
+├─ ff7-ime.schema.yaml  # 方案
+├─ ff7-ime.custom.yaml  # 可选用户 patch
+├─ ff7-ime_data.tsv     # Lua 运行时读取的数据
 ├─ lua\
-│  └─ moguang_jianying.lua       # Lua translator
+│  └─ ff7-ime.lua       # Lua translator
 ├─ build\                        # 部署生成，不要手改
 │  ├─ default.yaml
-│  └─ moguang_jianying.schema.yaml
+│  └─ ff7-ime.schema.yaml
 ├─ luna_pinyin.userdb\           # 现有方案的用户词库，不要动
 └─ sync\                         # 如同步
 ```
@@ -447,7 +447,7 @@ patch:
 patch:
   schema_list:
     - {schema: luna_pinyin_simp}
-    - {schema: moguang_jianying}
+    - {schema: ff7-ime}
 ```
 
 **策略 B：没有自定义过 schema_list**，用 `/+` 追加到 `default.yaml` 的完整列表，避免把默认 8 个方案全部替换掉：
@@ -455,7 +455,7 @@ patch:
 ```yaml
 patch:
   schema_list/+:
-    - {schema: moguang_jianying}
+    - {schema: ff7-ime}
 ```
 
 实测策略 B 的构建结果：
@@ -470,10 +470,10 @@ schema_list:
   - schema: cangjie5
   - schema: stroke
   - schema: terra_pinyin
-  - schema: moguang_jianying
+  - schema: ff7-ime
 ```
 
-**幂等性**：安装脚本 `install_moguang.py` 会先检查 `schema_list` 或 `schema_list/+` 中是否已有 `{schema: moguang_jianying}`，有就跳过；重复运行不会产生重复项。
+**幂等性**：安装脚本 `install_ff7_ime.py` 会先检查 `schema_list` 或 `schema_list/+` 中是否已有 `{schema: ff7-ime}`，有就跳过；重复运行不会产生重复项。
 
 **备份**：脚本在修改 `default.custom.yaml`、覆盖 schema/lua、删除文件前，会把原文件复制到：
 
@@ -500,8 +500,8 @@ echo exit=%ERRORLEVEL%
   ```
   deployment_tasks.cc:163] updating workspace.
   deployment_tasks.cc:186] updating schemas.
-  deployment_tasks.cc:195] schema: moguang_jianying
-  config_data.cc:92] saving config file '...\build\moguang_jianying.schema.yaml'
+  deployment_tasks.cc:195] schema: ff7-ime
+  config_data.cc:92] saving config file '...\build\ff7-ime.schema.yaml'
   ```
 - 若 WeaselServer 没运行，deploy 仍会执行（`client.Connect()` 失败不阻断），但 IME 不会自动重载；需要 `start "" WeaselServer.exe` 或重新登录。
 
@@ -509,12 +509,12 @@ echo exit=%ERRORLEVEL%
 
 1. 文件：
    ```bat
-   if exist "%APPDATA%\Rime\build\moguang_jianying.schema.yaml" echo BUILD_OK
-   findstr /C:"schema_id: moguang_jianying" "%APPDATA%\Rime\build\moguang_jianying.schema.yaml"
+   if exist "%APPDATA%\Rime\build\ff7-ime.schema.yaml" echo BUILD_OK
+   findstr /C:"schema_id: ff7-ime" "%APPDATA%\Rime\build\ff7-ime.schema.yaml"
    ```
 2. 日志：
    ```powershell
-   Select-String -Path "$env:TEMP\rime.weasel\*.log" -Pattern "moguang_jianying|ERROR" | Select-Object -Last 20
+   Select-String -Path "$env:TEMP\rime.weasel\*.log" -Pattern "ff7-ime|ERROR" | Select-Object -Last 20
    ```
 3. 方案选单：`Ctrl+\`` 或 `F4`（`default.yaml` 的 `switcher/hotkeys`），应出现“魔光键影”。
 4. 输入 `lkcc`，应出现候选。
@@ -523,7 +523,7 @@ echo exit=%ERRORLEVEL%
 
 - `F4` 或 `Ctrl+\`` 打开方案选单；`Ctrl+Shift+1`（本方案 key_binder）切到下一个方案。
 - `user.yaml` 会记录 `previously_selected_schema`，下次启动沿用。
-- 若想让新用户默认进入本方案，把 `{schema: moguang_jianying}` 放在 `schema_list` 第一位；已有用户的 `user.yaml` 仍可能记住上次方案。
+- 若想让新用户默认进入本方案，把 `{schema: ff7-ime}` 放在 `schema_list` 第一位；已有用户的 `user.yaml` 仍可能记住上次方案。
 
 ### 6.6 Weasel portable 结论
 
@@ -543,18 +543,18 @@ echo exit=%ERRORLEVEL%
 ### 6.7 不破坏现有 luna_pinyin_simp 的安装流程
 
 1. 备份 `%APPDATA%\Rime`（至少 `default.custom.yaml`、`user.yaml`、`luna_pinyin.userdb`）。
-2. 只新增 `moguang_jianying.*`、`lua/moguang_jianying.lua`、数据文件。
+2. 只新增 `ff7-ime.*`、`lua/ff7-ime.lua`、数据文件。
 3. 只修改 `default.custom.yaml` 的 `patch/schema_list`（追加），不动 `customization`、`user.yaml`、`installation.yaml`。
 4. 不删除、不覆盖 `luna_pinyin.*`、`build/luna_pinyin*`。
-5. 部署后同时测试 luna_pinyin_simp 和 moguang_jianying。实测两者共存：
+5. 部署后同时测试 luna_pinyin_simp 和 ff7-ime。实测两者共存：
 
 ```
 luna_pinyin_simp + nihao -> 你好 / 妳好 / 逆号 ...
-moguang_jianying + lkcc -> 测试候选（lkcc 分段验证用）
-build/default.yaml schema_list -> luna_pinyin_simp, moguang_jianying
+ff7-ime + lkcc -> 测试候选（lkcc 分段验证用）
+build/default.yaml schema_list -> luna_pinyin_simp, ff7-ime
 ```
 
-6. 回滚：`install_moguang.py --uninstall`，恢复 `default.custom.yaml` 备份，部署。
+6. 回滚：`install_ff7_ime.py --uninstall`，恢复 `default.custom.yaml` 备份，部署。
 
 ---
 
@@ -619,21 +619,21 @@ lkcc -> preedit='' candidates=0
 
 ### 7.4 共存安装实测
 
-用真实 `default.custom.yaml`（只有 luna_pinyin_simp）复制到 `_testuser_coexist`，运行 `install_moguang.py`：
+用真实 `default.custom.yaml`（只有 luna_pinyin_simp）复制到 `_testuser_coexist`，运行 `install_ff7_ime.py`：
 
-- 第一次：追加 `{schema: moguang_jianying}`；备份原文件到 `_backup/moguang_...`
+- 第一次：追加 `{schema: ff7-ime}`；备份原文件到 `_backup/moguang_...`
 - 第二次：识别已存在，不重复追加
-- 部署后 `build/default.yaml` 同时有 luna_pinyin_simp 与 moguang_jianying
+- 部署后 `build/default.yaml` 同时有 luna_pinyin_simp 与 ff7-ime
 - `nihao` 在 luna 下正常，`lkcc` 在 moguang 下正常
 
-无 existing custom 的目录测试 `schema_list/+`：部署后 `build/default.yaml` 保留 default 的 8 个方案并追加 moguang_jianying。
+无 existing custom 的目录测试 `schema_list/+`：部署后 `build/default.yaml` 保留 default 的 8 个方案并追加 ff7-ime。
 
 ### 7.5 Lua 缺失实测
 
-删除 `lua/moguang_jianying.lua` 后部署：
+删除 `lua/ff7-ime.lua` 后部署：
 
 ```
-E... lua_gears.cc:83] Lua Compoment of autoload error:( module: *moguang_jianying ... ): module 'moguang_jianying' not found:
+E... lua_gears.cc:83] Lua Compoment of autoload error:( module: *ff7-ime ... ): module 'ff7-ime' not found:
 E... lua_gears.cc:131] ... func type error expect function
 lkcc -> 0 candidates
 ```
@@ -644,9 +644,9 @@ lkcc -> 0 candidates
 
 ### 7.7 卸载/回滚实测
 
-- `install_moguang.py --uninstall` 从 `schema_list`/`schema_list/+` 移除条目，并删除 `build/moguang_jianying.*`；
+- `install_ff7_ime.py --uninstall` 从 `schema_list`/`schema_list/+` 移除条目，并删除 `build/ff7-ime.*`；
 - 部署后 `build/default.yaml` 恢复为默认 8 个方案，`build/` 无 moguang 产物；
-- 如果不删除 `build/moguang_jianying.schema.yaml`，即使从 schema_list 移除，`RimeSelectSchema("moguang_jianying")` 仍可能返回成功（旧编译产物还在），所以卸载脚本必须删除 build 产物。
+- 如果不删除 `build/ff7-ime.schema.yaml`，即使从 schema_list 移除，`RimeSelectSchema("ff7-ime")` 仍可能返回成功（旧编译产物还在），所以卸载脚本必须删除 build 产物。
 
 ---
 
@@ -661,7 +661,7 @@ lkcc -> 0 candidates
 
 原因：
 
-1. `lua_translator@moguang_jianying` 没有 `*`，而 `rime.lua` 里又没有 `moguang_jianying = require("moguang_jianying")`；
+1. `lua_translator@ff7-ime` 没有 `*`，而 `rime.lua` 里又没有 `ff7-ime = require("ff7-ime")`；
 2. `lua/` 目录位置不对（应在 user dir 或 shared data dir 下）；
 3. 文件名与组件别名不一致；
 4. `return` 的不是 function/table；
@@ -674,7 +674,7 @@ Select-String -Path "$env:TEMP\rime.weasel\*.log" -Pattern "lua|autoload|not fou
   Select-Object -Last 30
 ```
 
-修复：使用 `lua_translator@*moguang_jianying`；确认 `%APPDATA%\Rime\lua\moguang_jianying.lua`；重新部署。
+修复：使用 `lua_translator@*ff7-ime`；确认 `%APPDATA%\Rime\lua\ff7-ime.lua`；重新部署。
 
 ### 坑 2：`lkcc` 被拆成多个 segment / 候选只匹配前缀
 
@@ -691,7 +691,7 @@ Select-String -Path "$env:TEMP\rime.weasel\*.log" -Pattern "lua|autoload|not fou
 - `delimiter` 包含 `'` 或空格；
 - `recognizer/patterns` 匹配了子区间。
 
-排查：构建后的 `build/moguang_jianying.schema.yaml` 里看 `speller` 和 `recognizer`；在 Lua 里临时打印 `input` 和 `seg.length`。
+排查：构建后的 `build/ff7-ime.schema.yaml` 里看 `speller` 和 `recognizer`；在 Lua 里临时打印 `input` 和 `seg.length`。
 
 修复：按 §3 配置；不要在 speller 里 import `pinyin:/...`。
 
@@ -704,7 +704,7 @@ Select-String -Path "$env:TEMP\rime.weasel\*.log" -Pattern "lua|autoload|not fou
 
 原因：`engine/filters` 里挂了 `uniquifier`。源码 `uniquifier.cc` 会把文本相同的候选合并成 `UniquifiedCandidate`，只保留一行，注释取第一个。
 
-排查：看 `build/moguang_jianying.schema.yaml` 的 `engine/filters`。
+排查：看 `build/ff7-ime.schema.yaml` 的 `engine/filters`。
 
 修复：本方案不挂 `uniquifier`；Lua 自己按文本去重并保留第一条注释。若确实需要全局去重，再自行添加并接受合并行为。
 
@@ -713,7 +713,7 @@ Select-String -Path "$env:TEMP\rime.weasel\*.log" -Pattern "lua|autoload|not fou
 症状：
 
 - 修改 schema/custom 后部署，候选/开关不变；
-- `build/moguang_jianying.schema.yaml` 的 `__build_info/timestamps` 没变。
+- `build/ff7-ime.schema.yaml` 的 `__build_info/timestamps` 没变。
 
 原因：
 
@@ -726,9 +726,9 @@ Select-String -Path "$env:TEMP\rime.weasel\*.log" -Pattern "lua|autoload|not fou
 排查：
 
 ```powershell
-Get-Item "$env:APPDATA\Rime\moguang_jianying.schema.yaml" |
+Get-Item "$env:APPDATA\Rime\ff7-ime.schema.yaml" |
   Select-Object LastWriteTime
-Get-Item "$env:APPDATA\Rime\build\moguang_jianying.schema.yaml" |
+Get-Item "$env:APPDATA\Rime\build\ff7-ime.schema.yaml" |
   Select-Object LastWriteTime
 Select-String -Path "$env:TEMP\rime.weasel\*.log" -Pattern "source file changed|updating schemas|ERROR"
 ```
@@ -744,7 +744,7 @@ Select-String -Path "$env:TEMP\rime.weasel\*.log" -Pattern "source file changed|
 1. `schema_id` 与文件名不一致；
 2. `default.custom.yaml` 的 `patch/schema_list` 没包含；
 3. YAML 解析失败（缩进、Tab、中文冒号）；
-4. schema 文件放错目录（应在 user dir，文件名 `moguang_jianying.schema.yaml`）；
+4. schema 文件放错目录（应在 user dir，文件名 `ff7-ime.schema.yaml`）；
 5. 没有重新部署；
 6. `default.custom.yaml` 被写成了顶层 `schema_list` 而不是 `patch/schema_list`。
 
@@ -770,7 +770,7 @@ return 0;
 
 ### 坑 8：卸载后旧方案仍能被选中
 
-原因：`build/moguang_jianying.schema.yaml` 不会因为从 `schema_list` 移除而自动删除。`RimeSelectSchema` 仍可能成功。卸载脚本必须删除 `build/moguang_jianying.*`，并重新部署。
+原因：`build/ff7-ime.schema.yaml` 不会因为从 `schema_list` 移除而自动删除。`RimeSelectSchema` 仍可能成功。卸载脚本必须删除 `build/ff7-ime.*`，并重新部署。
 
 ---
 
@@ -789,12 +789,12 @@ return 0;
 | 文件 | 用途 |
 |---|---|
 | `REPORT.md` | 本报告 |
-| `moguang_jianying.schema.yaml` | 可直接作为起点的 schema 骨架（含注释） |
-| `moguang_jianying.custom.yaml` | 开关/候选数/注释配置示例 |
-| `lua/moguang_jianying.lua` | Lua translator 参考实现（骨架级匹配） |
-| `moguang_jianying_data.sample.tsv` | 数据格式样例 |
+| `ff7-ime.schema.yaml` | 可直接作为起点的 schema 骨架（含注释） |
+| `ff7-ime.custom.yaml` | 开关/候选数/注释配置示例 |
+| `lua/ff7-ime.lua` | Lua translator 参考实现（骨架级匹配） |
+| `ff7-ime_data.sample.tsv` | 数据格式样例 |
 | `install.md` | 安装、部署、验证、切换方案 |
 | `uninstall.md` | 卸载与回滚 |
 | `portable-layout.md` | portable 包目录结构与替代方案 |
-| `install_moguang.py` | 幂等安装/卸载脚本（备份 + schema_list 合并） |
+| `install_ff7_ime.py` | 幂等安装/卸载脚本（备份 + schema_list 合并） |
 | `_harness/rime_harness.py` | 临时 user dir 的 librime 测试工具（可选） |

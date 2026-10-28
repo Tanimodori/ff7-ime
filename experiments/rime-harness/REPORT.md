@@ -189,8 +189,8 @@ LoadLibrary(rime.dll)
   - 词典编译产物写 `<user>/build/`（`luna_pinyin.table.bin` 约 13 MB、
     `luna_pinyin_simp.prism.bin`、`stroke.*`）。
 - **schema/dict 可以只放在 user 目录**：部署解析器同时搜索 user_data_dir 与
-  shared_data_dir。实测在临时 user 目录放 `mgjy_test2.schema.yaml` +
-  `mgjy_test2.dict.yaml`，共享目录用安装 data，输入：
+  shared_data_dir。实测在临时 user 目录放 `ff7-ime_test2.schema.yaml` +
+  `ff7-ime_test2.dict.yaml`，共享目录用安装 data，输入：
   - `nihao` → `你好`（来自自定义 dict）
   - `moguangjianying` → `魔光键影`
   这是给“魔光键影”做回归测试的推荐姿势：**项目文件进临时 user 目录，系统目录零改动**。
@@ -255,7 +255,7 @@ librime 在 C API 里分配字符串/数组，必须由对应 `Free` 释放：
 
 ```bat
 python rime_harness.py --shared "C:\Program Files\Rime\weasel-0.17.4\data" ^
-  --user "%TEMP%\mgjy-test" --schema luna_pinyin_simp --input nihao --json
+  --user "%TEMP%\ff7-ime-test" --schema luna_pinyin_simp --input nihao --json
 ```
 
 输出（截取）：
@@ -305,7 +305,7 @@ python rime_harness.py --shared "C:\Program Files\Rime\weasel-0.17.4\data" ^
 | 场景 | 结果 |
 |---|---|
 | 换 schema `luna_pinyin`（同一 user 目录） | 自动重新部署，候选 `你好/妳好/逆號/擬好/你` |
-| 自定义 schema（user 目录）+ stock shared | 部署成功，`schema=mgjy_test` |
+| 自定义 schema（user 目录）+ stock shared | 部署成功，`schema=ff7-ime_test` |
 | 自定义 schema + 自定义 dict（user 目录） | `nihao→你好`、`moguangjianying→魔光键影` |
 | 非 ASCII 临时目录 `%TEMP%\魔光键影` | 正常工作 |
 | 真实 `%APPDATA%\Rime`（WeaselServer 运行中） | 测试前后快照一致 |
@@ -346,20 +346,20 @@ python rime_harness.py --shared "C:\Program Files\Rime\weasel-0.17.4\data" ^
 :: 1) 快速验证
 python experiments\rime-harness\rime_harness.py ^
   --shared "C:\Program Files\Rime\weasel-0.17.4\data" ^
-  --user "%TEMP%\mgjy-test" --schema luna_pinyin_simp ^
+  --user "%TEMP%\ff7-ime-test" --schema luna_pinyin_simp ^
   --input nihao --json
 
 :: 2) 验收测试
 python experiments\rime-harness\test_luna.py
 
 :: 3) 自定义方案（把 yaml 放进临时用户目录）
-set U=%TEMP%\mgjy-project
+set U=%TEMP%\ff7-ime-project
 mkdir "%U%"
 copy /y dist\*.schema.yaml "%U%\"
 copy /y dist\*.dict.yaml   "%U%\"
 python experiments\rime-harness\rime_harness.py ^
   --shared "C:\Program Files\Rime\weasel-0.17.4\data" ^
-  --user "%U%" --schema mgjy --input nihao --json
+  --user "%U%" --schema ff7-ime --input nihao --json
 ```
 
 无需管理员权限，无需安装/重启 Weasel，不修改 `%APPDATA%\Rime`。

@@ -4,7 +4,7 @@
 
 输入
 ----
-* ../../dict.txt                UTF-16 LE (BOM) + CRLF，一行一个词条
+* ../../data/dict.txt                UTF-16 LE (BOM) + CRLF，一行一个词条
 * override.yaml                 人工确认的读音覆盖（本脚本只读，不写）
 * luna_pinyin.dict.yaml         Rime 明月拼音，用于逐字交叉校验
 * terra_pinyin.dict.yaml        Rime 地球拼音，作为第三来源（可选）
@@ -18,7 +18,7 @@
 用法
 ----
     python extract.py
-    python extract.py --dict "D:/.../dict.txt" --luna "C:/.../luna_pinyin.dict.yaml"
+    python extract.py --dict "D:/.../data/dict.txt" --luna "C:/.../luna_pinyin.dict.yaml"
     python extract.py --check
 
 依赖：pypinyin, PyYAML
@@ -56,7 +56,7 @@ except ImportError:  # pragma: no cover
 HERE = Path(__file__).resolve().parent
 PROJECT_ROOT = HERE.parent.parent
 
-DEFAULT_DICT = PROJECT_ROOT / "dict.txt"
+DEFAULT_DICT = PROJECT_ROOT / "data/dict.txt"
 DEFAULT_OVERRIDE = HERE / "override.yaml"
 DEFAULT_LUNA = Path(r"C:\Program Files\Rime\weasel-0.17.4\data\luna_pinyin.dict.yaml")
 DEFAULT_TERRA = Path(r"C:\Program Files\Rime\weasel-0.17.4\data\terra_pinyin.dict.yaml")
@@ -451,7 +451,7 @@ def write_report(
 
     A("## 2. 输入解析")
     A("")
-    A("`dict.txt` 为 UTF-16 LE + BOM、CRLF 换行。解析步骤：")
+    A("`data/dict.txt` 为 UTF-16 LE + BOM、CRLF 换行。解析步骤：")
     A("")
     A("1. 按 BOM 判定 `utf-16` 解码（兼容无 BOM 的 UTF-8）。")
     A("2. `splitlines()` 同时处理 `\\r\\n` / `\\n`。")
@@ -593,7 +593,7 @@ def write_report(
     A(f"- luna 缺失：**{stats['n_luna_missing']}**。")
     A(f"- terra 缺失：**{stats['n_terra_missing']}**（{'、'.join(stats['terra_missing_chars']) or '无'}）。")
     A("")
-    A("重点生僻字核对表（含未出现在 dict.txt 的观察字）：")
+    A("重点生僻字核对表（含未出现在 data/dict.txt 的观察字）：")
     A("")
     A("| 字 | 读音 | 是否在词表 | 来源 | 说明 |")
     A("| --- | --- | --- | --- | --- |")
@@ -623,7 +623,7 @@ def write_report(
     A("2. **轻声标注**：词典对部分轻声词有不同处理（如“骰子”的“子”）；本表按普通话口语标轻声 5，"
       "无调全拼不受影响。")
     A("3. **一/不 变调**：数字声调标本调，不标语流变调；若下游需要表面声调，应另行实现变调规则。")
-    A("4. **译名用字**：FF7 中文译名存在多个版本（如 Aerith 有“爱丽丝/艾莉丝”），本表以 `dict.txt` 用字为准；"
+    A("4. **译名用字**：FF7 中文译名存在多个版本（如 Aerith 有“爱丽丝/艾莉丝”），本表以 `data/dict.txt` 用字为准；"
       "仅对用字的普通话读音负责，不改写译名。")
     A("5. **多音字备选**：`heteronyms` 来自 pypinyin，可能包含书面/古音/异体读音；"
       "`primary` 是语料上下文主读音，不应把所有 heteronym 都当作可接受输入。")
@@ -675,7 +675,7 @@ def write_report(
     A("| 列 | 说明 |")
     A("| --- | --- |")
     A("| `id` | 1..N，稳定 ID |")
-    A("| `line_no` | dict.txt 原始行号 |")
+    A("| `line_no` | data/dict.txt 原始行号 |")
     A("| `phrase` | 原词条，标点原样保留 |")
     A("| `han_chars` | 仅汉字，标点剔除 |")
     A("| `primary_pinyin` | 无调全拼，空格分隔，仅对应汉字 |")
@@ -714,7 +714,7 @@ def write_report(
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--dict", default=str(DEFAULT_DICT), help="dict.txt 路径")
+    parser.add_argument("--dict", default=str(DEFAULT_DICT), help="data/dict.txt 路径")
     parser.add_argument("--luna", default=str(DEFAULT_LUNA), help="luna_pinyin.dict.yaml")
     parser.add_argument("--terra", default=str(DEFAULT_TERRA), help="terra_pinyin.dict.yaml")
     parser.add_argument("--override", default=str(DEFAULT_OVERRIDE), help="override.yaml")

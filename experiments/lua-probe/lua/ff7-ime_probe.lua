@@ -1,12 +1,12 @@
--- mgjy_probe.lua
+-- ff7-ime_probe.lua
 -- 魔光键影 librime-lua 运行时探针（主 translator）
 --
--- 部署位置：<user_data_dir>/lua/mgjy_probe.lua
--- schema 写法：- lua_translator@*mgjy_probe
---   * 前缀 = require("mgjy_probe")；不带 * 则查找全局变量 mgjy_probe。
+-- 部署位置：<user_data_dir>/lua/ff7-ime_probe.lua
+-- schema 写法：- lua_translator@*ff7-ime_probe
+--   * 前缀 = require("ff7-ime_probe")；不带 * 则查找全局变量 ff7-ime_probe。
 
 local M = {}
-local TAG = "[mgjy_probe]"
+local TAG = "[ff7-ime_probe]"
 
 local function logf(fmt, ...)
   local ok, s = pcall(string.format, fmt, ...)
@@ -38,13 +38,13 @@ function M.init(env)
   logf("rime_api.get_shared_data_dir()=%s", tostring(rime_api.get_shared_data_dir()))
 
   -- require 是否走 user_data_dir/lua/?.lua
-  try('require("mgjy_probe_data")', function()
-    local d = require("mgjy_probe_data")
+  try('require("ff7-ime_probe_data")', function()
+    local d = require("ff7-ime_probe_data")
     return type(d) .. " magic=" .. tostring(d and d.magic) ..
            " values=" .. tostring(d and d.values and #d.values)
   end)
-  try('package.searchpath("mgjy_probe_data")', function()
-    return package.searchpath("mgjy_probe_data", package.path)
+  try('package.searchpath("ff7-ime_probe_data")', function()
+    return package.searchpath("ff7-ime_probe_data", package.path)
   end)
 
   -- 沙箱：io / os
@@ -95,9 +95,9 @@ function M.func(input, seg, env)
   logf("input:sub(seg.start+1, seg._end)=%q", input:sub(seg.start + 1, seg._end))
 
   -- 开关读取
-  logf("option mgjy_probe_enabled=%s mgjy_probe_extra=%s",
-    tostring(ctx:get_option("mgjy_probe_enabled")),
-    tostring(ctx:get_option("mgjy_probe_extra")))
+  logf("option ff7-ime_probe_enabled=%s ff7-ime_probe_extra=%s",
+    tostring(ctx:get_option("ff7-ime_probe_enabled")),
+    tostring(ctx:get_option("ff7-ime_probe_extra")))
   logf("option ascii_mode=%s (not declared in switches)", tostring(ctx:get_option("ascii_mode")))
 
   -- 配置读取
@@ -107,17 +107,17 @@ function M.func(input, seg, env)
     logf("get_int(menu/page_size)=%s (%s)", tostring(cfg:get_int("menu/page_size")), type(cfg:get_int("menu/page_size")))
     logf("get_int(/menu/page_size) leading slash=%s", tostring(cfg:get_int("/menu/page_size")))
     logf("get_string(schema/name)=%q (%s)", tostring(cfg:get_string("schema/name")), type(cfg:get_string("schema/name")))
-    logf("get_bool(mgjy_probe/flag)=%s (%s)", tostring(cfg:get_bool("mgjy_probe/flag")), type(cfg:get_bool("mgjy_probe/flag")))
-    logf("get_int(mgjy_probe/number)=%s", tostring(cfg:get_int("mgjy_probe/number")))
-    logf("get_string(mgjy_probe/name)=%q", tostring(cfg:get_string("mgjy_probe/name")))
+    logf("get_bool(ff7-ime_probe/flag)=%s (%s)", tostring(cfg:get_bool("ff7-ime_probe/flag")), type(cfg:get_bool("ff7-ime_probe/flag")))
+    logf("get_int(ff7-ime_probe/number)=%s", tostring(cfg:get_int("ff7-ime_probe/number")))
+    logf("get_string(ff7-ime_probe/name)=%q", tostring(cfg:get_string("ff7-ime_probe/name")))
 
     -- 缺省值行为：不存在的路径 -> nil
     logf("missing get_int=%s (%s)", tostring(cfg:get_int("no/such/int")), type(cfg:get_int("no/such/int")))
     logf("missing get_string=%s (%s)", tostring(cfg:get_string("no/such/string")), type(cfg:get_string("no/such/string")))
     logf("missing get_bool=%s (%s)", tostring(cfg:get_bool("no/such/bool")), type(cfg:get_bool("no/such/bool")))
 
-    local list = cfg:get_list("mgjy_probe/list")
-    logf("get_list(mgjy_probe/list)=%s type=%s", tostring(list), type(list))
+    local list = cfg:get_list("ff7-ime_probe/list")
+    logf("get_list(ff7-ime_probe/list)=%s type=%s", tostring(list), type(list))
     if list then
       logf("list.size=%s list.type=%s", tostring(list.size), tostring(list.type))
       for i = 0, list.size - 1 do
@@ -127,8 +127,8 @@ function M.func(input, seg, env)
     end
     logf("missing get_list=%s (%s)", tostring(cfg:get_list("no/such/list")), type(cfg:get_list("no/such/list")))
 
-    local map = cfg:get_map("mgjy_probe")
-    logf("get_map(mgjy_probe)=%s type=%s", tostring(map), type(map))
+    local map = cfg:get_map("ff7-ime_probe")
+    logf("get_map(ff7-ime_probe)=%s type=%s", tostring(map), type(map))
     if map then
       logf("map.size=%s map.type=%s keys=%s", tostring(map.size), tostring(map.type),
         table.concat(map:keys(), ","))
@@ -139,17 +139,17 @@ function M.func(input, seg, env)
   end
 
   -- Candidate 参数顺序：Candidate(type, start, end, text, comment)
-  local c = Candidate("mgjy_probe", seg.start, seg._end, "TEXT-" .. input, "COMMENT-" .. input)
+  local c = Candidate("ff7-ime_probe", seg.start, seg._end, "TEXT-" .. input, "COMMENT-" .. input)
   logf("Candidate(type,start,end,text,comment): type=%s start=%s _end=%s text=%q comment=%q dyn=%s",
     tostring(c.type), tostring(c.start), tostring(c._end),
     tostring(c.text), tostring(c.comment), tostring(c:get_dynamic_type()))
 
   -- 反例：若把 text 放第一位，会变成 type
-  local wrong = Candidate("TEXT-" .. input, seg.start, seg._end, "mgjy_probe", "COMMENT-" .. input)
+  local wrong = Candidate("TEXT-" .. input, seg.start, seg._end, "ff7-ime_probe", "COMMENT-" .. input)
   logf("swapped-args candidate: type=%s text=%q comment=%q", tostring(wrong.type), tostring(wrong.text), tostring(wrong.comment))
 
   -- type / quality 是否可写
-  c.type = "mgjy_probe_typed"
+  c.type = "ff7-ime_probe_typed"
   c.quality = 0.0
   logf("after write: type=%s quality=%s; gen_type field type=%s", tostring(c.type), tostring(c.quality), type(c.gen_type))
 
@@ -162,17 +162,17 @@ function M.func(input, seg, env)
   else
     text, comment = "探针:" .. input, "probe: " .. input
   end
-  yield(Candidate("mgjy_probe", seg.start, seg._end, text, comment))
+  yield(Candidate("ff7-ime_probe", seg.start, seg._end, text, comment))
 
-  -- 开关 mgjy_probe_extra 控制额外候选
-  if ctx:get_option("mgjy_probe_extra") then
-    yield(Candidate("mgjy_probe", seg.start, seg._end, "EXTRA-ON:" .. input,
-      "switch mgjy_probe_extra is ON"))
+  -- 开关 ff7-ime_probe_extra 控制额外候选
+  if ctx:get_option("ff7-ime_probe_extra") then
+    yield(Candidate("ff7-ime_probe", seg.start, seg._end, "EXTRA-ON:" .. input,
+      "switch ff7-ime_probe_extra is ON"))
   end
 
   -- 任意数量候选（这里 7 个），用于观察 page_size / 分页 / 截断
   for i = 1, 7 do
-    yield(Candidate("mgjy_probe", seg.start, seg._end,
+    yield(Candidate("ff7-ime_probe", seg.start, seg._end,
       string.format("%s#%02d", input, i),
       string.format("seq %d for %q", i, input)))
   end

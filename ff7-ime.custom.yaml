@@ -1,24 +1,24 @@
 # 魔光键影 · 用户配置示例
 # encoding: utf-8
 #
-# 复制/安装到 %APPDATA%\Rime\moguang_jianying.custom.yaml 后生效。
-# 修改后运行 WeaselDeployer.exe /deploy（或“重新部署”）。
+# 复制/安装到 %APPDATA%\Rime\ff7-ime.custom.yaml 后生效。
+# 修改后在 Weasel 托盘选择“重新部署”（或在方案选单中确认）。
 #
-# 注意：默认 mgjy/use_switches: false，因此下面的 mgjy/fuzzy/* 是权威配置。
-# 如果把 use_switches 改成 true，则 F4 菜单里的 mgjy_fuzzy_* 开关优先，
+# 注意：默认 ff7-ime/use_switches: false，因此下面的 ff7-ime/fuzzy/* 是权威配置。
+# 如果把 use_switches 改成 true，则 F4 菜单里的 ff7-ime_fuzzy_* 开关优先，
 # 下面的 fuzzy 配置只在开关未定义时作为兜底。
 
 patch:
   # ------------------------------------------------------------------
   # 候选数量 / 分页 / 注释
   # ------------------------------------------------------------------
-  mgjy/top_n: 9
+  ff7-ime/top_n: 9
   menu/page_size: 9
-  # DP 候选上限：越大越稳，越小越快（默认 64）
-  mgjy/dp_max_candidates: 56
-  mgjy/show_comment: true
-  mgjy/show_score: false
-  mgjy/use_switches: false
+  # DP 候选上限：越大越稳，越小越快（默认 56）
+  ff7-ime/dp_max_candidates: 56
+  ff7-ime/show_comment: true
+  ff7-ime/show_score: false
+  ff7-ime/use_switches: false
 
   # ------------------------------------------------------------------
   # 模糊音开关
@@ -26,63 +26,63 @@ patch:
   # B 类（可选，默认关）：n/l、r/l、f/h、en/eng、in/ing、an/ang、uan/uang
   # v_u：把 ü 的 v 拼写与 u 拼写视为互通（默认开）
   # ------------------------------------------------------------------
-  mgjy/fuzzy/zh_z: true
-  mgjy/fuzzy/ch_c: true
-  mgjy/fuzzy/sh_s: true
-  mgjy/fuzzy/ng_n: true
-  mgjy/fuzzy/n_l: false
-  mgjy/fuzzy/r_l: false
-  mgjy/fuzzy/f_h: false
-  mgjy/fuzzy/en_eng: false
-  mgjy/fuzzy/in_ing: false
-  mgjy/fuzzy/an_ang: false
-  mgjy/fuzzy/uan_uang: false
-  mgjy/fuzzy/v_u: true
+  ff7-ime/fuzzy/zh_z: true
+  ff7-ime/fuzzy/ch_c: true
+  ff7-ime/fuzzy/sh_s: true
+  ff7-ime/fuzzy/ng_n: true
+  ff7-ime/fuzzy/n_l: false
+  ff7-ime/fuzzy/r_l: false
+  ff7-ime/fuzzy/f_h: false
+  ff7-ime/fuzzy/en_eng: false
+  ff7-ime/fuzzy/in_ing: false
+  ff7-ime/fuzzy/an_ang: false
+  ff7-ime/fuzzy/uan_uang: false
+  ff7-ime/fuzzy/v_u: true
 
   # ------------------------------------------------------------------
   # 容错
   # ------------------------------------------------------------------
-  mgjy/typo/enabled: true
-  mgjy/typo/max_edit: 2
-  mgjy/typo/transposition: true
-  mgjy/typo/syllable_swap: true
+  ff7-ime/typo/enabled: true
+  ff7-ime/typo/max_edit: 2
+  ff7-ime/typo/transposition: true
+  ff7-ime/typo/syllable_swap: true
 
   # 声母 / 关键词模式（lkcc 等）
-  mgjy/initial/enabled: true
-  mgjy/keyword/gap_penalty: 0.02
+  ff7-ime/initial/enabled: true
+  ff7-ime/keyword/gap_penalty: 0.02
   # 中段音节前缀子序列（meishao -> 美少女）；关闭后只保留声母关键词
-  mgjy/keyword/syllable_subsequence: true
+  ff7-ime/keyword/syllable_subsequence: true
 
   # ------------------------------------------------------------------
   # 回退与置信度
   # ------------------------------------------------------------------
   # 最后一级回退用 bigram/trigram 召回 + Damerau/Dice-LCS 排序
-  mgjy/fallback/use_lcs: true
+  ff7-ime/fallback/use_lcs: true
   # DP 近似对齐低于该 raw 时视为噪声，不再作为强候选
-  mgjy/fallback/dp_min_raw: 0.65
+  ff7-ime/fallback/dp_min_raw: 0.65
   # 回退池按重叠度预排序后，实际计算相似度的候选数上限
-  mgjy/fallback/max_candidates: 96
+  ff7-ime/fallback/max_candidates: 96
   # 已有强命中（raw 达标）时改用小池，避免拖慢正常按键
-  mgjy/fallback/strong_raw: 0.70
-  mgjy/fallback/fast_max_candidates: 16
+  ff7-ime/fallback/strong_raw: 0.70
+  ff7-ime/fallback/fast_max_candidates: 16
 
   # ------------------------------------------------------------------
   # 预编辑显示（只影响输入框里的拼音，不影响匹配与上屏文本）
   # ------------------------------------------------------------------
   # 开启预测音节分隔符：diou -> di'ou，shenluo -> shen'luo
-  mgjy/preedit/enabled: true
-  mgjy/preedit/separator: "'"
+  ff7-ime/preedit/enabled: true
+  ff7-ime/preedit/separator: "'"
 
   # ------------------------------------------------------------------
   # 通道权重（高级调参；一般无需修改）
   # ------------------------------------------------------------------
-  mgjy/weights/exact: 1.0
-  mgjy/weights/fuzzy: 0.97
-  mgjy/weights/fuzzy_prefix: 0.95
-  mgjy/weights/prefix: 0.96
-  mgjy/weights/swap: 0.93
-  mgjy/weights/dp: 0.94
-  mgjy/weights/initial_exact: 0.96
-  mgjy/weights/initial: 0.86
-  mgjy/weights/keyword: 0.80
-  mgjy/weights/fallback: 0.55
+  ff7-ime/weights/exact: 1.0
+  ff7-ime/weights/fuzzy: 0.97
+  ff7-ime/weights/fuzzy_prefix: 0.95
+  ff7-ime/weights/prefix: 0.96
+  ff7-ime/weights/swap: 0.93
+  ff7-ime/weights/dp: 0.94
+  ff7-ime/weights/initial_exact: 0.96
+  ff7-ime/weights/initial: 0.86
+  ff7-ime/weights/keyword: 0.80
+  ff7-ime/weights/fallback: 0.55

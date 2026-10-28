@@ -1,7 +1,7 @@
 -- 透传型 lua_filter：只记录候选并原样 yield，用来观察 filter 与 translator/uniquifier 的顺序。
--- schema 写法：- lua_filter@*mgjy_probe_filter
+-- schema 写法：- lua_filter@*ff7-ime_probe_filter
 local M = {}
-local TAG = "[mgjy_filter]"
+local TAG = "[ff7-ime_filter]"
 
 function M.init(env)
   log.info(string.format("%s init name_space=%s", TAG, tostring(env.name_space)))

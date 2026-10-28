@@ -1,8 +1,14 @@
 # 魔光键影 · 总体方案与执行计划
 
 > 目标平台：小狼毫 Weasel 0.17.4（Windows x64，librime 1.13.1，内嵌 Lua 5.4.7）
-> 数据源：本仓库 `dict.txt`（1212 条《最终幻想7》相关词条/短句，UTF-16 LE BOM + CRLF）
-> 方案 ID：`moguang_jianying`；显示名：**魔光键影**
+> 数据源：本仓库 `data/dict.txt`（1212 条《最终幻想7》相关词条/短句，UTF-16 LE BOM + CRLF）
+> 方案 ID：`ff7-ime`；显示名：**魔光键影**
+>
+> **2026-10-29 修订**：分发方式改为“整仓适配 Plum”：根目录 `ff7-ime.schema.yaml` +
+> `lua/ff7-ime*.lua` + `recipe.yaml`；用户在小狼毫“获取更多输入方案”中输入
+> `Tanimodori/ff7-ime`。不再生成 portable zip，不再提供 install/uninstall/verify/deploy
+> 脚本；`dict.txt` 移到 `data/dict.txt`；代码采用 MIT。下文提到 portable/安装脚本的
+> 历史段落仅作为当时的执行记录，已被本节取代。
 
 ---
 
@@ -10,7 +16,7 @@
 
 ### 1.1 目标
 
-1. 只输出 `dict.txt` 中的 1212 条词条，每条作为一个完整候选，不造句、不联想用户词、不输出词库外内容。
+1. 只输出 `data/dict.txt` 中的 1212 条词条，每条作为一个完整候选，不造句、不联想用户词、不输出词库外内容。
 2. 用户输入中国大陆普通话**无调全拼**；候选文本保留词条中的中文标点（`！，·……？、`）。
 3. 支持四类容错：
    - **A 模糊音**：`zh/ch/sh → z/c/s`、`ng → n`，并预留 `n/l`、`r/l`、`f/h`、`en/eng`、`in/ing`、`an/ang` 等可配置模糊。
@@ -20,14 +26,14 @@
 4. **永远输出 N 个候选**（默认 N=9，可配置），任何输入（包括乱码）都不空输出。
 5. 精确全拼必须稳定排第一；短词与长句之间有良好区分度。
 6. 候选数量、权重、阈值、各模糊音开关均可通过 YAML 配置修改。
-7. 交付可分发档案（portable 分发包），并部署到本机小狼毫；提供完整 README / DOCS。
+7. 交付可安装的 Plum 包（整仓克隆 + `recipe.yaml`），并部署到本机小狼毫；提供完整 README / DOCS 与 MIT 许可。
 
 ### 1.2 非目标
 
 - 不做整句输入、云输入、用户自造词、简繁转换、英文/数字输入法。
 - 不修改或替换用户现有的 `luna_pinyin_simp` 方案；只新增方案并加入方案列表。
 - 不依赖外部服务、网络、Python 运行时（Python 仅用于构建期）。
-- 不保证对 `dict.txt` 之外词条的输入效果；词库外输入只做 n-gram + Damerau/Dice-LCS 回退。
+- 不保证对 `data/dict.txt` 之外词条的输入效果；词库外输入只做 n-gram + Damerau/Dice-LCS 回退。
 
 ---
 
@@ -50,7 +56,7 @@ Rime 原生方案可以处理全拼、简拼和部分模糊音，但：
 键盘按键
   → Rime speller（收集纯字母输入）
   → segmentor（保证整段字母进入同一 segment）
-  → lua_translator@mgjy（读取 raw input）
+  → lua_translator@*ff7-ime（读取 raw input）
       → 规范化（小写、去分隔符、v/ü）
       → 多通道匹配 + 打分（全拼/模糊/多音/误读/声母/关键词/前缀/编辑距离/音节换位）
       → Top-N 排序（精确优先、长度归一、稳定 tie-break）
@@ -63,15 +69,15 @@ Rime 原生方案可以处理全拼、简拼和部分模糊音，但：
 
 | 层 | 文件 | 职责 |
 |---|---|---|
-| Rime 方案 | `moguang_jianying.schema.yaml` | schema 元信息、switches、engine 组件、speller、Lua translator 引用 |
-| 用户覆盖 | `moguang_jianying.custom.yaml` | 模糊开关、Top-N、权重、分页等用户配置 |
-| Lua 引擎 | `lua/mgjy.lua` | translator 入口、输入规范化、匹配调度、候选生成 |
-| Lua 算法 | `lua/mgjy_matcher.lua` | 音节对齐 DP、编辑距离、子序列、打分 |
-| Lua 数据 | `lua/mgjy_data.lua` | 构建期生成的 1212 条词条、读音、权重 |
-| 构建脚本 | `tools/build_data.py`、`tools/build_package.py` | dict.txt + 拼音数据 → Lua 数据 / portable 分发包 |
-| 测试 | `tools/rime_harness.py`、`tests/` | Rime C API 自动化回归；算法单元测试 |
+| Rime 方案 | `ff7-ime.schema.yaml` | schema 元信息、switches、engine 组件、speller、Lua translator 引用 |
+| 用户覆盖 | `ff7-ime.custom.yaml` | 模糊开关、Top-N、权重、分页等用户配置 |
+| Lua 引擎 | `lua/ff7-ime.lua` | translator 入口、输入规范化、匹配调度、候选生成 |
+| Lua 算法 | `lua/ff7-ime_matcher.lua` | 音节对齐 DP、编辑距离、子序列、打分 |
+| Lua 数据 | `lua/ff7-ime_data.lua` | 构建期生成的 1212 条词条、读音、权重 |
+| 构建脚本 | `tools/build_from_pinyin_data.py`、`tools/check_package.py` | data/dict.txt + 拼音数据 → Lua 数据 / 包布局校验 |
+| 测试 | `experiments/rime-harness/rime_harness.py`、`tests/` | Rime C API 自动化回归；算法单元测试 |
 | 文档 | `README.md`、`docs/*.md` | 安装、使用、算法、架构、构建、维护 |
-| 发布 | `dist/moguang_jianying-portable.zip` | 可分发档案：自包含、可校验、可离线安装的 Rime 方案包 |
+| 发布 | `recipe.yaml` + `Tanimodori/ff7-ime` | 整仓 Plum 包：用户输入仓库标识安装 |
 
 ---
 
@@ -145,7 +151,7 @@ score = w_exact   * exact_full
 
 ## 4. 拼音数据管线
 
-1. 解析 `dict.txt`（UTF-16 LE BOM、CRLF），得到 1212 条、1326 个唯一汉字、最长 14 字。
+1. 解析 `data/dict.txt`（UTF-16 LE BOM、CRLF），得到 1212 条、1326 个唯一汉字、最长 14 字。
 2. 注音来源：
    - `pypinyin`（主，`heteronym=True` 取多音）；
    - `luna_pinyin.dict.yaml`（交叉校验/补充）；
@@ -154,7 +160,7 @@ score = w_exact   * exact_full
    - `data/phrases.tsv`：词条、主读音、逐字读音、备选读音、备注；
    - `data/chars.tsv`：汉字、规范读音、多音、来源；
    - `data/overrides.yaml`：人工覆盖；
-   - `lua/mgjy_data.lua`：构建期生成，嵌入 Lua。
+   - `lua/ff7-ime_data.lua`：构建期生成，嵌入 Lua。
 4. 验收：1212/1212 覆盖；生僻字缺失 0；抽查 ≥ 100 条读音；多音/误读结构化。
 
 ---
@@ -182,7 +188,7 @@ engine:
     - fallback_segmentor
   translators:
     - punct_translator
-    - lua_translator@mgjy
+    - lua_translator@ff7-ime
   filters:
     - uniquifier
 ```
@@ -193,7 +199,7 @@ engine:
 ### 5.2 配置项（基线）
 
 ```yaml
-mgjy:
+ff7-ime:
   top_n: 9
   page_size: 9
   debug: false
@@ -216,22 +222,24 @@ mgjy:
     syllable_swap: true
 ```
 
-用户通过 `moguang_jianying.custom.yaml` 覆盖，例如：
+用户通过 `ff7-ime.custom.yaml` 覆盖，例如：
 
 ```yaml
 patch:
-  mgjy/top_n: 12
-  mgjy/fuzzy/n_l: true
-  mgjy/fuzzy/zh_z: false
+  ff7-ime/top_n: 12
+  ff7-ime/fuzzy/n_l: true
+  ff7-ime/fuzzy/zh_z: false
 ```
 
 ### 5.3 部署
 
 - 用户目录：`%APPDATA%\Rime\`
-- 复制 schema、custom、`lua/`；把 `moguang_jianying` 加入 `default.custom.yaml` 的 `schema_list`（幂等、先备份）。
-- 运行 `WeaselDeployer.exe /deploy`，检查 `%APPDATA%\Rime\build\` 日志。
-- 不覆盖 `luna_pinyin_simp` 文件；卸载时只移除本方案相关文件并恢复备份。
-- portable 分发包：`dist/moguang_jianying-portable.zip`，内含 `rime/`（Rime 用户目录覆盖层）、`install.ps1`、`uninstall.ps1`、文档、离线数据、`MANIFEST.txt` 与 `SHA256SUMS`；同时生成 `.zip.sha256`。这里的 portable 指“可分发档案”，不是 Weasel 便携运行时。
+- 通过小狼毫“方案选单设定 → 获取更多输入方案”输入 `Tanimodori/ff7-ime`；
+  Plum 按根 `recipe.yaml` 只复制 schema + `lua/ff7-ime*.lua` 4 个文件。
+- 安装器不改 `default.custom.yaml`；用户在方案选单勾选“魔光键影”后由 Weasel 写入
+  `schema_list`，随后重新部署。
+- 不覆盖 `luna_pinyin_simp`；卸载时在方案选单取消勾选并删除本方案文件。
+- 不再生成 portable zip；仓库本身就是可分发的 Plum 包。
 
 ---
 
@@ -277,8 +285,8 @@ patch:
 | G1 数据 | 1212 条注音完整、读音正确、误读结构化 | 独立代理抽查 + 脚本校验 |
 | G2 算法 | 核心用例 top1、Top-N、无空输出 | 独立代理用隐藏用例跑原型 |
 | G3 引擎 | Lua 实现与原型一致、性能达标、Rime 中可运行 | 独立代理代码审查 + 集成测试 |
-| G4 部署 | 真实小狼毫安装/切换/输入/卸载；不影响现有方案 | 独立代理按文档从零安装验证 |
-| G5 交付 | portable 分发包可离线安装、可校验完整性、文档完整可复现 | 独立代理在临时目录模拟全新安装 |
+| G4 部署 | 真实小狼毫通过官方 Plum 安装/切换/输入/卸载；不影响现有方案 | 独立代理按文档从零安装验证 |
+| G5 交付 | 整仓 Plum 包可由官方入口安装、包校验通过、文档完整可复现 | 独立代理在临时目录模拟全新安装 |
 
 每个门禁不通过则回到对应阶段修复，重新验收；验收报告写入 `docs/acceptance/`。
 
@@ -291,7 +299,7 @@ patch:
 3. **G2 算法**：Python 原型 + 测试集 + 参数调优，子代理验收。
 4. **G3 引擎**：Lua 移植、Rime schema、配置、集成测试，子代理验收。
 5. **G4 部署**：本机安装、GUI 实测、与现有方案共存验证，子代理验收。
-6. **G5 交付**：portable 分发包（可分发档案 + 校验和）、README/DOCS、构建脚本、最终验收。
+6. **G5 交付**：整仓 Plum 包（`recipe.yaml` + schema + lua）、MIT、README/DOCS、包校验、最终验收。
 
 ---
 
@@ -304,14 +312,15 @@ patch:
 | 1212 条全量 DP 每键过慢 | 输入卡顿 | 快速路径 + 首字母倒排 + 两阶段；基准测试 |
 | 生僻字/多音字读音错误 | 候选不准 | 多源交叉 + 人工覆盖 + 抽查；误读集合兜底 |
 | 长句关键词过度匹配 | 短词被长句压过 | 覆盖率/紧凑度/长度归一 + 精确优先 |
-| 部署破坏现有方案 | 用户输入法异常 | 只新增文件、备份、幂等 patch、卸载脚本；独立验收 |
+| 部署破坏现有方案 | 用户输入法异常 | 安装器只复制 4 个运行时文件、不改 default.custom.yaml；方案启用交给官方选单；独立验收 |
 | Rime 版本差异 | 方案不可用 | 固定目标 0.17.4；文档注明兼容范围；G4 真机验证 |
 
 ---
 
 ## 9. 交付清单
 
-- [x] `dist/moguang_jianying-portable.zip`（分发包：schema、custom、lua、data、install/uninstall、README、MANIFEST、SHA256SUMS）
+- [x] 整仓 Plum 包：`recipe.yaml` + `ff7-ime.schema.yaml` + `lua/ff7-ime*.lua`（用户输入 `Tanimodori/ff7-ime` 安装）
+- [x] MIT `LICENSE`（Copyright (c) 2026 Tanimodori）
 - [x] 本机 `%APPDATA%\Rime` 已安装并部署，方案列表可见
 - [x] `README.md`
 - [x] `docs/ALGORITHM.md`
@@ -324,21 +333,21 @@ patch:
 - [~] 独立子代理验收 G0..G5：按用户指示跳过（G1–G3 子代理因 ClinePass 周限额失败；改由实现者自动化测试 + 真机 GUI 实测覆盖，见 `docs/TEST_REPORT.md`）
 - [x] 测试脚本与测试集（可复现）
 - [x] 内嵌预编辑（预测音节分隔符，`diou` → `di'ou`）与回车/小键盘回车上屏
-- [x] 构建脚本（dict.txt + 拼音数据 → Lua 数据 / 包）
+- [x] 构建脚本（data/dict.txt + 拼音数据 → Lua 数据 / 包）
 
 ### 实施结果摘要
 
-- 方案已部署到本机 `%APPDATA%\Rime`，`luna_pinyin_simp` 与 `moguang_jianying` 共存；
+- 方案已部署到本机 `%APPDATA%\Rime`，`luna_pinyin_simp` 与 `ff7-ime` 共存；
 - 真实 Rime + GUI 实测通过（`lkcc`、`lienuo`、`senluo`、`zanguokuaigon`、`ren sheng...`）；
 - 全量自动评估：exact 1212/1212、fuzzy 878/878、initial 1212/1212（top1 98.3%）、typo 600/600（top3）、keyword 233/238（top5）、mid_keyword 300/300、fallback 7/7；
 - 内嵌预编辑：`diou` → `di'ou`、`meishao` → `mei'shao`；回车/小键盘回车提交高亮候选（GUI 实测）；
 - 关键架构调整：
-  1. 使用 `lua_translator@*mgjy` + 纯 Lua 匹配引擎，而不是 Rime 原生 `script_translator`；
+  1. 使用 `lua_translator@*ff7-ime` + 纯 Lua 匹配引擎，而不是 Rime 原生 `script_translator`；
   2. 连续串 canon 只做安全规则（zh/ch/sh、v/u），`ng→n` 放音节级 DP，避免跨音节误伤；
   3. 两阶段召回（廉价通道 + canonical 双/三字母重叠 Top-K DP），兼顾准确率与逐键延迟；
   4. 回退改为 bigram/trigram 召回 + Damerau/Dice-LCS 排序，并给 DP 加 0.65 置信度门槛；有强命中时只用 16 个小池，避免拖慢正常按键；
-  5. 部署使用 `deploy-rime.ps1` 直接调 `rime.dll`，避免 `WeaselDeployer /deploy` 打开 GUI 并改写 `default.custom.yaml`。
-- 已知限制：极稀疏关键词子序列存在天然歧义；portable 是分发包而非便携运行时（Weasel 用户目录由前端决定）；词库外输入只回退不造句。
+  5. 安装改为官方 Plum：整仓浅克隆 + 根 `recipe.yaml` 只复制 4 个运行时文件；安装器不改 `default.custom.yaml`。
+- 已知限制：极稀疏关键词子序列存在天然歧义；整仓克隆需要公开仓库 + Git Bash；本地 ZIP 不复制 `lua/`；词库外输入只回退不造句。
 
 ---
 
@@ -347,4 +356,4 @@ patch:
 - 方案版本：`1.0.0`
 - 目标：Weasel 0.17.4 / librime 1.13.1 / Windows 10 19045 x64
 - 理论兼容：Weasel 0.17.x（Lua 5.4）；其他 Rime 前端需确认 `lua_translator` 与中文路径支持。
-- 数据版本：以 `dict.txt` 的 1212 条为准；更新词库后重新运行构建脚本并部署。
+- 数据版本：以 `data/dict.txt` 的 1212 条为准；更新词库后重新运行构建脚本并部署。

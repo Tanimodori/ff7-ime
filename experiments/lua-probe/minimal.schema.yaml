@@ -1,24 +1,24 @@
 # 魔光键影 / librime-lua 探针 schema
 # 目标：证明 lua_translator 能被调用，并覆盖非法拼音、大小写、数字、空格、分隔符等边界。
 schema:
-  schema_id: mgjy_probe
-  name: "MGJY Lua Probe"
+  schema_id: ff7-ime_probe
+  name: "FF7-IME Lua Probe"
   version: "0.1.0"
-  author: "mgjy lua-probe"
+  author: "ff7-ime lua-probe"
   description: |
     最小 librime-lua translator 探针。只依赖 lua_translator，不使用词典。
 
 switches:
-  - name: mgjy_probe_enabled
+  - name: ff7-ime_probe_enabled
     reset: 1
-  - name: mgjy_probe_extra
+  - name: ff7-ime_probe_extra
     reset: 0
 
 menu:
   page_size: 5
 
 # 供 Lua 读取的自定义配置（不是 Rime 保留字段）
-mgjy_probe:
+ff7-ime_probe:
   flag: true
   number: 7
   name: "探针配置"
@@ -47,8 +47,8 @@ engine:
     # 关键写法：lua_translator@*模块名
     #   lua_translator 是注册的组件类；@ 后是 name_space；
     #   前缀 * 表示用 require("模块名") 自动加载 user_data_dir/lua/模块名.lua
-    - lua_translator@*mgjy_probe
-    - lua_translator@*mgjy_probe_b
+    - lua_translator@*ff7-ime_probe
+    - lua_translator@*ff7-ime_probe_b
   filters:
-    - lua_filter@*mgjy_probe_filter
+    - lua_filter@*ff7-ime_probe_filter
     - uniquifier

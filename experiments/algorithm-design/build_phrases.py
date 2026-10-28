@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Build phrases.tsv from ../dict.txt.
+"""Build phrases.tsv from ../data/dict.txt.
 
 This is a *data preparation* helper, not part of the runtime matcher.
 The runtime/prototype only consumes phrases.tsv, so the pinyin data can be
@@ -29,7 +29,7 @@ from typing import Iterable
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
-DICT_PATH = os.path.join(PROJECT_ROOT, "dict.txt")
+DICT_PATH = os.path.join(PROJECT_ROOT, "data/dict.txt")
 OUT_PATH = os.path.join(HERE, "phrases.tsv")
 
 CJK_RANGES = (

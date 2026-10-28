@@ -14,7 +14,7 @@ Typical use:
 
     python rime_harness.py \
         --shared "C:\\Program Files\\Rime\\weasel-0.17.4\\data" \
-        --user "%TEMP%\\mgjy-test" \
+        --user "%TEMP%\\ff7-ime-test" \
         --schema luna_pinyin_simp \
         --input nihao --select 0 --json
 
@@ -436,7 +436,7 @@ class RimeHarness:
         self.shared = os.path.abspath(shared_data_dir)
         if user_data_dir is None:
             user_data_dir = os.path.join(
-                tempfile.gettempdir(), "mgjy-rime-harness", "default"
+                tempfile.gettempdir(), "ff7-ime-rime-harness", "default"
             )
         self.user = os.path.abspath(user_data_dir)
         self.schema = schema
@@ -499,7 +499,7 @@ class RimeHarness:
         traits.distribution_name = b"Rime"
         traits.distribution_code_name = b"weasel"
         traits.distribution_version = b"0.17.4"
-        traits.app_name = b"rime.mgjy_harness"
+        traits.app_name = b"rime.ff7-ime_harness"
         traits.min_log_level = self.min_log_level
         traits.log_dir = self.log_dir.encode("utf-8")
         if self.prebuilt:
@@ -1121,7 +1121,7 @@ def build_arg_parser():
     p.add_argument(
         "--user",
         default=None,
-        help="user_data_dir; created if missing (default: %%TEMP%%\\mgjy-rime-harness\\default)",
+        help="user_data_dir; created if missing (default: %%TEMP%%\\ff7-ime-rime-harness\\default)",
     )
     p.add_argument("--schema", default=None, help="schema id, e.g. luna_pinyin_simp")
     p.add_argument(
@@ -1256,7 +1256,7 @@ def main(argv=None):
         stamp = time.strftime("%Y%m%d-%H%M%S")
         user_dir = os.path.join(
             tempfile.gettempdir(),
-            "mgjy-rime-harness",
+            "ff7-ime-rime-harness",
             "run-%s-%d" % (stamp, os.getpid()),
         )
 

@@ -7,7 +7,7 @@ const path = require("path");
 const { LuaFactory } = require("wasmoon");
 
 const root = path.resolve(__dirname, "../..");
-const matcherSrc = fs.readFileSync(path.join(root, "src/lua/mgjy_matcher.lua"), "utf8");
+const matcherSrc = fs.readFileSync(path.join(root, "lua/ff7-ime_matcher.lua"), "utf8");
 const dataSrc = fs.readFileSync(path.join(root, "tests/lua/full_data.lua"), "utf8");
 const all = JSON.parse(fs.readFileSync(path.join(root, "tests/lua/full_data.json"), "utf8"));
 const limit = parseInt(process.argv[2] || "40", 10);

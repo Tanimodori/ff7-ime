@@ -36,7 +36,7 @@ cd /d "D:\Tanimodori\Projects\@FF14\ff7-ime\experiments\rime-harness"
 
 python rime_harness.py ^
   --shared "C:\Program Files\Rime\weasel-0.17.4\data" ^
-  --user "%TEMP%\mgjy-test" ^
+  --user "%TEMP%\ff7-ime-test" ^
   --schema luna_pinyin_simp ^
   --input nihao --json
 ```
@@ -47,7 +47,7 @@ python rime_harness.py ^
 
 ```bat
 python rime_harness.py --shared "C:\Program Files\Rime\weasel-0.17.4\data" ^
-  --user "%TEMP%\mgjy-test" --schema luna_pinyin_simp ^
+  --user "%TEMP%\ff7-ime-test" --schema luna_pinyin_simp ^
   --input nihao --select 0 --json --pretty
 ```
 
@@ -136,7 +136,7 @@ python test_luna.py
 |---|---|---|
 | `--dll PATH` | `C:\Program Files\Rime\weasel-0.17.4\rime.dll` | rime.dll |
 | `--shared DIR` | `C:\Program Files\Rime\weasel-0.17.4\data` | 共享数据目录（必须含 `default.yaml`） |
-| `--user DIR` | `%TEMP%\mgjy-rime-harness\default` | 用户数据目录，自动创建；部署产物只写这里 |
+| `--user DIR` | `%TEMP%\ff7-ime-rime-harness\default` | 用户数据目录，自动创建；部署产物只写这里 |
 | `--fresh-user` | 关 | 每次新建唯一临时用户目录（并行/干净测试） |
 | `--schema ID` | 无 | schema_id；会写 `<user>/default.custom.yaml` 并只部署该方案 |
 | `--input SPEC` | `""` | 键序列，见下节 |
@@ -246,14 +246,14 @@ librime 部署时会同时搜索 **user_data_dir** 和 shared_data_dir，因此�
 `data`：
 
 ```bat
-set U=%TEMP%\mgjy-project
-:: 1) 先把 mgjy.schema.yaml / mgjy.dict.yaml 放进 %U%（任意方式复制）
+set U=%TEMP%\ff7-ime-project
+:: 1) 先把 ff7-ime.schema.yaml / ff7-ime.dict.yaml 放进 %U%（任意方式复制）
 :: 2) 直接跑；夹具会自动写 default.custom.yaml 并部署
 python rime_harness.py --shared "C:\Program Files\Rime\weasel-0.17.4\data" ^
-  --user "%U%" --schema mgjy --input "nihao" --select 0 --json
+  --user "%U%" --schema ff7-ime --input "nihao" --select 0 --json
 ```
 
-已实测通过：在 user 目录放自定义 `mgjy_test2.schema.yaml` + `mgjy_test2.dict.yaml`
+已实测通过：在 user 目录放自定义 `ff7-ime_test2.schema.yaml` + `ff7-ime_test2.dict.yaml`
 （含 `ni hao → 你好`、`mo guang jian ying → 魔光键影`），共享目录保持安装目录，
 输入 `nihao` 得到 `你好`，输入 `moguangjianying` 得到 `魔光键影`。
 注意：`--schema` 会覆盖 `<user>\default.custom.yaml`；若要自己管理，用
@@ -281,7 +281,7 @@ import rime_harness
 
 h = rime_harness.RimeHarness(
     shared_data_dir=r"C:\Program Files\Rime\weasel-0.17.4\data",
-    user_data_dir=r"C:\Users\me\AppData\Local\Temp\mgjy-batch",
+    user_data_dir=r"C:\Users\me\AppData\Local\Temp\ff7-ime-batch",
     schema="luna_pinyin_simp",
 )
 try:

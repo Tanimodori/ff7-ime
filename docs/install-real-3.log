@@ -1,9 +1,0 @@
-[MGJY] Rime user dir: C:\Users\Tanimodori\AppData\Roaming\Rime
-[MGJY] Weasel dir:    C:\Program Files\Rime\weasel-0.17.4
-[MGJY] Backup: C:\Users\Tanimodori\AppData\Roaming\Rime\default.custom.yaml.mgjy-backup-20261028-220228
-[MGJY] Copied schema, custom config and Lua runtime.
-[MGJY] default.custom.yaml already contains moguang_jianying; skip patch.
-[MGJY] Deploying via rime.dll (headless) ...
-[MGJY] rime maintenance started=1
-[MGJY] Installed. Press F4 or Ctrl+` and select 魔光键影.
-Input examples: shenluo -> 神罗, lkcc -> 我们会立刻彻底铲除你们！, leinuo/lienuo/leino/leiknuo -> 雷诺

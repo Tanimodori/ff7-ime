@@ -8,9 +8,9 @@ const { LuaFactory } = require("wasmoon");
 
 const root = path.resolve(__dirname, "../..");
 const casesPath = process.argv[2] || path.join(root, "tests/lua/core_cases.json");
-const dataPath = process.argv[3] || path.join(root, "src/lua/mgjy_data.lua");
+const dataPath = process.argv[3] || path.join(root, "lua/ff7-ime_data.lua");
 
-const matcherSrc = fs.readFileSync(path.join(root, "src/lua/mgjy_matcher.lua"), "utf8");
+const matcherSrc = fs.readFileSync(path.join(root, "lua/ff7-ime_matcher.lua"), "utf8");
 const dataSrc = fs.readFileSync(dataPath, "utf8");
 const cases = JSON.parse(fs.readFileSync(casesPath, "utf8"));
 

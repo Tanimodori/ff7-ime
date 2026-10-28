@@ -77,8 +77,8 @@
   "meta": {
     "dll": "C:\\Program Files\\Rime\\weasel-0.17.4\\rime.dll",
     "shared_data_dir": "C:\\Program Files\\Rime\\weasel-0.17.4\\data",
-    "user_data_dir": "C:\\Users\\TANIMO~1\\AppData\\Local\\Temp\\mgjy-test",
-    "build_dir": "C:\\Users\\TANIMO~1\\AppData\\Local\\Temp\\mgjy-test\\build",
+    "user_data_dir": "C:\\Users\\TANIMO~1\\AppData\\Local\\Temp\\ff7-ime-test",
+    "build_dir": "C:\\Users\\TANIMO~1\\AppData\\Local\\Temp\\ff7-ime-test\\build",
     "deployed": true,
     "deploy_seconds": 3.98,
     "deploy_events": [

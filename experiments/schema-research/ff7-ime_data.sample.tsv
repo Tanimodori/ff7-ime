@@ -1,4 +1,4 @@
-# moguang_jianying data sample (UTF-8, tab-separated)
+# ff7-ime data sample (UTF-8, tab-separated)
 # code<TAB>text<TAB>comment<TAB>initials<TAB>keywords
 # keywords 是给 keyword_mode 用的“拉丁字母别名”，用英文逗号分隔。
 # 仅用于骨架联调；正式数据由 pinyin-data / algorithm-design 产出。

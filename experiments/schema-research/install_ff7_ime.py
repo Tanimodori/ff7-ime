@@ -5,9 +5,9 @@ Never writes to %APPDATA%\\Rime unless you pass that directory explicitly.
 Every modified/removed file is backed up first.
 
 Examples:
-  python install_moguang.py --user-dir "C:/Users/me/AppData/Roaming/Rime"
-  python install_moguang.py --user-dir ... --dry-run
-  python install_moguang.py --user-dir ... --uninstall
+  python install_ff7_ime.py --user-dir "C:/Users/me/AppData/Roaming/Rime"
+  python install_ff7_ime.py --user-dir ... --dry-run
+  python install_ff7_ime.py --user-dir ... --uninstall
 """
 import argparse
 import datetime as _dt
@@ -20,19 +20,19 @@ try:
 except ImportError:
     sys.exit("需要 PyYAML：python -m pip install pyyaml")
 
-SCHEMA_ID = "moguang_jianying"
+SCHEMA_ID = "ff7-ime"
 HERE = os.path.dirname(os.path.abspath(__file__))
 FILES = [
-    ("moguang_jianying.schema.yaml", "moguang_jianying.schema.yaml"),
-    ("moguang_jianying.custom.yaml", "moguang_jianying.custom.yaml"),
-    (os.path.join("lua", "moguang_jianying.lua"), os.path.join("lua", "moguang_jianying.lua")),
-    ("moguang_jianying_data.sample.tsv", "moguang_jianying_data.tsv"),
+    ("ff7-ime.schema.yaml", "ff7-ime.schema.yaml"),
+    ("ff7-ime.custom.yaml", "ff7-ime.custom.yaml"),
+    (os.path.join("lua", "ff7-ime.lua"), os.path.join("lua", "ff7-ime.lua")),
+    ("ff7-ime_data.sample.tsv", "ff7-ime_data.tsv"),
 ]
 
 # 用户可能已经改过这两类文件，安装/升级时不覆盖。
 KEEP_IF_EXISTS = {
-    "moguang_jianying.custom.yaml",
-    "moguang_jianying_data.tsv",
+    "ff7-ime.custom.yaml",
+    "ff7-ime_data.tsv",
 }
 
 
@@ -183,10 +183,10 @@ def uninstall(user_dir, dry_run, purge):
     else:
         print(f"[ok] {SCHEMA_ID} not present in {path}")
 
-    remove = ["moguang_jianying.schema.yaml", "moguang_jianying.custom.yaml"]
+    remove = ["ff7-ime.schema.yaml", "ff7-ime.custom.yaml"]
     if purge:
-        remove += [os.path.join("lua", "moguang_jianying.lua"),
-                   "moguang_jianying_data.tsv"]
+        remove += [os.path.join("lua", "ff7-ime.lua"),
+                   "ff7-ime_data.tsv"]
     # 部署生成的 build/<schema_id>.schema.yaml 不会因为从 schema_list 移除而
     # 自动删除；不删的话 RimeSelectSchema 仍能选中旧方案，回滚不彻底。
     build_dir = os.path.join(user_dir, "build")

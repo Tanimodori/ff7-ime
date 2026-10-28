@@ -1,4 +1,4 @@
--- mgjy_matcher.lua
+-- ff7-ime_matcher.lua
 -- 魔光键影 · 纯 Lua 匹配与排序核心。
 --
 -- 本文件不依赖 Rime / Lua 标准库之外的任何东西，便于用独立 Lua 5.4 沙箱做回归。
@@ -305,7 +305,7 @@ end
 
 -- 预计算一条词条的运行时索引。可重复调用。
 local function prepare_phrase(p, fuzzy, typo)
-  if p._mgjy_prepared then
+  if p._ff7_ime_prepared then
     return p
   end
 
@@ -438,7 +438,7 @@ local function prepare_phrase(p, fuzzy, typo)
     end
   end
 
-  p._mgjy_prepared = true
+  p._ff7_ime_prepared = true
   return p
 end
 
@@ -1051,14 +1051,14 @@ end
 -- 模糊音开关变化时自动重建（会重置缓存的 canons）。
 local function build_index(phrases, cfg)
   local key = fuzzy_key(cfg.fuzzy)
-  if phrases._mgjy_index and phrases._mgjy_index_key == key then
-    return phrases._mgjy_index
+  if phrases._ff7_ime_index and phrases._ff7_ime_index_key == key then
+    return phrases._ff7_ime_index
   end
-  if phrases._mgjy_index_key and phrases._mgjy_index_key ~= key then
+  if phrases._ff7_ime_index_key and phrases._ff7_ime_index_key ~= key then
     for _, p in ipairs(phrases) do
-      p._mgjy_prepared = nil
+      p._ff7_ime_prepared = nil
     end
-    phrases._mgjy_index = nil
+    phrases._ff7_ime_index = nil
   end
 
   local idx = {
@@ -1197,8 +1197,8 @@ local function build_index(phrases, cfg)
     return (pa.order or a) < (pb.order or b)
   end)
 
-  phrases._mgjy_index = idx
-  phrases._mgjy_index_key = key
+  phrases._ff7_ime_index = idx
+  phrases._ff7_ime_index_key = key
   return idx
 end
 

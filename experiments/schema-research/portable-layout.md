@@ -85,13 +85,13 @@ moguang-jianying-0.1.0/
 ├─ install.bat
 ├─ uninstall.bat
 ├─ payload/
-│  ├─ moguang_jianying.schema.yaml
-│  ├─ moguang_jianying.custom.yaml
-│  ├─ moguang_jianying_data.tsv
+│  ├─ ff7-ime.schema.yaml
+│  ├─ ff7-ime.custom.yaml
+│  ├─ ff7-ime_data.tsv
 │  └─ lua/
-│     └─ moguang_jianying.lua
+│     └─ ff7-ime.lua
 ├─ tools/
-│  ├─ install_moguang.py
+│  ├─ install_ff7_ime.py
 │  └─ rime_harness.py          （可选，开发/验证用）
 └─ backup/                     （安装时创建）
 ```
@@ -100,10 +100,10 @@ moguang-jianying-0.1.0/
 
 ```
 %APPDATA%\Rime\
-├─ moguang_jianying.schema.yaml
-├─ moguang_jianying.custom.yaml
-├─ moguang_jianying_data.tsv
-├─ lua\moguang_jianying.lua
+├─ ff7-ime.schema.yaml
+├─ ff7-ime.custom.yaml
+├─ ff7-ime_data.tsv
+├─ lua\ff7-ime.lua
 └─ default.custom.yaml         （只追加 schema）
 ```
 
@@ -116,7 +116,7 @@ set HERE=%~dp0
 set RIME_USER=%APPDATA%\Rime
 
 echo [1/3] 复制方案文件...
-python "%HERE%tools\install_moguang.py" --user-dir "%RIME_USER%"
+python "%HERE%tools\install_ff7_ime.py" --user-dir "%RIME_USER%"
 if errorlevel 1 (
   echo 安装脚本失败：请确认已安装 Python 3.8+ 与 PyYAML
   pause
@@ -127,8 +127,8 @@ echo [2/3] 部署...
 start /wait "" "C:\Program Files\Rime\weasel-0.17.4\WeaselDeployer.exe" /deploy
 
 echo [3/3] 检查...
-if exist "%RIME_USER%\build\moguang_jianying.schema.yaml" (
-  echo 部署成功：build\moguang_jianying.schema.yaml
+if exist "%RIME_USER%\build\ff7-ime.schema.yaml" (
+  echo 部署成功：build\ff7-ime.schema.yaml
 ) else (
   echo 部署可能失败，请查看 %TEMP%\rime.weasel 日志
 )
@@ -151,12 +151,12 @@ setlocal
 set HERE=%~dp0
 set RIME_USER=%APPDATA%\Rime
 
-python "%HERE%tools\install_moguang.py" --user-dir "%RIME_USER%" --uninstall
+python "%HERE%tools\install_ff7_ime.py" --user-dir "%RIME_USER%" --uninstall
 start /wait "" "C:\Program Files\Rime\weasel-0.17.4\WeaselDeployer.exe" /deploy
 pause
 ```
 
-加 `--purge` 可同时删除 `lua\moguang_jianying.lua` 与数据文件。
+加 `--purge` 可同时删除 `lua\ff7-ime.lua` 与数据文件。
 
 ### 2.4 优点与限制
 
@@ -180,16 +180,16 @@ pause
 ### 3.1 目录结构
 
 ```
-D:\MoguangRime\                 （U 盘或绿色目录）
+D:\ff7-imeRime\                 （U 盘或绿色目录）
 ├─ rime-data/                   ← 作为 RimeUserDir
 │  ├─ default.custom.yaml
 │  ├─ user.yaml
 │  ├─ installation.yaml         （从旧目录复制，保留 installation_id）
 │  ├─ luna_pinyin.userdb/       （如果要保留现有用户词库）
-│  ├─ moguang_jianying.schema.yaml
-│  ├─ moguang_jianying.custom.yaml
-│  ├─ moguang_jianying_data.tsv
-│  ├─ lua/moguang_jianying.lua
+│  ├─ ff7-ime.schema.yaml
+│  ├─ ff7-ime.custom.yaml
+│  ├─ ff7-ime_data.tsv
+│  ├─ lua/ff7-ime.lua
 │  └─ build/                    （可留空，部署生成）
 ├─ install-portable.ps1
 ├─ uninstall-portable.ps1
@@ -288,17 +288,17 @@ Start-Process -Wait -FilePath "$WEASEL\WeaselDeployer.exe" -ArgumentList "/deplo
 如果不想依赖 Python，可用 PowerShell 5.1 做最小合并：
 
 1. 读取 `default.custom.yaml` 文本；
-2. 如果已包含 `moguang_jianying`，跳过；
+2. 如果已包含 `ff7-ime`，跳过；
 3. 如果文件为空或不存在，写入：
 
    ```yaml
    patch:
      schema_list/+:
-       - {schema: moguang_jianying}
+       - {schema: ff7-ime}
    ```
 
 4. 如果存在 `patch:` 和 `schema_list:`，在 `schema_list:` 下插入一行
-   `    - {schema: moguang_jianying}`；
+   `    - {schema: ff7-ime}`；
 5. 否则写入 `patch: { schema_list/+: [...] }` 或提示用户手动编辑。
 
 PowerShell 没有内置 YAML 解析器，文本插入对缩进/注释敏感。建议：
@@ -320,7 +320,7 @@ robocopy "%APPDATA%\Rime" "%USERPROFILE%\Rime-backup-full" /E /COPY:DAT /R:1 /W:
 
 ### 5.2 方案包自带备份
 
-`install_moguang.py` 会把被修改/覆盖/删除的文件复制到：
+`install_ff7_ime.py` 会把被修改/覆盖/删除的文件复制到：
 
 ```
 %APPDATA%\Rime\_backup\moguang_<YYYYmmdd-HHMMSS>\
@@ -332,7 +332,7 @@ robocopy "%APPDATA%\Rime" "%USERPROFILE%\Rime-backup-full" /E /COPY:DAT /R:1 /W:
 2. 恢复文件（`robocopy` 或手工 copy）
 3. 启动 WeaselServer
 4. `WeaselDeployer.exe /deploy`
-5. 验证 luna_pinyin_simp 与 moguang_jianying
+5. 验证 luna_pinyin_simp 与 ff7-ime
 
 ### 5.4 便携数据目录的备份
 
