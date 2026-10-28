@@ -277,8 +277,11 @@ keyword 5.3→5.9 ms，其余类别基本持平或略降。
   - 发布前用本地克隆模拟 Plum 安装，用户目录只出现 schema + 3 个 Lua，没有 custom、`data/dict.txt`、tests；
   - 发布后用官方 `rime-install.bat` 从 `https://github.com/Tanimodori/ff7-ime.git` 克隆：
     输出 `Downloading package` → `Installing recipe: Tanimodori/ff7-ime`，安装 1 个包；
+  - **缺失文件重装实测**：删除用户目录中的 4 个运行时文件后重跑官方 `rime-install.bat`，
+    输出 4 个 `Installing:`，文件全部恢复；安装文件 SHA-256 与公开仓库 clone 一致
+    （本地工作树的 LF 与安装文件的 CRLF 仅为行尾差异，去掉 `\r` 后逐字节相同）；
   - 安装器执行前后 `default.custom.yaml` 的 SHA-256 一致，确认安装器未改写方案列表；
-  - Plum 缓存 origin 为 `https://github.com/Tanimodori/ff7-ime.git`。
+  - Plum 缓存 origin 为 `https://github.com/Tanimodori/ff7-ime.git`，更新后停在 `b3effcf`。
 - 本机旧安装迁移：
   - 旧 `moguang_jianying.schema.yaml`、旧 custom、旧 `lua/mgjy*.lua` 和旧 build 产物已备份后删除；
   - `default.custom.yaml` 现在为 `luna_pinyin_simp` + `ff7-ime`；
