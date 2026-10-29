@@ -58,13 +58,16 @@
 `-NoDeploy`）与完整排错见 [docs/INSTALL.md](docs/INSTALL.md)。
 
 > 如果你更习惯官方包管理器，`recipe.yaml` 仍然保留，可以用小狼毫的
-> **获取更多输入方案** 输入 `Tanimodori/ff7-ime` 安装（需要 Git for Windows）。
-> 该路径在装了 WSL 的机器上可能因 `bash` 冲突失败，见
-> [docs/INSTALL.md](docs/INSTALL.md) 附录 A。
+> **获取更多输入方案** 输入 `Tanimodori/ff7-ime` 安装。**但这条路只在目标机器装了
+> Git for Windows（含 Git Bash）时才成立**：没装 Git 时它不会报错，而是静默降级成
+> 小狼毫内置的 ZIP 路径，那条路径不复制 `lua/`，装完只会得到「能打字母、没有候选框」
+> 的空壳；装了 WSL 的机器上还可能因 `bash` 冲突直接失败。
+> 详见 [docs/INSTALL.md](docs/INSTALL.md) 附录 A。
 
-> 不要用 Weasel 内置的 **获取更多输入方案** 直接喂本仓库的 ZIP：那条路径只复制
-> 根目录的 `*.yaml`，会漏掉 `lua/`，还会把示例 `ff7-ime.custom.yaml` 覆盖进用户目录。
-> 请用本包自带的 `install.cmd`。
+> 所以：**不要用 Weasel 内置的「获取更多输入方案」装本方案**（无论是喂 ZIP 还是输入
+> 包名）。那条路径只复制根目录的 `*.yaml`，会漏掉 `lua/`，还会把示例
+> `ff7-ime.custom.yaml` 覆盖进用户目录。请用本包自带的 `install.cmd`，它不依赖 Git、
+> 不需要联网，并且会把 5 个运行时文件一次装齐。
 
 ---
 

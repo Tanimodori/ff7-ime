@@ -172,10 +172,15 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\packaging\ff7-ime.ps1 -Act
 1. `-WeaselDir` 参数（无条件优先，且必须是有效目录，否则直接报错）；
 2. 注册表 `HKCU` / `HKLM`（含 `WOW6432Node`）的
    `SOFTWARE\Rime\Weasel\WeaselRoot` / `InstallDir`；
-3. 正在运行的 `WeaselServer` / `WeaselDeployer` 进程路径；
-4. 卸载项（`DisplayName` 含 Weasel / 小狼毫）的 `InstallLocation` / `DisplayIcon`；
-5. 常见位置扫描：`%ProgramFiles%\Rime\weasel-*`、`%ProgramFiles(x86)%\...`、
+3. 自启动项 `…\CurrentVersion\Run` 里的 `WeaselServer.exe` 路径
+   （覆盖「装在非常规目录、注册表没有 WeaselRoot、且当前没在运行」的情况，
+   例如便携式安装到 `C:\小狼毫\weasel-0.17.4`）；
+4. 正在运行的 `WeaselServer` / `WeaselDeployer` 进程路径；
+5. 卸载项（`DisplayName` 含 Weasel / 小狼毫）的 `InstallLocation` / `DisplayIcon`；
+6. 常见位置扫描：`%ProgramFiles%\Rime\weasel-*`、`%ProgramFiles(x86)%\...`、
    `%LOCALAPPDATA%\Programs\Rime\weasel-*`、`%SystemDrive%\Rime\weasel-*`，多版本取最高。
+
+以上都找不到时会直接失败（退出码 3）并提示用 `-WeaselDir` 指定——不会静默猜一个目录。
 
 > **部署是怎么做的**：安装器**不使用** `WeaselDeployer.exe`。它的 `/deploy` 虽然被
 > 自己的 `/?` 列为「Update workspace」，但在 0.17.4 上实测会打开「方案选单设定」
@@ -390,14 +395,34 @@ uninstall.cmd -PruneSchemaList
 4. 如果文件存在但你之前手动改过 `default.custom.yaml`，检查其中是否有重复的
    `schema_list` 或 `schema_list/+` 键（YAML 后出现的键会覆盖前面的）。
 
-### 7.6 方案列表里有「魔光键影」，但输入没有候选
+### 7.6 输入只有字母、完全没有候选框（最常见：`lua/` 没被装进去）
 
-1. 用 `verify.cmd` 检查 `lua\ff7-ime.lua`、`ff7-ime_matcher.lua`、`ff7-ime_data.lua` 是否齐全；
-2. 检查 schema 中是否为 `lua_translator@*ff7-ime`（`*` 不能少）；
-3. 查看日志 `%TEMP%\rime.weasel\rime.weasel.*.log` 中的
-   `lua_translator` / `lua error` / `module not found`；
-4. 确认 `speller/alphabet` 包含全部小写字母，`delimiter` 为 `'`，无 `algebra`；
-5. 重新部署并重启 WeaselServer。
+症状：方案在列表里、能勾选、能切过去，但打字只出字母或者什么都不出，候选框根本不出现。
+日志 `%TEMP%\rime.weasel\rime.weasel.*.log` 里会有：
+
+```
+Lua Compoment of autoload error: module 'ff7-ime' not found:
+  no file '<用户目录>\lua\ff7-ime.lua'
+Lua Compoment of autoload error: module 'ff7-ime_filter' not found: ...
+LuaProcessor::ProcessKeyEvent of *ff7-ime_filter error: attempt to call a string value
+```
+
+原因几乎总是：**这个方案是用小狼毫内置的「获取更多输入方案」装的，而那条路径不复制
+`lua/`**（详见附录 A.2）。本方案的全部匹配逻辑都在 Lua 里，缺了 `lua/` 就只剩一个空壳
+schema——按键被处理了，翻译器却产不出任何候选。
+
+处理：
+
+1. 双击 `verify.cmd`，它会直接指出 `lua\` 下缺了哪几个文件；
+2. 下载本发行包，双击 `install.cmd` 重装一遍（补齐 5 个运行时文件并自动重新部署）；
+3. 右键小狼毫托盘图标 → **重新部署**；
+4. 再打 `shenluo`，应出现「神罗」。
+
+补齐之后如果还不通，再按顺序查：
+
+- schema 中是否为 `lua_translator@*ff7-ime`（`*` 不能少）；
+- `speller/alphabet` 包含全部小写字母，`delimiter` 为 `'`，无 `algebra`；
+- 重新部署并重启 WeaselServer。
 
 ### 7.7 `luna_pinyin_simp` 从方案列表消失
 
@@ -463,7 +488,11 @@ patch:
 ## 附录 A：用 Plum 安装（可选）
 
 仓库根目录的 `recipe.yaml` 仍然保留，所以也可以用官方包管理器安装。
-**这条路需要 Git for Windows（含 Git Bash），并且在装了 WSL 的机器上可能失败。**
+
+> **注意：这条路只在装了 Git for Windows（含 Git Bash）时才成立。**
+> 没有 Git 时它不会报错，而是**静默降级**成小狼毫内置的 ZIP 路径，而那条路径
+> **装不出本方案**（见 A.2）；装了 WSL 的机器上还可能直接失败（见 A.1）。
+> 所以除非你确认目标机器有 Git Bash，否则请用第 1 节的 `install.cmd`。
 
 1. 右键小狼毫托盘图标 → 方案选单设定；
 2. 点击左下角 **获取更多输入方案…**；
@@ -495,13 +524,43 @@ cd /d %APPDATA%\Rime
 
 或者干脆用本包自带的 `install.cmd`（见第 1 节），完全不碰 bash。
 
-### A.2 控制台输出 `Unpacking ...` 而不是 `Installing recipe ...`
+### A.2 输入只有字母、没有候选框：内置 ZIP 路径不复制 `lua/`
 
-说明没有走 Plum，而是走了 Weasel 内置的 ZIP 路径。该路径只复制根目录
-`*.yaml`/`*.txt` 和 `opencc/`，**不会复制 `lua/`**，所以输入不会有候选；
-它还会把根目录的示例 `ff7-ime.custom.yaml` 覆盖进用户目录。
+**没装 Git for Windows 时，`Tanimodori/ff7-ime` 会静默降级到内置 ZIP 路径**，这是这条路
+最需要警惕的地方。`rime-install.bat` 的判断是：
 
-请改用本包自带的 `install.cmd`。
+```bat
+if not defined use_plum if "%has_git_bash%" == "1" set use_plum=1
+```
+
+找不到 Git Bash 时 `use_plum` 保持关闭，它于是不再调用 Plum，而是把仓库 ZIP 下载到
+`%TEMP%`、解压，然后按一份**白名单**复制到用户目录：
+
+```
+*.yaml
+*.txt
+opencc\*.json
+opencc\*.ocd
+opencc\*.txt
+```
+
+`lua\` 不在白名单里。后果是：
+
+- 用户目录里出现 `ff7-ime.schema.yaml`、`ff7-ime.custom.yaml`、`recipe.yaml`
+  （都是根目录 `*.yaml`），**唯独没有 `lua\`**；
+- 打字只出字母、完全没有候选框，日志里是 `module 'ff7-ime' not found`；
+- 根目录那份示例 `ff7-ime.custom.yaml` 被一并写进用户目录，可能覆盖你自己的配置。
+
+怎么判断自己走的是哪条路：
+
+| 线索 | Plum 路径 | 内置 ZIP 路径（坏） |
+|---|---|---|
+| 控制台输出 | `Installing recipe:` + 5 个 `Installing:` | `Unpacking ...` |
+| `%APPDATA%\plum` | 存在（有克隆下来的包） | 不存在 |
+| 用户目录 | 只有 5 个运行时文件 | 多出 `recipe.yaml`、`ff7-ime.custom.yaml`，缺 `lua\` |
+
+处理：改用本包自带的 `install.cmd`（见第 1 节）。它不依赖 Git、不需要联网，
+而且会把这 5 个文件补齐并重新部署。修好之后症状和排查见 7.6。
 
 ---
 

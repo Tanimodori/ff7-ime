@@ -345,6 +345,28 @@ function Resolve-WeaselDir {
         }
     }
 
+    # 自启动项：小狼毫靠 Run 键拉起 WeaselServer，值里带完整路径。这条能覆盖
+    # 「装在非常规目录、注册表里又没有 WeaselRoot、而且当前没在运行」的情况，
+    # 例如便携式安装到 C:\小狼毫\weasel-0.17.4。
+    foreach ($runKey in @(
+            'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run',
+            'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run',
+            'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run')) {
+        $runProps = $null
+        try { $runProps = Get-ItemProperty -LiteralPath $runKey -ErrorAction SilentlyContinue } catch { $runProps = $null }
+        if ($null -eq $runProps) { continue }
+        foreach ($prop in $runProps.PSObject.Properties) {
+            if ($prop.Name -like 'PS*') { continue }
+            $value = [string]$prop.Value
+            # Run 值可能带引号、可能不带，也可能在 .exe 后面跟参数；路径里还可能有空格
+            # （例如 C:\Program Files\...），所以按「到 WeaselServer/Deployer.exe 为止」截取，
+            # 不要按空格切分。
+            $m = [regex]::Match($value, '(?i)^\s*"?([^"]*?Weasel(?:Server|Deployer)\.exe)')
+            if (-not $m.Success) { continue }
+            Add-WeaselCandidate $m.Groups[1].Value "自启动项 $runKey\$($prop.Name)"
+        }
+    }
+
     try {
         foreach ($proc in @(Get-Process -Name 'WeaselServer', 'WeaselDeployer' -ErrorAction SilentlyContinue)) {
             $p = $null

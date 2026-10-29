@@ -342,7 +342,10 @@ Get-ChildItem "$env:TEMP\rime.weasel\*.log" |
 
 | 症状 | 原因 | 处理 |
 |---|---|---|
-| 安装器报「找不到小狼毫安装目录」（退出码 3） | 注册表、运行中的进程、卸载项、常见位置都没找到含 `WeaselDeployer.exe` 的目录 | 用 `-WeaselDir` 指定，或 `-NoDeploy` 只复制文件（见 INSTALL.md 7.1） |
+| 打字只有字母、完全没有候选框；日志报 `module 'ff7-ime' not found` | 是用小狼毫内置「获取更多输入方案」装的，那条路径不复制 `lua/`，方案成了空壳 | 用 `install.cmd` 重装补齐 5 个运行时文件（见 INSTALL.md 7.6、A.2） |
+| 内置「获取更多输入方案」输出 `Unpacking ...` 而不是 `Installing recipe:` | 目标机没装 Git for Windows，`use_plum` 保持关闭，静默降级到内置 ZIP 路径 | 改用自带 `install.cmd`；不要指望这条路（见 INSTALL.md A.2） |
+| 内置路径装完后用户目录多出 `recipe.yaml`、`ff7-ime.custom.yaml` | 内置路径按 `*.yaml` 白名单复制根目录文件 | 手动删掉这两个多余文件；`ff7-ime.custom.yaml` 若是你改过的先备份（见 INSTALL.md A.2） |
+| 安装器报「找不到小狼毫安装目录」（退出码 3） | 注册表、自启动项、运行中的进程、卸载项、常见位置都没找到含 `WeaselDeployer.exe` 的目录 | 用 `-WeaselDir` 指定，或 `-NoDeploy` 只复制文件（见 INSTALL.md 7.1） |
 | 安装器报「包不完整」（退出码 2） | 压缩包没解压全，或缺 `packaging\` | 重新完整解压；不要只把 `install.cmd` 单独复制出来运行（见 INSTALL.md 7.2） |
 | 安装器报「目录不可写」（退出码 5） | 用户目录权限、或安全软件拦截 | 检查权限，或用 `-RimeUserDir` 指定可写目录（见 INSTALL.md 7.3） |
 | 安装器报退出码 4 | 部署失败，或部署后应有产物消失 | 看 `%TEMP%\rime.weasel` 日志，手动重新部署（见 INSTALL.md 7.4） |
