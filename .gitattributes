@@ -1,10 +1,16 @@
 # Line-ending policy.
 #
-# Batch files must stay CRLF: cmd.exe mis-parses some multi-line constructs
-# (parenthesised `if` blocks) when a .cmd is LF-only, and tools/check_package.py
-# asserts CRLF. Without this rule the working tree only gets CRLF by accident of
-# the local core.autocrlf setting.
-*.cmd text eol=crlf
+# Batch files must be CRLF on disk: cmd.exe mis-parses some multi-line
+# constructs (parenthesised `if` blocks) when a .cmd is LF-only.
+#
+# They are marked -text (i.e. stored verbatim) rather than `text eol=crlf`,
+# because GitHub's "Download ZIP" serves the blob bytes and does NOT apply
+# .gitattributes checkout conversion. With eol=crlf the blob stays LF, so a
+# clone would get CRLF but the ZIP a user downloads would get LF — and the
+# ZIP is the documented install route. Storing CRLF in the blob keeps both
+# routes identical. tools/check_package.py asserts CRLF, so a stray LF
+# save is caught before it can be committed.
+*.cmd -text
 
 # The runtime payload (schema + Lua) is copied verbatim into the Rime user
 # directory, and the installer compares it by SHA-256. Pin it to LF in every

@@ -24,7 +24,7 @@
 | `recipe.yaml` | 可选的 Plum 安装清单；只安装 schema + 4 个 Lua 文件 |
 | `tools/check_package.py` | 校验 recipe、manifest、安装器脚本、版本、schema 元信息与安装清单 |
 | `tools/build_release_zip.py` | 生成 `dist/ff7-ime-<版本>.zip` 发行包并自校验 |
-| `.gitattributes` | 行尾策略：`.cmd` 固定 CRLF（cmd.exe 对 LF-only 的多行块会解析错），运行时 `*.lua` / `*.schema.yaml` 固定 LF（安装器按 SHA-256 逐字节比对） |
+| `.gitattributes` | 行尾策略：`.cmd` 用 `-text` 把 CRLF **原样存进 blob**（cmd.exe 对 LF-only 的多行块会解析错；而 GitHub「Download ZIP」发的是 blob 字节、不套用 `eol=crlf` 的检出转换，所以只写 `text eol=crlf` 会让下载到的 ZIP 里是 LF）；运行时 `*.lua` / `*.schema.yaml` 固定 LF（安装器按 SHA-256 逐字节比对） |
 | `tests/` | Lua 核心用例与全量评估 |
 
 ---
