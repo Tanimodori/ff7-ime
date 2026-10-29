@@ -1,0 +1,13 @@
+# 魔光键影 ff7-ime — 运行时文件清单
+#
+# 每行一个相对路径，安装时按原样复制到 Rime 用户目录（保留 lua/ 子目录）。
+# 这个清单与 recipe.yaml 的 install_files 必须完全一致，
+# tools/check_package.py 会校验两者相等。
+#
+# 只列运行时文件：方案、翻译器适配层、匹配引擎、词条数据、按键过滤。
+# 不列 ff7-ime.custom.yaml（用户配置示例）、data/、tools/、tests/、docs/。
+ff7-ime.schema.yaml
+lua/ff7-ime.lua
+lua/ff7-ime_matcher.lua
+lua/ff7-ime_data.lua
+lua/ff7-ime_filter.lua

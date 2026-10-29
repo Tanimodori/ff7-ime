@@ -356,7 +356,9 @@ patch:
    python tools/build_from_pinyin_data.py
    ```
 
-3. 复制 `lua/ff7-ime_data.lua` 到 `%APPDATA%\Rime\lua\` 并重新部署。
+3. 复制 `lua/ff7-ime_data.lua` 到 `%APPDATA%\Rime\lua\` 并重新部署；
+   或者直接双击安装包里的 `install.cmd`，它会把 5 个运行时文件对齐到发行版，
+   只覆盖内容有变化的文件（旧文件会先备份）。
 
 更完整的维护流程见 [MAINTENANCE.md](MAINTENANCE.md)。
 

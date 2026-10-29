@@ -1,5 +1,6 @@
 # Local build outputs (Rime deployment / local archives)
 build/
+dist/
 *.zip
 
 # Test output

@@ -34,48 +34,37 @@
 
 ## 安装
 
-本项目是标准的 **Rime 包（Plum recipe）**，通过小狼毫自带的
-**方案选单设定 → 获取更多输入方案** 安装，不需要额外安装脚本。
+本方案自带 Windows 安装器：**不依赖 Plum、不依赖 Git、不依赖 bash**，
+唯一要求是 Windows 10/11 系统自带的 PowerShell 5.1（不需要 PowerShell 7）。
 
-前置条件：
+### 用自带安装器安装（推荐）
 
-- 小狼毫 Weasel 0.17.4 x64；
-- Git for Windows（含 Git Bash）。官方安装器检测到 Git Bash 才会走 Plum；
-  否则只会复制根目录 YAML，不会复制 `lua/`。
+1. 下载发行包：
+   - 在 GitHub 上点 **Code → Download ZIP**，或
+   - 从 Release 下载 `ff7-ime-1.0.0.zip`；
+2. 解压到任意可写目录（路径含中文、空格都可以）；
+3. 双击解压出来的 **`install.cmd`**；
+4. 安装器先打印它探测到的路径，然后把 5 个运行时文件复制到 Rime 用户目录，
+   并触发一次重新部署；
+5. 右键小狼毫托盘图标 → **方案选单设定**，勾选 **魔光键影**，点击 **中**；
+6. 若候选没有立即生效，右键托盘 → **重新部署**，或重启 WeaselServer。
 
-安装步骤：
+安装器不会改写 `default.custom.yaml`，也不会覆盖你自己的 `ff7-ime.custom.yaml`。
+重复运行是安全的：内容相同的文件会跳过，内容不同的文件会先备份到
+`%APPDATA%\Rime\_backup\ff7-ime-<时间戳>\` 再覆盖。
 
-1. 右键小狼毫托盘图标 → **方案选单设定**；
-2. 点击左下角 **获取更多输入方案…**；
-3. 在控制台提示后输入安装标识：
+卸载运行 **`uninstall.cmd`**，只读校验运行 **`verify.cmd`**。
+非默认路径、无网络安装、命令行选项（`-RimeUserDir` / `-WeaselDir` / `-DryRun` /
+`-NoDeploy`）与完整排错见 [docs/INSTALL.md](docs/INSTALL.md)。
 
-   ```
-   Tanimodori/ff7-ime
-   ```
+> 如果你更习惯官方包管理器，`recipe.yaml` 仍然保留，可以用小狼毫的
+> **获取更多输入方案** 输入 `Tanimodori/ff7-ime` 安装（需要 Git for Windows）。
+> 该路径在装了 WSL 的机器上可能因 `bash` 冲突失败，见
+> [docs/INSTALL.md](docs/INSTALL.md) 附录 A。
 
-4. 看到 `Installing recipe: Tanimodori/ff7-ime` 和 5 个 `Installing:` 文件后关闭控制台；
-5. 在自动刷新的方案列表里勾选 **魔光键影**，点击 **中**；
-6. 若未立即生效，右键托盘 → **重新部署**，或重启 WeaselServer。
-
-> 如果控制台报 `/bin/bash: C:\Users\<你>\...\plum/rime-install: No such file or directory`，
-> 说明安装器从 `C:\Windows\System32` 启动，系统里 WSL 的 `bash.exe` 抢在了 Git Bash
-> 前面。改为在 `%APPDATA%\Rime` 目录手动运行安装器：
->
-> ```bat
-> cd /d %APPDATA%\Rime
-> "C:\Program Files\Rime\weasel-0.17.4\rime-install.bat" Tanimodori/ff7-ime
-> ```
->
-> 完成后照常回到方案选单设定勾选。原因与更多细节见
-> [docs/INSTALL.md](docs/INSTALL.md) 第 7.3 节。
-
-通过 Plum 安装时，安装器只复制 5 个运行时文件，不改写 `default.custom.yaml`，也不会
-覆盖用户自己的 `ff7-ime.custom.yaml`。完整说明、更新、卸载与故障排查见
-[docs/INSTALL.md](docs/INSTALL.md)。
-
-> 不要用 Weasel 的本地 ZIP 路径安装：该路径会复制仓库根目录的 `*.yaml`，
-> 可能把示例 `ff7-ime.custom.yaml` 一并写入用户目录并覆盖已有配置，而且不会
-> 复制 `lua/`。
+> 不要用 Weasel 内置的 **获取更多输入方案** 直接喂本仓库的 ZIP：那条路径只复制
+> 根目录的 `*.yaml`，会漏掉 `lua/`，还会把示例 `ff7-ime.custom.yaml` 覆盖进用户目录。
+> 请用本包自带的 `install.cmd`。
 
 ---
 
@@ -129,17 +118,24 @@ F4 开关说明见 [docs/USAGE.md](docs/USAGE.md)。
 ## 项目结构
 
 ```
+install.cmd                   安装器入口（双击即用）
+uninstall.cmd                 卸载器入口
+verify.cmd                    只读校验入口
+packaging/
+  ff7-ime.ps1                 安装器核心（PowerShell 5.1）
+  manifest.txt                运行时文件清单
 data/dict.txt                 原始词表（UTF-16 LE BOM，1212 条）
-ff7-ime.schema.yaml           Rime 方案（Plum 安装）
-ff7-ime.custom.yaml           用户配置示例（Plum 不安装；不要用 ZIP 路径安装）
+ff7-ime.schema.yaml           Rime 方案
+ff7-ime.custom.yaml           用户配置示例（安装器不会安装它）
 lua/
   ff7-ime.lua                 Rime translator 适配层
   ff7-ime_matcher.lua         纯 Lua 匹配与排序引擎
   ff7-ime_data.lua            构建生成的词条数据
   ff7-ime_filter.lua          按键过滤（只放行字母与分隔符）
-recipe.yaml                   Plum 安装清单（只装 schema + lua）
+recipe.yaml                   可选的 Plum 安装清单（只装 schema + lua）
 docs/                         安装、使用、维护文档
-tools/                        数据构建、包校验、测试脚本
+tools/                        数据构建、包校验、发行包打包脚本
+  build_release_zip.py        生成 dist/ff7-ime-<版本>.zip
   pinyin-data/                注音 TSV、读音覆盖表与提取脚本
 tests/                        Lua 核心用例与全量评估
 LICENSE                       MIT
@@ -155,7 +151,7 @@ LICENSE                       MIT
 | librime | 1.13.1 |
 | Lua | 5.4.7（内嵌于 `rime.dll`） |
 | 系统 | Windows 10 19045 x64；理论兼容 Windows 11 |
-| 安装依赖 | Git for Windows（含 Git Bash） |
+| 安装依赖 | Windows 自带的 PowerShell 5.1；不需要 Git、Git Bash 或 PowerShell 7 |
 | 运行时依赖 | 无外部服务或运行时 |
 
 其他 Rime 前端（macOS/Linux）未做验证；需要确认其 `lua_translator`、`lua_processor`
@@ -170,12 +166,11 @@ LICENSE                       MIT
    top1 总是您想要的那条。
 2. **只输出固定词库**：词库外输入只按字面相似度回退，不会造句或输出其他内容；
    回退候选只保证字母相关，不保证语义相关。
-3. **安装源是整仓 Plum 包**：安装时会浅克隆整个仓库，仓库必须公开，目标机器需要
-   Git for Windows（Git Bash）。Weasel 0.17.4 的本地 ZIP 安装路径不复制 `lua/`，
-   不能作为完整安装方式。
-4. **安装器不改方案列表**：是否启用“魔光键影”由官方“方案选单设定”的勾选决定；
-   不建议用第三方脚本直接改写 `default.custom.yaml`，以免与 `luna_pinyin_simp`
-   等方案冲突。
+3. **安装不依赖官方包管理器**：自带 `install.cmd` 直接写 Rime 用户目录，
+   不需要网络、Git 或 Git Bash。`recipe.yaml` 仍保留，供习惯 Plum 的用户使用。
+4. **安装器不改方案列表**：是否启用「魔光键影」由官方「方案选单设定」的勾选决定；
+   安装器不会自动改写 `default.custom.yaml`，以免与 `luna_pinyin_simp` 等方案冲突。
+   卸载时可用 `uninstall.cmd -PruneSchemaList` 清理残留勾选。
 5. **读音为人工整理**：以 pypinyin、luna_pinyin 与人工覆盖表为准。如发现译名读音
    争议，可修改 `tools/pinyin-data/override.yaml` 后重新构建。
 6. **性能取决于输入类型**：精确/前缀输入很快；长模糊与容错输入会执行更完整的

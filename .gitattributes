@@ -1,0 +1,13 @@
+# Line-ending policy.
+#
+# Batch files must stay CRLF: cmd.exe mis-parses some multi-line constructs
+# (parenthesised `if` blocks) when a .cmd is LF-only, and tools/check_package.py
+# asserts CRLF. Without this rule the working tree only gets CRLF by accident of
+# the local core.autocrlf setting.
+*.cmd text eol=crlf
+
+# The runtime payload (schema + Lua) is copied verbatim into the Rime user
+# directory, and the installer compares it by SHA-256. Pin it to LF in every
+# checkout so a git clone and a release ZIP install byte-identical files.
+*.lua text eol=lf
+*.schema.yaml text eol=lf

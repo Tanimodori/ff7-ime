@@ -18,8 +18,13 @@
 | `lua/ff7-ime_filter.lua` | 按键过滤：只放行字母与分隔符，吞掉数字/标点/符号 |
 | `ff7-ime.schema.yaml` | 方案接线与默认配置 |
 | `ff7-ime.custom.yaml` | 用户配置示例 |
-| `recipe.yaml` | Plum 安装清单；只安装 schema + 4 个 Lua 文件 |
-| `tools/check_package.py` | 校验 recipe、版本、schema 元信息与安装清单 |
+| `install.cmd` / `uninstall.cmd` / `verify.cmd` | 安装器入口（纯 ASCII，只负责定位 PowerShell 并转发参数） |
+| `packaging/ff7-ime.ps1` | 安装器核心：路径探测、复制/备份、部署、卸载、只读校验（PowerShell 5.1） |
+| `packaging/manifest.txt` | 运行时文件清单；必须与 `recipe.yaml` 的 `install_files` 完全一致 |
+| `recipe.yaml` | 可选的 Plum 安装清单；只安装 schema + 4 个 Lua 文件 |
+| `tools/check_package.py` | 校验 recipe、manifest、安装器脚本、版本、schema 元信息与安装清单 |
+| `tools/build_release_zip.py` | 生成 `dist/ff7-ime-<版本>.zip` 发行包并自校验 |
+| `.gitattributes` | 行尾策略：`.cmd` 固定 CRLF（cmd.exe 对 LF-only 的多行块会解析错），运行时 `*.lua` / `*.schema.yaml` 固定 LF（安装器按 SHA-256 逐字节比对） |
 | `tests/` | Lua 核心用例与全量评估 |
 
 ---
@@ -208,21 +213,33 @@ NODE_PATH="$PWD/tools/lua-sandbox/node_modules" node tests/lua/bulk_eval.js
 
 输出按类别统计的通过率与失败样例。极稀疏关键词的少量歧义属于已知限制。
 
-### 6.3 包布局
+### 6.3 包布局与安装器
 
 ```bash
 python tools/check_package.py
+python tools/build_release_zip.py
+python tools/check_package.py --zip dist/ff7-ime-1.0.0.zip
 ```
 
-校验内容：
+`check_package.py` 校验内容：
 
 - `recipe.yaml` 的安装清单恰好是 5 个运行时文件；
+- `packaging/manifest.txt` 与 `recipe.yaml` 的 `install_files` **完全一致**
+  （两条安装路线不会各自漂移）；
 - recipe 版本与 schema 版本一致；
 - `schema_id: ff7-ime`、`author: Tanimodori`、`description: 魔光键影专属拼音输入方案`；
 - `engine.translators` 含 `lua_translator@*ff7-ime`；
-- `engine.processors` 含 `lua_processor@*ff7-ime_filter`；
+- `engine.processors` 含 `lua_processor@*ff7-ime_filter` 且在 `speller` 之前；
 - 不安装 `*.custom.yaml`、`data/`、测试或文档；
-- 安装路径没有绝对路径或 `..`。
+- 安装路径没有绝对路径或 `..`；
+- `install.cmd` / `uninstall.cmd` / `verify.cmd` 存在、是纯 ASCII、CRLF、
+  用 `-File -ExecutionPolicy Bypass` 调用脚本，且**不引用 bash 或 pwsh**；
+- `packaging/ff7-ime.ps1` 是 **UTF-8 with BOM**（PowerShell 5.1 缺 BOM 会按 ANSI
+  读，中文提示会全部乱码）。
+
+`build_release_zip.py` 生成 `dist/ff7-ime-<版本>/` 与 `.zip`、`.zip.sha256`，
+并在打包后自校验：单个顶层目录、成员名安全、5 个运行时文件都在且非空、
+包内 `.ps1` 仍带 BOM。`check_package.py --zip` 可再独立复核一次。
 
 ### 6.4 按键过滤
 
@@ -244,19 +261,43 @@ NODE_PATH="$PWD/tools/lua-sandbox/node_modules" \
 
 1. `ff7-ime.schema.yaml` 的 `schema/version`；
 2. `recipe.yaml` 的 `recipe/version`（必须与 schema 一致）；
-3. `README.md` 的版本段。
+3. `README.md` 的版本段与安装说明里出现的 zip 文件名。
+
+`packaging/manifest.txt` 只在运行时文件增删时才改；改完必须与 `recipe.yaml` 的
+`install_files` 保持完全一致，`check_package.py` 会拦住不一致。
+发行包名 `dist/ff7-ime-<版本>.zip` 由脚本按 schema 版本自动生成，不必手改。
 
 数据有变化时，重新执行第 3 节的生成与测试步骤。
 
-### 7.2 本机更新
+### 7.2 发版流程
 
-正式更新走官方 Plum：
+1. 跑完第 6 节的测试与包校验；
+2. 生成发行包并复核：
 
-1. 推送仓库；
-2. 在“获取更多输入方案”中输入 `Tanimodori/ff7-ime`；
-3. 在方案选单中确认勾选，然后重新部署。
+   ```bash
+   python tools/build_release_zip.py
+   python tools/check_package.py --zip dist/ff7-ime-1.0.0.zip
+   ```
 
-### 7.3 回滚
+3. 提交并推送仓库；
+4. 打 tag、建 Release，把 `dist/ff7-ime-1.0.0.zip` 和 `dist/ff7-ime-1.0.0.zip.sha256`
+   作为附件上传。
+
+> 打 tag、建 Release、上传附件都属于对外发布动作，必须先得到明确同意再执行。
+
+### 7.3 本机更新
+
+推送到 GitHub 后，本机更新有两条路：
+
+- **自带安装器（推荐）**：重新下载 / 解压新版本，双击 `install.cmd`。
+  只覆盖清单里的 5 个文件，内容没变的会跳过；
+- **只更新数据做本地验证**：复制变化的文件后重新部署：
+
+  ```powershell
+  Copy-Item lua\ff7-ime_data.lua "$env:APPDATA\Rime\lua\ff7-ime_data.lua" -Force
+  ```
+
+### 7.4 回滚
 
 先用 git 回到上一版提交，再重新安装或复制运行时文件。升级前建议备份整个
 Rime 用户目录：
@@ -301,15 +342,20 @@ Get-ChildItem "$env:TEMP\rime.weasel\*.log" |
 
 | 症状 | 原因 | 处理 |
 |---|---|---|
-| 安装器报 `/bin/bash: ... No such file or directory` | 从 `System32` 启动，WSL 的 `bash.exe` 抢在 Git Bash 前 | 在 `%APPDATA%\Rime` 目录手动运行 `rime-install.bat`（见 INSTALL.md 7.3） |
-| 方案不显示 | `build/default.yaml` 没有条目 | 在“方案选单设定”中勾选“魔光键影”，重新部署 |
-| 安装后完全无法打字/无候选 | 安装器只复制文件，未生成 `build/ff7-ime.schema.yaml` | 重新部署；确认 build 产物存在，必要时重启 WeaselServer |
-| 有方案无候选 | Lua 模块未加载/文件名错 | 检查 `lua/ff7-ime*.lua`、`lua_translator@*ff7-ime`、日志 |
+| 安装器报「找不到小狼毫安装目录」（退出码 3） | 注册表、运行中的进程、卸载项、常见位置都没找到含 `WeaselDeployer.exe` 的目录 | 用 `-WeaselDir` 指定，或 `-NoDeploy` 只复制文件（见 INSTALL.md 7.1） |
+| 安装器报「包不完整」（退出码 2） | 压缩包没解压全，或缺 `packaging\` | 重新完整解压；不要只把 `install.cmd` 单独复制出来运行（见 INSTALL.md 7.2） |
+| 安装器报「目录不可写」（退出码 5） | 用户目录权限、或安全软件拦截 | 检查权限，或用 `-RimeUserDir` 指定可写目录（见 INSTALL.md 7.3） |
+| 安装器报退出码 4 | 部署失败，或部署后应有产物消失 | 看 `%TEMP%\rime.weasel` 日志，手动重新部署（见 INSTALL.md 7.4） |
+| 安装器报「指定的 -WeaselDir 无效」 | `-WeaselDir` 指错目录 | 指向含 `WeaselDeployer.exe` 的目录 |
+| `packaging\ff7-ime.ps1` 的中文提示全是乱码 | 文件丢了 UTF-8 BOM（PowerShell 5.1 会按 ANSI 读） | 重新解压；`python tools/check_package.py` 会检查这一点 |
+| 方案不显示 | `build/default.yaml` 没有条目 | 在「方案选单设定」中勾选「魔光键影」，重新部署 |
+| 安装后完全无法打字/无候选 | 还没在方案选单里勾选，`build/ff7-ime.schema.yaml` 未生成 | 勾选「魔光键影」并保存，然后重新部署；必要时重启 WeaselServer |
+| 有方案无候选 | Lua 模块未加载/文件名错 | 先跑 `verify.cmd`，再检查 `lua_translator@*ff7-ime` 与日志 |
 | 输入被拆段 | `speller/algebra`/`finals`/`delimiter` 配置 | 保持 `alphabet` 全字母、`finals` 空、`delimiter` 为 `'`、无 algebra |
 | 数字/标点/空格无输出 | `lua_processor@*ff7-ime_filter` 正在过滤 | 正常行为；候选展开时 1–9 可选词，切换其他方案可输入符号 |
 | `lkcc` 被当 ASCII | `ascii_mode` 被外部打开 | 本方案已禁用 Shift 切换；切换到其他方案再切回，或重新部署 |
 | 改了配置不生效 | 秒级 mtime/未重建 | 等 2 秒后重新部署；重启 WeaselServer |
-| luna 丢失 | 其他工具改写了 `default.custom.yaml` | 在方案选单中同时勾选 luna 与“魔光键影”，重新部署 |
+| luna 丢失 | 其他工具改写了 `default.custom.yaml` | 在方案选单中同时勾选 luna 与「魔光键影」，重新部署 |
 | 输入卡顿 | 长模糊/容错计算 | 降 `dp_max_candidates`、`max_edit`，关闭可选模糊 |
 | 生僻字读音错 | 读音覆盖缺失 | 修改 `tools/pinyin-data/override.yaml` 后重新生成 |
 | 词条重复 | `data/dict.txt` 重复 | 去重后重建；完全相同的文本会被 `uniquifier` 隐藏，但重复条目仍影响匹配与排序 |
@@ -321,6 +367,9 @@ Get-ChildItem "$env:TEMP\rime.weasel\*.log" |
 - 方案自身不联网、不写日志、不上传输入；Rime/Weasel 的日志位置见第 8 节；
 - 只读取 `%APPDATA%\Rime` 与安装目录的 Rime 数据；
 - 所有候选来自本地 `ff7-ime_data.lua`；
-- Plum 安装器只复制 `recipe.yaml` 列出的 5 个运行时文件，不改写
-  `default.custom.yaml`；
-- 卸载时只删除本方案文件，不删除 `luna_pinyin_simp` 等既有方案。
+- 自带安装器只写 `packaging/manifest.txt` 列出的 5 个运行时文件，以及
+  需要时才创建的 `_backup\ff7-ime-*` 备份目录；不改写 `default.custom.yaml`；
+- 安装器不依赖 bash / Git，只调用系统自带的 PowerShell 5.1，且不访问网络；
+- 卸载默认只删除本方案自己的文件；`-PruneSchemaList` 必须显式指定才会修改
+  `default.custom.yaml`，并且改前先备份；
+- 卸载不会删除 `luna_pinyin_simp` 等既有方案。
