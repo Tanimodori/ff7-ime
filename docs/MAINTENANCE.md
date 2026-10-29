@@ -301,6 +301,7 @@ Get-ChildItem "$env:TEMP\rime.weasel\*.log" |
 
 | 症状 | 原因 | 处理 |
 |---|---|---|
+| 安装器报 `/bin/bash: ... No such file or directory` | 从 `System32` 启动，WSL 的 `bash.exe` 抢在 Git Bash 前 | 在 `%APPDATA%\Rime` 目录手动运行 `rime-install.bat`（见 INSTALL.md 7.3） |
 | 方案不显示 | `build/default.yaml` 没有条目 | 在“方案选单设定”中勾选“魔光键影”，重新部署 |
 | 安装后完全无法打字/无候选 | 安装器只复制文件，未生成 `build/ff7-ime.schema.yaml` | 重新部署；确认 build 产物存在，必要时重启 WeaselServer |
 | 有方案无候选 | Lua 模块未加载/文件名错 | 检查 `lua/ff7-ime*.lua`、`lua_translator@*ff7-ime`、日志 |

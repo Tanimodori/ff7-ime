@@ -36,7 +36,10 @@
    ```
 
    按回车。
-5. 看到类似输出即表示安装成功：
+5. 如果控制台立即报
+   `/bin/bash: C:\Users\<你>\AppData\Roaming\plum/rime-install: No such file or directory`，
+   这是 WSL 的 `bash.exe` 被优先执行，不是包或网络问题。按 7.3 节的方法手动启动安装器。
+6. 看到类似输出即表示安装成功：
 
    ```
    Installing recipe: Tanimodori/ff7-ime
@@ -48,15 +51,15 @@
    Updated ~ 5 files from 1 packages in 'C:\Users\<你>\AppData\Roaming\Rime'
    ```
 
-6. 关闭控制台。方案选单设定窗口会自动刷新；在列表中找到 **魔光键影** 并勾选，
+7. 关闭控制台。方案选单设定窗口会自动刷新；在列表中找到 **魔光键影** 并勾选，
    然后点击 **中** 保存。
-7. 如果候选没有立即生效，右键托盘 → **重新部署**，或重启 WeaselServer。
-8. 在任意输入框输入 `shenluo`，应出现“神罗”；输入 `lkcc`，应出现
+8. 如果候选没有立即生效，右键托盘 → **重新部署**，或重启 WeaselServer。
+9. 在任意输入框输入 `shenluo`，应出现“神罗”；输入 `lkcc`，应出现
    “我们会立刻彻底铲除你们！”。单独按 `1`、`,` 或 `!` 不应输入任何字符。
 
 > 如果安装器输出 5 个 `Installing:` 但完全无法打字，先检查
 > `%APPDATA%\Rime\build\ff7-ime.schema.yaml` 是否存在。缺失说明只复制了文件、
-> 还没有完成部署；执行第 7 步并在必要时重启 WeaselServer 即可恢复。
+> 还没有完成部署；执行第 8 步并在必要时重启 WeaselServer 即可恢复。
 
 ### 1.3 安装器做了什么
 
@@ -209,7 +212,27 @@ Plum 会更新 `%APPDATA%\plum\package\Tanimodori\ff7-ime`，并只覆盖清单�
 2. 关闭并重新打开控制台；
 3. 重新输入 `Tanimodori/ff7-ime`，确认输出为 `Installing recipe:`。
 
-### 7.3 方案列表里有“魔光键影”，但输入没有候选
+### 7.3 控制台提示 `/bin/bash: ...\plum/rime-install: No such file or directory`
+
+安装器和 Plum 都没有问题，这是 Windows 解析 `bash` 的顺序导致的：
+
+- “获取更多输入方案”会以 `C:\Windows\System32` 为工作目录启动 `rime-install.bat`；
+- 该目录里正好有 WSL 的 `bash.exe`（`C:\Windows\System32\bash.exe`）。Windows
+  解析命令时会先查当前目录、再查 PATH，所以它抢在了 Git Bash 前面；
+- 安装器把 `/usr/bin/env bash` 脚本交给 WSL 的 bash 后，WSL 不认识 `C:\...`
+  路径，于是报 “No such file or directory”。
+
+处理：不要从开始菜单/运行对话框直接启动，改为先进入一个普通目录，再手动运行安装器：
+
+```bat
+cd /d %APPDATA%\Rime
+"C:\Program Files\Rime\weasel-0.17.4\rime-install.bat" Tanimodori/ff7-ime
+```
+
+（小狼毫装在别的目录时替换第二行的路径。）命令会沿用当前目录，`bash` 就会命中
+Git for Windows 的版本；安装完成后照常回到方案选单设定勾选并重新部署。
+
+### 7.4 方案列表里有“魔光键影”，但输入没有候选
 
 1. 检查 `%APPDATA%\Rime\lua\ff7-ime.lua`、`ff7-ime_matcher.lua`、`ff7-ime_data.lua` 是否存在；
 2. 检查 schema 中是否为 `lua_translator@*ff7-ime`（`*` 不能少）；
@@ -218,7 +241,7 @@ Plum 会更新 `%APPDATA%\plum\package\Tanimodori\ff7-ime`，并只覆盖清单�
 4. 确认 `speller/alphabet` 包含全部小写字母，`delimiter` 为 `'`，无 `algebra`；
 5. 重新部署并重启 WeaselServer。
 
-### 7.4 方案列表里没有“魔光键影”
+### 7.5 方案列表里没有“魔光键影”
 
 1. 确认 `%APPDATA%\Rime\ff7-ime.schema.yaml` 存在；
 2. 关闭并重新打开“方案选单设定”，让它重新扫描；
@@ -226,7 +249,7 @@ Plum 会更新 `%APPDATA%\plum\package\Tanimodori\ff7-ime`，并只覆盖清单�
 4. 如果文件存在但你之前手动改过 `default.custom.yaml`，检查其中是否有重复的
    `schema_list` 或 `schema_list/+` 键（YAML 后出现的键会覆盖前面的）。
 
-### 7.5 `luna_pinyin_simp` 从方案列表消失
+### 7.6 `luna_pinyin_simp` 从方案列表消失
 
 通常是 `default.custom.yaml` 被其他工具改写。把它改为同时包含两个方案：
 
@@ -239,7 +262,7 @@ patch:
 
 然后重新部署。
 
-### 7.6 修改配置后不生效
+### 7.7 修改配置后不生效
 
 - Rime 部署签名是**秒级 mtime**；改完等 1–2 秒再部署；
 - Lua 模块只在 engine 初始化时加载；部署后建议重启 WeaselServer；
@@ -247,14 +270,14 @@ patch:
   - `false`（默认）：`ff7-ime/fuzzy/*` 等配置生效；
   - `true`：F4 的 `ff7-ime_fuzzy_*` 开关优先。
 
-### 7.7 输入卡顿
+### 7.8 输入卡顿
 
 - 调小 `ff7-ime/dp_max_candidates`（默认 56，可试 32/40）；
 - 调小 `ff7-ime/fallback/max_candidates`（默认 96）或 `fast_max_candidates`（默认 16）；
 - 调小 `ff7-ime/typo/max_edit`（默认 2，可试 1）；
 - 关闭不需要的模糊音（尤其 `n_l`、`r_l`、`f_h`）。
 
-### 7.8 标点、数字与空格
+### 7.9 标点、数字与空格
 
 - 词条中的 `！，·……` 是候选文本的一部分，由 Lua 原样输出；
 - 用户不需要输入标点；输入拼音即可；
@@ -263,7 +286,7 @@ patch:
 - 候选菜单展开时，主键盘数字 1–9 仍由 `selector` 用于选词；
 - 需要输入数字、标点或空格时，切换到 `luna_pinyin_simp` 等其他方案。
 
-### 7.9 日志与缓存位置
+### 7.10 日志与缓存位置
 
 | 内容 | 路径 |
 |---|---|

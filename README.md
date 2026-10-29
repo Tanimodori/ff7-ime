@@ -57,6 +57,18 @@
 5. 在自动刷新的方案列表里勾选 **魔光键影**，点击 **中**；
 6. 若未立即生效，右键托盘 → **重新部署**，或重启 WeaselServer。
 
+> 如果控制台报 `/bin/bash: C:\Users\<你>\...\plum/rime-install: No such file or directory`，
+> 说明安装器从 `C:\Windows\System32` 启动，系统里 WSL 的 `bash.exe` 抢在了 Git Bash
+> 前面。改为在 `%APPDATA%\Rime` 目录手动运行安装器：
+>
+> ```bat
+> cd /d %APPDATA%\Rime
+> "C:\Program Files\Rime\weasel-0.17.4\rime-install.bat" Tanimodori/ff7-ime
+> ```
+>
+> 完成后照常回到方案选单设定勾选。原因与更多细节见
+> [docs/INSTALL.md](docs/INSTALL.md) 第 7.3 节。
+
 通过 Plum 安装时，安装器只复制 5 个运行时文件，不改写 `default.custom.yaml`，也不会
 覆盖用户自己的 `ff7-ime.custom.yaml`。完整说明、更新、卸载与故障排查见
 [docs/INSTALL.md](docs/INSTALL.md)。
