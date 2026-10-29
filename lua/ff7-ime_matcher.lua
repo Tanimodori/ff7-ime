@@ -650,6 +650,95 @@ local function syllable_keyword_score(input, p, fuzzy, cfg)
   return best
 end
 
+-- 混合缩写：多个声母 + 末尾完整音节。
+--   shbi -> s(hou) + h(u) + bi
+-- 只用于 initial_mode；前段每个字母分别对应一个音节的声母首字母，
+-- 末段必须是某音节的主读音或模糊读音。这样不会把 shan bi 的 sh+bi
+-- 误当成声母序列（其声母为 s,b,z，缺少 h）。
+local function initial_letter(syllable, fuzzy)
+  local c = initial_of(syllable):sub(1, 1)
+  if fuzzy.n_l and c == "n" then c = "l" end
+  if fuzzy.r_l and c == "r" then c = "l" end
+  if fuzzy.f_h and c == "f" then c = "h" end
+  return c
+end
+
+local function mixed_keyword_score(input, p, fuzzy, cfg, tails)
+  local L = #input
+  if L < 4 or p.n < 2 then
+    return 0
+  end
+
+  local gap_penalty = cfg.keyword.gap_penalty or 0.02
+  local best = 0
+
+  -- tails 由 rank 预筛：只有词典中真实存在的完整音节后缀才进入这里。
+  for _, t in ipairs(tails) do
+    local head = input:sub(1, t.k)
+    local tail = t.tail
+
+    for start = 1, p.n - 1 do
+      for j = start + 1, p.n do
+        local tail_ok = false
+        for _, r in ipairs(p.readings[j]) do
+          if tail == r.s or tail == canon_syllable(r.s, fuzzy) then
+            tail_ok = true
+            break
+          end
+        end
+
+        if tail_ok then
+          -- 声母段按顺序各占一个音节，允许跳过节。
+          local pos = start
+          local ok = true
+          for i = 1, #head do
+            local ch = head:sub(i, i)
+            local found = nil
+            for sj = pos, j - 1 do
+              for _, r in ipairs(p.readings[sj]) do
+                if initial_letter(r.s, fuzzy) == ch then
+                  found = sj
+                  break
+                end
+              end
+              if found then
+                break
+              end
+            end
+            if not found then
+              ok = false
+              break
+            end
+            pos = found + 1
+          end
+
+          if ok then
+            local chunks = #head + 1
+            local span = j - start + 1
+            local compact = chunks / span
+            local phrase_cov = L / math.max(1, #p.primary_full)
+            local start_pen = (start - 1) / p.n
+            local gap = span - chunks
+            local s = 0.75
+              + 0.15 * compact
+              + 0.10 * (1 - start_pen)
+              + 0.05 * phrase_cov
+              - gap_penalty * gap
+            if s > best then
+              best = s
+            end
+          end
+        end
+      end
+    end
+  end
+
+  if best > 1 then
+    best = 1
+  end
+  return best
+end
+
 -- 音节级对齐 DP：允许整音节/前缀/近似匹配、漏音节、多字母、相邻换位。
 local function dp_score(input, p, fuzzy, cfg, cache, strict)
   local L, n = #input, p.n
@@ -1069,6 +1158,7 @@ local function build_index(phrases, cfg)
     by_canon_bigram = {},
     by_canon_trigram = {},
     by_syl_prefix = {},
+    by_syllable = {},
     by_full = {},
     by_canon = {},
     static_top = {},
@@ -1080,6 +1170,8 @@ local function build_index(phrases, cfg)
   for id, p in ipairs(phrases) do
     prepare_phrase(p, cfg.fuzzy, cfg.typo)
 
+    local seen_syl = {}
+
     for _, readings in ipairs(p.readings) do
       for _, r in ipairs(readings) do
         local forms = { r.s }
@@ -1087,6 +1179,10 @@ local function build_index(phrases, cfg)
         if cr ~= r.s then forms[2] = cr end
         for _, syl in ipairs(forms) do
           if syl ~= "" then
+            if not seen_syl[syl] then
+              seen_syl[syl] = true
+              add_index(idx.by_syllable, syl, id)
+            end
             idx.syllables[syl] = true
             if #syl > idx.max_syllable then idx.max_syllable = #syl end
             for k = 1, #syl do
@@ -1500,6 +1596,42 @@ function M.rank(input, phrases, opts)
       add_result(results, pos, id, p, r)
       if r.raw > best_cheap_raw then
         best_cheap_raw = r.raw
+      end
+    end
+  end
+
+  -- 阶段 1b：混合缩写（多个声母 + 末尾完整音节）。
+  -- 先用词典的音节索引筛出可能包含尾音节的词条，再逐条检查声母段。
+  if initial_mode and cfg.keyword.syllable_subsequence ~= false
+      and #q >= 4 and best_cheap_raw < 0.99 and q:find("[aeiouv]") then
+    local by_syllable = idx.by_syllable or {}
+    local mixed_tails = {}
+    local mixed_cand = {}
+    for k = 2, #q - 2 do
+      local tail = q:sub(k + 1)
+      local list = by_syllable[tail]
+      if list then
+        mixed_tails[#mixed_tails + 1] = { k = k, tail = tail }
+        for _, id in ipairs(list) do
+          mixed_cand[id] = true
+        end
+      end
+    end
+    if #mixed_tails > 0 then
+      local kw_weight = channel_weight(cfg, "keyword", initial_mode)
+      for id in pairs(mixed_cand) do
+        local p = phrases[id]
+        local raw = mixed_keyword_score(q, p, fuzzy, cfg, mixed_tails)
+        if raw > 0 then
+          add_result(results, pos, id, p, {
+            index = id,
+            phrase = p,
+            score = raw * kw_weight + 0.0001 * (p.w or 1.0),
+            raw = raw,
+            channel = "keyword",
+            detail = "mixed",
+          })
+        end
       end
     end
   end

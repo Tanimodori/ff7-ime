@@ -196,8 +196,8 @@ NODE_PATH="$PWD/tools/lua-sandbox/node_modules" \
   node tests/lua/run_cases.js tests/lua/core_cases.json lua/ff7-ime_data.lua
 ```
 
-覆盖精确全拼、模糊、声母、关键词、中段关键词、前缀、漏错换位、预编辑、
-fallback 与空输入等核心行为。
+覆盖精确全拼、模糊、声母、关键词、中段关键词、混合缩写、前缀、漏错换位、
+预编辑、fallback 与空输入等核心行为。
 
 ### 6.2 全量评估
 

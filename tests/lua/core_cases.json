@@ -39,5 +39,7 @@
   {"input": "asdfghjkl", "expect_nonempty": 9, "expect_not_channel": "dp"},
   {"input": "qwxz", "expect_nonempty": 9, "expect_not_channel": "dp"},
   {"input": "mina", "expect_top1": "蜜娜"},
-  {"input": "mian", "expect_top1": "双面相"}
+  {"input": "mian", "expect_top1": "双面相"},
+  {"input": "shshhb", "expect_top1": "水手护臂"},
+  {"input": "shbi", "expect_in_top": 4, "expect_text": "水手护臂"}
 ]

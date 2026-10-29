@@ -126,6 +126,7 @@ ff7-ime:
   keyword:
     gap_penalty: 0.02
     # 词条中段的音节前缀子序列（meishao -> 美少女）
+    # 与混合缩写（shbi -> s + h + bi）
     syllable_subsequence: true
 
   # 最后一级回退：bigram/trigram 召回 + Damerau/Dice-LCS 排序
